@@ -1,0 +1,345 @@
+\documentclass[letterpaper,12pt,leqno]{article}
+\usepackage{paper,math}
+\bibliographystyle{bibliography}
+\newcommand{\bib}{../../../bibliography/businesscycle.bib}
+\newcommand{\pdf}{../../figures/xsquareroot_202206.pdf}
+\available{https://www.pascalmichaillat.org/13.html}
+\hypersetup{pdftitle={u*=√uv}}
+
+\begin{document}
+
+\title{$\bm{u^*=\sqrt{uv}}$}
+\author{Pascal Michaillat, Emmanuel Saez
+\thanks{Pascal Michaillat: Brown University. Emmanuel Saez: University of California--Berkeley. We thank David Baqaee, Daniel Bogart, Varanya Chaubey, Olivia Lattus, Romain Ranciere, Guillaume Rocheteau, and Pierre-Olivier Weill for helpful comments and discussions.}}
+\date{June 2022}                       
+
+\begin{titlepage}\maketitle
+
+Most governments are mandated to maintain their economies at full employment. We propose that the best marker of full employment is the efficient unemployment rate, $u^*$. We define $u^*$ as the unemployment rate that minimizes the nonproductive use of labor---both jobseeking and recruiting. The nonproductive use of labor is well measured by the number of jobseekers and vacancies, $u + v$. Through the Beveridge curve, the number of vacancies is inversely related to the number of jobseekers. With such symmetry, the labor market is efficient when there are as many jobseekers as vacancies ($u = v$), too tight when there are more vacancies than jobseekers ($v > u$), and too slack when there are more jobseekers than vacancies ($u > v$). Accordingly, the efficient unemployment rate is the geometric average of the unemployment and vacancy rates: $u^* = \sqrt{uv}$. We compute $u^*$ for the United States between 1930 and 2022. We find for instance that the US labor market has been over full employment ($u < u^*$) since May 2021.
+
+\end{titlepage}\section{Introduction}
+ 
+\paragraph{Full-employment mandate} Policymakers in many countries are mandated to maintain the economy at full employment. In the United States this legislative mandate comes from the 1978 Full Employment and Balanced Growth Act---itself an amendment of the 1946 Employment Act.\footnote{See \url{https://perma.cc/N4N5-BGJD} and \url{https://perma.cc/QK6U-C73K} for the history of these laws.} Despite the long existence of the full-employment mandate, there are no employment or unemployment rates that governments can use to capture full employment. In this paper, we produce an unemployment rate $u^*$ that characterizes a state of full employment.
+
+\paragraph{Full employment does not mean no unemployment} Reaching full employment should be interpreted not as reaching zero unemployment. This is because it is not physically possible to reduce unemployment to zero. For instance, during World War 2, \citet[p. 125]{B44} noted that ``Even under full employment, there will be some unemployment \dots as there is some unemployment even in Britain at war to-day.'' 
+
+\paragraph{So what is full employment} Rather, reaching full employment should be interpreted as reaching a socially desirable amount of unemployment. We define the socially efficient amount of unemployment as the amount that minimizes the nonproductive use of labor---both recruiting and jobseeking. It is because people constantly move in and out of jobs that unemployment cannot be reduced to zero, as noted by \citet[p. 125]{B44}: ``However great the unsatisfied demand for labor, there is an irreducible minimum of unemployment, a margin in the labor force required to make change and movement possible.'' Hence, while labor market flows are inevitable, the goal is that workers spend as much time as possible producing useful things and waste as little time as possible searching for employees or jobs.
+
+\paragraph{Measuring jobseeking activity} The number of jobseekers is well measured by the number of unemployed workers. In theory, unemployed workers might also produce useful things at home beside looking for jobs. But in practice home production is minimal, so we count unemployed workers full-time jobseekers \citep[pp. 9--11]{MS16}.
+
+\paragraph{Measuring recruiting activity} The number of recruiters is well measured by the number of vacancies. Indeed, it takes about one full-time worker to service a vacancy, so there are as many recruiters as vacancies \citep[p. 11]{MS16}.
+
+\paragraph{Social objective} The social objective is to minimize the time spent on jobseeking and recruiting at the expense of producing. The amount of jobseeking is well measured by the number of unemployed workers, and the amount of recruiting by the number of job vacancies. Hence, the objective is to minimize the sum of the unemployment and vacancy rates, $u + v$.
+
+\paragraph{Beveridge curve} Because of the Beveridge curve, it is not possible to reduce the numbers of jobseekers and vacancies at the same time. When the economy is depressed, there are many jobseekers and few vacancies; conversely, when the economy is booming, there are few jobseekers and many vacancies. The Beveridge curve is approximately a rectangular hyperbola:  $vu = A$, where $A$ is a constant \citep[figure 6]{MS16}. Hence, unemployment rate $u$ and vacancy rate $v$ are inversely related.
+
+\paragraph{Efficiency criterion} Because of the symmetrical roles played by unemployed workers and vacant jobs, we find that the nonproductive use of labor is minimized when there are as many unemployed workers as vacant jobs ($u = v$). The labor market is inefficiently tight when there are more vacancies than jobseekers ($v > u$), and inefficiently slack when there are more jobseekers than vacancies ($u > v$).
+
+\paragraph{Efficient labor-market tightness} The efficiency criterion can be reformulated in terms of labor-market tightness. The labor-market tightness is the ratio of vacancies to unemployment, $\t = v/u$. It measures the number of vacancies per unemployed worker. Our analysis implies that the efficient labor-market tightness is $\t^* = 1$. The labor market is inefficiently tight when $\t > 1$ and inefficiently slack when $\t < 1$. 
+
+\paragraph{Efficient unemployment rate} Because the unemployment and vacancy rates play a symmetric role on the labor market, the efficient unemployment rate is the geometric average of the unemployment and vacancy rates: $u^* = \sqrt{uv}$. This formula arises by combining the Beveridge curve, $uv = A$, and the result that the efficient unemployment and vacancy rates are equal. 
+
+\paragraph{Measuring the efficient unemployment rate the United States} Because it only requires unemployment and vacancy rates, the formula $u^* = \sqrt{uv}$ is easy to apply. In the United States, we can combine the historical unemployment and vacancy series produced by \citet{B10d} and \citet{PZ21} with the data produced by the Bureau of Labor Statistics to assemble monthly unemployment and vacancy series from 1930 and 2022. We use these series to compute the efficient unemployment rate $u^*$ between 1930 and 2022. We find that $u^*$ averages $4.2\%$ over the period and is very stable. 
+
+\paragraph{Application to the post-pandemic labor market} We also apply our formula in the post-pandemic period in the United States. There has been more vacant jobs than unemployed workers since May 2021, so the labor market has been too tight since then. In March 2022, there is twice as many vacant jobs as unemployed workers. Looking at historical data going back to 1930, we see that the last time that the labor-market tightness was so high, and the last time that the unemployment rate was so much below its efficient level, was at the end of World War 2. The post-pandemic labor market is in a very unusual situation: by any measure, 2022 is experiencing the tightest labor market since World War 2.
+
+\paragraph{Application to modern monetary policy} During a press conference in May 2022, Jerome Powell, the chair of the Federal Reserve, discussed labor-market tightness at length.\footnote{See pp. 12--13 at \url{https://perma.cc/4EGU-XZYG}.} In response to a question from journalist Howard Schneider asking which tightness the Fed might target, he responded: ``So in terms of the vacancy-to-unemployment ratio, we don't have a goal in mind. There's no specific number that we're saying, `We've got to get to that.'  \dots I think when we got to one-to-one in the, you know, in the late teens, we thought that was a pretty good number. But, again, we're not shooting for any particular number.'' We find that a vacancy-to-unemployment ratio of $1$ is indeed what the Fed should target.
+
+\section{Derivation of the efficient-unemployment formula}\label{s:formula}
+
+This section derives the formula for the efficient unemployment rate: $u^* = \sqrt{uv}$.
+
+\subsection{Definition of efficiency}
+
+From a social perspective, it is optimal to maximize the number of people who spend time producing useful things rather than shuffling employees or jobs. This perspective is consistent with the view expressed by \citet[p. 20]{B44} that ``The material end of all human activity is consumption. Employment is wanted as a means to more consumption \dots as a means to a higher standard of life.'' We therefore define the socially efficient amount of unemployment as the amount that minimizes the nonproductive use of labor---both jobseeking and recruiting. Because people constantly move in and out of jobs, it is impossible to have zero unemployment, and it is impossible to have all workers devoted to production. While labor market flows are inevitable, the goal is that workers waste as little time as possible searching for jobs or employees. 
+
+\subsection{Measuring jobseeking activity}
+
+The number of jobseekers is well measured by the number of unemployed workers. In theory, beside looking for jobs, unemployed workers might also produce useful things at home. Such home production would be included into aggregate production and contribute to social welfare. But in practice home production is minimal, as was already noted by \citet[p. 11]{R49}: ``The most important aspect of unemployment is its wastefulness. It is the existence of unused productive resources side by side with unsatisfied human needs that is the intolerable condition.'' \citet[pp. 9--11]{MS16} measure the fraction of nonwork time devoted to home production in the United States. The measure is based on the results by \citet{BM15}. Using administrative data from the US military, \citeauthor{BM15} study how servicemembers choose between reenlisting and leaving the military. The choices allow them to estimate the difference between market production and the sum of home production and public benefits during unemployment. Subtracting the value of public benefits from these estimates, \citet[p. 11]{MS16} find that the value of home production relative to market production could be as low as $0.03$. Given such low value, we assume that unemployed workers do not engage in home production at all, and we count them as full-time jobseekers.
+
+\subsection{Measuring recruiting activity} 
+
+The number of recruiters is well measured by the number of vacancies. In theory it might take more or less than one full-time worker to service a vacancy. But in practice it takes about one full-time worker to service a vacancy, so the numbers of recruiters and vacancies are about the same. In the United States, the amount of labor required to service a vacancy can be measured from the National Employer Survey, which was conducted by the Census Bureau in 1997 \citep{V10}. \citet[p. 11]{MS16} estimate that servicing a vacancy requires $0.92$ worker at any point in time. So it takes about $1$ worker to service a vacancy, which is what we assume here by equating the number of recruiters to the number of vacancies.
+
+\subsection{Shape of the Beveridge curve}
+
+\paragraph{First observations of the Beveridge curve} Looking at labor-market statistics for the United Kingdom, \citet{B44} first noted that the number of vacancies and the number of jobseekers move in opposite directions. When the economy is in a slump, there are lots of jobseekers and few vacancies. Conversely, when the economy is in a boom, there are few jobseekers and many vacancies. This negative relationship between unemployment and vacancies---known as the Beveridge curve---was first plotted by \citet[figures 1 and 2]{DD58} using UK data for 1946--1956. Moreover, \citet[p. 22]{DD58} noted that the Beveridge curve looked like a rectangular hyperbola in an unemployment-vacancy plane.
+
+\begin{figure}[t]
+\subcaptionbox{Regular scale\label{f:regular1951}}{\includegraphics[scale=\sfig,page=1]{\pdf}}\hfill
+\subcaptionbox{Log scale\label{f:log1951}}{\includegraphics[scale=\sfig,page=2]{\pdf}}
+\caption{Unemployment and vacancy rates in the United States, 1951--2019}
+\note{The unemployment rate is constructed by the \citet{UNRATE}. For 1951--2000, the vacancy rate is constructed by \citet{B10d}; for 2001--2019, the vacancy rate is the number of job openings divided by the civilian labor force, both measured by the \citet{CLF16OV,JTSJOL}. Unemployment and vacancy rates are quarterly averages of monthly series. The gray areas are NBER-dated recessions.}
+\label{f:1951}\end{figure}
+
+\paragraph{Unemployment and vacancy rates move in opposite directions} The Beveridge curve holds remarkably well in the United States as well \citep{BD89,EMR15}. Figure~\ref{f:regular1951} depicts the unemployment rate $u$ (all jobseekers divided by the labor force) and the vacancy rate $v$ (all vacancies divided by the same labor force) in the United States for 1951--2019. The unemployment rate is constructed by the \citet{UNRATE}. For 1951--2000, the vacancy rate is constructed by \citet{B10d}; for 2001--2019, the vacancy rate is the number of job openings divided by the civilian labor force, both measured by the \citet{CLF16OV,JTSJOL}. The figure shows clearly that unemployment and vacancy rates move in opposite directions. 
+
+\paragraph{Unemployment and vacancy rates are inversely related} In fact, unemployment and vacancy appear to be the inverse of each other, so that doubling the unemployment rate cuts the vacancy rate in half, and inversely, doubling the vacancy rate cuts the unemployment rate in half. Figure \ref{f:log1951} displays again unemployment and vacancy, but now in log scale. The fluctuations of the unemployment and vacancy rates are almost the mirror image of each other. This empirical regularity is particularly striking because the two series are constructed independently of each other.
+
+\begin{figure}[p]
+\subcaptionbox{1951Q1--1961Q1: elasticity $= -0.85$\label{f:branch1}}{\includegraphics[scale=\sfig,page=3]{\pdf}}\hfill
+\subcaptionbox{1961Q2--1971Q4: elasticity $= -1.02$\label{f:branch2}}{\includegraphics[scale=\sfig,page=4]{\pdf}}\vfig
+\subcaptionbox{1972Q1--1989Q1: elasticity $= -0.84$\label{f:branch3}}{\includegraphics[scale=\sfig,page=5]{\pdf}}\hfill
+\subcaptionbox{1989Q2--1999Q2: elasticity $= -0.94$\label{f:branch4}}{\includegraphics[scale=\sfig,page=6]{\pdf}}\vfig
+\subcaptionbox{1999Q3--2009Q3: elasticity $= -1.00$\label{f:branch5}}{\includegraphics[scale=\sfig,page=7]{\pdf}}\hfill
+\subcaptionbox{2009Q4--2019Q4: elasticity $= -0.84$\label{f:branch6}}{\includegraphics[scale=\sfig,page=8]{\pdf}}
+\caption{Estimated Beveridge curve in the United States, 1951--2019}
+\note{This figure is constructed from figures 5 and 6 in \citet{MS16}. Unemployment and vacancy rates are the same as in figure~\ref{f:1951}. The number of structural breaks, dates of structural breaks, and elasticities of the Beveridge curve between breaks are estimated with the algorithm of \citet{BP98,BP03}.}
+\label{f:hyperbola}\end{figure}
+
+
+\paragraph{The Beveridge curve is a rectangular hyperbola} Mathematically, the property that unemployment and vacancy rates are inversely related implies that in an unemployment-vacancy plane, the Beveridge curve is a rectangular hyperbola:  
+\begin{equation*}
+vu = A,
+\end{equation*}
+where $A>0$ is a constant.
+
+\paragraph{Estimates of the Beveridge elasticity} We can formally establish that the Beveridge curve is a rectangular hyperbola by estimating the elasticity of the vacancy rate with respect to the unemployment rate, $\odlx{v}{u}$. An elasticity of $-1$ corresponds to an hyperbola. \citet[figures 5 and 6]{MS16} use the algorithm of \citet{BP98,BP03} to estimate the structural breaks of the US Beveridge curve, and the elasticity of the Beveridge curve between these breaks. They find that the Beveridge elasticity remains between $-0.84$ and $-1.02$, so never far from $-1$ (figure~\ref{f:hyperbola}). This finding confirms that the Beveridge curve is close to an hyperbola.
+
+\paragraph{Informal foundation for the hyperbolic Beveridge curve} Why is the Beveridge curve an hyperbola? Empirically, the number of new matches depends symmetrically on the number of jobseekers and vacancies. Doubling jobseekers increases new matches much the same as doubling vacancies. This makes sense as both jobseekers and vacancies are striving to find each other. This is obvious for jobseekers who spend time looking for jobs, applying, doing interviews. But this is also the case for vacancies as recruiters have to advertise vacancies, and screen and interview applicants. Therefore, as new matches have to meet the number of job separations, cutting in half the number of jobseekers requires doubling the number of vacancies, explaining why unemployment and vacancy rates are the inverse of each other.
+
+\paragraph{Formal foundation for the hyperbolic Beveridge curve} In matching models the Beveridge curve says labor market flows are balanced: the number of job separations equals the number of jobs found. The employment rate $1-u$ is approximately constant around 1 since the unemployment rate $u$ is an order of magnitude less than 1. The job-separation rate $\l$ is also constant, so the number of job separations $\l (1-u)$ is approximately constant around $\l$. So at any point of the business cycle, the number of jobs found is approximately constant at $\l$.  With the standard symmetric Cobb-Douglas matching function, $m = \o \cdot\sqrt{uv}$, the number of jobs found at any point in time is proportional to $\sqrt{uv}$. \footnote{The US matching function appears to have a Cobb-Douglas form with exponents of $0.5$ on unemployment and vacancies. See \citet[p. 9]{MS16} for a survey of the US estimates based on aggregate data, and \citet{PP01} for a broader survey.} Hence $\sqrt{uv}$ is constant along the Beveridge curve, which implies $uv = \text{constant}$ along the Beveridge curve.
+
+\subsection{Efficiency criterion}
+
+The social objective is to minimize the time spent on jobseeking and recruiting at the expense of producing. Since the amount of jobseeking can be measured by the number of unemployed workers, and the amount of recruiting by the number of vacancies, the social objective is to minimize the sum of the unemployment and vacancy rates, $u + v$. This minimization is subject to the Beveridge curve constraint, $u v = \text{constant}$. Because of the Beveridge curve, it is not possible to reduce unemployment and vacancies at the same time. Therefore, the social planner must trade off unemployment and vacancies. 
+
+\paragraph{Symmetry argument} Because of the symmetrical roles played by unemployed workers and vacant jobs, the nonproductive use of labor is minimized when there are as many unemployed workers as vacant jobs ($u = v$). Indeed, we would like to minimize wasted resources from unemployment and from vacancies, subject to the Beveridge curve.  Since this problem is perfectly symmetric in $u$ and $v$, the solution to minimize waste is to have $u = v$.
+
+\paragraph{Departure from efficiency} When the number of jobseekers is not equal to the number of vacancies, the labor market is operating inefficiently. The labor market is inefficiently tight when there are more vacancies than jobseekers ($v > u$). In that case, increasing $u$ and reducing $v$ would reduce waste. The labor market is inefficiently slack when there are more jobseekers than vacancies ($u > v$). Then, reducing $u$ and increasing $v$ would reduce waste.
+
+\paragraph{First-order condition} We can also establish these results mathematically. The planner minimizes nonproduction $u + v$ subject to Beveridge curve $uv = A$, or $v = A/u$. This is equivalent to minimizing $u+A/u$, which is convex in $u$. A first-order condition is necessary and sufficient to find the minimum. We take the derivative of $u+A/u$ with respect to $u$ and set it to $0$. We obtain $1-A/u^2 = 0$. This condition implies that the minimum occurs when $u = \sqrt{A}$. By the Beveridge curve we have $v = A/u$, so at the minimum $v = A/ \sqrt{A} = \sqrt{A}$. Accordingly, the efficient unemployment and vacancy rates satisfy $u^* = v^* = \sqrt{A}$.
+
+\paragraph{Formulation in terms of labor-market tightness} The efficiency criterion can be reformulated in terms of labor-market tightness. The labor-market tightness is the ratio of vacancies to unemployment, $\t = v/u$. It measures the number of vacancies per unemployed workers. The analysis implies that the efficient labor-market tightness is $\t^* = 1$; that the labor market is inefficiently tight when $\t > 1$; and that the labor market is inefficiently slack when $\t < 1$. 
+
+\begin{figure}[t]
+\subcaptionbox{Unemployment and vacancy rates\label{f:uv1951}}{\includegraphics[scale=\sfig,page=9]{\pdf}}\hfill
+\subcaptionbox{Labor-market tightness\label{f:tightness1951}}{\includegraphics[scale=\sfig,page=10]{\pdf}}
+\caption{State of the labor market in the United States, 1951--2019}
+\note{The unemployment and vacancy rates come from figure~\ref{f:1951}. The labor-market tightness is the vacancy rate divided by the unemployment rate. The gray areas are NBER-dated recessions. The labor market is inefficiently slack whenever the unemployment rate is above the vacancy rate (purple shade); it is inefficiently tight whenever the unemployment rate is below the vacancy rate (orange shade). Between 1951 and 2019, the US labor market is always inefficiently slack except during three episodes: the Korean War (1951Q1--1953Q3), the Vietnam War (1965Q4--1970Q1), and the end of the Trump presidency (2018Q1--2019Q4).}
+\label{f:state1951}\end{figure}
+
+\subsection{Efficient unemployment rate}
+
+We have seen that the efficient unemployment rate is given by $u^* = \sqrt{A}$ where the parameter $A$ determines the location of Beveridge curve, $uv = A$. Accordingly, the efficient unemployment rate is the geometric average of the unemployment and vacancy rates: $u^* = \sqrt{uv}$. Intuitively, the efficient unemployment rate is the average of the unemployment and vacancy rates because unemployment and vacancy rates play a symmetric role on the labor market.
+
+\subsection{Similarity with previous markers of full employment}
+
+Our criterion provide a theoretical underpinning for the old idea that the state of full employment could be assessed by comparing the number of vacant jobs to that of unemployed workers. For example,  \citet[p. 18]{B44} states that ``Full employment \dots means having always more vacant jobs than unemployed men,'' and before his report, the prevailing view was that full employment was ``a state of affairs in which the number of unfilled vacancies is not appreciably below the number of unemployed persons.'' \citet[p. 39 and chart 5]{R57} applies Beveridge' s verbal criterion to the United States. He computes the ratio between number of vacancies and number of unemployed and examines when the ratio crosses $1$. In the same spirit, the \citet{BLS22} scrutinizes the jobseeker-per-job-opening statistic and flags when it crosses $1$.
+
+\begin{figure}[t]
+\subcaptionbox{Efficient unemployment rate\label{f:efficient1951}}{\includegraphics[scale=\sfig,page=11]{\pdf}}\hfill
+\subcaptionbox{Unemployment gap\label{f:gap1951}}{\includegraphics[scale=\sfig,page=12]{\pdf}}
+\caption{Efficient unemployment in the United States, 1951--2019}
+\note{The unemployment rate $u$ and vacancy rate $v$ come from figure~\ref{f:1951}. The efficient unemployment rate is $u^* = \sqrt{uv}$. The unemployment gap is the difference between the actual unemployment rate and the efficient unemployment rate, $u-u^*$. The gray areas are NBER-dated recessions.}
+\label{f:squareroot1951}\end{figure}
+
+\begin{figure}[t]
+\includegraphics[scale=\sfig,page=13]{\pdf}
+\caption{Comparison with efficient unemployment from \citet{MS16}}
+\note{The Michaillat \& Saez (2021) line represents the efficient unemployment rate constructed by \citet[figure 7B]{MS16}. The $\sqrt{uv}$ line reproduces the efficient unemployment rate from figure~\ref{f:efficient1951}. The gray areas are NBER-dated recessions.}
+\label{f:comparison}\end{figure}
+
+
+\section{Efficient unemployment in the United States}\label{s:postwar}
+
+We compute the efficient unemployment rate in the United States in three periods: the standard postwar period, 1951--2019; the coronavirus pandemic, 2020--2022; and the Great Depression and World War 2, 1930--1950.
+
+\subsection{Postwar period}
+
+\paragraph{State of the labor market} We assess the state of the US labor market between 1951 and 2019. We use the unemployment and vacancy rates from figure~\ref{f:1951}. The labor market is inefficiently slack whenever the unemployment rate is above the vacancy rate; it is inefficiently tight whenever the unemployment rate is below the vacancy rate. Between 1951 and 2019, the US labor market is always inefficiently slack except in three episodes (figure~\ref{f:uv1951}): the Korean War (1951Q1--1953Q3), the Vietnam War (1965Q4--1970Q1), and the end of the Trump presidency (2018Q1--2019Q4).
+
+\paragraph{Visualization with labor-market tightness} The state of the US labor market can also be visualized by plotting the labor-market tightness (figure~\ref{f:tightness1951}). The labor market is inefficiently slack whenever tightness is below $1$. It is inefficiently tight whenever tightness is above $1$. And it is efficient when the tightness equals $1$---when there is just one vacancy per jobseeker. The tightness averages $0.62$ between 1951 and 2019, and it is sharply procyclical. The tightness peaked at $1.49$ in 1953Q1, during the Korean War, and it bottomed at $0.16$ in 2009Q3, during the Great Recession.
+
+\paragraph{Efficient unemployment rate} We then compute the efficient unemployment rate between 1951 and 2019 using the formula $u^* = \sqrt{uv}$. The efficient unemployment rate is fairly stable: it remains between $3.0\%$ and $5.3\%$, with an average value of $4.2\%$ (figure~\ref{f:efficient1951}). 
+
+\paragraph{Unemployment gap} We also compute the unemployment gap, which is the difference $u-u^*$ between the actual unemployment rate and the efficient unemployment rate. The unemployment gap indicates the distance from full employment at any given time. The unemployment gap is sharply countercyclical and generally positive. The unemployment gap peaked at $+6.0$ percentage points in 2009Q4, during the Great Recession, and bottomed at $-0.6$ percentage points in 1969Q1, during the Vietnam War. The unemployment gap averages $1.6$ percentage points over the 1951--2019 period. Hence, the economy is generally not at full employment, and it is especially far from full employment in recessions.
+
+\paragraph{Comparison with the formula from \citet{MS16}} In a previous paper, \citet[proposition 3]{MS16} compute a more sophisticated formula for the efficient unemployment rate:
+\begin{equation}
+u^* = \bp{\frac{\k \e}{1-\z}\cdot\frac{v}{u^{-\e}}}^{1/(1+\e)},
+\label{e:ms16}\end{equation}
+where  $\e$ is the Beveridge elasticity, $\z$ is the social value of nonwork, and $\k$ is the recruiting cost. The formula requires to keep track of three statistics in addition to the unemployment and vacancy rates ($\e$, $\z$, $\k$), so it is harder for policymakers to compute than the simple $u^* = \sqrt{uv}$. But $u^* = \sqrt{uv}$ is a special case of \eqref{e:ms16} when $\e=1$, $\k=1$, and $\z=0$. The two formulas are so closely related because the model of the labor market presented here is a special case of the model in \citet{MS16}. By specializing the model and therefore the values of the sufficient statistics, we obtain an extremely simple and user-friendly formula. In the United States, however, the two formulas yield almost identical unemployment rates (figure~\ref{f:comparison}). Over 1951--2019, the two efficient unemployment rates depart by $0.2$ percentage points on average, and they never depart by more than $0.5$ percentage points.
+
+\begin{figure}[t]
+\subcaptionbox{Unemployment and vacancy rates\label{f:uv2020}}{\includegraphics[scale=\sfig,page=14]{\pdf}}\hfill
+\subcaptionbox{Labor-market tightness\label{f:tightness2020}}{\includegraphics[scale=\sfig,page=15]{\pdf}}
+\caption{State of the labor market in the United States, 2020M1--2022M3}
+\note{The unemployment rate is constructed by the \citet{UNRATE}. The vacancy rate is the number of job openings divided by the civilian labor force, both measured by the \citet{CLF16OV,JTSJOL}. The labor-market tightness is the vacancy rate divided by the unemployment rate. The gray area is the NBER-dated pandemic recession. The labor market is inefficiently slack whenever the unemployment rate is above the vacancy rate (purple shade); it is inefficiently tight whenever the unemployment rate is below the vacancy rate (orange shade). The US labor market is inefficiently slack from 2020M3 to 2021M4; it is inefficiently tight in 2020M1--2020M2 and from 2021M5 to 2022M3.}
+\label{f:state2020}\end{figure}
+
+\begin{figure}[t]
+\subcaptionbox{Efficient unemployment rate\label{f:efficient2020}}{\includegraphics[scale=\sfig,page=16]{\pdf}}\hfill
+\subcaptionbox{Unemployment gap\label{f:gap2020}}{\includegraphics[scale=\sfig,page=17]{\pdf}}
+\caption{Efficient unemployment in the United States, 2020M1--2022M3}
+\note{The unemployment rate $u$ and vacancy rate $v$ come from figure~\ref{f:uv2020}.  The efficient unemployment rate is $u^* = \sqrt{uv}$. The unemployment gap is the difference between the actual unemployment rate and the efficient unemployment rate, $u-u^*$. The gray area is the NBER-dated pandemic recession.}
+\label{f:squareroot2020}\end{figure}
+
+\begin{figure}[t]
+\includegraphics[scale=\sfig,page=18]{\pdf}
+\caption{Effect of the pandemic on the US Beveridge curve}
+\note{Each dot represents the unemployment and vacancy rates in a month between 2001M1 and 2022M3. The unemployment rate is constructed by the \citet{UNRATE}. The vacancy rate is the number of job openings divided by the civilian labor force, both measured by the \citet{CLF16OV,JTSJOL}. The labor market is inefficiently slack when the unemployment rate is above the vacancy rate (purple shade); it is inefficiently tight when the unemployment rate is below the vacancy rate (orange shade); it is efficient when the unemployment rate equals the vacancy rate (pink line).}
+\label{f:pandemic}\end{figure}
+
+\subsection{Coronavirus pandemic}\label{s:pandemic}
+
+We now apply our efficiency criterion and efficient-unemployment formula to the coronavirus pandemic in the United States. We focus on the period between January 2020 and March 2022.
+
+\paragraph{Unemployment and vacancy rates} The unemployment rate is constructed by the \citet{UNRATE}. The vacancy rate is the number of job openings divided by the civilian labor force, both measured by the \citet{CLF16OV,JTSJOL}. Both series are displayed on figure~\ref{f:uv2020}.
+
+\paragraph{State of the labor market} The labor market is inefficiently slack whenever the unemployment rate is above the vacancy rate; it is inefficiently tight whenever the unemployment rate is below the vacancy rate. We find that the US labor market is inefficiently slack from March 2020 to April 2021; it is inefficiently tight from May 2021 to March 2022 (figure~\ref{f:uv2020}).
+
+\paragraph{Visualization with labor-market tightness} The state of the US labor market can also be visualized by plotting labor-market tightness (figure~\ref{f:tightness2020}). The labor market is inefficiently slack whenever tightness is below $1$. And it is inefficiently tight whenever tightness is above $1$. The tightness cratered to $0.20$ in April 2020, at the beginning of the pandemic. It then steadily recovered to reach $2.0$ in March 2022---the highest tightness recorded in the postwar period.
+
+\paragraph{Efficient unemployment rate} We then compute the efficient unemployment rate between 2020 and 2022 using the formula $u^* = \sqrt{uv}$. The efficient unemployment rate was at $4.0\%$ at the onset of the pandemic, but it sharply increased above $6.0\%$ in the first months of the pandemic (figure~\ref{f:efficient2020}). It hovered around $6.0\%$ during the rest of the 2020--2022 period.
+
+\paragraph{Unemployment gap} We also compute the unemployment gap, which is the difference $u-u^*$ between the actual unemployment rate and the efficient unemployment rate (figure~\ref{f:gap2020}). The unemployment gap was initially positive and large: the labor market was much too slack in the first pandemic year. The unemployment gap reached $+8.1$ percentage points in April 2020---its highest level in the postwar period. But the economy recovered quickly, and the unemployment gap turned negative in May 2021. The unemployment gap reached $-1.5$ percentage points in March 2022. This is the lowest unemployment gap in the postwar period. So in 2022, the labor market is well beyond full employment.
+
+\paragraph{Why did the efficient unemployment rate increase during the pandemic?} The efficient unemployment rate increased by more than 2 percentage points at the onset of the pandemic. Such a sharp increase is unprecedented. It can be explained by the gigantic outward shift of the Beveridge curve that took place in the spring 2020. Graphically, the efficient unemployment rate appears at the intersection of the Beveridge curve and the pink identity line (figure~\ref{f:pandemic}). In February 2020, at the onset of the pandemic, the labor market was close to efficient, and the unemployment rate was around $4\%$. In May 2021, about a year later, the labor market had returned to efficiency, but the unemployment rate was now $6\%$. The increase of the efficient unemployment rate from $4\%$ to $6\%$ was caused by the outward shit of the Beveridge curve that occurred between March and April 2020. Mathematically, the efficient unemployment rate is determined by the location of the Beveridge curve ($u^* = \sqrt{A}$), so only a sharp outward shift of the Beveridge curve (increase in $A$) can increase the efficient unemployment rate.\footnote{The previous shifts of the Beveridge curve during the postwar period (figure~\ref{f:hyperbola}) were not large enough to produce noteworthy changes in the efficient unemployment rate (figure~\ref{f:squareroot1951}).}
+
+\begin{figure}[t]
+\subcaptionbox{Regular scale\label{f:regular1930}}{\includegraphics[scale=\sfig,page=19]{\pdf}}\hfill
+\subcaptionbox{Log scale\label{f:log1930}}{\includegraphics[scale=\sfig,page=20]{\pdf}}
+\caption{Unemployment and vacancy rates in the United States, 1930--1950}
+\note{The unemployment and vacancy rates are constructed by \citet{PZ21}. Unemployment and vacancy rates are quarterly averages of monthly series. The gray areas are NBER-dated recessions.}
+\label{f:1930}\end{figure}
+
+\begin{figure}[t]
+\subcaptionbox{Unemployment and vacancy rates\label{f:uv1930}}{\includegraphics[scale=\sfig,page=21]{\pdf}}\hfill
+\subcaptionbox{Labor-market tightness\label{f:tightness1930}}{\includegraphics[scale=\sfig,page=22]{\pdf}}
+\caption{State of the labor market in the United States, 1930--1950}
+\note{The unemployment and vacancy rates come from figure~\ref{f:1930}.  The labor-market tightness is the vacancy rate divided by the unemployment rate. The gray areas are NBER-dated recessions. The labor market is inefficiently slack whenever the unemployment rate is above the vacancy rate (purple shade); it is inefficiently tight whenever the unemployment rate is below the vacancy rate (orange shade). Between 1930 and 1950, the US labor market is always inefficiently slack except during World War 2 (1942Q3--1946Q3).}
+\label{f:state1930}\end{figure}
+
+\begin{figure}[t]
+\subcaptionbox{Efficient unemployment rate\label{f:efficient1930}}{\includegraphics[scale=\sfig,page=23]{\pdf}}\hfill
+\subcaptionbox{Unemployment gap\label{f:gap1930}}{\includegraphics[scale=\sfig,page=24]{\pdf}}
+\caption{Efficient unemployment in the United States, 1930--1950}
+\note{The unemployment rate $u$ and vacancy rate $v$ come from figure~\ref{f:1930}. The efficient unemployment rate is $u^* = \sqrt{uv}$. The unemployment gap is the difference between the actual unemployment rate and the efficient unemployment rate, $u-u^*$. The gray areas are NBER-dated recessions.}
+\label{f:squareroot1930}\end{figure}
+
+\subsection{Great Depression and World War 2}\label{s:depression}
+
+Finally, we apply our efficiency criterion and efficient-unemployment formula to the historical period 1930--1950, which covers both the Great Depression and World War 2.
+
+\paragraph{Unemployment and vacancy rates} The unemployment and vacancy rates are constructed by \citet{PZ21} from NBER macrohistory files. Between 1930 and 1950 it remains true that unemployment and vacancy rates move in opposite directions (figure~\ref{f:regular1930}). Using a log scale, it also appears that unemployment and vacancy rates are inversely related (figure~\ref{f:log1930}). These fluctuations indicate that just as in the postwar era, the hyperbolic Beveridge curve holds in 1930--1950.\footnote{See also figure 3 in \citet{PZ21}.}
+
+\paragraph{State of the labor market} The labor market is inefficiently slack whenever the unemployment rate is above the vacancy rate; it is inefficiently tight whenever the unemployment rate is below the vacancy rate. The US labor market is always inefficiently slack between 1930 and 1950 except at the end World War 2, during 1942Q3--1946Q3 (figure~\ref{f:uv1930}).
+
+\paragraph{Visualization with labor-market tightness} The state of the labor market can also be visualized by plotting labor-market tightness (figure~\ref{f:tightness1930}). The labor market is inefficiently slack whenever tightness is below $1$; it is inefficiently tight whenever tightness is above $1$. Tightness is extremely volatile during the 1930--1950 period: it plunged to $0.03$ in 1932Q3, during the Great Depression, and climbed all the way to $6.8$ in 1944Q4, at the end of World War 2. These are the most extreme tightness fluctuations on record.
+
+\paragraph{Efficient unemployment rate} We then compute the efficient unemployment rate between 1930 and 1950 using the formula $u^* = \sqrt{uv}$. The efficient unemployment rate is again fairly stable: it remains between $2.5\%$ and $4.6\%$, with an average value of $3.5\%$ (figure~\ref{f:efficient1930}). This value of the efficient unemployment rate is actually pretty close from the full-employment rate of unemployment advocated by \citet[p. 21]{B44} just after World War 2, which was $3\%$.
+
+\paragraph{Unemployment gap} Finally, we compute the unemployment gap, which is the difference $u-u^*$ between the actual unemployment rate and the efficient unemployment rate (figure~\ref{f:gap1930}). The unemployment gap was of course positive and very large during the Great Depression: the labor market was much too slack then. The unemployment gap reached $+20.9$ percentage points in 1932Q3---its highest level on record. The economy recovered only slowly from the Great Depression . The unemployment gap finally turned negative during World War 2, in 1942Q3. The unemployment gap reached $-1.6$ percentage points in 1945Q1---its lowest level on record. The unemployment gap turned positive again during the 1948--1949 recession.
+
+\newlength{\imageheight}
+\settoheight{\imageheight}{\includegraphics[page=24]{\pdf}}
+\begin{figure}[p]
+\subcaptionbox{Unemployment and vacancy rates, $u$ and $v$\label{f:uv}}{\includegraphics[trim=0 0 0 0.5\imageheight, clip, scale=\lfig,page=25]{\pdf}}\vfig
+\subcaptionbox{Labor-market tightness, $v/u$\label{f:tightness}}{\includegraphics[trim=0 0 0 0.5\imageheight, clip, scale=\lfig,page=26]{\pdf}}\vfig
+\subcaptionbox{Efficient unemployment rate, $u^* = \sqrt{uv}$ \label{f:squareroot}}{\includegraphics[trim=0 0 0 0.5\imageheight, clip, scale=\lfig,page=27]{\pdf}}
+\caption{State of the US labor market, 1930Q1--2022Q1}
+\note{The unemployment and vacancy rates are obtained by splicing the unemployment and vacancy rates from figures~\ref{f:uv1951}, \ref{f:uv2020}, and \ref{f:uv1930}. Labor-market tightness and efficient unemployment rate are constructed from the unemployment and vacancy rates. The gray areas are NBER-dated recessions.}
+\label{f:summary}\end{figure}
+
+\subsection{Summary}
+
+To summarize, we combine the US data for 1930Q1--2022Q1.
+
+\paragraph{State of the labor market} The unemployment rate is generally above the vacancy rate, and this gap is exacerbated in recessions (figure~\ref{f:uv}). This means that the labor market does not operate efficiently, unlike what economists often assume. It also means that monetary and fiscal policies are needed to reduce unemployment in bad times, and adhere more closely to the full-employment mandate. Before 2018, the labor market is only inefficiently tight in wartime---World War 2, Korean War, Vietnam War. Since then the labor market has been inefficiently tight at the end of the Trump presidency and during the recovery of the coronavirus pandemic. The state of the labor market in 2018--2019 and 2021--2022 is a rarity: it is the only peacetime labor market that is exceedingly tight. \citet[p. 322]{K36} doubted that the labor market could reach full employment in peacetime. It seems that he was essentially right: before 2018 the US labor market never reached full employment in peacetime.
+
+\paragraph{Labor-market tightness} The state of the labor market can also be visualized by plotting labor-market tightness (figure~\ref{f:tightness}). Over 1930Q1--2022Q1, labor-market tightness averages $0.68$. In 2022, tightness reached a value of $2.0$, which it had last reached in 1945. In the recovery of the pandemic, the US labor market has reached historical levels of tightness.
+
+\paragraph{Full employment} Over 1930Q1--2022Q1, the efficient unemployment rate averages $4.2\%$ (figure~\ref{f:squareroot}). The efficient unemployment rate is stable over time. It hovered around $4\%$ between 1930 and 1970. It raised to about $5\%$ in the 1970s and stayed there in the 1980s. It then remained around $4\%$ again between 1990 and 2020. Finally, it rose to $6\%$ during the pandemic. This means that in the United States, the full-employment unemployment rate is stable over time, around $4\%$. 
+
+\section{Frequently asked questions}\label{s:faq}
+
+To conclude, we address questions that are frequently asked about the analysis. We cover questions about the analysis, about the policy implications of the results, about the theoretical underpinnings of the results, and about possible extensions.
+
+\subsection{Shouldn't unemployment dynamics play a role?}
+
+\paragraph{Informal argument} Unemployment perpetually evolves through a dynamic process driven by differences in inflow into and outflow from unemployment. Yet, our analysis of labor-market efficiency is static. But because gross flows are so large relative to net flows---$4\%$ of employment per month compared to a fraction of a percent of employment per month---this dynamic unemployment process converges extremely quickly to the Beveridge curve. This explains why the static analysis is an excellent approximation to the dynamic process.
+
+ \paragraph{Formal argument in a matching model \citep[p. 7]{MS16}} In a matching model the unemployment rate evolves according to the following differential equation:
+\begin{equation}
+\dot{u}(t) = \l [1-u(t)] - f u(t),
+\label{e:uDot}\end{equation}
+where $\l$ is the job-separation rate and $f$ is the job-finding rate. The term $\l [1-u(t)]$ gives the number of workers who lose or quit their jobs and enter unemployment during a unit time. The term $f u(t)$ gives the number of workers who find a job and leave unemployment during a unit time. The difference between inflow into and outflow from unemployment determines the change in the unemployment rate, $\dot{u}(t)$. The solution to the differential equation~\eqref{e:uDot} is
+\begin{equation}
+u(t) - u^b = [u(0) - u^b] e^{-(\l+f)t},
+\label{e:uSolution}\end{equation}
+where
+\begin{equation*}
+u^b = \frac{\l}{\l+f}.
+\end{equation*}
+The unemployment rate $u^b$ is the critical point of differential equation~\eqref{e:uDot}, so it corresponds to the unemployment rate given by the Beveridge curve when the job-finding rate is $f$. Equation \eqref{e:uSolution} shows that the distance between the unemployment rate $u(t)$ and the Beveridgean unemployment rate $u^b$ decays at an exponential rate $\l+f$. In the United States, the rate of decay is really fast: between 1951 and 2019, the job-finding rate averages $f = 55.8\%$ per month, the job-separation rate averages $\l = 3.2\%$ per month, so the rate of decay averages $\l+f = 59.0 \%$ per month. Accordingly, the half-life of the deviation from the Beveridgean unemployment rate, $u(t)-u^b$, is $\ln(2)/0.590 = 1.17$ month. Since about $50\%$ of the deviation evaporates within one month, about $90\%$ of it evaporates within one quarter, which implies that the unemployment rate is always close to the Beveridgean unemployment rate.
+
+\subsection{Shouldn't workers out of the labor force be part of the calculation?}
+
+If the labor-force participation rate systematically responded to the unemployment rate, then it would make sense to endogenize labor-force participation and include it in the welfare analysis. And in theory, two kinds of effects are possible. It would be possible that additional workers enter the labor force in bad times to supplement their household's income. It would also be possible that jobseekers become discouraged in bad times and leave the labor force. In practice, however, the labor-force participation rate appears acyclical, so variations in unemployment do not lead to systematic changes in participation \citep[p. 294]{S09}. Shimer's result is based on US data for 1960--2006. It is in line with earlier evidence from the United States. Using data for 1946--1954: \citet[p. 32]{R57} found that ``There is no substantial evidence upholding the view that labor-force participation declines when there are moderate decreases in the demand for labor.'' 
+
+\subsection{Shouldn't the hardship from unemployment be included in the calculation?}
+
+Beyond production lost, unemployment can also create psychological hardship for unemployed workers. This psychological toll has been understood for a long time, even though it is often neglected in economics. \citet[p. 11]{R49} for instance noted that ``The most striking aspect of unemployment is the suffering of the unemployed and their families---the loss of health and morale that follows loss of income and occupation.'' In contrast, unemployed workers might enjoy more leisure than employed workers. \citet{MS16} account for such considerations and find that psychological costs from unemployment offset the value of home production and leisure by unemployed workers. In net, it is as if unemployed workers do not engage in home production---which is what we assume here.
+
+\subsection{Are recruiting and jobseeking useless activities?}
+
+Of course recruiting and jobseeking are necessary for workers and firms to match with each other. But they do not generate any social welfare by themselves. In academia, faculty members have to spend time recruiting new colleagues. But during that time they do not teach or do research. Similarly, when graduate students are on the job market looking for a faculty position, they cannot teach or do research. In this paper we are looking for the unemployment rate that minimizes disruptions caused by recruiting and jobseeking.
+
+\subsection{Shouldn't we eliminate unemployment to almost zero?}
+
+Unemployment is clearly a waste of economic resources as people who would like to work and produce are forced to look for jobs and are not able to be productive. Yet, reducing the unemployment rate to zero is not desirable because, by the logic of the Beveridge curve, it would require a huge number of vacancies. Servicing vacancies takes work--- posting advertisements, screening and interviewing candidates---work that has to be diverted away from other productive tasks. And machines cannot do recruiting for firms. Therefore, vacancies also consume economic resources. It turns out that job recruiting is as labor intensive as job seeking is: one vacancy consumes as much resources as what is wasted when one person is looking for a job instead of working. As a result, it is efficient to reduce the sum of the unemployment and vacancy rates, and not simply the unemployment rate.
+
+\subsection{Don't people move from job to job without going through unemployment?}
+
+It is true that many workers change jobs without going through unemployment. This does reduce the waste on the jobseeking side of the labor market. Conceptually, such moves can be considered as unemployment of duration zero. While it would be ideal if all unemployment spells were of zero duration, empirically they are not: this is why the Beveridge curve exists. Our analysis follows from the Beveridge curve, and it applies even with job-to-job moves.
+
+\subsection{What do the results imply for monetary policy?}
+
+\paragraph{In practice} In the United States, the government is mandated to stabilize the economy at full employment. We have argued that our efficient unemployment rate $u^* = \sqrt{uv}$ is the appropriate measure of full employment. Hence, the Fed could use it as their full-employment target---especially since $\sqrt{uv}$ can be measured in real time.
+
+\paragraph{In theory} Moreover, targeting $u^*$ is optimal in certain monetary models with unemployment. This happens for instance in the model developed by \citet{MS19}. In that model, it is optimal to eliminate the unemployment gap by setting the nominal interest rate appropriately. As the unemployment gap is countercyclical, and a reduction in interest rate lowers unemployment, it is optimal to lower the interest rate in slumps, when the unemployment gap is high, and to raise it in booms, when the unemployment gap turns negative.
+
+\paragraph{Sufficient-statistic formula} In fact, \citet[section 5]{MS19} show that starting from a nominal interest rate $i>0$ and an inefficient unemployment rate $u \neq u^*$, the Fed should set the federal funds rate to $i^*$ such that
+\begin{equation}
+ i - i^* =  \frac{u-u^*}{du/di}.
+\label{e:monetary}\end{equation}
+The statistic $i-i^*$ indicates the decrease in interest rate required to reach the optimal policy. The statistic $u-u^*$ is the prevailing unemployment gap. And the statistic $du/di>0$ is the monetary multiplier: the percentage-point decrease in unemployment achieved by lowering the nominal interest rate by 1 percentage point. This sufficient-statistic formula ensures that the unemployment rate is efficient, and therefore also that the economy is at full employment.
+
+\paragraph{Monetary multiplier} A large literature estimates the effect of the federal funds rate on unemployment \citep{CEE99,C12,R15}. A midrange estimate of the US monetary multiplier is $du/di = 0.5$ \citep[p. 402]{MS19}. Combined with a monetary multiplier of $0.5$, formula~\eqref{e:monetary} says that the Fed should cut its interest rate by $2$ percentage points for each positive percentage point of unemployment gap, and raise its interest rate by $2$ percentage points for each negative percentage point of unemployment gap. For instance in March 2022, the economy is exceedingly tight: the unemployment gap is $-1.6$ percentage points. The Fed should raise its interest rate by $1.6\times 2 = 3.2$ percentage points in total to cool the economy back to full employment.
+
+\paragraph{At the zero lower bound} If the zero lower bound on nominal interest rates becomes binding, conventional monetary policy will not be able to sustain full employment. But other policies, such as government spending, can bring the economy closer to full employment. In a fiscal model with unemployment, \citet{MS15} find that optimal government spending deviates from the \citet{S54} rule to reduce---but not eliminate---the unemployment gap. Since the unemployment gap is countercyclical, and an increase in government spending reduces unemployment \citep{Ra13}, optimal government spending is countercyclical.
+
+\subsection{Shouldn't redistributive considerations be included in the analysis?}
+
+Our simple efficiency criterion minimizes the nonproductive use of labor. However, it is reasonable to think that waste on the jobseekers' side from looking for a job is more harmful than waste on the employer side for spending resources to fill vacancies. In other words, for distributive reasons, we might prefer having more waste if this waste is pushed toward employers. It is indeed the case that labor likes tight labor markets. Under some conditions, it is theoretically preferable to have direct redistribution (for example through more generous unemployment insurance funded by taxes on the wealthy) rather than through inefficiently tight labor markets. Practically, if taxes and transfers are set and cannot be made more generous, then an excessively tight labor market is an indirect way to redistribute toward labor.
+
+\subsection{Is the hyperbolic Beveridge curve consistent with a matching function?}
+
+\citet[equation (A12)]{MS16} relate the matching elasticity $\h$ to the Beveridge elasticity $\e$ in a matching model:
+\begin{equation*}
+\h = \frac{1}{1+\e}\bp{\e-\frac{u}{1-u}}.
+\end{equation*}
+An hyperbolic Beveridge curve implies a Beveridge elasticity $\e=1$. With an unemployment rate around $u=5\%$, we obtain a matching elasticity of $\h = 0.47$. Such matching elasticity falls squarely in the range of estimates obtained with aggregate US data, which span $0.30$--$0.76$ \citet[p. 9]{MS16}. So the hyperbolic Beveridge curve is consistent with US estimates of the matching function.
+
+\subsection{What causes the observed fluctuations along the Beveridge curve?} 
+
+Over the business cycle, unemployment and vacancy rates move along the Beveridge curve (such as in figure~\ref{f:pandemic}). Different models offer different explanations for these fluctuations? In the DMP model, shocks to workers' bargaining power lead to fluctuations along the Beveridge curve \citep[table~6]{S05}. In the variants of the DMP model by \citet{H05}, \citet{HM08}, and \citet{M09}, real wages are rigid, and shocks to labor productivity generate realistic fluctuations along the Beveridge curve. In the mismatch model by \citet{S07} and stock-flow matching model by \citet{ES10}, shocks to labor productivity also generate sizable fluctuations along the Beveridge curve. Finally, in the business-cycle model by \citet{MS19}, prices are rigid and shocks to aggregate demand generate fluctuations along the Beveridge curve. Such shocks may be caused by changes in monetary policy, or by changes in people's willingness to save (modeled as changes in people's marginal utility of wealth).
+
+\subsection{Should the government really take the Beveridge curve as given?}
+
+\paragraph{Empirical argument} Empirically the Beveridge curve is very stable over the business cycle. It does not seem to respond to stabilization policies (either monetary or fiscal policy) in any systematic way. Given this stability, it makes sense that the Fed takes the Beveridge curve as given. 
+
+\paragraph{Theoretical argument} Most Beveridgean models of monetary and fiscal policy are built around a matching function \citep{W05,BG08,RW11,M12,MS15,MS19}. In these models the Beveridge curve is determined by the matching function and job-separation rate. Neither respond to monetary or fiscal policy, so the Beveridge curve is unaffected by policy. In the context of business-cycle stabilization, it therefore seems appropriate for the government to take the Beveridge curve as given.\footnote{Stabilization policies do not seem to affect the Beveridge curve, but some structural policies might. For instance, Germany implemented labor-market reforms in 2003--2005 that were designed to improve how the labor market operates (Hartz reforms). Such policies might shift the Beveridge curve inward.}
+
+\subsection{What explains the inefficiency of the labor market?}
+
+In most Beveridgean models, unlike in Walrasian models, the market economy does not overlap with the planning economy. This is because most price and wage mechanisms do not ensure efficiency. For instance, in matching models of the labor market, the wage is determined in a situation of bilateral monopoly, so a range of wages is theoretically possible. A wage mechanism picks one wage within the range. There is only an infinitesimal chance that this wage is the one ensuring efficiency \citep[p.~185]{P00}. Accordingly, theory does not guarantee that unemployment is efficient---or that full employment occurs.
+
+\subsection{What does labor-market tightness imply for inflation?}
+
+In the recovery of the coronavirus pandemic in the United States, the labor market has reached a tightness never seen since World War 2 (figure~\ref{f:tightness}). At the same time, wage inflation has also been very high. The Employment Cost Index for wages and salaries of workers in the private sector grew at an annual rate of $6.3\%$ in 2021Q3 and $5.0\%$ in 2022Q1, the highest rates recorded since the Employment Cost Index was created in 2001 \citep{ECIWAG}. It is therefore quite possible that wage inflation accelerates when the labor market is exceedingly tight. \citet{DS22} provide some support for this hypothesis. They find that both unemployment and vacancies are good predictors of wage inflation. Since labor-market tightness is the vacancy-to-unemployment ratio, it could be a good predictor of wage inflation as well.
+
+\bibliography{\bib}
+
+\end{document}
