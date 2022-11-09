@@ -11,7 +11,8 @@ LaTeX style file to format academic papers
 
 - Text font is Source Serif Pro
 - Greek & symbol font is Euler 
-- No colors are used in the test so papers print well
+- No colors are used in the text (only black) so papers print well and to reduce distraction
+- Colors are reserved for graphs 
 - Margins & spacing are set for comfortable reading
 
 ## Example
