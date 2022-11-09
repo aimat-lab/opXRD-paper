@@ -10,3 +10,7 @@ LaTeX style file for academic papers
 ## Example
 
 The paper `paper.pdf` was produced with the style file. The LaTeX file `paper.tex` illustrates how to use the new commands defined in the style file. The new mathematical commands are defined in `math.sty`, which is [available in this GitHub repository](https://github.com/pmichaillat/latex-math).
+
+## Reference
+
+As much as possible the style file follows Matthew Butterick's wonderful typographical advice in [Practical Typography](https://practicaltypography.com).
