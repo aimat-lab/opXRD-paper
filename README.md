@@ -1,11 +1,18 @@
 # latex-paper
 
-LaTeX style file for academic papers
+LaTeX style file to format academic papers
 
 ## How to use
 
 - Add `paper.sty` to the folder with your LaTeX files
 - Insert `\usepackage{paper}` in the preamble of your document
+
+## Key features
+
+- Text font is Source Serif Pro
+- Greek & symbol font is Euler 
+- No colors are used in the test so papers print well
+- Margins & spacing are set for comfortable reading
 
 ## Example
 
