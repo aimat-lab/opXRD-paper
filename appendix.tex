@@ -1,0 +1,107 @@
+\documentclass[letterpaper,12pt,leqno]{article}
+\usepackage{paper,appendix}
+\bibliographystyle{bibliography}
+\hypersetup{pdftitle={Paper Title: Online Appendices}}
+% Enter journal of publication and URL to paper
+\published{Journal Name}{https://github.com/pmichaillat/latex-paper}
+% Enter BibTeX file with references here:
+\newcommand{\bib}{bibliography.bib}
+% Enter PDF file with figures here:
+\newcommand{\pdf}{figures.pdf}
+% Enter TeX file with the main text so references can be used in appendix file (this is especially useful if the appendix has to be split away from the main text)
+\externaldocument{paper}
+
+\begin{document}
+
+\title{Paper Title: Online Appendices}
+\author{Author 1, Author 2}
+\date{Month Year}
+
+\begin{titlepage}
+\maketitle
+\tableofcontents
+\end{titlepage}
+
+
+\section{A section}\label{a:appendix1}
+
+We extend the p-hacking model of section~\ref{s:section} by introducing a cost of research, incurred at each new p-hacking step. Obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. 
+
+\subsection{Links} 
+
+The references from the paper file are available in the appendix as long as the appendix is compiled after the paper and intermediary LaTeX-related files are not deleted.
+
+\begin{itemize}    
+    \item Equation \ref{e:type1} was very helpful.
+    \item Figure \ref{f:graph1} provided a lot of information---especially the plot on figure \ref{f:panel2}. 
+\end{itemize}  
+
+\subsection{Assumptions} 
+
+At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. A corrolary in the appendix is as follows:
+
+\begin{corollary} The number of p-hacking steps might be
+\begin{equation*}
+\mathbb{E}(\Omega) = \mathbb{P}(\omega\cdot \mu - \xi) - \sum_{i=0}^{m}\sum_{j=-\infty}^{n} \sigma(i,j) + 123^{56}.
+\end{equation*}\end{corollary}
+
+\subsection{Optimal stopping time and robust critical value}
+
+\paragraph{Significant result} Since it is optimal to engage in research, the researcher starts a first p-hacking step. With probability $\xi$, the step can be completed, and the researcher obtains a test result \citep{MS22a}.
+
+\paragraph{Another paragraph with some math} When a researcher decides to start research, three scenarios are again possible. With probability $1-\gamma$, the researcher cannot complete the first research step and cannot submit any result; she then collects $0$. With probability $\gamma$, she can complete the first research step. Then with probability $S(z^*)$, her result is significant and she collects $v^s$. With probability $1-S(z^*)$, her result is insignificant and the continuation value at this point is $\mathcal{V}^i$. Aggregating these scenarios, we obtain the initial continuation value:
+\begin{equation}
+\mathbb{V}^r = (1-\gamma) \times 0 +\gamma S(z^*) v^s+\gamma [1-S(z^*)] \mathcal{V}^i-c.
+\label{e:appendix1}\end{equation}
+
+
+\paragraph{Paragraph with links to appendix equations} What does the researcher decide if the result is insignificant? It depends on the research cost $\mathcal{C}$. Equation \eqref{e:appendix1} shows that if the cost is high enough, the researcher stops right away. This happens when the possibility of obtaining a significant result in the future does not compensate the research cost.
+
+\subsection{A larger figure, without panel, in the appendix} 
+
+At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. This is showed in figure \ref{f:appendix1}.
+
+\begin{figure}[t]
+\includegraphics[scale=\mfig,page=1]{\pdf}
+\caption{A caption for the larger graph}
+\note{A note for the larger graph. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus.}
+\label{f:appendix1}\end{figure}
+
+\section{Another section}\label{a:appendix2}
+
+At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti.
+
+\subsection{A even larger figure, without panel, in the appendix} 
+
+At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. 
+
+\begin{figure}[t]
+\includegraphics[scale=\lfig,page=3]{\pdf}
+\caption{A caption for the even larger graph}
+\note{A note for the larger graph. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus.}
+\label{f:appendix2}\end{figure}
+
+When a researcher decides to continue p-hacking, three scenarios are possible, as showed in figure \ref{f:appendix2}. The vector probability $1-\bm{\gamma}$ then gives $v^i$. The vector $\bm{\gamma}$ contains the p-hacking steps. Then with probability $S(z^*)$, her result is significant and she collects $v^s$. With probability $1-S(z^*)$, her result is insignificant once again and the continuation value at this point is $\mathcal{V}^i$. In any case, she must incur a cost $c$ to conduct the research step. 
+
+We rewrite the initial continuation value as
+\begin{equation}
+\mathbb{V}^r = \zeta \mathcal{V}^i + \zeta S(z^*) (v^s - \mathcal{V}^i) - c.
+\label{e:appendix2}\end{equation}
+
+Equation \eqref{e:appendix2} shows when there is no p-hacking. The robust critical value is then just the classical critical value. 
+
+\subsection{Condition for p-hacking}\label{a:subappendix}
+
+When a researcher has obtained one insignificant result, it is optimal to continue p-hacking if $\mathcal{V}^i > \mathcal{V}^r$. This is related to the results by \citet{MS21b}.\footnote{The reference goes to its own reference list at the end of the appendix---unlike when the appendix was at the end of the main text.}
+
+\subsection{Continuation value of research} 
+
+We first compute the continuation value of research for a researcher who has already recorded an insignificant result. We denote this value $\mathcal{B}^\theta$. Because the researcher's situation is invariant in time, the continuation value is the same at each p-hacking step. 
+
+\subsection{Condition for research} 
+
+We also compute the cost below which it is optimal to engage in research. Given that we have normalized the outside option of the researcher to $0$, it is optimal to engage in research if the expected value from it is positive. This results are summarized in a repository with the following URL: \url{https://github.com/pmichaillat/latex-paper}.
+
+\bibliography{\bib}
+
+\end{document}

@@ -1,0 +1,49 @@
+% ---------- Title page ----------
+
+\pretitle{\begin{center}\bfseries\LARGE}
+
+\usepackage[subfigure]{tocloft}
+\renewcommand{\contentsname}{}
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsecpagefont}{\normalfont}
+\renewcommand{\cftsecaftersnum}{.}
+\renewcommand{\cftsubsecaftersnum}{.}
+\renewcommand{\cftdotsep}{10}
+\setlength{\cftbeforesecskip}{0em}
+
+% ---------- Headings ----------
+
+\renewcommand{\thesection}{\Alph{section}}
+\titleformat{\section}{\centering\large\bfseries}{Appendix~\thesection.}{1em}{}
+\newcommand{\sectionbreak}{\clearpage}
+
+% ---------- Numbering: JEEA ----------
+
+% \numberwithin{theorem}{section}
+% \numberwithin{proposition}{section}
+% \numberwithin{lemma}{section}
+% \numberwithin{corollary}{section}
+% \numberwithin{definition}{section}
+% \numberwithin{assumption}{section}
+% \numberwithin{remark}{section}
+% \numberwithin{table}{section}
+% \numberwithin{figure}{section}
+% \numberwithin{equation}{section}
+
+% ---------- Numbering: AER ----------
+
+\renewcommand{\thetheorem}{A\arabic{theorem}}
+\renewcommand{\theproposition}{A\arabic{proposition}}
+\renewcommand{\thelemma}{A\arabic{lemma}}
+\renewcommand{\thecorollary}{A\arabic{corollary}}
+\renewcommand{\thedefinition}{A\arabic{definition}}
+\renewcommand{\theassumption}{A\arabic{assumption}}
+\renewcommand{\theremark}{A\arabic{remark}}
+\renewcommand{\thetable}{A\arabic{table}}
+\renewcommand{\thefigure}{A\arabic{figure}}
+\renewcommand{\theequation}{A\arabic{equation}}
+
+% ---------- Crossreferences ----------
+
+\usepackage{xr}
+

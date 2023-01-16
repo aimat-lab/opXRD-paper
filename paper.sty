@@ -23,14 +23,16 @@
 
 \usepackage{enumitem}
 \setlist[itemize,1]{leftmargin=\parindent,label=\color{gray}{\upshape\textbullet}}
-\setlist[itemize,2]{leftmargin=\parindent,label=\color{gray}{\upshape\textendash}}
-\setlist[enumerate,1]{leftmargin=2\parindent,label=\upshape(\roman*)}
+\setlist[itemize,2]{leftmargin=2\parindent,label=\color{gray}{\upshape\textendash}}
+\setlist[enumerate,1]{leftmargin=\parindent,label=\upshape(\alph*)}
+\setlist[enumerate,2]{leftmargin=2\parindent,label=\upshape(\roman*)}
 
 \AtBeginDocument{\frenchspacing}
 \MTsetmathskips{f}{\thinmuskip}{0mu} % Spacing around f in math
 \MTsetmathskips{y}{\thinmuskip}{0mu} % Spacing around y in math
 \MTsetmathskips{p}{\thinmuskip}{0mu} % Spacing around p in math
 \MTsetmathskips{l}{0mu}{\thinmuskip} % Spacing around l in math
+\MTsetmathskips{j}{0mu}{\thinmuskip} % Spacing around j in math
 
 % ---------- Title page ----------
 
