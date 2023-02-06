@@ -7,8 +7,8 @@ This repository contains a minimalist template to write academic papers with LaT
 - `paper.tex` –  Skeleton of the paper. Fill it out with the content of your paper.
 - `paper.sty` –  LaTeX style file collecting all the formatting commands. Must be included in the same folder as `paper.tex`.
 - `figures.pdf` – PDF file with all the figures included in the paper. Replace the figures with your own figures---one per page. An easy way to do that is to create a Keynote or Powerpoint presentation; insert each figure as a slide background; and save the resulting presentation as PDF. With this method, all the figures have the exact same size. It is also possible to use Keynote or Powerpoint to annotate the figures created with an external software (Matlab, R, and so on).
-- `bibliography.bib` – BibTeX file with all the references included in the paper. Replace the references with your own.
-- `bibliography.bst` – BibTeX style file to format the entries into the reference section. This style file is [hosted in this GitHub repository](https://github.com/pmichaillat/latex-bibliography). 
+- `bibliography.bib` – BibTeX file with all the references included in the paper. Replace these references with your own.
+- `bibliography.bst` – BibTeX style file to format the entries into the reference section.  Must be included in the same folder as `paper.tex`. The style file is based on the style file `econ.bst`, which was created by [Shiro Takeda](https://shirotakeda.github.io) and is [available on GitHub](https://github.com/ShiroTakeda/econ-bst).
 - `paper.pdf` – PDF file produced by compiling `paper.tex` (with PDFTeX). This file is not required to use the template; it only illustrate the output of the template.
 
 ## Additional files for online appendix
@@ -30,7 +30,7 @@ The repository also includes an additional template and style file in case the a
 
 ## Reference
 
-As much as possible the style file follows Matthew Butterick's wonderful typographical advice in [Practical Typography](https://practicaltypography.com).
+As much as possible the template follows Matthew Butterick's wonderful typographical advice in [Practical Typography](https://practicaltypography.com). The references follow the guidelines from the [Chicago Manual of Style](https://www.chicagomanualofstyle.org/home.html).
 
 ## Related LaTeX resources
 
