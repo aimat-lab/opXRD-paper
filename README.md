@@ -1,38 +1,48 @@
-# LaTeX template for academic papers
+# LaTeX Template for Academic Papers
 
 This repository contains a minimalist template to write academic papers with LaTeX.
 
-## Included files and how to use them
+## Template documentation
 
-- `paper.tex` –  Skeleton of the paper. Fill it out with the content of your paper.
-- `paper.sty` –  LaTeX style file collecting all the formatting commands. Must be included in the same folder as `paper.tex`.
-- `figures.pdf` – PDF file with all the figures included in the paper. Replace the figures with your own figures---one per page. An easy way to do that is to create a Keynote or Powerpoint presentation; insert each figure as a slide background; and save the resulting presentation as PDF. With this method, all the figures have the exact same size. It is also possible to use Keynote or Powerpoint to annotate the figures created with an external software (Matlab, R, and so on).
-- `bibliography.bib` – BibTeX file with all the references included in the paper. Replace these references with your own.
-- `bibliography.bst` – BibTeX style file to format the entries into the reference section.  Must be included in the same folder as `paper.tex`. The style file is based on the style file `econ.bst`, which was created by [Shiro Takeda](https://shirotakeda.github.io) and is [available on GitHub](https://github.com/ShiroTakeda/econ-bst).
-- `paper.pdf` – PDF file produced by compiling `paper.tex` (with PDFTeX). This file is not required to use the template; it only illustrate the output of the template.
+The template is documented at https://pascalmichaillat.org/d2/.
 
-## Additional files for online appendix
+## Template overview
 
-The repository also includes an additional template and style file in case the appendix of the paper must be carved out into a separate online appendix. 
++ The font for text, roman math, and numbers is [Source Serif Pro](https://fonts.google.com/specimen/Source+Serif+Pro).
++ The font for Greek and calligraphic math is [Euler](http://luc.devroye.org/fonts-26139.html).
++ No colors are used in the text (only black) to reduce distraction, and so papers print well.
++ Colors are reserved for graphs.
++ Margins, spacing, and font size are set for comfortable reading.
++ Headings are designed so the paper is easy to scan.
++ Formatting is also specified for figures, tables, appendix, and online appendix.
 
-- `appendix.tex` –  Skeleton of the online appendix. Fill it out with the content of your online appendix. The appendix must be in the same folder as the paper so the equation and section labels from the paper can be used in the online appendix.
-- `appendix.sty` –  LaTeX style file collecting additional formatting commands for the online appendix. Must be included in the same folder as `appendix.tex`. This style file must be used in conjonction with `paper.sty`, which must also be included in the folder. 
-- `appendix.pdf` – PDF file produced by compiling `appendix.tex` (with PDFTeX). This file is not required to use the template; it only illustrate the output of the template.
+## Template files
 
-## Key features
+The repository contains files to produce a minimalist paper with LaTeX. The template was developed with the MacTeX-2021 distribution.
 
-- The font for text, roman math, and numbers is [Source Serif Pro](https://fonts.google.com/specimen/Source+Serif+Pro).
-- The font for Greek and calligraphic math is [Euler](http://luc.devroye.org/fonts-26139.html).
-- No colors are used in the text (only black) to reduce distraction, and so papers print well.
-- Colors are reserved for graphs.
-- Margins, spacing, and font size are set for comfortable reading.
-- Formating is also specified for appendix and online appendix.
++ `paper.tex` –  LaTeX file containing the skeleton of the paper. Fill it out with the content of your paper. Compile it with pdfTeX.
++ `paper.sty` –  LaTeX style file collecting all the formatting commands. Must be included in the same folder as `paper.tex`.
++ `figures.pdf` – PDF file with all the figures included in the paper. Replace the figures with your own figures—one per page.
++ `bibliography.bib` – BibTeX file with all the references included in the paper. Replace these references with your own.
++ `bibliography.bst` – BibTeX style file to format the references.  Must be included in the same folder as `paper.tex`. This style file is based on `econ.bst`, which was created by [Shiro Takeda](https://shirotakeda.github.io) and is [available on GitHub](https://github.com/ShiroTakeda/econ-bst).
++ `paper.pdf` – PDF file produced by compiling `paper.tex` with pdfTeX. This file is not required to use the template; it only illustrate the output of the template.
 
-## Reference
+## Online appendix
 
-As much as possible the template follows Matthew Butterick's wonderful typographical advice in [Practical Typography](https://practicaltypography.com). The references follow the guidelines from the [Chicago Manual of Style](https://www.chicagomanualofstyle.org/home.html).
+The repository also includes files to produce an online appendix—in case the paper's appendix must be carved out into a separate, online appendix. 
 
-## Related LaTeX resources
++ `appendix.tex` –  LaTeX file containing the skeleton of the online appendix. Fill it out with the content of your online appendix. Compile it with pdfTeX. The equation and section labels from `paper.tex` can be used in `appendix.tex` thanks to the `xr` package. [This requires the following](https://www.ctan.org/pkg/xr):
+	* `appendix.tex` is be in the same folder as `paper.tex`.
+	* `paper.tex` is compiled first.
+	* The auxiliary file `paper.aux` is available when `appendix.tex` is compiled.
++ `appendix.sty` –  LaTeX style file collecting additional formatting commands for the online appendix. Must be included in the same folder as `appendix.tex`. This style file must be used in conjunction with `paper.sty`, which must also be included in the folder. 
++ `appendix.pdf` – PDF file produced by compiling `appendix.tex` with pdfTeX. This file is not required to use the template; it only illustrate the output of the template.
 
-- [This LaTeX template](https://github.com/pmichaillat/latex-presentation) produces minimalist academic presentations following the same principles and with a similar general appearance as this paper template. 
-- [This LaTeX style file](https://github.com/pmichaillat/latex-math) contains commands to easily typeset mathematical expressions. It can be used in combination with this paper template to make it easier to type and read math.
+## Related resources
+
++ [This LaTeX template](https://github.com/pmichaillat/latex-presentation) produces minimalist academic presentations following the same principles, and with a similar general appearance, as this paper template. 
++ [This LaTeX style file](https://github.com/pmichaillat/latex-math) contains commands to easily typeset mathematical expressions. It can be used in combination with this paper template to make it easier to type and read math.
+
+## License
+
+The content of this repository is licensed under the terms of the [MIT License](https://opensource.org/license/mit-license-php/).
