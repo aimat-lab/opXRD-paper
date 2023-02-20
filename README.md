@@ -44,7 +44,7 @@ The repository also includes files to produce an online appendix (in case the pa
 
 These files should be used as follows:
 
-+ Fill out `appendix.tex` with the content of your online appendix. Compile it with pdfTeX. The equation and section labels from `paper.tex` can be used in `appendix.tex` thanks to the `xr` package. [This requires the following](https://www.ctan.org/pkg/xr):
++ Fill out `appendix.tex` with the content of your online appendix. Compile it with pdfTeX. The equation and section labels from `paper.tex` can be used in `appendix.tex`. [This requires the following](https://www.ctan.org/pkg/xr):
 	* `appendix.tex` is in the same folder as `paper.tex`.
 	* `paper.tex` is compiled first.
 	* The auxiliary file `paper.aux` is available when `appendix.tex` is compiled.
