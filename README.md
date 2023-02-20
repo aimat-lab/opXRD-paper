@@ -21,7 +21,7 @@ The template's documentation is available at https://pascalmichaillat.org/d2/.
 + `paper.sty` –  LaTeX style file collecting all the formatting commands.
 + `figures.pdf` – PDF file with all the figures included in the paper.
 + `bibliography.bib` – BibTeX file with all the references included in the paper.
-+ `bibliography.bst` – BibTeX style file to format the references. This style file is based on `econ.bst`, which was created by [Shiro Takeda](https://shirotakeda.github.io) and is [available on GitHub](https://github.com/ShiroTakeda/econ-bst).
++ `bibliography.bst` – BibTeX style file to format the references. This style file is based on `econ.bst`, which was created by Shiro Takeda and is [available on GitHub](https://github.com/ShiroTakeda/econ-bst).
 + `paper.pdf` – PDF file produced by compiling `paper.tex` with pdfTeX.
 
 ## Usage
@@ -58,4 +58,4 @@ These files should be used as follows:
 
 ## License
 
-The content of this repository is licensed under the terms of the [MIT License](https://opensource.org/license/mit-license-php/).
+The content of this repository is licensed under the terms of the MIT License.
