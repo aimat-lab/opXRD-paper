@@ -54,7 +54,7 @@ These files should be used as follows:
 ## Related resources
 
 + [This LaTeX template](https://github.com/pmichaillat/latex-presentation) produces  academic presentations following the same principles, and with a similar appearance, as this paper template. 
-+ [This LaTeX style file](https://github.com/pmichaillat/latex-math) contains commands to typeset mathematical expressions easily. It can be used in combination with this paper template.
++ [This LaTeX style file](https://github.com/pmichaillat/latex-math) contains commands to write mathematical expressions easily. It can be used in combination with this paper template.
 
 ## License
 
