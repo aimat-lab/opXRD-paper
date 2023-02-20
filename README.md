@@ -10,7 +10,7 @@ The template's documentation is available at https://pascalmichaillat.org/d2/.
 
 + The font for text, roman math, and numbers is [Source Serif Pro](https://fonts.google.com/specimen/Source+Serif+Pro).
 + The font for Greek and calligraphic math is [Euler](http://luc.devroye.org/fonts-26139.html).
-+ No colors are used in the text (only black) to reduce distraction, and so papers print well.
++ No colors are used in the text (only black) to reduce distraction and to guarantee quality printing.
 + Margins, spacing, and font size are set for comfortable reading.
 + Headings are designed for easy scanning.
 + Formatting is also specified for figures, tables, appendix, and online appendix.
