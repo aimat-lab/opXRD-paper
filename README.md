@@ -27,8 +27,8 @@ The template's documentation is available at https://pascalmichaillat.org/d2/.
 ## Usage
 
 + Fill out `paper.tex` with the content of your paper. Compile the file with pdfTeX.
-+ `paper.sty` must be included in the same folder as `paper.tex`. This file can be modified to alter the paper's format.
-+ `bibliography.bst` must also be included in the same folder as `paper.tex`. This file can be modified to alter the bibliography's format.
++ `paper.sty` must be included in the same folder as `paper.tex`. It can be modified to alter the paper's format.
++ `bibliography.bst` must be included in the same folder as `paper.tex`. It can be modified to alter the bibliography's format.
 + Replace the figures in `figures.pdf` with your own figures—one per page.
 + Replace the references in `bibliography.bib` with your own references.
 + `paper.pdf` is not required to use the template. It only illustrate the output of the template, and will be overridden once `paper.tex` is compiled.
@@ -48,7 +48,7 @@ These files should be used as follows:
 	* `appendix.tex` is in the same folder as `paper.tex`.
 	* `paper.tex` is compiled first.
 	* The auxiliary file `paper.aux` is available when `appendix.tex` is compiled.
-+ `appendix.sty` must be included in the same folder as `appendix.tex`. This file is used in conjunction with `paper.sty`, which must also be included in the folder. 
++ `appendix.sty` must be included in the same folder as `appendix.tex`. It can be modified to alter the format of the online appendix. It works in conjunction with `paper.sty`, which must also be included in the folder. 
 + `appendix.pdf` is not required to use the template. It only illustrate the output of the template, and will be overridden once `appendix.tex` is compiled.
 
 ## Related resources
