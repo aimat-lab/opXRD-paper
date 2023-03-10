@@ -1,20 +1,21 @@
-% ---------- Fonts ----------
+%% Fonts
 
 \usepackage{sourceserifpro}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm,eucal,bbold,bm}
 \usepackage[italic,eulergreek]{mathastext}
 
+% Ensures text from PDF can be copy-pasted
 \input{glyphtounicode}\pdfgentounicode=1
 
-% ---------- Spacing ----------
+%% Spacing
 
 \usepackage[onehalfspacing]{setspace}
 
 \renewcommand{\floatpagefraction}{0}
 \AtBeginDocument{\allowdisplaybreaks[1]}
 
-% ---------- General typography ----------
+%% General typography
 
 \usepackage{microtype}
 \usepackage[x11names]{xcolor}
@@ -28,13 +29,15 @@
 \setlist[enumerate,2]{leftmargin=2\parindent,label=\upshape(\roman*)}
 
 \AtBeginDocument{\frenchspacing}
-\MTsetmathskips{f}{\thinmuskip}{0mu} % Spacing around f in math
-\MTsetmathskips{y}{\thinmuskip}{0mu} % Spacing around y in math
-\MTsetmathskips{p}{\thinmuskip}{0mu} % Spacing around p in math
-\MTsetmathskips{l}{0mu}{\thinmuskip} % Spacing around l in math
-\MTsetmathskips{j}{0mu}{\thinmuskip} % Spacing around j in math
 
-% ---------- Title page ----------
+% Correct spacing around letters in math
+\MTsetmathskips{f}{\thinmuskip}{0mu}
+\MTsetmathskips{y}{\thinmuskip}{0mu}
+\MTsetmathskips{p}{\thinmuskip}{0mu}
+\MTsetmathskips{l}{0mu}{\thinmuskip}
+\MTsetmathskips{j}{\thinmuskip}{\thinmuskip}
+
+%% Title page
 
 \usepackage{titling}
 \pretitle{\begin{center}\bfseries\huge} 
@@ -45,7 +48,7 @@
 \usepackage{etoolbox}
 \AtBeginEnvironment{titlepage}{\setlength{\parindent}{0pt}}
 
-% ---------- Headings ----------
+%% Headings
 
 \usepackage{titlesec}
 \titleformat*{\section}{\centering\large\bfseries}
@@ -53,7 +56,7 @@
 \titleformat{\paragraph}[runin]{\itshape}{}{}{}[.]
 \titlelabel{\thetitle.\quad}
 
-% ---------- Theorems + proofs ----------
+%% Theorems + proofs
 
 \newtheoremstyle{paper}{}{}{\itshape}{}{\scshape}{.}{.5em}{}
 \theoremstyle{paper}
@@ -67,7 +70,7 @@
 
 \renewcommand{\proofname}{\upshape\scshape Proof}
 
-% ---------- Tables + figures ----------
+%% Tables + figures
 
 \usepackage{multirow,booktabs,rotating,graphicx}
 
@@ -91,7 +94,7 @@
 
 \newcommand{\note}[2][]{\parbox{\textwidth}{\footnotesize\vspace*{10pt}\textit{#1}#2}}
 
-% ---------- Bibliography ----------
+%% Bibliography
 
 \AtBeginEnvironment{thebibliography}{\setstretch{1.1}}
 
@@ -101,7 +104,7 @@
 \setlength{\bibsep}{0pt}
 \setlength{\bibhang}{1.5em}
 
-% ---------- Appendix ----------
+%% Appendix
 
 \AfterEndEnvironment{thebibliography}{
 \setcounter{theorem}{0}
@@ -126,16 +129,16 @@
 \renewcommand{\theequation}{A\arabic{equation}}
 \titleformat{\section}{\centering\large\bfseries}{Appendix~\thesection.}{1em}{}}
 
-% ---------- Hyperlinks ----------
+%% Hyperlinks
 
 \usepackage{fancyhdr} % Before hyperref
 \usepackage[pdftex,hidelinks,hypertexnames=false,hyperfootnotes=false,pdfpagemode=UseNone,pdfdisplaydoctitle=true]{hyperref} % Last package
 
-% ---------- Layout ----------
+%% Layout
 
 \usepackage[margin=1.1in,footskip=0.7in]{geometry} % After hyperref
 
-% ---------- Headers + footers ----------
+%% Headers + footers
 
 \renewcommand{\headrule}{}
 
