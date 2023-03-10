@@ -1,4 +1,4 @@
-# LaTeX Template for Academic Papers
+# Minimalist LaTeX Template for Academic Papers
 
 This repository contains a minimalist template to write academic papers with LaTeX.
 
