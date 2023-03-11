@@ -5,30 +5,9 @@
 \usepackage{amsmath,amssymb,amsthm,eucal,bbold,bm}
 \usepackage[italic,eulergreek]{mathastext}
 
-% Ensures text from PDF can be copy-pasted
-\input{glyphtounicode}\pdfgentounicode=1
-
-%% Spacing
-
-\usepackage[onehalfspacing]{setspace}
-
-\renewcommand{\floatpagefraction}{0}
-\AtBeginDocument{\allowdisplaybreaks[1]}
-
-%% General typography
-
-\usepackage{microtype}
-\usepackage[x11names]{xcolor}
+% URL font
 \usepackage[hyphens]{url}
 \urlstyle{same}
-
-\usepackage{enumitem}
-\setlist[itemize,1]{leftmargin=\parindent,label=\color{gray}{\upshape\textbullet}}
-\setlist[itemize,2]{leftmargin=2\parindent,label=\color{gray}{\upshape\textendash}}
-\setlist[enumerate,1]{leftmargin=\parindent,label=\upshape(\alph*)}
-\setlist[enumerate,2]{leftmargin=2\parindent,label=\upshape(\roman*)}
-
-\AtBeginDocument{\frenchspacing}
 
 % Correct spacing around letters in math
 \MTsetmathskips{f}{\thinmuskip}{0mu}
@@ -37,14 +16,32 @@
 \MTsetmathskips{l}{0mu}{\thinmuskip}
 \MTsetmathskips{j}{\thinmuskip}{\thinmuskip}
 
+% Copiable text in PDF
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+%% Color
+
+\usepackage[x11names]{xcolor}
+
+%% Spacing
+
+\usepackage[onehalfspacing]{setspace}
+\AtBeginDocument{\frenchspacing}
+\usepackage{microtype}
+
 %% Title page
 
+% Title font
 \usepackage{titling}
 \pretitle{\begin{center}\bfseries\huge} 
+
+% No thanks mark
 \renewcommand{\tamark}{}
 \setlength{\thanksmarkwidth}{0em}
 \setlength{\thanksmargin}{0em}
 
+% No indentation for abstract
 \usepackage{etoolbox}
 \AtBeginEnvironment{titlepage}{\setlength{\parindent}{0pt}}
 
@@ -56,7 +53,7 @@
 \titleformat{\paragraph}[runin]{\itshape}{}{}{}[.]
 \titlelabel{\thetitle.\quad}
 
-%% Theorems + proofs
+%% Theorems & proofs
 
 \newtheoremstyle{paper}{}{}{\itshape}{}{\scshape}{.}{.5em}{}
 \theoremstyle{paper}
@@ -68,41 +65,56 @@
 \newtheorem{assumption}{Assumption}
 \newtheorem{remark}{Remark}
 
+% Proof label font
 \renewcommand{\proofname}{\upshape\scshape Proof}
 
-%% Tables + figures
+%% Tables & figures
 
 \usepackage{multirow,booktabs,rotating,graphicx}
-
-\makeatletter\g@addto@macro\@floatboxreset\centering\makeatother % Centered figures + tables
+\renewcommand{\floatpagefraction}{0}
+\renewcommand{\arraystretch}{1.1}
 \renewcommand{\figurename}{\textsc{Figure}}
 \renewcommand{\tablename}{\textsc{Table}}
-
 \BeforeBeginEnvironment{tabular*}{\footnotesize}
-\renewcommand{\arraystretch}{1.1}
+\AtBeginDocument{\allowdisplaybreaks[1]}
 
+% Captions
 \usepackage{caption,subcaption}
 \captionsetup{labelsep=period}
 \captionsetup[sub]{labelformat=simple,labelsep=period,size=footnotesize}
 \captionsetup[table]{position=top}
-
 \renewcommand{\thesubfigure}{\Alph{subfigure}}
+
+% Centered figures & tables
+\makeatletter\g@addto@macro\@floatboxreset\centering\makeatother 
+
+% Notes below tables & figures
+\newcommand{\note}[2][]{\parbox{\textwidth}{\footnotesize\vspace*{10pt}\textit{#1}#2}}
+
+% Figure sizes & spaces
 \newcommand{\sfig}{0.2}
 \newcommand{\mfig}{0.3}
 \newcommand{\lfig}{0.4}
 \newcommand{\vfig}{\\\vspace*{0.4cm}}
 
-\newcommand{\note}[2][]{\parbox{\textwidth}{\footnotesize\vspace*{10pt}\textit{#1}#2}}
+%% Lists
+
+\usepackage{enumitem}
+\setlist[itemize,1]{leftmargin=\parindent,label=\color{gray}{\upshape\textbullet}}
+\setlist[itemize,2]{leftmargin=2\parindent,label=\color{gray}{\upshape\textendash}}
+\setlist[enumerate,1]{leftmargin=\parindent,label=\upshape(\alph*)}
+\setlist[enumerate,2]{leftmargin=2\parindent,label=\upshape(\roman*)}
 
 %% Bibliography
-
-\AtBeginEnvironment{thebibliography}{\setstretch{1.1}}
 
 \usepackage{natbib}
 \setcitestyle{aysep={}}
 \renewcommand{\bibfont}{\small}
 \setlength{\bibsep}{0pt}
 \setlength{\bibhang}{1.5em}
+
+% Reduced spacing in bibliography
+\AtBeginEnvironment{thebibliography}{\setstretch{1.1}}
 
 %% Appendix
 
@@ -129,24 +141,26 @@
 \renewcommand{\theequation}{A\arabic{equation}}
 \titleformat{\section}{\centering\large\bfseries}{Appendix~\thesection.}{1em}{}}
 
-%% Hyperlinks
+%% Hyperlinks (last package)
 
 \usepackage{fancyhdr} % Before hyperref
-\usepackage[pdftex,hidelinks,hypertexnames=false,hyperfootnotes=false,pdfpagemode=UseNone,pdfdisplaydoctitle=true]{hyperref} % Last package
+\usepackage[pdftex,hidelinks,hypertexnames=false,hyperfootnotes=false,pdfpagemode=UseNone,pdfdisplaydoctitle=true]{hyperref}
 
-%% Layout
+%% Layout (after hyperref)
 
-\usepackage[margin=1.1in,footskip=0.7in]{geometry} % After hyperref
+\usepackage[margin=1.1in,footskip=0.7in]{geometry}
 
-%% Headers + footers
+%% Headers & footers (after hyperref & geometry)
 
+% No header line
 \renewcommand{\headrule}{}
 
-\pagestyle{fancy} % After hyperref + geometry
+% Centered page numbers on regular pages
+\pagestyle{fancy}
 \fancyhf{}
 \fancyfoot[C]{\thepage}
 
+% Footers for title pages
 \fancypagestyle{plain}{\fancyhf{}}
 \newcommand{\available}[1]{\fancypagestyle{plain}{\fancyfoot[C]{\color{gray}\footnotesize Available at \url{#1}}}}
 \newcommand{\published}[2]{\fancypagestyle{plain}{\fancyfoot[C]{\footnotesize Published in \emph{#1}\;\textbullet\;Available at \url{#2}}}}
-
