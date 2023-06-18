@@ -1,12 +1,12 @@
 # Minimalist LaTeX Template for Academic Papers
 
-This repository contains a minimalist template to write academic papers with LaTeX.
+This repository contains a LaTeX template for academic papers. The template carefully follows typographical best practices and has a minimalist design.
 
-## Template documentation
+## Documentation
 
 The template's documentation is available at https://pascalmichaillat.org/d2/.
 
-## Template features
+## Features
 
 + The font for text, roman math, and numbers is [Source Serif Pro](https://fonts.google.com/specimen/Source+Serif+Pro).
 + The font for Greek and calligraphic math is [Euler](http://luc.devroye.org/fonts-26139.html).
@@ -15,45 +15,40 @@ The template's documentation is available at https://pascalmichaillat.org/d2/.
 + Headings are designed for easy scanning.
 + Formatting is also specified for figures, tables, appendix, and a separate online appendix.
 
-## Repository content
+## Usage
 
-+ `paper.tex` –  LaTeX file containing the skeleton of the paper.
-+ `paper.pdf` – PDF file produced by compiling `paper.tex` with pdfTeX.
-+ `paper.sty` –  LaTeX style file collecting all the formatting commands.
-+ `figures.pdf` – PDF file with all the figures included in the paper.
-+ `bibliography.bib` – BibTeX file with all the references included in the paper.
-+ `bibliography.bst` – BibTeX style file to format the references. This style file is based on `econ.bst`, which was created by Shiro Takeda and is [available on GitHub](https://github.com/ShiroTakeda/econ-bst).
-+ `appendix.tex` –  LaTeX file containing the skeleton of an online appendix.
-+ `appendix.pdf` – PDF file produced by compiling `appendix.tex` with pdfTeX.
-+ `appendix.sty` –  LaTeX style file collecting additional formatting commands for an online appendix.
-
-## Template usage
-
-+ Fill out `paper.tex` with the content of your paper. Compile the file with pdfTeX.
-+ `paper.sty` must be included in the same folder as `paper.tex`. It can be modified to alter the paper's format.
-+ `bibliography.bst` must be included in the same folder as `paper.tex`. It can be modified to alter the bibliography's format.
-+ Replace the figures in `figures.pdf` with your own figures—one per page.
-+ Replace the references in `bibliography.bib` with your own references.
-+ `paper.pdf` is not required to use the template. It only illustrate the output of the template, and will be overridden once `paper.tex` is compiled.
-+ The template was developed with the MacTeX-2021 distribution but should hopefully also work with more recent distributions. 
++ Clone the repository to your local machine.
++ Start editing the LaTeX file `paper.tex` to replace the boilerplate content with the content of your paper. 
++ Replace the figures in the PDF file `figures.pdf` with the figures that will be included in the paper. There should be one figure per page.
++ Replace the references in the BibTeX file `bibliography.bib` with the references that will be included in the paper.
++ Compile `paper.tex` with pdfTeX. This will generate a PDF file of your paper named `paper.pdf`.
++ The LaTeX style file `paper.sty` collects all the commands to format the paper. The file must be included in the same folder as `paper.tex`. It can be modified to alter the paper's format.
++ The BibTeX style file `bibliography.bst` collects all the commands to format the bibliography. It must be included in the same folder as `paper.tex`. It can be modified to alter the bibliography's format. This style file is based on `econ.bst`, which was created by Shiro Takeda and is [available on GitHub](https://github.com/ShiroTakeda/econ-bst).
++ The file `paper.pdf` is not required to use the template. It only illustrate the output of the template. It will be overridden once `paper.tex` is compiled.
 
 ### Online appendix
 
-The repository also includes files to produce an online appendix—in case the paper's appendix must be carved out into a separate, online appendix upon publication. 
-An online appendix can be produced as follows:
+The repository also includes files to produce an online appendix—in case the paper's appendix must be carved out into a separate, online appendix upon publication. An online appendix can be produced as follows:
 
-+ Fill out `appendix.tex` with the content of your online appendix. Compile it with pdfTeX. The equation and section labels from `paper.tex` can be used in `appendix.tex`. [This requires the following](https://www.ctan.org/pkg/xr):
-	* `appendix.tex` is in the same folder as `paper.tex`.
-	* `paper.tex` is compiled first.
-	* The auxiliary file `paper.aux` is available when `appendix.tex` is compiled.
-+ `appendix.sty` must be included in the same folder as `appendix.tex`. It can be modified to alter the format of the online appendix. It works in conjunction with `paper.sty`, which must also be included in the folder. 
-+ `appendix.pdf` is not required to use the template. It only illustrate the output of the template, and will be overridden once `appendix.tex` is compiled.
++ Start editing the LaTeX file `appendix.tex` to replace the boilerplate content with the content of your online appendix. 
++ The equation and section labels from `paper.tex` can be used in `appendix.tex`. [This requires the following](https://www.ctan.org/pkg/xr):
+	+ The file `appendix.tex` is in the same folder as `paper.tex`.
+	+ The file `paper.tex` is compiled first.
+	+ The auxiliary file `paper.aux` is available when `appendix.tex` is compiled.
++ Compile `appendix.tex` with pdfTeX. This will generate a PDF file of your appendix named `appendix.pdf`.
++ The LaTeX style file `appendix.sty` collects additional commands to format the online appendix. It must be included in the same folder as `appendix.tex`. It can be modified to alter the format of the online appendix. It works in conjunction with `paper.sty`, which must be included in the same folder. 
++ The file `appendix.pdf` is not required to use the template. It only illustrate the output of the template, and will be overridden once `appendix.tex` is compiled.
+
+## Software
+
+The template was developed on a Mac with the MacTeX-2021 distribution. Hopefully, it should also work on other machines and with more recent distributions.
+
+## License
+
+The content of this repository is licensed under the terms of the MIT License.
 
 ## Related resources
 
 + [This LaTeX template](https://github.com/pmichaillat/latex-presentation) produces  academic presentations following the same principles, and with a similar appearance, as this paper template. 
 + [These LaTeX commands](https://github.com/pmichaillat/latex-math) make it easy to write mathematical expressions. They can be used in combination with this paper template.
-
-## License
-
-The content of this repository is licensed under the terms of the MIT License.
+<!-- + [These Matlab scripts](https://github.com/pmichaillat/matlab-graph) produce clean 4:3 graphs that can be directly imported into slides and then into the paper. They can be used to generate graphs that can be inserted into `figures.pdf` in combination with this paper template. -->
