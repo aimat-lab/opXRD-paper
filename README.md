@@ -41,7 +41,7 @@ The repository also includes files to produce an online appendix—in case the p
 
 ## Software
 
-The template was developed on a Mac with the MacTeX-2021 distribution. Hopefully, it should also work on other machines and with more recent distributions.
+The template was developed on a Mac running macOS Ventura 13.2 with the MacTeX-2021 distribution. Hopefully, it should also work on other machines and with more recent distributions.
 
 ## License
 
