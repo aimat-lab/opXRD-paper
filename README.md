@@ -49,6 +49,6 @@ The content of this repository is licensed under the terms of the MIT License.
 
 ## Related resources
 
-+ [This LaTeX template](https://github.com/pmichaillat/latex-presentation) produces  academic presentations following the same principles, and with a similar appearance, as this paper template. 
-+ [These LaTeX commands](https://github.com/pmichaillat/latex-math) make it easy to write mathematical expressions. They can be used in combination with this paper template.
++ [LaTeX template for academic presentations](https://github.com/pmichaillat/latex-presentation) – This template produces academic presentations following the same principles, and with a similar appearance, as this paper template. 
++ [LaTeX commands to write math](https://github.com/pmichaillat/latex-math) – These commands make it easy to write mathematical expressions. They can be used in combination with this paper template.
 <!-- + [These Matlab scripts](https://github.com/pmichaillat/matlab-graph) produce clean 4:3 graphs that can be directly imported into slides and then into the paper. They can be used to generate graphs that can be inserted into `figures.pdf` in combination with this paper template. -->
