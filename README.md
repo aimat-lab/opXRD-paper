@@ -16,7 +16,7 @@ The template's documentation is available at https://pascalmichaillat.org/d2/.
 + Formatting is specified for figures and tables.
 + Formatting is specified for appendix and a separate online appendix.
 + Formatting is specified for references.
-+ Formatting is specified for all labels to make cross-referencing easy.
++ All labels are formatted to make cross-referencing easy.
 + The file `paper.pdf` illustrate the output of the paper template.
 + The file `appendix.pdf` illustrate the output of the online appendix template.
 
