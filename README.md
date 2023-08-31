@@ -10,11 +10,14 @@ The template's documentation is available at https://pascalmichaillat.org/d2/.
 
 + The font for text, roman math, and numbers is [Source Serif Pro](https://github.com/adobe-fonts/source-serif).
 + The font for Greek and calligraphic math is [Euler](http://luc.devroye.org/fonts-26139.html).
-+ No colors are used in the text to reduce distraction and to guarantee quality printing.
++ No colors are used in the text (only black) to reduce distraction, and so the paper prints well; colors are reserved for graphs.
 + Margins, spacing, and font size are set for comfortable reading.
-+ Headings are designed for easy scanning.
-+ Formatting is also specified for figures, tables, appendix, and a separate online appendix.
-+ The file `paper.pdf` illustrate the output of the template.
++ Headings and labels are designed so the paper is easy to scan.
++ Formatting is specified for figures and tables.
++ Formatting is specified for appendix and a separate online appendix.
++ Formatting is specified for references.
++ The file `paper.pdf` illustrate the output of the paper template.
++ The file `appendix.pdf` illustrate the output of the online appendix template.
 
 ## Usage
 
