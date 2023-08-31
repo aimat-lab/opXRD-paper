@@ -1,8 +1,8 @@
-%%  Title 
+% --- Title  ---
 
 \pretitle{\begin{center}\bfseries\LARGE}
 
-%% Table of contents
+% --- Table of contents ---
 
 \usepackage[subfigure]{tocloft}
 \renewcommand{\contentsname}{}
@@ -13,13 +13,13 @@
 \renewcommand{\cftdotsep}{10}
 \setlength{\cftbeforesecskip}{0em}
 
-%% Headings 
+% --- Headings ---
 
 \titleformat{\section}{\centering\large\bfseries}{Appendix~\thesection.}{1em}{}
 \renewcommand{\thesection}{\Alph{section}}
 \newcommand{\sectionbreak}{\clearpage}
 
-%% Numbering (AER format)
+% --- Numbering (AER format) ---
 
 \renewcommand{\thetheorem}{A\arabic{theorem}}
 \renewcommand{\theproposition}{A\arabic{proposition}}
@@ -32,7 +32,6 @@
 \renewcommand{\thefigure}{A\arabic{figure}}
 \renewcommand{\theequation}{A\arabic{equation}}
 
-%%  Crossreferences 
+% --- Crossreferences ---
 
 \usepackage{xr}
-

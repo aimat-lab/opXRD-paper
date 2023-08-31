@@ -3,7 +3,7 @@
 \usepackage{sourceserifpro}
 \usepackage[T1]{fontenc}
 \usepackage{amsmath,amssymb,amsthm,eucal,bbold,bm}
-\usepackage[italic,eulergreek]{mathastext}
+\usepackage[italic,eulergreek,symbolmisc]{mathastext}
 
 % URL font
 \usepackage[hyphens]{url}
@@ -43,7 +43,8 @@
 
 % No indentation for abstract
 \usepackage{etoolbox}
-\AtBeginEnvironment{titlepage}{\setlength{\parindent}{0pt}}
+\AtBeginEnvironment{titlepage}{\pagestyle{empty}\setlength{\parindent}{0pt}
+}
 
 % --- Headings ---
 
@@ -161,6 +162,9 @@
 \fancyfoot[C]{\thepage}
 
 % Footers for title pages
+\usepackage{xparse}
 \fancypagestyle{plain}{\fancyhf{}}
-\newcommand{\available}[1]{\fancypagestyle{plain}{\fancyfoot[C]{\color{gray}\footnotesize Available at \url{#1}}}}
-\newcommand{\published}[2]{\fancypagestyle{plain}{\fancyfoot[C]{\footnotesize Published in \emph{#1}\;\textbullet\;Available at \url{#2}}}}
+\NewDocumentCommand{\available}{o g}{%
+\fancypagestyle{plain}{\fancyfoot[C]{\color{gray}\footnotesize%
+\IfValueT{#1}{Published in \emph{#1}\;\textbullet\;}%
+Available at \url{#2}}}}
