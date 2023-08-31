@@ -1,4 +1,4 @@
-%% Fonts
+% --- Fonts ---
 
 \usepackage{sourceserifpro}
 \usepackage[T1]{fontenc}
@@ -20,17 +20,17 @@
 \input{glyphtounicode}
 \pdfgentounicode=1
 
-%% Color
+% --- Color ---
 
 \usepackage[x11names]{xcolor}
 
-%% Spacing
+% --- Spacing ---
 
 \usepackage[onehalfspacing]{setspace}
 \AtBeginDocument{\frenchspacing}
 \usepackage{microtype}
 
-%% Title page
+% --- Title page ---
 
 % Title font
 \usepackage{titling}
@@ -45,7 +45,7 @@
 \usepackage{etoolbox}
 \AtBeginEnvironment{titlepage}{\setlength{\parindent}{0pt}}
 
-%% Headings
+% --- Headings ---
 
 \usepackage{titlesec}
 \titleformat*{\section}{\centering\large\bfseries}
@@ -53,7 +53,7 @@
 \titleformat{\paragraph}[runin]{\itshape}{}{}{}[.]
 \titlelabel{\thetitle.\quad}
 
-%% Theorems & proofs
+% --- Theorems & proofs ---
 
 \newtheoremstyle{paper}{}{}{\itshape}{}{\scshape}{.}{.5em}{}
 \theoremstyle{paper}
@@ -68,7 +68,7 @@
 % Proof label font
 \renewcommand{\proofname}{\upshape\scshape Proof}
 
-%% Tables & figures
+% --- Tables & figures ---
 
 \usepackage{multirow,booktabs,rotating,graphicx}
 \renewcommand{\floatpagefraction}{0}
@@ -97,7 +97,7 @@
 \newcommand{\lfig}{0.4}
 \newcommand{\vfig}{\\\vspace*{0.4cm}}
 
-%% Lists
+% --- Lists ---
 
 \usepackage{enumitem}
 \setlist[itemize,1]{leftmargin=\parindent,label=\color{gray}{\upshape\textbullet}}
@@ -105,7 +105,7 @@
 \setlist[enumerate,1]{leftmargin=\parindent,label=\upshape(\alph*)}
 \setlist[enumerate,2]{leftmargin=2\parindent,label=\upshape(\roman*)}
 
-%% Bibliography
+% --- Bibliography ---
 
 \usepackage{natbib}
 \setcitestyle{aysep={}}
@@ -116,7 +116,7 @@
 % Reduced spacing in bibliography
 \AtBeginEnvironment{thebibliography}{\setstretch{1.1}}
 
-%% Appendix
+% --- Appendix ---
 
 \AfterEndEnvironment{thebibliography}{
 \setcounter{theorem}{0}
@@ -141,16 +141,16 @@
 \renewcommand{\theequation}{A\arabic{equation}}
 \titleformat{\section}{\centering\large\bfseries}{Appendix~\thesection.}{1em}{}}
 
-%% Hyperlinks (last package)
+% --- Hyperlinks (last package) ---
 
 \usepackage{fancyhdr} % Before hyperref
 \usepackage[pdftex,hidelinks,hypertexnames=false,hyperfootnotes=false,pdfpagemode=UseNone,pdfdisplaydoctitle=true]{hyperref}
 
-%% Layout (after hyperref)
+% --- Layout (after hyperref) ---
 
 \usepackage[margin=1.1in,footskip=0.7in]{geometry}
 
-%% Headers & footers (after hyperref & geometry)
+% --- Headers & footers (after hyperref & geometry) ---
 
 % No header line
 \renewcommand{\headrule}{}

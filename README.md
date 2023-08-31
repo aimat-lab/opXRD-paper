@@ -1,6 +1,6 @@
 # Minimalist LaTeX Template for Academic Papers
 
-This repository contains a LaTeX template for academic papers. The template carefully follows typographical best practices and has a minimalist design.
+This repository contains a [LaTeX](https://github.com/latex3/latex2e) template for academic papers. The template carefully follows typographical best practices and has a minimalist design.
 
 ## Documentation
 
@@ -8,12 +8,13 @@ The template's documentation is available at https://pascalmichaillat.org/d2/.
 
 ## Features
 
-+ The font for text, roman math, and numbers is [Source Serif Pro](https://fonts.google.com/specimen/Source+Serif+Pro).
++ The font for text, roman math, and numbers is [Source Serif Pro](https://github.com/adobe-fonts/source-serif).
 + The font for Greek and calligraphic math is [Euler](http://luc.devroye.org/fonts-26139.html).
 + No colors are used in the text to reduce distraction and to guarantee quality printing.
 + Margins, spacing, and font size are set for comfortable reading.
 + Headings are designed for easy scanning.
 + Formatting is also specified for figures, tables, appendix, and a separate online appendix.
++ The file `paper.pdf` illustrate the output of the template.
 
 ## Usage
 
@@ -41,7 +42,7 @@ The repository also includes files to produce an online appendix—in case the p
 
 ## Software
 
-The template was developed on a Mac running macOS Ventura 13.2 with the MacTeX-2021 distribution. Hopefully, it should also work on other machines and with more recent distributions.
+The template was developed on a Mac running macOS Ventura 13.2 with the MacTeX-2021 distribution. It continues to work on a Mac running macOS Ventura 13.5 with the MacTeX-2023 distribution. Hopefully, it should also work on other machines and with other distributions.
 
 ## License
 
@@ -51,4 +52,3 @@ The content of this repository is licensed under the terms of the MIT License.
 
 + [LaTeX template for academic presentations](https://github.com/pmichaillat/latex-presentation) – This template produces academic presentations following the same principles, and with a similar appearance, as this paper template. 
 + [LaTeX commands to write math](https://github.com/pmichaillat/latex-math) – These commands make it easy to write mathematical expressions. They can be used in combination with this paper template.
-<!-- + [These Matlab scripts](https://github.com/pmichaillat/matlab-graph) produce clean 4:3 graphs that can be directly imported into slides and then into the paper. They can be used to generate graphs that can be inserted into `figures.pdf` in combination with this paper template. -->
