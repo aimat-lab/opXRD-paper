@@ -6,7 +6,7 @@
 \usepackage{amsmath,amssymb,amsthm,eucal,bbold,bm}
 \usepackage[italic,eulergreek,symbolmisc]{mathastext}
 \usepackage[hyphens]{url}
-
+\usepackage{microtype}
 
 % Correct spacing around letters in math
 \MTsetmathskips{f}{\thinmuskip}{0mu}
@@ -27,7 +27,6 @@
 
 \usepackage[onehalfspacing]{setspace}
 \AtBeginDocument{\frenchspacing}
-\usepackage{microtype}
 
 % --- Title page ---
 
@@ -42,8 +41,7 @@
 
 % No indentation for abstract
 \usepackage{etoolbox}
-\AtBeginEnvironment{titlepage}{\pagestyle{empty}\setlength{\parindent}{0pt}
-}
+\AtBeginEnvironment{titlepage}{\pagestyle{empty}\setlength{\parindent}{0pt}}
 
 % --- Headings ---
 
@@ -161,8 +159,8 @@
 \fancyfoot[C]{\thepage}
 
 % Footers for title pages
-\usepackage{xparse}
 \fancypagestyle{plain}{\fancyhf{}}
+\usepackage{xparse}
 \NewDocumentCommand{\available}{o g}{%
 \fancypagestyle{plain}{\fancyfoot[C]{\color{gray}\footnotesize%
 \IfValueT{#1}{Published in \emph{#1}\;\textbullet\;}%
