@@ -19,14 +19,14 @@
 \input{glyphtounicode}
 \pdfgentounicode=1
 
-% --- Color ---
-
-\usepackage[x11names]{xcolor}
-
 % --- Spacing ---
 
 \usepackage[onehalfspacing]{setspace}
 \AtBeginDocument{\frenchspacing}
+
+% --- Color ---
+
+\usepackage[x11names]{xcolor}
 
 % --- Title page ---
 
@@ -98,6 +98,7 @@
 % --- Lists ---
 
 \usepackage{enumitem}
+\setlist{nosep}
 \setlist[itemize,1]{leftmargin=\parindent,label=\color{gray}{\upshape\textbullet}}
 \setlist[itemize,2]{leftmargin=2\parindent,label=\color{gray}{\upshape\textendash}}
 \setlist[enumerate,1]{leftmargin=\parindent,label=\upshape(\alph*)}
