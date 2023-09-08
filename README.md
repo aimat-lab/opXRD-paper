@@ -4,7 +4,7 @@ This repository contains a [LaTeX](https://github.com/latex3/latex2e) template f
 
 ## Documentation
 
-The template's documentation is available at https://pascalmichaillat.org/d2/.
+The template is documented at https://pascalmichaillat.org/d2/.
 
 ## Features
 
@@ -17,8 +17,8 @@ The template's documentation is available at https://pascalmichaillat.org/d2/.
 + Formatting is specified for appendix and a separate online appendix.
 + Formatting is specified for references.
 + All labels are formatted to make cross-referencing easy.
-+ The file `paper.pdf` illustrate the output of the paper template.
-+ The file `appendix.pdf` illustrate the output of the online appendix template.
++ The file `paper.pdf` illustrates the output of the paper template.
++ The file `appendix.pdf` illustrates the output of the online appendix template.
 
 ## Usage
 
