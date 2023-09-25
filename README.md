@@ -1,6 +1,6 @@
 # Minimalist LaTeX Template for Academic Papers
 
-This repository contains a [LaTeX](https://github.com/latex3/latex2e) template for academic papers. The template carefully follows typographical best practices and has a minimalist design.
+This repository contains a [LaTeX](https://github.com/latex3/latex2e) template to create an academic paper. The template carefully follows typographical best practices and has a minimalist design.
 
 ## Documentation
 
