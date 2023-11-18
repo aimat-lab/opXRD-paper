@@ -6,6 +6,11 @@ This repository contains a [LaTeX](https://github.com/latex3/latex2e) template t
 
 The template is documented at https://pascalmichaillat.org/d2/.
 
+## Illustration
+
++ The paper produced by the template can be viewed at https://pascalmichaillat.org/d2.pdf.
++ The online appendix produced by the template can be viewed at https://pascalmichaillat.org/d2a.pdf.
+
 ## Features
 
 + The font for text, roman math, and numbers is [Source Serif Pro](https://github.com/adobe-fonts/source-serif).
@@ -17,8 +22,6 @@ The template is documented at https://pascalmichaillat.org/d2/.
 + Formatting is specified for appendix and a separate online appendix.
 + Formatting is specified for references.
 + All labels are formatted to make cross-referencing easy.
-+ The file `paper.pdf` illustrates the output of the paper template.
-+ The file `appendix.pdf` illustrates the output of the online appendix template.
 
 ## Usage
 
