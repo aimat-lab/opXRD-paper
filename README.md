@@ -6,7 +6,7 @@ This repository contains a [LaTeX](https://github.com/latex3/latex2e) template t
 
 The template is documented at https://pascalmichaillat.org/d2/.
 
-## Illustration
+## Illustrations
 
 + The paper produced by the template can be viewed at https://pascalmichaillat.org/d2.pdf.
 + The online appendix produced by the template can be viewed at https://pascalmichaillat.org/d2a.pdf.
@@ -54,6 +54,12 @@ The template was developed on a Mac with the MacTeX-2021 distribution, and it co
 ## License
 
 The content of this repository is licensed under the terms of the MIT License.
+
+## Real-world implementations
+
++ [Modeling the Displacement of Native Workers by Immigrants](https://arxiv.org/pdf/2303.13319v2.pdf) ([source code](https://arxiv.org/e-print/2303.13319v2))
++ [u* = √uv](https://arxiv.org/pdf/2206.13012v1.pdf) ([source code](https://arxiv.org/e-print/2206.13012v1))
++ [Critical Values Robust to P-hacking](https://arxiv.org/pdf/2005.04141v7.pdf) ([source code](https://arxiv.org/e-print/2005.04141v7))
 
 ## Related resources
 
