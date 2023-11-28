@@ -5,3 +5,6 @@
  Once sufficient data is collected it will be published in the form of a standardized and cohesive dataset for anyone to use. This repository contains a draft of a paperm that we will publish along with the the dataset to survey it and discuss its uses.
  
  We could be happy to include anyone contributing data as a co-author. If you would like to be included as a co-author please notify the maintainer of this repository, through a mail to "daniel.hollarek@student.kit.edu".
+ 
+ [Current version](paper.pdf)
+
