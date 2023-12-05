@@ -4,7 +4,7 @@ Config.set('graphics', 'resizable', '0')
 
 import os
 from kivy.core.window import Window
-from datacollectapp import DataCollectApp
+from data_collector.datacollectapp import DataCollectApp
 
 # -------------------------------------------
 

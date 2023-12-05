@@ -10,9 +10,9 @@ from kivy.core.window import Window
 
 
 from data_collector.filesystem import zip_file_list, produce_csv_file
-from elements import PathCheckbox, InputDialog
-from elements import get_select_layout, get_scroll_view
-from elements import get_file_count_widget, get_ok_button, get_feedback_widget, get_scrollable_checkboxes_layout
+from data_collector.elements import PathCheckbox, InputDialog
+from data_collector.elements import get_select_layout, get_scroll_view
+from data_collector.elements import get_file_count_widget, get_ok_button, get_feedback_widget, get_scrollable_checkboxes_layout
 
 # -------------------------------------------
 
