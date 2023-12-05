@@ -70,7 +70,7 @@ def produce_csv_file(path_list : list[str], target_path : str):
 
 
 if __name__ == "__main__":
-    source_path = ["/home/work/Desktop/test2/asdf2.png"]
+    source_path = ["/home/work/Desktop/test1/asdf2.png"]
     the_target_path = "/home/work/Desktop/target"
 
     zip_file_list(source_path, the_target_path)
