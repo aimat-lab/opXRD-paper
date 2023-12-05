@@ -4,7 +4,7 @@ Config.set('graphics', 'resizable', '0')
 
 import os
 from kivy.core.window import Window
-from data_collector.datacollectapp import DataCollectApp
+from datacollectapp import DataCollectApp
 
 # -------------------------------------------
 
@@ -24,5 +24,4 @@ def main():
 
     app.run()
 
-if __name__ == "__main__":
-    main()
+main()
