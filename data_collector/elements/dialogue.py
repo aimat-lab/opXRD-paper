@@ -18,6 +18,8 @@ class InputDialog(Popup):
         self.size_hint = (0.8, 0.6)
         self.title = 'XRD data collector'
         self.title_align = 'center'  # Center the title
+        self.auto_dismiss = False  # Disable automatic dismissal of the popup
+
 
         self.callback = callback
         # Main container
@@ -52,7 +54,9 @@ class InputDialog(Popup):
         # Warning label
         self.warning = Label(opacity=0,
                              size_hint=(1, 0.1),
-                             halign="left")
+                             halign="left",
+                             color=[1, 0, 0, 1])  # RGB for red, and 1 for full opacity
+
 
         # Input widget
         self.path_input = TextInput(text='',
@@ -63,7 +67,7 @@ class InputDialog(Popup):
         self.path_input.bind(on_text_validate=self.on_answer)
 
         # Confirm button
-        confirm = Button(text='Confirm', size_hint=(1, 0.05))
+        confirm = Button(text='Confirm', size_hint=(1, 0.07))
         confirm.bind(on_press=self.on_answer)
 
         # Adding widgets to the main container
@@ -74,7 +78,8 @@ class InputDialog(Popup):
         self.content.add_widget(self.path_input)
         self.content.add_widget(confirm)
 
-    def _update_text_height(self, instance, texture_size):
+    @staticmethod
+    def _update_text_height(instance, texture_size):
         instance.height = texture_size[1]  # Set the height to the text height
 
 
