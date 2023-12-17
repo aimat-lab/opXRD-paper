@@ -45,6 +45,7 @@ class PathCheckbox:
 
 
     def on_toggle(self, instance, value):
+        _ = instance
         if value == 'down':
             self.total_container.remove_widget(self.child_container)
         else:

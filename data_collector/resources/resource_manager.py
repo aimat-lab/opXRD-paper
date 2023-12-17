@@ -13,3 +13,6 @@ def get_collapsed_icon_path() -> str:
 
 def get_expanded_icon_path() -> str:
     return os.path.join(dir_path,'expanded.png')
+
+def get_loading_icon_path() -> str:
+    return os.path.join(dir_path,'loading.png')

@@ -3,7 +3,7 @@ set_configs()
 
 from kivy.core.window import Window
 Window.clearcolor = (1, 1, 1, 1)
-import os
+# import os
 from data_collector.datacollectapp import DataCollectApp
 # -------------------------------------------
 
@@ -14,7 +14,7 @@ def main():
 
     # _, __ = win_test_dir, win_target_test
 
-    linux_input_test = '/home/daniel/aimat/tool_sample_folder'
+    # linux_input_test = '/home/daniel/aimat/tool_sample_folder'
     # linux_target_test = '/home/work/Desktop'
 
 

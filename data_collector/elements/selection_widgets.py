@@ -63,6 +63,7 @@ class ImageToggleButton(RelativeLayout):
 
 
     def toggle_image(self,instance, value):
+        _ = instance
         self.remove_widget(self.icon)
         if value == 'down':
             self.icon = self.collapsed
