@@ -86,11 +86,13 @@ class DataCollectApp(App):
         scroll_layout = get_scrollable_checkboxes_layout(root_checkbox=self.root_checkbox)
         self.scroll_view.add_widget(widget=scroll_layout)
 
+
     def on_start(self):
         if self.input_folder_override is None:
             self.show_popup()
         else:
             self.set_select_layout_content(path=self.input_folder_override)
+
 
     def show_popup(self):
         self.input_popup.open()
@@ -126,7 +128,7 @@ class DataCollectApp(App):
             return
 
         zipfile_path = os.path.join(self.target_folder, f'xrd_data_collected_on_{datetime_stamp}.zip')
-        csv_file_path = os.path.join(self.target_folder,f'xrd_labels.csv')
+        csv_file_path = os.path.join(self.target_folder,f'xrd_labels_generated_on_{datetime_stamp}.csv')
 
         print("Checked Paths:", checked_paths)
         try:

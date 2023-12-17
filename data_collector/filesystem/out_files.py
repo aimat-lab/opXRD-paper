@@ -43,7 +43,7 @@ def zip_file_list(path_list: list[str], zipfile_path : str):
         log(to_log=f'Target path {zipfile_path} already exists. Aborting ...')
         return
 
-    with zipfile.ZipFile(zipfile_path, 'w') as zipf:
+    with zipfile.ZipFile(zipfile_path, 'a') as zipf:
         for file_path in path_list:
             zip_path = zip_path_dict[file_path]
             zipf.write(file_path, zip_path)
@@ -59,7 +59,7 @@ def produce_csv_file(path_list : list[str], target_path : str):
         print(f'Target CSV path {target_path} already exists. Aborting ...')
         return
 
-    with open(target_path, mode='w', newline='') as file:
+    with open(target_path, mode='a', newline='') as file:
         writer = csv.writer(file)
         writer.writerow(['Filepath relative to zip root'])
         for file_path in path_list:
