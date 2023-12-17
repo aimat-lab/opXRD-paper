@@ -42,8 +42,4 @@ def set_configs():
 
     Config.set('graphics', 'width', str(app_width))
     Config.set('graphics', 'height', str(app_height))
-    # Config.set('graphics', 'left', str(primary_monitor.x * scaling_factor))
-    # Config.set('graphics', 'top', str(primary_monitor.y * scaling_factor))
-    Config.write()
 
-# Call set_configs() at the appropriate place in your application initialization
