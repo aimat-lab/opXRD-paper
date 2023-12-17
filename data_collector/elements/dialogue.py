@@ -21,10 +21,10 @@ class InputDialog(Popup):
 
         self.callback = callback
         # Main container
-        self.content = BoxLayout(orientation='vertical', size_hint=(1, 1))
+        self.content = BoxLayout(orientation='vertical', padding=[10, 10, 10, 10], spacing=10)
 
         # First hint
-        first_hint_text = '''This application is designed to scan a given input folder for all xrd formats specified.You can edit this list to your preferences.'''
+        first_hint_text = '''This application is designed to scan a given input folder for all xrd formats specified.You can edit this list to your preferences:'''
         self.first_hint = Label(text=first_hint_text,
                                         size_hint=(1, None),
                                         font_size=Window.width * 0.02)
@@ -37,7 +37,7 @@ class InputDialog(Popup):
 
         # Input widget
         self.format_input = TextInput(text=f'{default_format_text}',
-                                      size_hint=(1, 0.03),
+                                      size_hint=(1, 0.07),
                                       font_size=Window.width * 0.02,
                                       multiline=False)
 
@@ -56,13 +56,14 @@ class InputDialog(Popup):
 
         # Input widget
         self.path_input = TextInput(text='',
-                                    size_hint=(1, 0.03),
+                                    size_hint=(1, 0.07),
                                     font_size=Window.width * 0.02,
                                     multiline=False)
+
         self.path_input.bind(on_text_validate=self.on_answer)
 
         # Confirm button
-        confirm = Button(text='Confirm', size_hint=(1, 0.025))
+        confirm = Button(text='Confirm', size_hint=(1, 0.05))
         confirm.bind(on_press=self.on_answer)
 
         # Adding widgets to the main container
