@@ -9,7 +9,7 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.textinput import TextInput
 from data_collector.filesystem import Folder
-
+import platform, sys
 # -------------------------------------------
 
 class InputDialog(Popup):
@@ -39,7 +39,7 @@ class InputDialog(Popup):
 
         # Input widget
         self.format_input = TextInput(text=f'{default_format_text}',
-                                      size_hint=(1, 0.07),
+                                      size_hint=(1, 0.08),
                                       font_size=Window.width * 0.02,
                                       multiline=False)
 
@@ -59,15 +59,15 @@ class InputDialog(Popup):
 
 
         # Input widget
-        self.path_input = TextInput(text='',
-                                    size_hint=(1, 0.07),
+        self.path_input = TextInput(text=f'{self.get_initial_path()}',
+                                    size_hint=(1, 0.08),
                                     font_size=Window.width * 0.02,
                                     multiline=False)
 
         self.path_input.bind(on_text_validate=self.on_answer)
 
         # Confirm button
-        confirm = Button(text='Confirm', size_hint=(1, 0.07))
+        confirm = Button(text='Confirm', size_hint=(1, 0.08))
         confirm.bind(on_press=self.on_answer)
 
         # Adding widgets to the main container
@@ -86,6 +86,16 @@ class InputDialog(Popup):
     def print_warning_notice(self):
         self.warning.text = f'Given input \"{self.path_input.text}\" is not a path to a directory. Please try again'
         self.warning.opacity = 1
+
+    @staticmethod
+    def get_initial_path():
+
+        if platform.system() == 'Windows':
+            initial_path = os.path.splitdrive(sys.executable)[0] + '\\'
+        else:
+            initial_path = '/'
+
+        return initial_path
 
     def on_answer(self, instance):
         _ = instance
