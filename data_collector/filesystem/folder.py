@@ -8,6 +8,14 @@ import os
 class Folder:
     default_xrd_formats : list = ['raw', 'dif', 'gdf', 'dat', 'ras', 'cpi', 'txt', 'plv', 'xrdml']
 
+    @classmethod
+    def set_default_formats(cls, format_text : str):
+        entries = format_text.split(',')
+        formats = [entry.strip('.').strip() for entry in entries if '.' in entry]
+
+        cls.default_xrd_formats = formats
+
+
     def __init__(self, path : str):
         self.path : str = path
         self.name : str = os.path.basename(path)

@@ -96,7 +96,7 @@ class BlackLabel(AutoSizeLabel):
 
 def get_file_count_widget(num_elements: int):
     file_count_label = BlackLabel(
-        text=f"Found {num_elements} files that match XRD formats",
+        text=f"Found {num_elements} files that specified XRD formats" ,
         size_hint=(1, None),
         halign="center",  # Horizontally center the text
         valign="middle"  # Vertically center the text

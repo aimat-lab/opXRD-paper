@@ -35,10 +35,12 @@ class InputDialog(Popup):
 
 
         default_xrd_formats = Folder.default_xrd_formats
-        default_format_text = ',.'.join(default_xrd_formats)
+        default_xrd_text = ''
+        for xrd_format in default_xrd_formats:
+            default_xrd_text += f'.{xrd_format},'
 
         # Input widget
-        self.format_input = TextInput(text=f'{default_format_text}',
+        self.format_input = TextInput(text=f'{default_xrd_text}',
                                       size_hint=(1, 0.08),
                                       font_size=Window.width * 0.02,
                                       multiline=False)
@@ -78,6 +80,7 @@ class InputDialog(Popup):
         self.content.add_widget(self.path_input)
         self.content.add_widget(confirm)
 
+
     @staticmethod
     def _update_text_height(instance, texture_size):
         instance.height = texture_size[1]  # Set the height to the text height
@@ -98,6 +101,9 @@ class InputDialog(Popup):
         return initial_path
 
     def on_answer(self, instance):
+
+        Folder.set_default_formats(self.format_input.text)
+
         _ = instance
         user_input = self.path_input.text
 
