@@ -13,6 +13,7 @@ from kivy.uix.textinput import TextInput
 from data_collector.elements.selection_widgets import AutoSizeLabel
 from data_collector.filesystem import Folder
 
+# -------------------------------------------
 
 class InputDialog(Popup):
     def __init__(self, callback  : callable, **kwargs):
@@ -28,7 +29,8 @@ class InputDialog(Popup):
                                     'and all subdirectories and allow for a selection of what files you want to share. Once you confirm that selection, the application will produce a .zip '
                                     'file ready for submission along with a template .csv file for labels \n\n'
                                     'Enter file path to \"input folder\"',
-                                     size_hint=(1, None))
+                                     size_hint=(1, None),
+                                     font_size=Window.width * 0.02)
         self.hint.bind(width=lambda *x: setattr(self.hint, 'text_size', (self.hint.width, 0.8*self.height)))
         self.warning = Label(opacity=0,
                              size_hint = (1, 0.1),
@@ -37,8 +39,10 @@ class InputDialog(Popup):
         # Adding BlackLabel to ScrollView
         self.scroll_view.add_widget(self.hint)
         self.input_widget = TextInput(text='',
-                                    size_hint=(1, 0.125),
-                                    font_size=Window.width * 0.02)
+                                    size_hint=(1, 0.1),
+                                    font_size=Window.width * 0.02,
+                                      multiline=False)
+        self.input_widget.bind(on_text_validate=self.on_answer)
 
         confirm = Button(text='Confirm', size_hint=(1, 0.1))
         confirm.bind(on_press=self.on_answer)
