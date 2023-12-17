@@ -43,6 +43,8 @@ class DataCollectApp(App):
         self.scroll_view = get_scroll_view()
 
         self.filecount_label = get_file_count_widget(num_elements=0)
+        self.filecount_label.opacity = 0
+
         select_layout = get_select_layout(file_count_label=self.filecount_label,
                                           scroll_view=self.scroll_view)
         self.slider = Slider(orientation='vertical',min=0, max=1, value=1, size_hint=(0.1, 1))
@@ -79,6 +81,8 @@ class DataCollectApp(App):
 
         new_label = get_file_count_widget(num_elements=len(self.root_checkbox.get_file_descendants()))
         self.filecount_label.text =  new_label.text
+        self.filecount_label.opacity = 1
+
         scroll_layout = get_scrollable_checkboxes_layout(root_checkbox=self.root_checkbox)
         self.scroll_view.add_widget(widget=scroll_layout)
 
@@ -128,7 +132,7 @@ class DataCollectApp(App):
                              target_path=csv_file_path)
 
 
-            self.feedback_widget.text = (f'Successfully produced zip archive and labels at:\n'
+            self.feedback_widget.text = (f'Wrote {len(checked_paths)} xrd files to .zip file and produced label template at:\n'
                                          f'{zipfile_path} \n'
                                          f'{csv_file_path}')
         except:

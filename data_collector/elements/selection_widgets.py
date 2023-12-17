@@ -10,6 +10,7 @@ from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 
+from data_collector.filesystem.folder import Folder
 from data_collector.resources import get_foldericon_path,get_fileicon_path
 # -------------------------------------------
 from data_collector.resources import get_collapsed_icon_path, get_expanded_icon_path
@@ -95,8 +96,11 @@ class BlackLabel(AutoSizeLabel):
 
 
 def get_file_count_widget(num_elements: int):
+
+    with_leading_dot_list = [f'.{xrd_format}' for xrd_format in Folder.default_xrd_formats]
+
     file_count_label = BlackLabel(
-        text=f"Found {num_elements} files that specified XRD formats" ,
+        text=f"Found {num_elements} files that match specified XRD formats: {with_leading_dot_list}" ,
         size_hint=(1, None),
         halign="center",  # Horizontally center the text
         valign="middle"  # Vertically center the text
