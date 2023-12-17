@@ -1,8 +1,6 @@
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.scrollview import ScrollView
-# from kivy.core.window import Window
 from kivy.uix.label import Label
-# from kivy.uix.slider import Slider
 from data_collector.elements.path_checkbox import PathCheckbox
 
 # -------------------------------------------

@@ -4,7 +4,7 @@ from kivy.uix.boxlayout import  BoxLayout
 import copy
 import os.path
 from PIL import Image
-from data_collector.elements.widgets import LabeledCheckBox, ImageToggleButton
+from data_collector.elements.selection_widgets import LabeledCheckBox, ImageToggleButton
 from data_collector.resources import get_foldericon_path, get_fileicon_path
 from data_collector.filesystem import Folder
 
