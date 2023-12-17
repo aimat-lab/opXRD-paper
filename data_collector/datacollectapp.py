@@ -17,13 +17,13 @@ from data_collector.elements import get_file_count_widget, get_ok_button, get_fe
 # -------------------------------------------
 
 class DataCollectApp(App):
-    def __init__(self, target_folder : Optional[str] = None,
-                 override_input_folder : Optional[str]  = None):
+    def __init__(self, override_target_folder : Optional[str] = None,
+                       override_input_folder : Optional[str]  = None):
         super(DataCollectApp, self).__init__()
 
         # Properties
         self.title : str = 'AiMAT XRD data collect'
-        self.target_folder : str = target_folder
+        self.target_folder : Optional[str] = override_target_folder
         self.input_folder_override : Optional[str]  = override_input_folder
         self.default_font_size = Window.width*0.018
 
@@ -98,6 +98,7 @@ class DataCollectApp(App):
     # -------------------------------------------
     # callbacks
     def on_scroll_view_scroll(self, instance, value):
+        _ = instance
         self.slider.unbind(value=self.adjust_scroll_view)
         self.slider.value = value
         self.slider.bind(value=self.adjust_scroll_view)
@@ -120,6 +121,9 @@ class DataCollectApp(App):
         current_date = datetime.now()
         datetime_stamp = current_date.strftime('%d_%m_%Y_%H_%M_%S')
 
+        if self.target_folder is None:
+            print(f'No target folder provided. Check setup')
+            return
 
         zipfile_path = os.path.join(self.target_folder, f'xrd_data_collected_on_{datetime_stamp}.zip')
         csv_file_path = os.path.join(self.target_folder,f'xrd_labels.csv')

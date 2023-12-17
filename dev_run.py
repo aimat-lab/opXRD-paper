@@ -18,7 +18,7 @@ def main():
     # linux_target_test = '/home/work/Desktop'
 
 
-    app = DataCollectApp(target_folder=os.path.dirname(os.path.abspath(__file__)))
+    app = DataCollectApp(override_target_folder=f'/home/daniel/aimat/tool_target_folder')
                          # override_input_folder= linux_input_test)
 
     app.run()

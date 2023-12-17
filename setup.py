@@ -17,5 +17,5 @@ setup(
     version="0.1",
     description="My Kivy GUI application!",
     options={"build_exe": build_exe_options},
-    executables=[Executable("run.py", base=base)]
+    executables=[Executable("dev_run.py", base=base)]
 )
