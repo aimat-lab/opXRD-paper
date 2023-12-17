@@ -6,7 +6,7 @@ import os
 
 
 class Folder:
-    xrd_formats : list = ['raw','dif','gdf','dat','ras','cpi','txt','plv','xrdml']
+    default_xrd_formats : list = ['raw', 'dif', 'gdf', 'dat', 'ras', 'cpi', 'txt', 'plv', 'xrdml']
 
     def __init__(self, path : str):
         self.path : str = path
@@ -32,7 +32,7 @@ class Folder:
 
     def _get_path_is_xrd_file(self, path : str):
         is_file = os.path.isfile(path)
-        is_xrd_format = any([path.endswith(f'.{the_format}') for the_format in self.xrd_formats])
+        is_xrd_format = any([path.endswith(f'.{the_format}') for the_format in self.default_xrd_formats])
         return is_file and is_xrd_format
 
 

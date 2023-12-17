@@ -11,48 +11,57 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.textinput import TextInput
 
 from data_collector.elements.selection_widgets import AutoSizeLabel
-from data_collector.filesystem import Folder
+# from data_collector.filesystem import Folder
 
 # -------------------------------------------
 
 class InputDialog(Popup):
-    def __init__(self, callback  : callable, **kwargs):
+    def __init__(self, callback: callable, **kwargs):
         super(InputDialog, self).__init__(**kwargs)
         self.size_hint = (0.8, 0.6)
         self.title = 'XRD data collector'
         self.callback = callback
 
-        self.scroll_view = ScrollView(size_hint=(1, 0.8))
-        self.hint = AutoSizeLabel(text='This application is designed to scan a given input folder for all files that fit any of the following common XRD formats: '
-                                    f'{Folder.xrd_formats}\n\n'
-                                    'Once an input folder is selected, you will be presented with a view that displays all xrd files found in the input directory '
-                                    'and all subdirectories and allow for a selection of what files you want to share. Once you confirm that selection, the application will produce a .zip '
-                                    'file ready for submission along with a template .csv file for labels \n\n'
-                                    'Enter file path to \"input folder\"',
-                                     size_hint=(1, None),
-                                     font_size=Window.width * 0.02)
-        self.hint.bind(width=lambda *x: setattr(self.hint, 'text_size', (self.hint.width, 0.8*self.height)))
+        # Main container
+        self.content = BoxLayout(orientation='vertical', size_hint=(1, 1))
+
+        # First hint
+        first_hint_text = '''This application is designed to scan a given input folder for all xrd formats specified. You edit this list to your preferences.'''
+        self.first_hint = AutoSizeLabel(text=first_hint_text,
+                                        size_hint=(1, None),
+                                        font_size=Window.width * 0.02)
+        self.first_hint.bind(width=lambda *x: setattr(self.first_hint, 'text_size', (self.first_hint.width, None)))
+
+        # Second hint
+        second_hint_text = '''Once an input folder is selected, it will be scanned for the specified formats and all xrd files matching that directory will be displayed. You can then check folders or individual files that you want to share. Once you confirm that selection, the application will produce a .zip file ready for submission on xrd.aimat.science along with a template .csv file for labels.\n\nEnter file path to "input folder"'''
+        self.second_hint = AutoSizeLabel(text=second_hint_text,
+                                         size_hint=(1, None),
+                                         font_size=Window.width * 0.02)
+        self.second_hint.bind(width=lambda *x: setattr(self.second_hint, 'text_size', (self.second_hint.width, None)))
+
+        # Warning label
         self.warning = Label(opacity=0,
-                             size_hint = (1, 0.1),
+                             size_hint=(1, 0.1),
                              halign="left")
 
-        # Adding BlackLabel to ScrollView
-        self.scroll_view.add_widget(self.hint)
+        # Input widget
         self.input_widget = TextInput(text='',
-                                    size_hint=(1, 0.1),
-                                    font_size=Window.width * 0.02,
+                                      size_hint=(1, 0.025),
+                                      font_size=Window.width * 0.02,
                                       multiline=False)
         self.input_widget.bind(on_text_validate=self.on_answer)
 
-        confirm = Button(text='Confirm', size_hint=(1, 0.1))
+        # Confirm button
+        confirm = Button(text='Confirm', size_hint=(1, 0.025))
         confirm.bind(on_press=self.on_answer)
 
-        self.content = BoxLayout(orientation='vertical')
-
-        self.content.add_widget(self.scroll_view)
+        # Adding widgets to the main container
+        self.content.add_widget(self.first_hint)
+        self.content.add_widget(self.second_hint)
         self.content.add_widget(self.warning)
         self.content.add_widget(self.input_widget)
         self.content.add_widget(confirm)
+
 
 
     def print_warning_notice(self):
