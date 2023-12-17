@@ -40,13 +40,13 @@ class InputDialog(Popup):
             default_xrd_text += f'.{xrd_format},'
 
         # Input widget
-        self.format_input = TextInput(text=f'{default_xrd_text}',
+        self.format_input = FocusTextInput(text=f'{default_xrd_text}',
                                       size_hint=(1, 0.08),
                                       font_size=Window.width * 0.02,
                                       multiline=False)
 
         # Second hint
-        second_hint_text = '''Once an input folder is selected, it will be scanned for the specified formats and all xrd files matching that directory will be displayed. You can then check folders or individual files that you want to share. Once you confirm that selection, the application will produce a .zip file ready for submission on xrd.aimat.science along with a template .csv file for labels.\n\nEnter file path to "input folder"'''
+        second_hint_text = '''Once an input folder is selected, it will be scanned for the specified formats and all xrd files matching that directory will be displayed. You can then check folders or individual files that you want to share. Once you self.confirm that selection, the application will produce a .zip file ready for submission on xrd.aimat.science along with a template .csv file for labels.\n\nEnter file path to "input folder"'''
         self.second_hint = Label(text=second_hint_text,
                                          size_hint=(1, None),
                                          font_size=Window.width * 0.02)
@@ -61,16 +61,16 @@ class InputDialog(Popup):
 
 
         # Input widget
-        self.path_input = TextInput(text=f'{self.get_initial_path()}',
+        self.path_input = FocusTextInput(text=f'{self.get_initial_path()}',
                                     size_hint=(1, 0.08),
                                     font_size=Window.width * 0.02,
                                     multiline=False)
 
         self.path_input.bind(on_text_validate=self.on_answer)
 
-        # Confirm button
-        confirm = Button(text='Confirm', size_hint=(1, 0.08))
-        confirm.bind(on_press=self.on_answer)
+        # confirm button
+        self.confirm = Button(text='confirm', size_hint=(1, 0.08))
+        self.confirm.bind(on_press=self.on_answer)
 
         # Adding widgets to the main container
         self.content.add_widget(self.first_hint)
@@ -78,7 +78,15 @@ class InputDialog(Popup):
         self.content.add_widget(self.second_hint)
         self.content.add_widget(self.warning)
         self.content.add_widget(self.path_input)
-        self.content.add_widget(confirm)
+        self.content.add_widget(self.confirm)
+        self.set_focus_chain()
+
+    def set_focus_chain(self):
+        self.format_input.focus_next = self.path_input
+        self.format_input.focus_previous = self.path_input
+
+        self.path_input.focus_next = self.format_input
+        self.path_input.focus_previous = self.format_input
 
 
     @staticmethod
@@ -115,3 +123,18 @@ class InputDialog(Popup):
 
         self.callback(user_input)
         self.dismiss()
+
+
+class FocusTextInput(TextInput):
+    def keyboard_on_key_down(self, window, keycode, text, modifiers):
+        if keycode[1] == 'tab':  # Check if the key is Tab
+            if 'shift' in modifiers:  # Check if Shift is also pressed
+                # Focus the previous widget
+                if self.focus_previous:
+                    self.focus_previous.focus = True
+            else:
+                # Focus the next widget
+                if self.focus_next:
+                    self.focus_next.focus = True
+            return True  # Indicate that the key was handled
+        return super(FocusTextInput, self).keyboard_on_key_down(window, keycode, text, modifiers)
