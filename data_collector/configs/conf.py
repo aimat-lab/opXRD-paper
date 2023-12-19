@@ -50,7 +50,7 @@ def set_configs():
 
 def get_line_height():
     std_width = 1920
-    std_line_height = 40
+    std_line_height = 30
 
     line_height =int(std_line_height * get_primary_monitor_width()/std_width)
 
