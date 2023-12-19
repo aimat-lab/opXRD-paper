@@ -100,7 +100,7 @@ def get_file_count_widget(num_elements: int):
     with_leading_dot_list = [f'.{xrd_format}' for xrd_format in Folder.default_xrd_formats]
 
     file_count_label = BlackLabel(
-        text=f"Found {num_elements} files that match specified XRD formats: {with_leading_dot_list}" ,
+        text=f"Found {num_elements} files that match specified XRD formats:\n {with_leading_dot_list}" ,
         size_hint=(1, None),
         halign="center",  # Horizontally center the text
         valign="middle"  # Vertically center the text

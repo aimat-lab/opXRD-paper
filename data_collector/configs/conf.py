@@ -53,5 +53,8 @@ def get_line_height():
     std_line_height = 30
 
     line_height =int(std_line_height * get_primary_monitor_width()/std_width)
+
+    print(line_height)
+
     return line_height
 
