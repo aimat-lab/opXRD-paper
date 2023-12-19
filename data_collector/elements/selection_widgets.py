@@ -101,7 +101,7 @@ def get_file_count_widget(num_elements: int):
 
     file_count_label = BlackLabel(
         text=f"Found {num_elements} files that match specified XRD formats:\n {with_leading_dot_list}" ,
-        size_hint=(1, None),
+        size_hint=(1, 0.15),
         halign="center",  # Horizontally center the text
         valign="middle"  # Vertically center the text
     )

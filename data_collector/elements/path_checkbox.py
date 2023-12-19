@@ -7,12 +7,13 @@ from PIL import Image
 from data_collector.elements.selection_widgets import LabeledCheckBox, ImageToggleButton
 from data_collector.resources import get_foldericon_path, get_fileicon_path
 from data_collector.filesystem import Folder
+from data_collector.configs import get_line_height
 
 from typing import Optional
 # -------------------------------------------
 
 class PathCheckbox:
-    dim = 20
+    dim = get_line_height()
     file_img = Image.open(fp=get_fileicon_path()).resize((dim, dim))
     folder_img = Image.open(fp=get_foldericon_path()).resize((dim, dim))
 
