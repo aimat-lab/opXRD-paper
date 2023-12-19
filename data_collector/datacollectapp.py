@@ -46,6 +46,8 @@ class DataCollectApp(App):
         # Main layout
         self.scroll_view = get_scroll_view()
 
+        self.scroll_view.smooth_scroll_end = 10
+
         self.filecount_label = get_file_count_widget(num_elements=0)
         self.filecount_label.opacity = 0
 
