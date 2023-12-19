@@ -20,6 +20,7 @@ from data_collector.configs import get_line_height
 class DataCollectApp(App):
     def __init__(self, override_target_folder : Optional[str] = None,
                        override_input_folder : Optional[str]  = None):
+        self.icon = None    
         super(DataCollectApp, self).__init__()
 
         # Properties
