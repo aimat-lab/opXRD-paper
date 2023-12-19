@@ -1,0 +1,8 @@
+--------- Filepath relative to zip root ---------,Composition,Phase 1,Phase 1,Phase 1,Phase 1,Phase 1,Phase 1,Phase 1,Phase 1,Phase 1,,,,Phase 2,Phase 2,Phase 2,Phase 2,Phase 2,Phase 2,Phase 2,Phase 2,Phase 2,,,,,Phase 3,Phase 3,Phase 3,Phase 3,Phase 3,Phase 3,Phase 3,Phase 3,Phase 3
+material_sys_1/sample_1.raw,CuNi,Fraction in %,a in nm,b in nm,c in nm,alpha in deg, beta in deg,gamma in deg,Space group number,*Other labels if available,,,,Fraction in %,a in nm,b in nm,c in nm,alpha in deg, beta in deg,gamma in deg,Space group number,*Other labels if available,,,,,Fraction in %,a in nm,b in nm,c in nm,alpha in deg, beta in deg,gamma in deg,Space group number,*Other labels if available
+material_sys_1/sample_2.raw,CuNi,90,4,4,4,90,90,90,195,,,,,10,3,3,3,90,90,90,195,,,,,,,,,,,,,,
+material_sys_1/sample_3.raw,CuNi,100,4,4,4,90,90,90,195,,,,,,,,,,,,,,,,,,,,,,,,,,
+material_sys_2/sample_1.xrdml,CuNi,90,4,4,4,90,90,90,195,,,,,10,3,3,3,90,90,90,195,,,,,,,,,,,,,,
+material_sys_2/sample_2.xrdml,CuNi,90,4,4,4,90,90,120,123,,,,,10,3,3,3,90,90,90,195,,,,,,,,,,,,,,
+material_sys_2/sample_3.xrdml,CuNi,90,4,4,4,90,90,120,123,,,,,10,3,3,3,90,90,90,195,,,,,,,,,,,,,,
+material_sys_2/sample_4.dif,CuNi,90,4,4,4,90,90,120,230,,,,,10,3,3,3,90,90,90,195,,,,,,,,,,,,,,
