@@ -15,6 +15,8 @@ from data_collector.elements import get_select_layout, get_scroll_view
 from data_collector.elements import get_file_count_widget, get_ok_button, get_feedback_widget, get_scrollable_checkboxes_layout
 from data_collector.configs import get_line_height
 
+from data_collector.elements import ThickVerticalSlider
+
 # -------------------------------------------
 
 class DataCollectApp(App):
@@ -49,7 +51,7 @@ class DataCollectApp(App):
 
         select_layout = get_select_layout(file_count_label=self.filecount_label,
                                           scroll_view=self.scroll_view)
-        self.slider = Slider(orientation='vertical',min=0, max=1, value=1, size_hint=(0.1, 1))
+        self.slider = ThickVerticalSlider(orientation='vertical', min=0, max=1, value=1, size_hint=(0.1, 1))
 
         main_layout = BoxLayout(orientation='horizontal', size_hint=(1, 0.9))
         main_layout.add_widget(widget=select_layout)

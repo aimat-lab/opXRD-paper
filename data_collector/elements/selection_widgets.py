@@ -10,6 +10,10 @@ from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 
+from kivy.app import App
+from kivy.uix.slider import Slider
+from kivy.graphics import Color, Line
+
 from data_collector.filesystem.folder import Folder
 from data_collector.resources import get_foldericon_path,get_fileicon_path
 # -------------------------------------------
@@ -120,3 +124,18 @@ def get_ok_button():
     return ok_button
 
 
+
+
+class ThickVerticalSlider(Slider):
+    def __init__(self, **kwargs):
+        super(ThickVerticalSlider, self).__init__(**kwargs)
+        self.bind(pos=self._update_canvas, size=self._update_canvas)
+
+    def _update_canvas(self, *args):
+        self.canvas.before.clear()
+        with self.canvas.before:
+            Color(0.5, 0.5, 0.5, 1)  # Grey color for the track
+            line_width = 2  # Adjust width for thickness
+            Line(points=[self.x + self.width / 2, self.y + line_width / 2,
+                         self.x + self.width / 2, self.y + self.height - line_width / 2],
+                 width=line_width)

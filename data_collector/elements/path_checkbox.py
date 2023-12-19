@@ -8,6 +8,7 @@ from data_collector.elements.selection_widgets import LabeledCheckBox, ImageTogg
 from data_collector.resources import get_foldericon_path, get_fileicon_path
 from data_collector.filesystem import Folder
 from data_collector.configs import get_line_height
+from kivy.uix.label import Label
 
 from typing import Optional
 # -------------------------------------------
@@ -136,7 +137,7 @@ class PathCheckbox:
             image_btn.toggle_button.bind(state=self.on_toggle)
             line_container.add_widget(image_btn)
         else:
-            from kivy.uix.label import Label
+
             place_holder = Label(size_hint=(None,None),size=(self.height,self.height))
             line_container.add_widget(place_holder)
 

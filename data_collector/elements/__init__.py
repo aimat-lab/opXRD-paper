@@ -1,4 +1,4 @@
 from .layouts import get_scrollable_checkboxes_layout,get_select_layout, get_scroll_view
-from .selection_widgets import get_ok_button,get_feedback_widget,get_file_count_widget
+from .selection_widgets import get_ok_button,get_feedback_widget,get_file_count_widget, ThickVerticalSlider
 from .dialogue import InputDialog
 from .path_checkbox import PathCheckbox
