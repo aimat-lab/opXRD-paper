@@ -16,3 +16,9 @@ def get_expanded_icon_path() -> str:
 
 def get_loading_icon_path() -> str:
     return os.path.join(dir_path,'loading.png')
+
+def get_checked_box_path() -> str:
+    return os.path.join(dir_path,'checked_box.png')
+
+def get_unchecked_box_path() -> str:
+    return os.path.join(dir_path,'unchecked_box.png')

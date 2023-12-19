@@ -10,12 +10,13 @@ from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.label import Label
 from kivy.uix.button import Button
 
-from kivy.app import App
 from kivy.uix.slider import Slider
-from kivy.graphics import Color, Line
+from kivy.graphics import Line
 
 from data_collector.filesystem.folder import Folder
 from data_collector.resources import get_foldericon_path,get_fileicon_path
+from kivy.graphics import Rectangle, Color
+from data_collector.resources import get_checked_box_path, get_unchecked_box_path
 # -------------------------------------------
 from data_collector.resources import get_collapsed_icon_path, get_expanded_icon_path
 
@@ -29,7 +30,7 @@ class LabeledCheckBox(BoxLayout):
         self.height = height
 
         # Create the CheckBox
-        self.check_box = CheckBox(size_hint=(None, None), size=(self.height, self.height))
+        self.check_box = ImageCheckBox(size_hint=(None, None), size=(self.height, self.height))
         self.check_box.bind(active=toggle_callback)
 
         # Create the Icon
@@ -98,6 +99,32 @@ class BlackLabel(AutoSizeLabel):
         super().__init__(**kwargs, text=text)
 
 
+class ImageCheckBox(CheckBox):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self._checkbox_image = get_unchecked_box_path()
+
+    def on_state(self, widget, value):
+        if value == 'down':
+            self._checkbox_image = get_checked_box_path()
+        else:
+            self._checkbox_image = get_unchecked_box_path()
+
+
+class ThickVerticalSlider(Slider):
+    def __init__(self, **kwargs):
+        super(ThickVerticalSlider, self).__init__(**kwargs)
+        self.bind(pos=self._update_canvas, size=self._update_canvas)
+
+    def _update_canvas(self, *args):
+        self.canvas.before.clear()
+        with self.canvas.before:
+            Color(0.5, 0.5, 0.5, 1)  # Grey color for the track
+            line_width = 2  # Adjust width for thickness
+            Line(points=[self.x + self.width / 2, self.y + line_width / 2,
+                         self.x + self.width / 2, self.y + self.height - line_width / 2],
+                 width=line_width)
+
 
 def get_file_count_widget(num_elements: int):
 
@@ -124,18 +151,3 @@ def get_ok_button():
     return ok_button
 
 
-
-
-class ThickVerticalSlider(Slider):
-    def __init__(self, **kwargs):
-        super(ThickVerticalSlider, self).__init__(**kwargs)
-        self.bind(pos=self._update_canvas, size=self._update_canvas)
-
-    def _update_canvas(self, *args):
-        self.canvas.before.clear()
-        with self.canvas.before:
-            Color(0.5, 0.5, 0.5, 1)  # Grey color for the track
-            line_width = 2  # Adjust width for thickness
-            Line(points=[self.x + self.width / 2, self.y + line_width / 2,
-                         self.x + self.width / 2, self.y + self.height - line_width / 2],
-                 width=line_width)
