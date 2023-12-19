@@ -18,13 +18,15 @@ class PathCheckbox:
     file_img = Image.open(fp=get_fileicon_path()).resize((dim, dim))
     folder_img = Image.open(fp=get_foldericon_path()).resize((dim, dim))
 
-    def __init__(self,path : str, height : int):
+    def __init__(self,path : str, height : int, scroll_view):
         self.path : str = path
         self.height = height
         self.potential_des : list[PathCheckbox] = []
         self.relevant_des : list[PathCheckbox] =[]
         self.widget : Optional[LabeledCheckBox] = None
+        self.scroll_view = scroll_view
         self.active_children: list[PathCheckbox] = self.get_children_from_path()
+
 
         self.child_container = None
         self.total_container = None
@@ -49,10 +51,16 @@ class PathCheckbox:
 
     def on_toggle(self, instance, value):
         _ = instance
+        height = copy.copy(self.child_container.height)
+        print(height)
+
         if value == 'down':
             self.total_container.remove_widget(self.child_container)
+            self.scroll_by_px(px=-height)
         else:
             self.total_container.add_widget(self.child_container)
+            # self.scroll_by_px(px=height)
+            self.scroll_by_px(px=height)
 
 
     def recursively_initialize_descendants(self):
@@ -73,6 +81,13 @@ class PathCheckbox:
 
     # -------------------------------------------
     # State
+
+    def scroll_by_px(self, px):
+        layout_height = self.scroll_view.children[0].height
+        to_scroll = px / layout_height
+        print(layout_height, to_scroll)
+        self.scroll_view.scroll_y += to_scroll
+
 
     def toggle(self, *args)-> None:
         _ = args
@@ -99,7 +114,7 @@ class PathCheckbox:
             children = []
         else:
             this_folder = Folder(path=self.path)
-            children = [PathCheckbox(path=path, height=self.height) for path in this_folder.get_children_xrdpaths()]
+            children = [PathCheckbox(path=path, height=self.height, scroll_view=self.scroll_view) for path in this_folder.get_children_xrdpaths()]
 
         return children
 
@@ -108,6 +123,8 @@ class PathCheckbox:
 
     def get_file_descendants(self):
         return [desecenant for desecenant in self.get_all_relevant_descendants() if desecenant.get_is_file()]
+
+
 
     # -------------------------------------------
     # Get static

@@ -82,7 +82,7 @@ class DataCollectApp(App):
 
 
     def set_select_layout_content(self, path : str):
-        self.root_checkbox: PathCheckbox = PathCheckbox(path=path, height=get_line_height())
+        self.root_checkbox: PathCheckbox = PathCheckbox(path=path, height=get_line_height(), scroll_view=self.scroll_view)
         self.root_checkbox.recursively_initialize_descendants()
 
         new_label = get_file_count_widget(num_elements=len(self.root_checkbox.get_file_descendants()))
@@ -155,8 +155,20 @@ class DataCollectApp(App):
         self.feedback_widget.opacity = 1
         print(self.feedback_widget.text)
 
+
     # -------------------------------------------
-    # get
+    # other
+
+    def scroll_by_px(self, px):
+        layout_height = self.scroll_view.children[0].height
+        print(layout_height)
+
+        viewport_height = self.scroll_view.height
+        max_scroll = layout_height - viewport_height
+
+        scroll_value = px / max_scroll if max_scroll > 0 else 0
+        self.scroll_view.scroll_y = max(0, min(self.scroll_view.scroll_y + scroll_value, 1))
+
 
     def get_checked_filepaths(self) -> list[str]:
         all_checkboxes = self.root_checkbox.get_file_descendants()
