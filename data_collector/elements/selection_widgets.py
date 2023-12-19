@@ -18,26 +18,25 @@ from data_collector.resources import get_collapsed_icon_path, get_expanded_icon_
 class LabeledCheckBox(BoxLayout):
     indent = 50
 
-    def __init__(self, text, toggle_callback, is_file : bool, indent=0, **kwargs):
+    def __init__(self, height : int, text :str, toggle_callback, is_file : bool, indent=0, **kwargs):
         super().__init__(**kwargs)
         # Properties
         self.size_hint_y = None
-        self.height = 30  # Fixed height for each LabeledCheckBox
+        self.height = height
 
         # Create the CheckBox
-        self.check_box = CheckBox(size_hint=(None, None), size=(30, 30))
+        self.check_box = CheckBox(size_hint=(None, None), size=(self.height, self.height))
         self.check_box.bind(active=toggle_callback)
 
         # Create the Icon
         icon_path = get_fileicon_path() if is_file else get_foldericon_path()
-        self.icon = Image(source=icon_path, size_hint=(None, None), size=(30, 30))
+        self.icon = Image(source=icon_path, size_hint=(None, None), size=(self.height, self.height))
         self.add_widget(self.icon)
 
         # Create the Label
         self.label = BlackLabel(text=text,
                                 size_hint_x=None,
                                 size_hint_y=None,
-                                height=30,
                                 halign='left',
                                 valign='middle')
 
@@ -50,8 +49,8 @@ class ImageToggleButton(RelativeLayout):
     def __init__(self, **kwargs):
         super(ImageToggleButton, self).__init__(**kwargs)
 
-        self.collapsed = Image(source=get_collapsed_icon_path(), size_hint=(None, None),size=(30,30))
-        self.expanded = Image(source=get_expanded_icon_path(), size_hint=(None, None),size=(30,30))
+        self.collapsed = Image(source=get_collapsed_icon_path(), size_hint=(None, None),size=(self.height,self.height))
+        self.expanded = Image(source=get_expanded_icon_path(), size_hint=(None, None),size=(self.height,self.height))
 
         self.toggle_button = ToggleButton(size_hint=(1, 1), background_color=(0, 0, 0, 0))
         self.add_widget(self.toggle_button)

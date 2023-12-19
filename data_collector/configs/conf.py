@@ -14,6 +14,10 @@ def get_primary_monitor():
             return monitor
     return None
 
+
+def get_primary_monitor_width():
+    return get_primary_monitor().width
+
 def get_scaling_factor():
     ui_scale = 1
     if sys.platform == 'win32':
@@ -42,4 +46,12 @@ def set_configs():
 
     Config.set('graphics', 'width', str(app_width))
     Config.set('graphics', 'height', str(app_height))
+
+
+def get_line_height():
+    std_width = 1920
+    std_line_height = 30
+
+    line_height =int(std_line_height * get_primary_monitor_width()/std_width)
+    return line_height
 

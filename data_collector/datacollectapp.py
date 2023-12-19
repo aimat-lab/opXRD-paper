@@ -13,6 +13,7 @@ from data_collector.filesystem import zip_file_list, produce_csv_file
 from data_collector.elements import PathCheckbox, InputDialog
 from data_collector.elements import get_select_layout, get_scroll_view
 from data_collector.elements import get_file_count_widget, get_ok_button, get_feedback_widget, get_scrollable_checkboxes_layout
+from data_collector.configs import get_line_height
 
 # -------------------------------------------
 
@@ -76,7 +77,7 @@ class DataCollectApp(App):
 
 
     def set_select_layout_content(self, path : str):
-        self.root_checkbox: PathCheckbox = PathCheckbox(path=path)
+        self.root_checkbox: PathCheckbox = PathCheckbox(path=path, height=get_line_height())
         self.root_checkbox.recursively_initialize_descendants()
 
         new_label = get_file_count_widget(num_elements=len(self.root_checkbox.get_file_descendants()))

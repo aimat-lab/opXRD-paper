@@ -16,12 +16,13 @@ class PathCheckbox:
     file_img = Image.open(fp=get_fileicon_path()).resize((dim, dim))
     folder_img = Image.open(fp=get_foldericon_path()).resize((dim, dim))
 
-    def __init__(self,path : str):
+    def __init__(self,path : str, height : int):
         self.path : str = path
-        self.active_children: list[PathCheckbox] = self.get_children_from_path()
+        self.height = height
         self.potential_des : list[PathCheckbox] = []
         self.relevant_des : list[PathCheckbox] =[]
         self.widget : Optional[LabeledCheckBox] = None
+        self.active_children: list[PathCheckbox] = self.get_children_from_path()
 
         self.child_container = None
         self.total_container = None
@@ -31,7 +32,7 @@ class PathCheckbox:
         self.total_container.bind(minimum_height=self.total_container.setter('height'))
 
         # Item container
-        item_container = self.make_toggleitem_container(level=level)
+        item_container = self.make_line_container(level=level)
         self.total_container.add_widget(item_container)
 
 
@@ -96,7 +97,7 @@ class PathCheckbox:
             children = []
         else:
             this_folder = Folder(path=self.path)
-            children = [PathCheckbox(path=path) for path in this_folder.get_children_xrdpaths()]
+            children = [PathCheckbox(path=path, height=self.height) for path in this_folder.get_children_xrdpaths()]
 
         return children
 
@@ -116,33 +117,33 @@ class PathCheckbox:
         return child_container
 
 
-    def make_toggleitem_container(self, level : int):
-        toggleitem_container = BoxLayout(orientation='horizontal', size_hint=(1, None))
+    def make_line_container(self, level : int):
+        line_container = BoxLayout(orientation='horizontal', size_hint=(1, None))
 
 
 
         self.widget = LabeledCheckBox(text=self._get_text(),
                                       toggle_callback=self.toggle,
-                                      height=30,
                                       indent=level,
-                                      is_file=self.get_is_file())
+                                      is_file=self.get_is_file(),
+                                      height=self.height)
 
         if not self.get_is_file():
             image_btn = ImageToggleButton(size_hint=(None, None),
-                                          size=(30,30))
+                                          size=(self.height,self.height))
 
             image_btn.toggle_button.bind(state=self.on_toggle)
-            toggleitem_container.add_widget(image_btn)
+            line_container.add_widget(image_btn)
         else:
             from kivy.uix.label import Label
-            place_holder = Label(size_hint=(None,None),size=(30,30))
-            toggleitem_container.add_widget(place_holder)
+            place_holder = Label(size_hint=(None,None),size=(self.height,self.height))
+            line_container.add_widget(place_holder)
 
 
 
-        toggleitem_container.add_widget(self.widget)
-        toggleitem_container.bind(minimum_height=toggleitem_container.setter('height'))
-        return toggleitem_container
+        line_container.add_widget(self.widget)
+        line_container.bind(minimum_height=line_container.setter('height'))
+        return line_container
 
 
     def _get_text(self) -> str:
