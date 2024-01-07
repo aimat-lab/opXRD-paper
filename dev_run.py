@@ -3,25 +3,23 @@ set_configs()
 
 from kivy.core.window import Window
 Window.clearcolor = (1, 1, 1, 1)
-# import os
+
 from kivy.modules import inspector
-from data_collector.datacollectapp import DataCollectApp
+from data_collector.app import DataCollectApp
 # -------------------------------------------
 
 
 def main():
-    # win_test_dir = 'C:\\Users\\daniel\\OneDrive\\Desktop\\test_folder'
-    # win_target_test = 'C:\\Users\\daniel\\OneDrive\\Desktop'
+    win_test_dir = 'C:\\Users\\daniel\\OneDrive\\Desktop\\test_folder'
+    win_target_test = 'C:\\Users\\daniel\\OneDrive\\Desktop'
 
-    # _, __ = win_test_dir, win_target_test
+    _, __ = win_test_dir, win_target_test
 
-    # linux_input_test = '/home/daniel/aimat/tool_sample_folder'
-    # linux_target_test = '/home/work/Desktop'
+    linux_input_test = '/home/daniel/aimat/tool_sample_folder'
+    linux_target_test = f'/home/daniel/aimat/tool_target_folder'
 
-
-    # app = DataCollectApp(override_target_folder=f'/home/daniel/aimat/tool_target_folder',
-    #                      override_input_folder=f'/home/daniel/aimat/tool_sample_folder')
-    app = DataCollectApp()
+    app = DataCollectApp(override_input_folder=linux_input_test,
+                         override_target_folder=linux_target_test)
     inspector.create_inspector(Window, app)
 
     app.run()

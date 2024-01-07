@@ -17,13 +17,15 @@ from data_collector.configs import get_line_height
 # -------------------------------------------
 
 class DataCollectApp(App):
-    def __init__(self, override_input_folder : Optional[str]  = None):
+    def __init__(self, override_input_folder : Optional[str]  = None,
+                       override_target_folder : Optional[str] = None):
         self.icon = None    
         super(DataCollectApp, self).__init__()
 
         # Properties
         self.title : str = 'AiMAT XRD data collect'
         self.input_folder_override : Optional[str]  = override_input_folder
+        self.targt_folder_override : Optional[str] = override_target_folder
         self.default_font_size = Window.width*0.018
 
         # PathCheckbox
@@ -35,6 +37,7 @@ class DataCollectApp(App):
         self.scroll_view : Optional[Widget] = None
         self.filecount_label : Optional[Widget] = None
         self.target_path_input : Optional[Widget] = None
+
 
     def build(self):
         self.scroll_view = get_scroll_view()
@@ -134,7 +137,7 @@ class DataCollectApp(App):
         current_date = datetime.now()
         datetime_stamp = current_date.strftime('%d_%m_%Y_%H_%M_%S')
 
-        target_folder_path = self.target_path_input.text
+        target_folder_path = self.get_targetfolder_path()
 
         if target_folder_path is None:
             print(f'No target folder provided. Check setup')
@@ -157,6 +160,10 @@ class DataCollectApp(App):
         except:
             self.feedback_widget.text = f'An error occured during the creating of the zip archive. Aborting ...'
         self.reveal_feedback_text()
+
+
+    def get_targetfolder_path(self) -> str:
+        return self.target_path_input.text if self.targt_folder_override is None else self.targt_folder_override
 
 
     def reveal_feedback_text(self):
