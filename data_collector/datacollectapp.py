@@ -9,7 +9,7 @@ from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
 
 from data_collector.filesystem import zip_file_list, produce_csv_file
-from data_collector.elements import PathCheckbox, InputDialog, BlackLabel, ThickVerticalSlider, get_checkboxes_layout, \
+from data_collector.elements import FsNodeWidget, InputDialog, BlackLabel, ThickVerticalSlider, get_checkboxes_layout, \
     get_scroll_view, get_scrollable_checkboxes_layout
 from data_collector.elements import get_file_count_widget, get_ok_button, get_feedback_widget
 from data_collector.configs import get_line_height
@@ -28,7 +28,7 @@ class DataCollectApp(App):
         self.default_font_size = Window.width*0.018
 
         # PathCheckbox
-        self.root_checkbox : Optional[PathCheckbox] = None
+        self.root_checkbox : Optional[FsNodeWidget] = None
 
         # GUI Elements
         self.slider : Optional[Widget] = None
@@ -96,7 +96,7 @@ class DataCollectApp(App):
 
 
     def set_select_layout_content(self, path : str):
-        self.root_checkbox: PathCheckbox = PathCheckbox(path=path, height=get_line_height(), scroll_view=self.scroll_view)
+        self.root_checkbox: FsNodeWidget = FsNodeWidget(path=path, height=get_line_height(), scroll_view=self.scroll_view)
         self.root_checkbox.recursively_initialize_filestructure()
 
         new_label = get_file_count_widget(num_elements=len(self.root_checkbox.xrd_file_des))

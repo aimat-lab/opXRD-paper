@@ -14,7 +14,7 @@ from kivy.clock import Clock
 from typing import Optional
 # -------------------------------------------
 
-class PathCheckbox(FsNode):
+class FsNodeWidget(FsNode):
     dim = get_line_height()
     file_img = Image.open(fp=get_fileicon_path()).resize((dim, dim))
     folder_img = Image.open(fp=get_foldericon_path()).resize((dim, dim))
@@ -22,13 +22,14 @@ class PathCheckbox(FsNode):
     def __init__(self,path : str, height : int, scroll_view):
         super().__init__(path=path)
 
-        self.active_children = [PathCheckbox(path=path, height=height, scroll_view=scroll_view) for path in self.get_all_sub()]
+        self.active_children = [FsNodeWidget(path=path, height=height, scroll_view=scroll_view) for path in self.get_all_sub()]
         self.height : int = height
         self.labeled_checkbox : Optional[LabeledCheckBox] = None
         self.scroll_view = scroll_view
 
         self.child_container = None
         self.total_container = None
+
 
     def initialize_gui(self, master_frame, level : int):
         self.total_container = BoxLayout(orientation='vertical', size_hint=(1, None))
