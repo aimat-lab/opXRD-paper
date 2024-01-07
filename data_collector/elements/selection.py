@@ -53,6 +53,10 @@ def get_checkboxes_layout(file_count_label: Label, scroll_view: ScrollView):
 
 def get_scroll_view():
     scroll_view = ScrollView(size_hint=(1, 1), bar_width=0)
+    scrol_unit = 200
+    scroll_view.scroll_distance = scrol_unit
+    scroll_view.scroll_wheel_distance = scrol_unit
+
     return scroll_view
 
 

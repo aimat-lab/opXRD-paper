@@ -51,7 +51,7 @@ class FsNodeWidget(FsNode):
     def on_check(self, *args)-> None:
         _ = args
         descendants = self.relevant_des
-        target_value = self.get_value()
+        target_value = self.get_is_checked()
         for box in descendants:
             box.set_value(target_value=target_value)
 
@@ -60,7 +60,7 @@ class FsNodeWidget(FsNode):
         self.labeled_checkbox.check_box.active = target_value
 
 
-    def get_value(self) -> bool:
+    def get_is_checked(self) -> bool:
         return self.labeled_checkbox.check_box.active
 
 
