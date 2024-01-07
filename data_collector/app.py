@@ -35,7 +35,7 @@ class DataCollectApp(App):
         self.slider : Optional[Widget] = None
         self.feedback_widget : Optional[Widget] = None
         self.scroll_view : Optional[Widget] = None
-        self.filecount_label : Optional[Widget] = None
+        self.header_layout : Optional[Widget] = None
         self.target_path_input : Optional[Widget] = None
 
 
@@ -54,9 +54,9 @@ class DataCollectApp(App):
 
 
     def make_selection_layout(self):
-        self.filecount_label = get_header_widget(num_elements=0)
-        self.filecount_label.opacity = 1
-        checkboxes_layout = get_checkboxes_layout(file_count_label=self.filecount_label,
+        self.header_layout = get_header_widget(num_elements=0)
+        self.header_layout.opacity = 0
+        checkboxes_layout = get_checkboxes_layout(file_count_label=self.header_layout,
                                                   scroll_view=self.scroll_view)
         self.slider = ThickVerticalSlider(orientation='vertical', min=0, max=1, value=1, size_hint=(0.1, 1))
         self.slider.bind(value=self.adjust_scroll_view)
@@ -101,9 +101,9 @@ class DataCollectApp(App):
         self.root_checkbox: FsNodeWidget = FsNodeWidget(path=path, height=get_line_height(), scroll_view=self.scroll_view)
         self.root_checkbox.recursively_initialize_filestructure()
 
-        # new_label = get_header_widget(num_elements=len(self.root_checkbox.xrd_file_des))
-        # self.filecount_label.text =  new_label.
-        # self.filecount_label.opacity = 1
+        new_label = get_header_widget(num_elements=len(self.root_checkbox.xrd_file_des)).children[2]
+        self.header_layout.children[2].text =  new_label.text
+        self.header_layout.opacity = 1
 
         scroll_layout = get_scrollable_checkboxes_layout(root_checkbox=self.root_checkbox)
         self.scroll_view.add_widget(widget=scroll_layout)
