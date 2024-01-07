@@ -160,7 +160,7 @@ class DataCollectApp(App):
                                          f'{zipfile_path} \n'
                                          f'{csv_file_path}')
         except:
-            self.feedback_widget.text = f'An error occured during the creating of the zip archive. Aborting ...'
+            self.feedback_widget.text = f'An error occured during the creating of the zip archive.\nIs "{target_folder_path}" a valid folder path?'
         self.reveal_feedback_text()
 
 
