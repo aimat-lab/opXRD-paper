@@ -19,6 +19,7 @@ class FsNode:
     def __init__(self, path : str):
         self.path : str = path
         self.name : str = os.path.basename(path)
+
         if not self.get_is_file():
             self.sub_paths : list[str] = [os.path.join(self.path,name) for name in os.listdir(self.path)]
         else:

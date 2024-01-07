@@ -21,13 +21,15 @@ class PathCheckbox(FsNode):
 
     def __init__(self,path : str, height : int, scroll_view):
         super().__init__(path=path)
-        
+
+        self.active_children = [PathCheckbox(path=path, height=height, scroll_view=scroll_view) for path in self.get_all_sub()]
+
         self.height : int = height
         self.potential_des : list[PathCheckbox] = []
         self.relevant_des : list[PathCheckbox] =[]
         self.labeled_checkbox : Optional[LabeledCheckBox] = None
         self.scroll_view = scroll_view
-        self.active_children: list[PathCheckbox] = self.get_children_from_path()
+
         self.xrd_file_des : list[PathCheckbox] = []
 
         self.child_container = None
@@ -52,8 +54,6 @@ class PathCheckbox(FsNode):
         master_frame.add_widget(self.total_container)
 
 
-
-
     def recursively_initialize_descendants(self):
         descendants = copy.copy(self.active_children)
         for child in self.active_children:
@@ -62,7 +62,6 @@ class PathCheckbox(FsNode):
 
 
         self.potential_des = descendants
-
         relevant_des = []
         for outer_des in self.potential_des:
             is_relevant = any([des.get_is_file() for des in outer_des.potential_des]) or outer_des.get_is_file()
@@ -111,18 +110,6 @@ class PathCheckbox(FsNode):
 
         target_value = 1 - (h1 - h2) / (h1prime - h2prime) * s
         self.scroll_view.scroll_y = target_value if target_value < 1 else 1
-
-    # -------------------------------------------
-    # Get filestructure
-
-    def get_children_from_path(self) -> list[PathCheckbox]:
-        if os.path.isfile(self.path):
-            children = []
-        else:
-            this_folder = FsNode(path=self.path)
-            children = [PathCheckbox(path=path, height=self.height, scroll_view=self.scroll_view) for path in this_folder.get_all_sub()]
-
-        return children
 
     # -------------------------------------------
     # get
