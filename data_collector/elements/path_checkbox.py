@@ -4,7 +4,7 @@ from kivy.uix.boxlayout import  BoxLayout
 import copy
 import os.path
 from PIL import Image
-from data_collector.elements.types import LabeledCheckBox, ImageToggleButton
+from data_collector.elements.types import LabeledCheckBox, IconToggleButton
 from data_collector.resources import get_foldericon_path, get_fileicon_path
 from data_collector.filesystem import Folder
 from data_collector.configs import get_line_height
@@ -21,10 +21,10 @@ class PathCheckbox:
 
     def __init__(self,path : str, height : int, scroll_view):
         self.path : str = path
-        self.height = height
+        self.height : int = height
         self.potential_des : list[PathCheckbox] = []
         self.relevant_des : list[PathCheckbox] =[]
-        self.widget : Optional[LabeledCheckBox] = None
+        self.labeled_checkbox : Optional[LabeledCheckBox] = None
         self.scroll_view = scroll_view
         self.active_children: list[PathCheckbox] = self.get_children_from_path()
 
@@ -95,14 +95,7 @@ class PathCheckbox:
     # -------------------------------------------
     # State
 
-    def scroll_by_px(self, px):
-        layout_height = self.scroll_view.children[0].height
-        to_scroll = px / layout_height
-        print(layout_height, to_scroll)
-        self.scroll_view.scroll_y += to_scroll
-
-
-    def toggle(self, *args)-> None:
+    def on_check(self, *args)-> None:
         _ = args
         descendants = self.get_all_relevant_descendants()
         target_value = self.get_value()
@@ -110,10 +103,10 @@ class PathCheckbox:
             box.set_value(target_value=target_value)
 
     def set_value(self,target_value : bool):
-        self.widget.check_box.active = target_value
+        self.labeled_checkbox.check_box.active = target_value
 
     def get_value(self) -> bool:
-        return self.widget.check_box.active
+        return self.labeled_checkbox.check_box.active
 
 
     # -------------------------------------------
@@ -140,7 +133,7 @@ class PathCheckbox:
 
 
     # -------------------------------------------
-    # Get static
+    # get
 
     @staticmethod
     def get_child_container():
@@ -154,18 +147,18 @@ class PathCheckbox:
 
 
 
-        self.widget = LabeledCheckBox(text=self._get_text(),
-                                      toggle_callback=self.toggle,
-                                      indent=level,
-                                      is_file=self.get_is_file(),
-                                      height=self.height)
+        self.labeled_checkbox = LabeledCheckBox(text=self._get_text(),
+                                                toggle_callback=self.on_check,
+                                                indent=level,
+                                                is_file=self.get_is_file(),
+                                                height=self.height)
 
         if not self.get_is_file():
-            image_btn = ImageToggleButton(size_hint=(None, None),
+            icon_toggle_button = IconToggleButton(size_hint=(None, None),
                                           size=(self.height,self.height))
 
-            image_btn.toggle_button.bind(state=self.on_toggle)
-            line_container.add_widget(image_btn)
+            icon_toggle_button.btn.bind(state=self.on_toggle)
+            line_container.add_widget(icon_toggle_button)
         else:
 
             place_holder = Label(size_hint=(None,None),size=(self.height,self.height))
@@ -173,7 +166,7 @@ class PathCheckbox:
 
 
 
-        line_container.add_widget(self.widget)
+        line_container.add_widget(self.labeled_checkbox)
         line_container.bind(minimum_height=line_container.setter('height'))
         return line_container
 

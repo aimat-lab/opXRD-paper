@@ -61,20 +61,20 @@ class LabeledCheckBox(BoxLayout):
         self.padding = [indent * LabeledCheckBox.indent, 0, 0, 0]  # Left padding for indentation
 
 
-class ImageToggleButton(RelativeLayout):
+class IconToggleButton(RelativeLayout):
     def __init__(self, **kwargs):
-        super(ImageToggleButton, self).__init__(**kwargs)
+        super(IconToggleButton, self).__init__(**kwargs)
 
         self.collapsed = Image(source=get_collapsed_icon_path(), size_hint=(None, None),size=(self.height,self.height))
         self.expanded = Image(source=get_expanded_icon_path(), size_hint=(None, None),size=(self.height,self.height))
 
-        self.toggle_button = ToggleButton(size_hint=(1, 1), background_color=(0, 0, 0, 0))
-        self.add_widget(self.toggle_button)
+        self.btn = IconToggleButton(size_hint=(1, 1), background_color=(0, 0, 0, 0))
+        self.add_widget(self.btn)
 
-        self.icon = self.collapsed if self.toggle_button.state == 'down' else self.expanded
+        self.icon = self.collapsed if self.btn.state == 'down' else self.expanded
         self.add_widget(self.icon)
 
-        self.toggle_button.bind(state=self.toggle_image)
+        self.btn.bind(state=self.toggle_image)
 
 
     def toggle_image(self,instance, value):
