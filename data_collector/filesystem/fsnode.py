@@ -50,16 +50,6 @@ class FsNode:
     def get_is_file(self):
         return os.path.isfile(self.path)
 
-    def get_xrd_descendants(self) -> list[str]:
-        xrd_file_paths = []
-
-        xrd_file_paths += self._get_xrd_subfiles()
-        for folder_path in self._get_subdirs():
-            xrd_folder = FsNode(path=folder_path)
-            xrd_file_paths += xrd_folder.get_xrd_descendants()
-
-        return xrd_file_paths
-
     def get_all_sub(self):
         return self._get_xrd_subfiles() + self._get_subdirs()
 
