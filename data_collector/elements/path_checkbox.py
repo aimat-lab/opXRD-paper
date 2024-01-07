@@ -38,44 +38,21 @@ class PathCheckbox(FsNode):
         self.total_container.bind(minimum_height=self.total_container.setter('height'))
 
         # Item container
-        item_container = self.make_line_container(level=level)
-        self.total_container.add_widget(item_container)
+        self.labeled_checkbox = self._make_label_checkbox(level=level)
+        line = self._make_line(labeled_checkbox=self.labeled_checkbox)
+        self.total_container.add_widget(line)
 
 
         # Child container
         if not self.get_is_file():
-            self.child_container = self.get_child_container()
+            self.child_container = self._get_child_container()
             self.total_container.add_widget(self.child_container)
 
         # Master
         master_frame.add_widget(self.total_container)
 
 
-    def on_toggle(self, instance, value):
-        _ = instance
-        h1 = copy.copy(self.scroll_view.children[0].height)
-        h2 = copy.copy(self.scroll_view.height)
-        s = copy.copy(1-self.scroll_view.scroll_y)
 
-        print(f'h1,h2: {h1},{h2}')
-
-        if value == 'down':
-            self.total_container.remove_widget(self.child_container)
-        else:
-            self.total_container.add_widget(self.child_container)
-
-        # Schedule the size calculation for the next frame
-        Clock.schedule_once(lambda dt: self.calculate_sizes(h1, h2,s))
-
-    def calculate_sizes(self, h1, h2, s):
-        h1prime = self.scroll_view.children[0].height
-        h2prime = self.scroll_view.height
-
-        print(f'h1,h2,h1prime,h2prime: {h1},{h2},{h1prime},{h2prime}')
-
-        target_value = 1 - (h1 - h2) / (h1prime - h2prime) * s
-        print(target_value)
-        self.scroll_view.scroll_y = target_value if target_value < 1 else 1
 
     def recursively_initialize_descendants(self):
         descendants = copy.copy(self.active_children)
@@ -94,7 +71,7 @@ class PathCheckbox(FsNode):
         self.relevant_des = relevant_des
 
     # -------------------------------------------
-    # State
+    # callbacks
 
     def on_check(self, *args)-> None:
         _ = args
@@ -103,12 +80,36 @@ class PathCheckbox(FsNode):
         for box in descendants:
             box.set_value(target_value=target_value)
 
+
     def set_value(self,target_value : bool):
         self.labeled_checkbox.check_box.active = target_value
+
 
     def get_value(self) -> bool:
         return self.labeled_checkbox.check_box.active
 
+
+    def on_toggle(self, instance, value):
+        _ = instance
+        h1 = copy.copy(self.scroll_view.children[0].height)
+        h2 = copy.copy(self.scroll_view.height)
+        s = copy.copy(1-self.scroll_view.scroll_y)
+
+        print(f'h1,h2: {h1},{h2}')
+
+        if value == 'down':
+            self.total_container.remove_widget(self.child_container)
+        else:
+            self.total_container.add_widget(self.child_container)
+
+        Clock.schedule_once(lambda dt: self.calculate_sizes(h1, h2,s))
+
+    def calculate_sizes(self, h1, h2, s):
+        h1prime = self.scroll_view.children[0].height
+        h2prime = self.scroll_view.height
+
+        target_value = 1 - (h1 - h2) / (h1prime - h2prime) * s
+        self.scroll_view.scroll_y = target_value if target_value < 1 else 1
 
     # -------------------------------------------
     # Get filestructure
@@ -134,40 +135,13 @@ class PathCheckbox(FsNode):
     # -------------------------------------------
     # get
 
-    @staticmethod
-    def get_child_container():
-        child_container = BoxLayout(orientation='vertical', size_hint=(1, None))
-        child_container.bind(minimum_height=child_container.setter('height'))
-        return child_container
-
-
-    def make_line_container(self, level : int):
-        line_container = BoxLayout(orientation='horizontal', size_hint=(1, None))
-
-
-
-        self.labeled_checkbox = LabeledCheckBox(text=self._get_text(),
-                                                check_callback=self.on_check,
-                                                indent=level,
-                                                is_file=self.get_is_file(),
-                                                height=self.height)
-
-        if not self.get_is_file():
-            icon_toggle_button = IconToggleButton(size_hint=(None, None),
-                                          size=(self.height,self.height))
-
-            icon_toggle_button.btn.bind(state=self.on_toggle)
-            line_container.add_widget(icon_toggle_button)
-        else:
-
-            place_holder = Label(size_hint=(None,None),size=(self.height,self.height))
-            line_container.add_widget(place_holder)
-
-
-
-        line_container.add_widget(self.labeled_checkbox)
-        line_container.bind(minimum_height=line_container.setter('height'))
-        return line_container
+    def _make_label_checkbox(self, level : int):
+        labeled_checkbox = LabeledCheckBox(text=self._get_text(),
+                                            check_callback=self.on_check,
+                                            indent=level,
+                                            is_file=self.get_is_file(),
+                                            height=self.height)
+        return labeled_checkbox
 
 
     def _get_text(self) -> str:
@@ -176,3 +150,27 @@ class PathCheckbox(FsNode):
 
         return f'{modifier}{base_name}'
 
+
+    def _make_line(self, labeled_checkbox : LabeledCheckBox):
+        line_container = BoxLayout(orientation='horizontal', size_hint=(1, None))
+
+        if not self.get_is_file():
+            icon_toggle_button = IconToggleButton(size_hint=(None, None),
+                                          size=(self.height,self.height))
+
+            icon_toggle_button.btn.bind(state=self.on_toggle)
+            line_container.add_widget(icon_toggle_button)
+        else:
+            place_holder = Label(size_hint=(None,None),size=(self.height,self.height))
+            line_container.add_widget(place_holder)
+
+        line_container.add_widget(labeled_checkbox)
+        line_container.bind(minimum_height=line_container.setter('height'))
+        return line_container
+
+
+    @staticmethod
+    def _get_child_container():
+        child_container = BoxLayout(orientation='vertical', size_hint=(1, None))
+        child_container.bind(minimum_height=child_container.setter('height'))
+        return child_container
