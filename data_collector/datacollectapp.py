@@ -45,8 +45,11 @@ class DataCollectApp(App):
     def build(self):
         # Main layout
         self.scroll_view = get_scroll_view()
+        scrol_unit = 200
+        self.scroll_view.scroll_distance = scrol_unit
+        self.scroll_view.scroll_wheel_distance = scrol_unit
 
-        self.scroll_view.smooth_scroll_end = 10
+        # self.scroll_view.smooth_scroll_end = 10
 
         self.filecount_label = get_file_count_widget(num_elements=0)
         self.filecount_label.opacity = 0
