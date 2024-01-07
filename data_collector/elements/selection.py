@@ -5,7 +5,8 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
 
-from data_collector.elements import BlackLabel, PathCheckbox
+from data_collector.elements.types import BlackLabel
+from data_collector.elements.path_checkbox import PathCheckbox
 from data_collector.filesystem.fsnode import FsNode
 
 from kivy.uix.widget import Widget

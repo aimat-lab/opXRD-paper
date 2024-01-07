@@ -8,7 +8,7 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
 
-from data_collector.filesystem import zip_file_list, produce_csv_file, get_initial_path
+from data_collector.filesystem import zip_file_list, produce_csv_file
 from data_collector.elements import PathCheckbox, InputDialog, BlackLabel, ThickVerticalSlider, get_checkboxes_layout, \
     get_scroll_view, get_scrollable_checkboxes_layout
 from data_collector.elements import get_file_count_widget, get_ok_button, get_feedback_widget

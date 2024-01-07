@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from PIL import Image
+from kivy.uix.image import Image
 from kivy.clock import Clock
 from kivy.graphics import Color, Line
 from kivy.uix.boxlayout import BoxLayout
@@ -8,9 +8,9 @@ from kivy.uix.checkbox import CheckBox
 from kivy.uix.label import Label
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.slider import Slider
+from kivy.uix.togglebutton import ToggleButton
 
 from kivy.uix.textinput import TextInput
-from kivy.uix.togglebutton import ToggleButton
 
 from data_collector.resources import get_fileicon_path, get_foldericon_path, get_collapsed_icon_path, \
     get_expanded_icon_path, get_unchecked_box_path, get_checked_box_path
@@ -68,7 +68,7 @@ class IconToggleButton(RelativeLayout):
         self.collapsed = Image(source=get_collapsed_icon_path(), size_hint=(None, None),size=(self.height,self.height))
         self.expanded = Image(source=get_expanded_icon_path(), size_hint=(None, None),size=(self.height,self.height))
 
-        self.btn = IconToggleButton(size_hint=(1, 1), background_color=(0, 0, 0, 0))
+        self.btn = ToggleButton(size_hint=(1, 1), background_color=(0, 0, 0, 0))
         self.add_widget(self.btn)
 
         self.icon = self.collapsed if self.btn.state == 'down' else self.expanded
