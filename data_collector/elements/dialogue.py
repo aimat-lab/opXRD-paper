@@ -19,7 +19,6 @@ class InputDialog(Popup):
         self.title_align = 'center'  # Center the title
         self.auto_dismiss = False  # Disable automatic dismissal of the popup
 
-
         self.callback = callback
         # Main container
         self.content = BoxLayout(orientation='vertical', padding=[10, 10, 10, 10], spacing=10)
@@ -53,10 +52,10 @@ class InputDialog(Popup):
         self.second_hint.bind(texture_size=self._update_text_height)
 
         # Warning label
-        self.warning = Label(opacity=0,
-                             size_hint=(1, 0.1),
-                             halign="left",
-                             color=[1, 0, 0, 1])  # RGB for red, and 1 for full opacity
+        self.notice = Label(opacity=0,
+                            size_hint=(1, 0.1),
+                            halign="left",
+                            color=[1, 0, 0, 1])  # RGB for red, and 1 for full opacity
 
 
         # Input widget
@@ -75,7 +74,7 @@ class InputDialog(Popup):
         self.content.add_widget(self.first_hint)
         self.content.add_widget(self.format_input)
         self.content.add_widget(self.second_hint)
-        self.content.add_widget(self.warning)
+        self.content.add_widget(self.notice)
         self.content.add_widget(self.path_input)
         self.content.add_widget(self.confirm)
         self.set_focus_chain()
@@ -92,11 +91,6 @@ class InputDialog(Popup):
     def _update_text_height(instance, texture_size):
         instance.height = texture_size[1]  # Set the height to the text height
 
-
-    def print_warning_notice(self):
-        self.warning.text = f'Given input \"{self.path_input.text}\" is not a path to a directory. Please try again'
-        self.warning.opacity = 1
-
     def on_answer(self, instance):
 
         Folder.set_default_formats(self.format_input.text)
@@ -106,12 +100,24 @@ class InputDialog(Popup):
 
         print(f"User input: {user_input}")
         if not os.path.isdir(user_input):
-            self.print_warning_notice()
+            self.print_warning()
             self.path_input.text = ''
             return
+        else:
+            self.print_wait()
 
-        self.callback(user_input)
+        from kivy.clock import Clock
+        Clock.schedule_once(lambda dt: self.callback(user_input),0.1)
         self.dismiss()
+
+    def print_warning(self):
+        self.notice.text = f'Given input \"{self.path_input.text}\" is not a path to a directory. Please try again'
+        self.notice.opacity = 1
+
+    def print_wait(self):
+        self.notice.text = f'Generating selection. Please wait ...'
+        self.notice.opacity = 1
+        self.notice.color = [0,1,0,1]
 
 
 class FocusTextInput(TextInput):
