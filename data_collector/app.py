@@ -70,15 +70,17 @@ class DataCollectApp(App):
         finish_layout = BoxLayout(orientation='vertical',size_hint =(1,0.125))
         upper_finish = BoxLayout(orientation='horizontal', size_hint=(1, 0.4))
 
-        note = BlackLabel(text='Target folder:',size_hint=(0.2,1))
+        note = BlackLabel(text='Target folder:',size_hint=(0.2,1), font_size = Window.width * 0.02, bold=True)
 
         self.target_path_input = TextInput(text=f'{os.getcwd()}',
-                                    size_hint=(0.8, 1),
+                                    size_hint=(0.7, 1),
                                     font_size=Window.width * 0.02,
                                     multiline=False)
+        buffer = BlackLabel(text='',size_hint=(0.1,1))
 
         upper_finish.add_widget(note)
         upper_finish.add_widget(self.target_path_input)
+        upper_finish.add_widget(buffer)
 
         lower_finish = BoxLayout(orientation='horizontal',size_hint =(1,0.6))
         ok_button = get_ok_button()
