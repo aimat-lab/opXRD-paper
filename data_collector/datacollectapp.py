@@ -62,13 +62,12 @@ class DataCollectApp(App):
         self.feedback_widget = get_feedback_widget(font_size=self.default_font_size)
 
         finish_layout = BoxLayout(orientation='vertical',size_hint =(1,0.125))
-
         upper_finish = BoxLayout(orientation='horizontal', size_hint=(1, 0.4))
 
         # Add an explanatory note
         note = BlackLabel(text='Target folder:',size_hint=(0.2,1))
 
-        self.target_path_input = TextInput(text=f'{get_initial_path()}',
+        self.target_path_input = TextInput(text=f'{os.getcwd()}',
                                     size_hint=(0.8, 1),
                                     font_size=Window.width * 0.02,
                                     multiline=False)
