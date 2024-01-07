@@ -115,6 +115,8 @@ class InputDialog(Popup):
                                            size_hint=(1, 0.08),
                                            font_size=Window.width * 0.02,
                                            multiline=False)
+        Clock.schedule_once(lambda dt: setattr(format_input, 'focus', True), 0.1)
+
         return format_input
 
 
