@@ -18,7 +18,7 @@ def main():
     linux_input_test = '/home/daniel/aimat/tool_sample_folder'
     linux_target_test = f'/home/daniel/aimat/tool_target_folder'
 
-    app = DataCollectApp(override_input_folder=linux_input_test,
+    app = DataCollectApp(override_input_folder=None,
                          override_target_folder=linux_target_test)
     inspector.create_inspector(Window, app)
 

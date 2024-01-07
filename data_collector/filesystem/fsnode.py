@@ -26,7 +26,11 @@ class FsNode:
         self.xrd_file_des : list = []
 
         if not self.get_is_file():
-            self.sub_paths : list[str] = [os.path.join(self.path,name) for name in os.listdir(self.path)]
+            try:
+                self.sub_paths : list[str] = [os.path.join(self.path,name) for name in os.listdir(self.path)]
+            except:
+                self.sub_paths: list[str] = []
+
         else:
             self.sub_paths : list[str] = []
 

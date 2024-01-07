@@ -6,7 +6,7 @@ from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
 
 from data_collector.elements.types import BlackLabel
-from data_collector.elements.fsnode_widget import FsNodeWidget
+from data_collector.elements.fsnode_widget import NodeWidget
 from data_collector.filesystem.fsnode import FsNode
 
 from kivy.uix.widget import Widget
@@ -77,7 +77,7 @@ def get_scroll_view():
     return scroll_view
 
 
-def get_scrollable_checkboxes_layout(root_checkbox : FsNodeWidget):
+def get_scrollable_checkboxes_layout(root_checkbox : NodeWidget):
     scroll_layout = BoxLayout(orientation='vertical', size_hint_y=None)
     scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
     recursively_add_boxes(gui_parent=scroll_layout, root_box=root_checkbox, indent=0)
@@ -85,7 +85,7 @@ def get_scrollable_checkboxes_layout(root_checkbox : FsNodeWidget):
     return scroll_layout
 
 
-def recursively_add_boxes(gui_parent, root_box : FsNodeWidget, indent : int):
+def recursively_add_boxes(gui_parent, root_box : NodeWidget, indent : int):
     if not root_box.get_is_file() and len(root_box.xrd_file_des) == 0:
         return
 
