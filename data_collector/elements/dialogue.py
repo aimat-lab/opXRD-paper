@@ -32,13 +32,8 @@ class InputDialog(Popup):
         self.path_input = self.make_path_input()
         confirm_button = self.make_confirm_button()
 
-        # Adding widgets to the main container
-        self.content.add_widget(first_hint)
-        self.content.add_widget(self.format_input)
-        self.content.add_widget(second_hint)
-        self.content.add_widget(self.notice)
-        self.content.add_widget(self.path_input)
-        self.content.add_widget(confirm_button)
+        for widget in [first_hint,self.format_input,second_hint,self.notice,self.path_input,confirm_button]:
+            self.content.add_widget(widget=widget)
         self.set_focus_chain()
 
     def set_focus_chain(self):
