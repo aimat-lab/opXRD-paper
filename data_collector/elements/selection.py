@@ -6,7 +6,7 @@ from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
 
 from data_collector.elements.types import BlackLabel
-from data_collector.elements.fs_checkbox import FsNodeWidget
+from data_collector.elements.fsnode_widget import FsNodeWidget
 from data_collector.filesystem.fsnode import FsNode
 
 from kivy.uix.widget import Widget
