@@ -2,12 +2,15 @@ from __future__ import annotations
 
 import os
 
+from kivy.uix.widget import Widget
+from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
-from kivy.uix.textinput import TextInput
+
+from data_collector.elements.types import FocusTextInput
 from data_collector.filesystem import Folder, get_initial_path
 # -------------------------------------------
 
@@ -16,67 +19,26 @@ class InputDialog(Popup):
         super(InputDialog, self).__init__(**kwargs)
         self.size_hint = (0.8, 0.6)
         self.title = 'XRD data collector'
-        self.title_align = 'center'  # Center the title
-        self.auto_dismiss = False  # Disable automatic dismissal of the popup
-
+        self.title_align = 'center'
+        self.auto_dismiss = False
         self.callback = callback
-        # Main container
         self.content = BoxLayout(orientation='vertical', padding=[10, 10, 10, 10], spacing=10)
 
-        # First hint
-        first_hint_text = '''This application is designed to scan a given input folder for all xrd formats specified.You can edit this list to your preferences:'''
-        self.first_hint = Label(text=first_hint_text,
-                                        size_hint=(1, None),
-                                        font_size=Window.width * 0.02)
-        self.first_hint.bind(width=lambda *x: setattr(self.first_hint, 'text_size', (self.first_hint.width, None)))
-        self.first_hint.bind(texture_size=self._update_text_height)
+        first_hint = self.make_hint()
+        self.format_input =self.make_format_input()
+        second_hint = self.make_second_hint()
 
-
-        default_xrd_formats = Folder.default_xrd_formats
-        default_xrd_text = ''
-        for xrd_format in default_xrd_formats:
-            default_xrd_text += f'.{xrd_format},'
-
-        # Input widget
-        self.format_input = FocusTextInput(text=f'{default_xrd_text}',
-                                      size_hint=(1, 0.08),
-                                      font_size=Window.width * 0.02,
-                                      multiline=False)
-
-        # Second hint
-        second_hint_text = '''Once an input folder is selected, it will be scanned for the specified formats and all xrd files matching that directory will be displayed. You can then check folders or individual files that you want to share. Once you self.confirm that selection, the application will produce a .zip file ready for submission on xrd.aimat.science along with a template .csv file for labels.\n\nEnter file path to "input folder"'''
-        self.second_hint = Label(text=second_hint_text,
-                                         size_hint=(1, None),
-                                         font_size=Window.width * 0.02)
-        self.second_hint.bind(width=lambda *x: setattr(self.second_hint, 'text_size', (self.second_hint.width, None)))
-        self.second_hint.bind(texture_size=self._update_text_height)
-
-        # Warning label
-        self.notice = Label(opacity=0,
-                            size_hint=(1, 0.1),
-                            halign="left",
-                            color=[1, 0, 0, 1])  # RGB for red, and 1 for full opacity
-
-
-        # Input widget
-        self.path_input = FocusTextInput(text=f'{get_initial_path()}',
-                                    size_hint=(1, 0.08),
-                                    font_size=Window.width * 0.02,
-                                    multiline=False)
-
-        self.path_input.bind(on_text_validate=self.on_answer)
-
-        # confirm button
-        self.confirm = Button(text='confirm', size_hint=(1, 0.08))
-        self.confirm.bind(on_press=self.on_answer)
+        self.notice = self.make_notice()
+        self.path_input = self.make_path_input()
+        confirm_button = self.make_confirm_button()
 
         # Adding widgets to the main container
-        self.content.add_widget(self.first_hint)
+        self.content.add_widget(first_hint)
         self.content.add_widget(self.format_input)
-        self.content.add_widget(self.second_hint)
+        self.content.add_widget(second_hint)
         self.content.add_widget(self.notice)
         self.content.add_widget(self.path_input)
-        self.content.add_widget(self.confirm)
+        self.content.add_widget(confirm_button)
         self.set_focus_chain()
 
     def set_focus_chain(self):
@@ -87,12 +49,14 @@ class InputDialog(Popup):
         self.path_input.focus_previous = self.format_input
 
 
+    # -------------------------------------------
+    # Callbacks
+
     @staticmethod
     def _update_text_height(instance, texture_size):
         instance.height = texture_size[1]  # Set the height to the text height
 
-    def on_answer(self, instance):
-
+    def on_confirm(self, instance):
         Folder.set_default_formats(self.format_input.text)
 
         _ = instance
@@ -106,7 +70,7 @@ class InputDialog(Popup):
         else:
             self.print_wait()
 
-        from kivy.clock import Clock
+
         Clock.schedule_once(lambda dt: self.callback(user_input),0.1)
         self.dismiss()
 
@@ -120,16 +84,64 @@ class InputDialog(Popup):
         self.notice.color = [0,1,0,1]
 
 
-class FocusTextInput(TextInput):
-    def keyboard_on_key_down(self, window, keycode, text, modifiers):
-        if keycode[1] == 'tab':  # Check if the key is Tab
-            if 'shift' in modifiers:  # Check if Shift is also pressed
-                # Focus the previous widget
-                if self.focus_previous:
-                    self.focus_previous.focus = True
-            else:
-                # Focus the next widget
-                if self.focus_next:
-                    self.focus_next.focus = True
-            return True  # Indicate that the key was handled
-        return super(FocusTextInput, self).keyboard_on_key_down(window, keycode, text, modifiers)
+    # -------------------------------------------
+    # make widgets
+
+    def make_hint(self) -> Widget:
+        first_hint_text = '''This application is designed to scan a given input folder for all xrd formats specified.You can edit this list to your preferences:'''
+        hint = Label(text=first_hint_text,
+                          size_hint=(1, None),
+                          font_size=Window.width * 0.02)
+        hint.bind(width=lambda *x: setattr(hint, 'text_size', (hint.width, None)))
+        hint.bind(texture_size=self._update_text_height)
+
+        return hint
+
+
+    def make_second_hint(self) -> Widget:
+        second_hint_text = '''Once an input folder is selected, it will be scanned for the specified formats and all xrd files matching that directory will be displayed. You can then check folders or individual files that you want to share. Once you confirm that selection, the application will produce a .zip file ready for submission on xrd.aimat.science along with a template .csv file for labels.\n\nEnter file path to "input folder"'''
+        second_hint = Label(text=second_hint_text,
+                                         size_hint=(1, None),
+                                         font_size=Window.width * 0.02)
+        second_hint.bind(width=lambda *x: setattr(second_hint, 'text_size', (second_hint.width, None)))
+        second_hint.bind(texture_size=self._update_text_height)
+
+        return second_hint
+
+
+    @staticmethod
+    def make_format_input() -> Widget:
+        default_xrd_formats = Folder.default_xrd_formats
+        default_xrd_text = ''
+        for xrd_format in default_xrd_formats:
+            default_xrd_text += f'.{xrd_format},'
+
+        format_input = FocusTextInput(text=f'{default_xrd_text}',
+                                           size_hint=(1, 0.08),
+                                           font_size=Window.width * 0.02,
+                                           multiline=False)
+        return format_input
+
+
+    @staticmethod
+    def make_notice() -> Widget:
+        return Label(opacity=0,
+                     size_hint=(1, 0.1),
+                     halign="left",
+                     color=[1, 0, 0, 1])
+
+
+    def make_path_input(self) -> Widget:
+        path_input = FocusTextInput(text=f'{get_initial_path()}',
+                                         size_hint=(1, 0.08),
+                                         font_size=Window.width * 0.02,
+                                         multiline=False)
+
+        path_input.bind(on_text_validate=self.on_confirm)
+        return path_input
+
+
+    def make_confirm_button(self) -> Widget:
+        confirm = Button(text='confirm', size_hint=(1, 0.08))
+        confirm.bind(on_press=self.on_confirm)
+        return confirm
