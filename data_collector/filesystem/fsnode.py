@@ -5,7 +5,7 @@ import os
 # -------------------------------------------
 
 
-class Folder:
+class FsNode:
     default_xrd_formats : list = ['raw', 'dif', 'gdf', 'dat', 'ras', 'cpi', 'txt', 'plv', 'xrdml']
 
     @classmethod
@@ -26,7 +26,7 @@ class Folder:
 
         xrd_file_paths += self._get_children_xrdfilepaths()
         for folder_path in self._get_children_folderpaths():
-            xrd_folder = Folder(path=folder_path)
+            xrd_folder = FsNode(path=folder_path)
             xrd_file_paths += xrd_folder.get_descendant_xrdfilepaths()
 
         return xrd_file_paths
@@ -45,6 +45,10 @@ class Folder:
 
 
     # -------------------------------------------
+
+    def get_is_file(self) -> bool:
+        return os.path.isfile(self.path)
+
 
     def _get_children_filepaths(self) -> list[str]:
         return [path for path in self.sub_paths if os.path.isfile(path)]

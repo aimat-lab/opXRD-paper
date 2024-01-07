@@ -34,7 +34,7 @@ class FocusTextInput(TextInput):
 class LabeledCheckBox(BoxLayout):
     indent = 50
 
-    def __init__(self, height : int, text :str, toggle_callback, is_file : bool, indent=0, **kwargs):
+    def __init__(self, height : int, text :str, check_callback, is_file : bool, indent=0, **kwargs):
         super().__init__(**kwargs)
         # Properties
         self.size_hint_y = None
@@ -42,7 +42,7 @@ class LabeledCheckBox(BoxLayout):
 
         # Create the CheckBox
         self.check_box = ImageCheckBox(size_hint=(None, None), size=(self.height, self.height))
-        self.check_box.bind(active=toggle_callback)
+        self.check_box.bind(active=check_callback)
 
         # Create the Icon
         icon_path = get_fileicon_path() if is_file else get_foldericon_path()

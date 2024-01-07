@@ -11,7 +11,7 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 
 from data_collector.elements.types import FocusTextInput
-from data_collector.filesystem import Folder, get_initial_path
+from data_collector.filesystem import FsNode, get_initial_path
 # -------------------------------------------
 
 class InputDialog(Popup):
@@ -52,7 +52,7 @@ class InputDialog(Popup):
         instance.height = texture_size[1]  # Set the height to the text height
 
     def on_confirm(self, instance):
-        Folder.set_default_formats(self.format_input.text)
+        FsNode.set_default_formats(self.format_input.text)
 
         _ = instance
         user_input = self.path_input.text
@@ -106,7 +106,7 @@ class InputDialog(Popup):
 
     @staticmethod
     def make_format_input() -> Widget:
-        default_xrd_formats = Folder.default_xrd_formats
+        default_xrd_formats = FsNode.default_xrd_formats
         default_xrd_text = ''
         for xrd_format in default_xrd_formats:
             default_xrd_text += f'.{xrd_format},'

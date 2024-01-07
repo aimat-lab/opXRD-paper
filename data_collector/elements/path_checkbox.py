@@ -6,7 +6,7 @@ import os.path
 from PIL import Image
 from data_collector.elements.types import LabeledCheckBox, IconToggleButton
 from data_collector.resources import get_foldericon_path, get_fileicon_path
-from data_collector.filesystem import Folder
+from data_collector.filesystem import FsNode
 from data_collector.configs import get_line_height
 from kivy.uix.label import Label
 from kivy.clock import Clock
@@ -14,13 +14,14 @@ from kivy.clock import Clock
 from typing import Optional
 # -------------------------------------------
 
-class PathCheckbox:
+class PathCheckbox(FsNode):
     dim = get_line_height()
     file_img = Image.open(fp=get_fileicon_path()).resize((dim, dim))
     folder_img = Image.open(fp=get_foldericon_path()).resize((dim, dim))
 
     def __init__(self,path : str, height : int, scroll_view):
-        self.path : str = path
+        super().__init__(path=path)
+        
         self.height : int = height
         self.potential_des : list[PathCheckbox] = []
         self.relevant_des : list[PathCheckbox] =[]
@@ -112,14 +113,12 @@ class PathCheckbox:
     # -------------------------------------------
     # Get filestructure
 
-    def get_is_file(self) -> bool:
-        return os.path.isfile(self.path)
 
     def get_children_from_path(self) -> list[PathCheckbox]:
         if os.path.isfile(self.path):
             children = []
         else:
-            this_folder = Folder(path=self.path)
+            this_folder = FsNode(path=self.path)
             children = [PathCheckbox(path=path, height=self.height, scroll_view=self.scroll_view) for path in this_folder.get_children_xrdpaths()]
 
         return children
@@ -148,7 +147,7 @@ class PathCheckbox:
 
 
         self.labeled_checkbox = LabeledCheckBox(text=self._get_text(),
-                                                toggle_callback=self.on_check,
+                                                check_callback=self.on_check,
                                                 indent=level,
                                                 is_file=self.get_is_file(),
                                                 height=self.height)

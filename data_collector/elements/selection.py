@@ -6,7 +6,7 @@ from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
 
 from data_collector.elements import BlackLabel, PathCheckbox
-from data_collector.filesystem.folder import Folder
+from data_collector.filesystem.fsnode import FsNode
 
 from kivy.uix.widget import Widget
 
@@ -16,7 +16,7 @@ from kivy.uix.widget import Widget
 
 def get_file_count_widget(num_elements: int) -> Widget:
 
-    with_leading_dot_list = [f'.{xrd_format}' for xrd_format in Folder.default_xrd_formats]
+    with_leading_dot_list = [f'.{xrd_format}' for xrd_format in FsNode.default_xrd_formats]
 
     file_count_label = BlackLabel(
         text=f"Found {num_elements} files that match specified XRD formats:\n {with_leading_dot_list}" ,
