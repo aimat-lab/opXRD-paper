@@ -9,6 +9,7 @@ from data_collector.resources import get_foldericon_path, get_fileicon_path
 from data_collector.filesystem import Folder
 from data_collector.configs import get_line_height
 from kivy.uix.label import Label
+from kivy.clock import Clock
 
 from typing import Optional
 # -------------------------------------------
@@ -51,17 +52,29 @@ class PathCheckbox:
 
     def on_toggle(self, instance, value):
         _ = instance
-        height = copy.copy(self.child_container.height)
-        print(height)
+        h1 = copy.copy(self.scroll_view.children[0].height)
+        h2 = copy.copy(self.scroll_view.height)
+        s = copy.copy(1-self.scroll_view.scroll_y)
+
+        print(f'h1,h2: {h1},{h2}')
 
         if value == 'down':
             self.total_container.remove_widget(self.child_container)
-            self.scroll_by_px(px=-height)
         else:
             self.total_container.add_widget(self.child_container)
-            # self.scroll_by_px(px=height)
-            self.scroll_by_px(px=height)
 
+        # Schedule the size calculation for the next frame
+        Clock.schedule_once(lambda dt: self.calculate_sizes(h1, h2,s))
+
+    def calculate_sizes(self, h1, h2, s):
+        h1prime = self.scroll_view.children[0].height
+        h2prime = self.scroll_view.height
+
+        print(f'h1,h2,h1prime,h2prime: {h1},{h2},{h1prime},{h2prime}')
+
+        target_value = 1 - (h1 - h2) / (h1prime - h2prime) * s
+        print(target_value)
+        self.scroll_view.scroll_y = target_value if target_value < 1 else 1
 
     def recursively_initialize_descendants(self):
         descendants = copy.copy(self.active_children)
