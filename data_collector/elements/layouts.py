@@ -5,7 +5,7 @@ from data_collector.elements.path_checkbox import PathCheckbox
 
 # -------------------------------------------
 
-def get_select_layout(file_count_label: Label, scroll_view: ScrollView):
+def get_checkboxes_layout(file_count_label: Label, scroll_view: ScrollView):
     select_layout = BoxLayout(orientation='vertical')
     select_layout.add_widget(widget=file_count_label)
     select_layout.add_widget(widget=scroll_view)

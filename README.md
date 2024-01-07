@@ -6,5 +6,5 @@
  
  We could be happy to include anyone contributing data as a co-author. If you would like to be included as a co-author please notify the maintainer of this repository, through a mail to daniel.hollarek@student.kit.edu.
  
- [Current version](paper.pdf)
+[//]: # ( [Current version]&#40;paper.pdf&#41;)
 

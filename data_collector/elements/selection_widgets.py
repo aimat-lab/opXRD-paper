@@ -15,7 +15,7 @@ from kivy.graphics import Line
 
 from data_collector.filesystem.folder import Folder
 from data_collector.resources import get_foldericon_path,get_fileicon_path
-from kivy.graphics import Rectangle, Color
+from kivy.graphics import Color
 from data_collector.resources import get_checked_box_path, get_unchecked_box_path
 # -------------------------------------------
 from data_collector.resources import get_collapsed_icon_path, get_expanded_icon_path
@@ -105,6 +105,7 @@ class ImageCheckBox(CheckBox):
         self._checkbox_image = get_unchecked_box_path()
 
     def on_state(self, widget, value):
+        _ = widget
         if value == 'down':
             self._checkbox_image = get_checked_box_path()
         else:
@@ -117,6 +118,7 @@ class ThickVerticalSlider(Slider):
         self.bind(pos=self._update_canvas, size=self._update_canvas)
 
     def _update_canvas(self, *args):
+        _ = args
         self.canvas.before.clear()
         with self.canvas.before:
             Color(0.5, 0.5, 0.5, 1)  # Grey color for the track
