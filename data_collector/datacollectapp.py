@@ -97,7 +97,7 @@ class DataCollectApp(App):
 
     def set_select_layout_content(self, path : str):
         self.root_checkbox: PathCheckbox = PathCheckbox(path=path, height=get_line_height(), scroll_view=self.scroll_view)
-        self.root_checkbox.recursively_initialize_descendants()
+        self.root_checkbox.recursively_initialize_filestructure()
 
         new_label = get_file_count_widget(num_elements=len(self.root_checkbox.xrd_file_des))
         self.filecount_label.text =  new_label.text

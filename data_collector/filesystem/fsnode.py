@@ -1,5 +1,5 @@
 from __future__ import annotations
-import os
+import os, copy
 # from typing import Optional
 
 # -------------------------------------------
@@ -20,10 +20,32 @@ class FsNode:
         self.path : str = path
         self.name : str = os.path.basename(path)
 
+        self.active_children : list = []
+        self.potential_des : list = []
+        self.relevant_des : list =[]
+        self.xrd_file_des : list = []
+
         if not self.get_is_file():
             self.sub_paths : list[str] = [os.path.join(self.path,name) for name in os.listdir(self.path)]
         else:
             self.sub_paths : list[str] = []
+
+
+    def recursively_initialize_filestructure(self):
+        descendants = copy.copy(self.active_children)
+        for child in self.active_children:
+            child.recursively_initialize_filestructure()
+            descendants += child.potential_des
+
+        self.potential_des = descendants
+        relevant_des = []
+        for outer_des in self.potential_des:
+            is_relevant = any([des.get_is_file() for des in outer_des.potential_des]) or outer_des.get_is_file()
+            relevant_des += [outer_des] if is_relevant else []
+
+        self.relevant_des = relevant_des
+        self.xrd_file_des = [des for des in self.relevant_des if des.get_is_file()]
+
 
     def get_is_file(self):
         return os.path.isfile(self.path)

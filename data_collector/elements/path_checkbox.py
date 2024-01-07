@@ -23,14 +23,9 @@ class PathCheckbox(FsNode):
         super().__init__(path=path)
 
         self.active_children = [PathCheckbox(path=path, height=height, scroll_view=scroll_view) for path in self.get_all_sub()]
-
         self.height : int = height
-        self.potential_des : list[PathCheckbox] = []
-        self.relevant_des : list[PathCheckbox] =[]
         self.labeled_checkbox : Optional[LabeledCheckBox] = None
         self.scroll_view = scroll_view
-
-        self.xrd_file_des : list[PathCheckbox] = []
 
         self.child_container = None
         self.total_container = None
@@ -39,36 +34,15 @@ class PathCheckbox(FsNode):
         self.total_container = BoxLayout(orientation='vertical', size_hint=(1, None))
         self.total_container.bind(minimum_height=self.total_container.setter('height'))
 
-        # Item container
         self.labeled_checkbox = self._make_label_checkbox(level=level)
         line = self._make_line(labeled_checkbox=self.labeled_checkbox)
         self.total_container.add_widget(line)
 
-
-        # Child container
         if not self.get_is_file():
             self.child_container = self._get_child_container()
             self.total_container.add_widget(self.child_container)
 
-        # Master
         master_frame.add_widget(self.total_container)
-
-
-    def recursively_initialize_descendants(self):
-        descendants = copy.copy(self.active_children)
-        for child in self.active_children:
-            child.recursively_initialize_descendants()
-            descendants += child.potential_des
-
-
-        self.potential_des = descendants
-        relevant_des = []
-        for outer_des in self.potential_des:
-            is_relevant = any([des.get_is_file() for des in outer_des.potential_des]) or outer_des.get_is_file()
-            relevant_des += [outer_des] if is_relevant else []
-
-        self.relevant_des = relevant_des
-        self.xrd_file_des = [des for des in self.relevant_des if des.get_is_file()]
 
     # -------------------------------------------
     # callbacks
