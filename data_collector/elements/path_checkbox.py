@@ -120,7 +120,7 @@ class PathCheckbox(FsNode):
             children = []
         else:
             this_folder = FsNode(path=self.path)
-            children = [PathCheckbox(path=path, height=self.height, scroll_view=self.scroll_view) for path in this_folder.get_children_xrdpaths()]
+            children = [PathCheckbox(path=path, height=self.height, scroll_view=self.scroll_view) for path in this_folder.get_all_sub()]
 
         return children
 

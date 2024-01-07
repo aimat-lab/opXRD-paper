@@ -24,38 +24,38 @@ class FsNode:
         else:
             self.sub_paths : list[str] = []
 
+    def get_is_file(self):
+        return os.path.isfile(self.path)
 
-    def get_descendant_xrdfilepaths(self) -> list[str]:
+    def get_xrd_descendants(self) -> list[str]:
         xrd_file_paths = []
 
-        xrd_file_paths += self._get_children_xrdfilepaths()
-        for folder_path in self._get_children_folderpaths():
+        xrd_file_paths += self._get_xrd_subfiles()
+        for folder_path in self._get_subdirs():
             xrd_folder = FsNode(path=folder_path)
-            xrd_file_paths += xrd_folder.get_descendant_xrdfilepaths()
+            xrd_file_paths += xrd_folder.get_xrd_descendants()
 
         return xrd_file_paths
 
-    def get_children_xrdpaths(self):
-        return self._get_children_xrdfilepaths() + self._get_children_folderpaths()
+    def get_all_sub(self):
+        return self._get_xrd_subfiles() + self._get_subdirs()
 
-    def _get_children_xrdfilepaths(self) -> list[str]:
-        return [path for path in self._get_children_filepaths() if self._get_path_is_xrd_file(path=path)]
+    # -------------------------------------------
 
+    def _get_subfiles(self) -> list[str]:
+        return self._get_subnodes(criterion=lambda x : os.path.isfile(x))
+
+    def _get_subdirs(self) -> list[str]:
+        return self._get_subnodes(criterion=lambda x : os.path.isdir(x))
+
+    def _get_xrd_subfiles(self) -> list[str]:
+        return self._get_subnodes(criterion=self._get_path_is_xrd_file)
 
     def _get_path_is_xrd_file(self, path : str):
         is_file = os.path.isfile(path)
         is_xrd_format = any([path.endswith(f'.{the_format}') for the_format in self.default_xrd_formats])
         return is_file and is_xrd_format
 
+    def _get_subnodes(self, criterion : callable):
+        return [path for path in self.sub_paths if criterion(path)]
 
-    # -------------------------------------------
-
-    def get_is_file(self) -> bool:
-        return os.path.isfile(self.path)
-
-
-    def _get_children_filepaths(self) -> list[str]:
-        return [path for path in self.sub_paths if os.path.isfile(path)]
-
-    def _get_children_folderpaths(self) -> list[str]:
-        return [path for path in self.sub_paths if os.path.isdir(path)]
