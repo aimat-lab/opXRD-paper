@@ -28,7 +28,7 @@ class PathCheckbox(FsNode):
         self.labeled_checkbox : Optional[LabeledCheckBox] = None
         self.scroll_view = scroll_view
         self.active_children: list[PathCheckbox] = self.get_children_from_path()
-
+        self.xrd_file_des : list[PathCheckbox] = []
 
         self.child_container = None
         self.total_container = None
@@ -69,13 +69,14 @@ class PathCheckbox(FsNode):
             relevant_des += [outer_des] if is_relevant else []
 
         self.relevant_des = relevant_des
+        self.xrd_file_des = [des for des in self.relevant_des if des.get_is_file()]
 
     # -------------------------------------------
     # callbacks
 
     def on_check(self, *args)-> None:
         _ = args
-        descendants = self.get_all_relevant_descendants()
+        descendants = self.relevant_des
         target_value = self.get_value()
         for box in descendants:
             box.set_value(target_value=target_value)
@@ -114,7 +115,6 @@ class PathCheckbox(FsNode):
     # -------------------------------------------
     # Get filestructure
 
-
     def get_children_from_path(self) -> list[PathCheckbox]:
         if os.path.isfile(self.path):
             children = []
@@ -123,14 +123,6 @@ class PathCheckbox(FsNode):
             children = [PathCheckbox(path=path, height=self.height, scroll_view=self.scroll_view) for path in this_folder.get_all_sub()]
 
         return children
-
-    def get_all_relevant_descendants(self) -> list[PathCheckbox]:
-        return self.relevant_des
-
-    def get_file_descendants(self):
-        return [desecenant for desecenant in self.get_all_relevant_descendants() if desecenant.get_is_file()]
-
-
 
     # -------------------------------------------
     # get

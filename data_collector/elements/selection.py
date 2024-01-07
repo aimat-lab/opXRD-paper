@@ -65,7 +65,7 @@ def get_scrollable_checkboxes_layout(root_checkbox : PathCheckbox):
 
 
 def recursively_add_boxes(gui_parent, root_box : PathCheckbox, indent : int):
-    if not root_box.get_is_file() and len(root_box.get_file_descendants()) == 0:
+    if not root_box.get_is_file() and len(root_box.xrd_file_des) == 0:
         return
 
     root_box.initialize_gui(gui_parent, level=indent)
