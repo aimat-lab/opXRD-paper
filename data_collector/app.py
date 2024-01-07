@@ -10,7 +10,7 @@ from kivy.uix.textinput import TextInput
 from data_collector.filesystem import zip_file_list, produce_csv_file
 from data_collector.elements import FsNodeWidget, InputDialog, BlackLabel, ThickVerticalSlider, get_checkboxes_layout, \
     get_scroll_view, get_scrollable_checkboxes_layout
-from data_collector.elements import get_file_count_widget, get_ok_button, get_feedback_widget
+from data_collector.elements import get_header_widget, get_ok_button, get_feedback_widget
 from data_collector.configs import get_line_height
 
 
@@ -52,9 +52,10 @@ class DataCollectApp(App):
 
         return root_layout
 
+
     def make_selection_layout(self):
-        self.filecount_label = get_file_count_widget(num_elements=0)
-        self.filecount_label.opacity = 0
+        self.filecount_label = get_header_widget(num_elements=0)
+        self.filecount_label.opacity = 1
         checkboxes_layout = get_checkboxes_layout(file_count_label=self.filecount_label,
                                                   scroll_view=self.scroll_view)
         self.slider = ThickVerticalSlider(orientation='vertical', min=0, max=1, value=1, size_hint=(0.1, 1))
@@ -65,6 +66,7 @@ class DataCollectApp(App):
         selection_layout.add_widget(widget=self.slider)
 
         return selection_layout
+
 
     def make_finish_layout(self):
         finish_layout = BoxLayout(orientation='vertical',size_hint =(1,0.125))
@@ -99,9 +101,9 @@ class DataCollectApp(App):
         self.root_checkbox: FsNodeWidget = FsNodeWidget(path=path, height=get_line_height(), scroll_view=self.scroll_view)
         self.root_checkbox.recursively_initialize_filestructure()
 
-        new_label = get_file_count_widget(num_elements=len(self.root_checkbox.xrd_file_des))
-        self.filecount_label.text =  new_label.text
-        self.filecount_label.opacity = 1
+        # new_label = get_header_widget(num_elements=len(self.root_checkbox.xrd_file_des))
+        # self.filecount_label.text =  new_label.
+        # self.filecount_label.opacity = 1
 
         scroll_layout = get_scrollable_checkboxes_layout(root_checkbox=self.root_checkbox)
         self.scroll_view.add_widget(widget=scroll_layout)

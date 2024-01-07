@@ -2,6 +2,9 @@ import os
 file_path = __file__
 dir_path = os.path.dirname(file_path)
 
+def get_logo_path() -> str:
+    return os.path.join(dir_path,'logo.png')
+
 def get_foldericon_path() -> str:
     return os.path.join(dir_path,'folder.png')
 

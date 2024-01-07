@@ -11,22 +11,39 @@ from data_collector.filesystem.fsnode import FsNode
 
 from kivy.uix.widget import Widget
 
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.image import Image
+from kivy.uix.widget import Widget
+
+from data_collector.resources import get_logo_path
 
 # -------------------------------------------
 # widgets
 
-def get_file_count_widget(num_elements: int) -> Widget:
-
+def get_header_widget(num_elements: int) -> Widget:
     with_leading_dot_list = [f'.{xrd_format}' for xrd_format in FsNode.default_xrd_formats]
 
     file_count_label = BlackLabel(
-        text=f"Found {num_elements} files that match specified XRD formats:\n {with_leading_dot_list}" ,
-        size_hint=(1, 0.15),
-        halign="center",  # Horizontally center the text
-        valign="middle"  # Vertically center the text
+        text=f"Found {num_elements} files that match specified XRD formats:\n {with_leading_dot_list}",
+        size_hint=(0.6, 1),  # Adjusted size hint
+        halign="center",
+        valign="middle"
     )
-    file_count_label.bind(size=file_count_label.setter('text_size'))  # Bind the text size to the label size
-    return file_count_label
+    file_count_label.bind(size=file_count_label.setter('text_size'))
+
+    logo_image = Image(source=get_logo_path(), size_hint=(0.3, 1))
+
+    # Transparent placeholders to center the logo
+    left_placeholder = Widget(size_hint=(0.4, 1))
+    right_placeholder = Widget(size_hint=(0.1, 1))
+
+    layout = BoxLayout(orientation='horizontal', size_hint=(1, 0.125))
+    layout.add_widget(left_placeholder)  # Placeholder to balance the layout
+    layout.add_widget(file_count_label)
+    layout.add_widget(right_placeholder)  # Placeholder to balance the layout
+    layout.add_widget(logo_image)
+
+    return layout
 
 
 def get_feedback_widget(font_size : float) -> Widget:
