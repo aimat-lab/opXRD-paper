@@ -1,6 +1,6 @@
 import os
 file_path = __file__
-dir_path = os.path.dirname(file_path)
+dir_path = os.path.join(os.path.dirname(file_path), 'images')
 
 def get_logo_path() -> str:
     return os.path.join(dir_path,'logo.png')
