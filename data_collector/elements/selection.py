@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from typing import Optional
-from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
 
@@ -19,21 +18,24 @@ from data_collector.configs import get_line_height
 # -------------------------------------------
 
 class SelectionLayout(BoxLayout):
-    def __init__(self, rootCheckbox : NodeWidget, **kwargs):
+    def __init__(self, **kwargs):
         super(SelectionLayout, self).__init__(orientation='horizontal', size_hint=(1, 0.9), **kwargs)
-        self.root_checkbox = rootCheckbox
+        self.root_checkbox : Optional[NodeWidget] = None
 
         self.header_layout = self.get_header_widget(num_elements=0)
+
         self.slider = ThickVerticalSlider(orientation='vertical', min=0, max=1, value=1, size_hint=(0.1, 1))
+        self.slider.bind(value=self.adjust_scroll_view)
+
         self.scroll_view = self.get_scroll_view()
+        self.scroll_view.bind(scroll_y=self.on_scroll_view_scroll)
+
         self.header_layout = self.get_header_widget(num_elements=0)
         self.header_layout.opacity = 0
 
         self.checkboxes_layout = self.get_checkboxes_layout(file_count_label=self.header_layout,
                                                             scroll_view=self.scroll_view)
 
-        self.scroll_view.bind(scroll_y=self.on_scroll_view_scroll)
-        self.slider.bind(value=self.adjust_scroll_view)
         self.add_widget(self.checkboxes_layout)
         self.add_widget(self.slider)
 
@@ -82,7 +84,6 @@ class SelectionLayout(BoxLayout):
 
         logo_image = Image(source=get_logo_path(), size_hint=(0.3, 1))
 
-        # Transparent placeholders to center the logo
         left_placeholder = Widget(size_hint=(0.4, 1))
         right_placeholder = Widget(size_hint=(0.1, 1))
 
@@ -93,8 +94,6 @@ class SelectionLayout(BoxLayout):
         layout.add_widget(logo_image)
 
         return layout
-
-
 
     @staticmethod
     def get_checkboxes_layout(file_count_label: Label, scroll_view: ScrollView):
@@ -130,13 +129,3 @@ class SelectionLayout(BoxLayout):
             self.recursively_add_boxes(gui_parent=root_box.child_container,
                                   root_box=child_box,
                                   indent=indent + 1)
-
-def get_feedback_widget(font_size : float) -> Widget:
-    return BlackLabel(size_hint=(0.8, 1),
-                      opacity=0,
-                      font_size=font_size)
-
-
-def get_ok_button() -> Widget:
-    ok_button = Button(text="OK", size_hint=(0.2, 1))
-    return ok_button
