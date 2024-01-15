@@ -9,7 +9,7 @@ from data_collector.resources import get_foldericon_path, get_fileicon_path
 from data_collector.filesystem import FsNode
 from data_collector.configs import get_line_height
 from kivy.uix.label import Label
-from kivy.clock import Clock
+# from kivy.clock import Clock
 
 from typing import Optional
 # -------------------------------------------
@@ -72,12 +72,15 @@ class NodeWidget(FsNode):
 
         factor = -1 if value == 'down' else 1
         height_delta =  factor * self.child_container.height
-        self.adjust_scroll(scroll_height=scroll_height, vp_height=vp_height, new_scroll_height=scroll_height+height_delta, s=s)
 
-        if value == 'down':
-            self.total_container.remove_widget(self.child_container)
-        else:
-            self.total_container.add_widget(self.child_container)
+        with self.scroll_view.canvas:
+            if value == 'down':
+                self.total_container.remove_widget(self.child_container)
+            else:
+                self.total_container.add_widget(self.child_container)
+
+            self.adjust_scroll(scroll_height=scroll_height, vp_height=vp_height,
+                               new_scroll_height=scroll_height + height_delta, s=s)
 
 
     def adjust_scroll(self, scroll_height, vp_height,  new_scroll_height, s):
