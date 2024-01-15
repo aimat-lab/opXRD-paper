@@ -66,24 +66,24 @@ class NodeWidget(FsNode):
 
     def on_toggle(self, instance, value):
         _ = instance
-        h1 = copy.copy(self.scroll_view.children[0].height)
-        h2 = copy.copy(self.scroll_view.height)
+        scroll_height = copy.copy(self.scroll_view.children[0].height)
+        vp_height = copy.copy(self.scroll_view.height)
         s = copy.copy(1-self.scroll_view.scroll_y)
 
-        print(f'h1,h2: {h1},{h2}')
+        factor = -1 if value == 'down' else 1
+        height_delta =  factor * self.child_container.height
+        self.adjust_scroll(scroll_height=scroll_height, vp_height=vp_height, new_scroll_height=scroll_height+height_delta, s=s)
 
         if value == 'down':
             self.total_container.remove_widget(self.child_container)
         else:
             self.total_container.add_widget(self.child_container)
 
-        Clock.schedule_once(lambda dt: self.calculate_sizes(h1, h2,s))
 
-    def calculate_sizes(self, h1, h2, s):
-        h1prime = self.scroll_view.children[0].height
-        h2prime = self.scroll_view.height
+    def adjust_scroll(self, scroll_height, vp_height,  new_scroll_height, s):
+        viewport_height = self.scroll_view.height
 
-        target_value = 1 - (h1 - h2) / (h1prime - h2prime) * s
+        target_value = 1 - (scroll_height - vp_height) / (new_scroll_height - viewport_height) * s
         self.scroll_view.scroll_y = target_value if target_value < 1 else 1
 
     # -------------------------------------------

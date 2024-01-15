@@ -10,7 +10,7 @@ from kivy.uix.widget import Widget
 
 from data_collector.resources import get_logo_path
 from data_collector.filesystem.fsnode import FsNode
-from data_collector.elements.fsnode_widget import NodeWidget
+from data_collector.elements.node_widget import NodeWidget
 from data_collector.elements.types import ThickVerticalSlider, BlackLabel
 
 from data_collector.configs import get_line_height
