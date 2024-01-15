@@ -77,11 +77,11 @@ class DataCollectApp(App):
                              target_path=csv_file_path)
 
 
-            self.selection_layout.feedback_widget.text = (f'Wrote {len(checked_paths)} xrd files to .zip file and produced label template at:\n'
+            self.finish_layout.feedback_widget.text = (f'Wrote {len(checked_paths)} xrd files to .zip file and produced label template at:\n'
                                          f'{zipfile_path} \n'
                                          f'{csv_file_path}')
         except:
-            self.selection_layout.feedback_widget.text = f'An error occured during the creating of the zip archive.\nIs "{target_folder_path}" a valid folder path?'
+            self.finish_layout.feedback_widget.text = f'An error occured during the creating of the zip archive.\nIs "{target_folder_path}" a valid folder path?'
         self.reveal_feedback_text()
 
 
@@ -91,10 +91,10 @@ class DataCollectApp(App):
 
 
     def get_targetfolder_path(self) -> str:
-        return self.selection_layout.target_path_input.text if self.targt_folder_override is None else self.targt_folder_override
+        return self.finish_layout.target_path_input.text if self.targt_folder_override is None else self.targt_folder_override
 
 
     def reveal_feedback_text(self):
-        self.selection_layout.feedback_widget.opacity = 1
-        print(self.selection_layout.feedback_widget.text)
+        self.finish_layout.feedback_widget.opacity = 1
+        print(self.finish_layout.feedback_widget.text)
 
