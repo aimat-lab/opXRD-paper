@@ -9,7 +9,7 @@ from kivy.uix.label import Label
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.slider import Slider
 from kivy.uix.togglebutton import ToggleButton
-
+from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
 
 from data_collector.resources import get_fileicon_path, get_foldericon_path, get_collapsed_icon_path, \
@@ -49,10 +49,12 @@ class LabeledCheckBox(BoxLayout):
         self.icon = Image(source=icon_path, size_hint=(None, None), size=(self.height, self.height))
         self.add_widget(self.icon)
 
+
         # Create the Label
         self.label = BlackLabel(text=text,
+                                font_size=Window.width * 0.018,
                                 size_hint_x=None,
-                                size_hint_y=None,
+                                size_hint_y=1,
                                 halign='left',
                                 valign='middle')
 
