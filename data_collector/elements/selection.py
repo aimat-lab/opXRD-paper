@@ -17,31 +17,25 @@ from data_collector.elements.types import ThickVerticalSlider, BlackLabel
 from data_collector.configs import get_line_height
 
 # -------------------------------------------
-# widgets
 
 class SelectionLayout(BoxLayout):
     def __init__(self, rootCheckbox : NodeWidget, **kwargs):
         super(SelectionLayout, self).__init__(orientation='horizontal', size_hint=(1, 0.9), **kwargs)
+        self.root_checkbox = rootCheckbox
 
         self.header_layout = self.get_header_widget(num_elements=0)
         self.slider = ThickVerticalSlider(orientation='vertical', min=0, max=1, value=1, size_hint=(0.1, 1))
-
-        self.scroll_view : Optional[Widget] = None
-        self.root_checkbox = rootCheckbox
-
         self.scroll_view = self.get_scroll_view()
-
         self.header_layout = self.get_header_widget(num_elements=0)
         self.header_layout.opacity = 0
+
         self.checkboxes_layout = self.get_checkboxes_layout(file_count_label=self.header_layout,
-                                                  scroll_view=self.scroll_view)
+                                                            scroll_view=self.scroll_view)
 
         self.scroll_view.bind(scroll_y=self.on_scroll_view_scroll)
         self.slider.bind(value=self.adjust_scroll_view)
-
         self.add_widget(self.checkboxes_layout)
         self.add_widget(self.slider)
-
 
 
     def set_content(self, path : str):
@@ -52,9 +46,27 @@ class SelectionLayout(BoxLayout):
         self.header_layout.children[2].text =  new_label.text
         self.header_layout.opacity = 1
 
-        scroll_layout = get_scroll_layout(root_checkbox=self.root_checkbox)
+        scroll_layout = self.get_scroll_layout(root_checkbox=self.root_checkbox)
         self.scroll_view.add_widget(widget=scroll_layout)
 
+
+    # -------------------------------------------
+    # logic
+
+    def on_scroll_view_scroll(self, instance, value):
+        _ = instance
+        self.slider.unbind(value=self.adjust_scroll_view)
+        self.slider.value = value
+        self.slider.bind(value=self.adjust_scroll_view)
+
+
+    def adjust_scroll_view(self, instance, value):
+        _ = instance
+        self.scroll_view.scroll_y = value
+
+
+    # -------------------------------------------
+    # elements
 
     @staticmethod
     def get_header_widget(num_elements: int) -> Widget:
@@ -82,16 +94,7 @@ class SelectionLayout(BoxLayout):
 
         return layout
 
-    def on_scroll_view_scroll(self, instance, value):
-        _ = instance
-        self.slider.unbind(value=self.adjust_scroll_view)
-        self.slider.value = value
-        self.slider.bind(value=self.adjust_scroll_view)
 
-
-    def adjust_scroll_view(self, instance, value):
-        _ = instance
-        self.scroll_view.scroll_y = value
 
     @staticmethod
     def get_checkboxes_layout(file_count_label: Label, scroll_view: ScrollView):
@@ -110,6 +113,23 @@ class SelectionLayout(BoxLayout):
 
         return scroll_view
 
+    def get_scroll_layout(self,root_checkbox: NodeWidget):
+        scroll_layout = BoxLayout(orientation='vertical', size_hint_y=None)
+        scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
+        self.recursively_add_boxes(gui_parent=scroll_layout, root_box=root_checkbox, indent=0)
+
+        return scroll_layout
+
+    def recursively_add_boxes(self,gui_parent, root_box: NodeWidget, indent: int):
+        if not root_box.get_is_file() and len(root_box.xrd_file_des) == 0:
+            return
+
+        root_box.initialize_gui(gui_parent, level=indent)
+
+        for child_box in root_box.active_children:
+            self.recursively_add_boxes(gui_parent=root_box.child_container,
+                                  root_box=child_box,
+                                  indent=indent + 1)
 
 def get_feedback_widget(font_size : float) -> Widget:
     return BlackLabel(size_hint=(0.8, 1),
@@ -120,31 +140,3 @@ def get_feedback_widget(font_size : float) -> Widget:
 def get_ok_button() -> Widget:
     ok_button = Button(text="OK", size_hint=(0.2, 1))
     return ok_button
-
-
-# -------------------------------------------
-# layouts
-
-
-
-
-
-
-def get_scroll_layout(root_checkbox : NodeWidget):
-    scroll_layout = BoxLayout(orientation='vertical', size_hint_y=None)
-    scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
-    recursively_add_boxes(gui_parent=scroll_layout, root_box=root_checkbox, indent=0)
-
-    return scroll_layout
-
-
-def recursively_add_boxes(gui_parent, root_box : NodeWidget, indent : int):
-    if not root_box.get_is_file() and len(root_box.xrd_file_des) == 0:
-        return
-
-    root_box.initialize_gui(gui_parent, level=indent)
-
-    for child_box in root_box.active_children:
-        recursively_add_boxes(gui_parent=root_box.child_container,
-                              root_box=child_box,
-                              indent=indent + 1)
