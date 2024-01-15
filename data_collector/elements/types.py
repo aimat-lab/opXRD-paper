@@ -65,8 +65,9 @@ class IconToggleButton(RelativeLayout):
     def __init__(self, **kwargs):
         super(IconToggleButton, self).__init__(**kwargs)
 
-        self.collapsed = Image(source=get_collapsed_icon_path(), size_hint=(None, None),size=(self.height,self.height))
-        self.expanded = Image(source=get_expanded_icon_path(), size_hint=(None, None),size=(self.height,self.height))
+        height = self.height
+        self.collapsed = Image(source=get_collapsed_icon_path(), size_hint=(None, None),size=(height,height))
+        self.expanded = Image(source=get_expanded_icon_path(), size_hint=(None, None),size=(height,height))
 
         self.btn = ToggleButton(size_hint=(1, 1), background_color=(0, 0, 0, 0))
         self.add_widget(self.btn)
