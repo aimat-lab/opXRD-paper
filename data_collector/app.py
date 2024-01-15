@@ -35,6 +35,17 @@ class DataCollectApp(App):
         self.target_path_input : Optional[Widget] = None
 
 
+    def on_start(self):
+        if self.input_folder_override is None:
+            self.show_launch_dialog(callback=self.selection_layout.set_content)
+        else:
+            self.selection_layout.set_content(path=self.input_folder_override)
+
+    @staticmethod
+    def show_launch_dialog( callback : callable):
+        InputDialog(callback=callback).open()
+
+
     def build(self):
         self.selection_layout = SelectionLayout(rootCheckbox=self.root_checkbox)
         finish_layout = self.make_finish_layout()
@@ -44,7 +55,6 @@ class DataCollectApp(App):
         root_layout.add_widget(finish_layout)
 
         return root_layout
-
 
     def make_finish_layout(self):
         finish_layout = BoxLayout(orientation='vertical',size_hint =(1,0.125))
@@ -75,21 +85,8 @@ class DataCollectApp(App):
 
         return finish_layout
 
-
-    def on_start(self):
-        if self.input_folder_override is None:
-            self.show_launch_dialog(callback=self.selection_layout.set_content)
-        else:
-            self.selection_layout.set_content(path=self.input_folder_override)
-
-    @staticmethod
-    def show_launch_dialog( callback : callable):
-        InputDialog(callback=callback).open()
-
     # -------------------------------------------
     # callbacks
-
-
 
     def produce_dataset_files(self, *args):
         _ = args
@@ -124,6 +121,11 @@ class DataCollectApp(App):
         self.reveal_feedback_text()
 
 
+    def get_checked_filepaths(self) -> list[str]:
+        all_file_checkboxes = self.root_checkbox.xrd_file_des
+        return [box.path for box in all_file_checkboxes if box.get_is_checked()]
+
+
     def get_targetfolder_path(self) -> str:
         return self.target_path_input.text if self.targt_folder_override is None else self.targt_folder_override
 
@@ -132,7 +134,3 @@ class DataCollectApp(App):
         self.feedback_widget.opacity = 1
         print(self.feedback_widget.text)
 
-
-    def get_checked_filepaths(self) -> list[str]:
-        all_file_checkboxes = self.root_checkbox.xrd_file_des
-        return [box.path for box in all_file_checkboxes if box.get_is_checked()]
