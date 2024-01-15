@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from kivy.uix.boxlayout import BoxLayout
+# from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
@@ -9,7 +9,7 @@ from data_collector.elements.types import BlackLabel
 from data_collector.elements.fsnode_widget import NodeWidget
 from data_collector.filesystem.fsnode import FsNode
 
-from kivy.uix.widget import Widget
+# from kivy.uix.widget import Widget
 
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.image import Image

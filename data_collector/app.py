@@ -154,7 +154,7 @@ class DataCollectApp(App):
         try:
             zip_file_list(path_list=checked_paths,
                           zipfile_path=zipfile_path)
-            produce_csv_file(path_list=checked_paths,
+            produce_csv_file(absolute_path_list=checked_paths,
                              target_path=csv_file_path)
 
 

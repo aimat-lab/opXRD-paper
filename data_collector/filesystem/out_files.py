@@ -1,5 +1,5 @@
-# import logging
 from collections import defaultdict
+from data_collector.resources import get_template_csv
 
 import os
 import zipfile, csv
@@ -52,19 +52,28 @@ def zip_file_list(path_list: list[str], zipfile_path : str):
 
 
 
-def produce_csv_file(path_list : list[str], target_path : str):
-    zip_path_dict = get_zip_path_mapping(path_list=path_list)
+def produce_csv_file(absolute_path_list : list[str], target_path : str):
+    zip_path_dict = get_zip_path_mapping(path_list=absolute_path_list)
+    zip_path_list = list(zip_path_dict.values())
+    template_path = get_template_csv()
 
     if os.path.isfile(target_path):
         print(f'Target CSV path {target_path} already exists. Aborting ...')
         return
 
-    with open(target_path, mode='a', newline='') as file:
+    with open(template_path, 'r') as file:
+        reader = csv.reader(file)
+        data = list(reader)
+
+    for i, string in enumerate(zip_path_list, start=2):  # Starting from index 2 (third row)
+        if i < len(data):
+            data[i][0] = string
+        else:
+            data.append([string])
+
+    with open(target_path, 'w', newline='') as file:
         writer = csv.writer(file)
-        writer.writerow(['Filepath relative to zip root'])
-        for file_path in path_list:
-            zip_file_path = zip_path_dict[file_path]
-            writer.writerow([zip_file_path])
+        writer.writerows(data)
 
     print(f"CSV file created at {target_path}")
 

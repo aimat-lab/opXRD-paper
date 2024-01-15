@@ -1,27 +1,35 @@
 import os
 file_path = __file__
-dir_path = os.path.join(os.path.dirname(file_path), 'images')
+images_folder_path = os.path.join(os.path.dirname(file_path), 'images')
 
 def get_logo_path() -> str:
-    return os.path.join(dir_path,'logo.png')
+    return os.path.join(images_folder_path, 'logo.png')
 
 def get_foldericon_path() -> str:
-    return os.path.join(dir_path,'folder.png')
+    return os.path.join(images_folder_path, 'folder.png')
 
 def get_fileicon_path() -> str:
-    return os.path.join(dir_path,'file.png')
+    return os.path.join(images_folder_path, 'file.png')
 
 def get_collapsed_icon_path() -> str:
-    return os.path.join(dir_path,'collapsed.png')
+    return os.path.join(images_folder_path, 'collapsed.png')
 
 def get_expanded_icon_path() -> str:
-    return os.path.join(dir_path,'expanded.png')
+    return os.path.join(images_folder_path, 'expanded.png')
 
 def get_loading_icon_path() -> str:
-    return os.path.join(dir_path,'loading.png')
+    return os.path.join(images_folder_path, 'loading.png')
 
 def get_checked_box_path() -> str:
-    return os.path.join(dir_path,'checked_box.png')
+    return os.path.join(images_folder_path, 'checked_box.png')
 
 def get_unchecked_box_path() -> str:
-    return os.path.join(dir_path,'unchecked_box.png')
+    return os.path.join(images_folder_path, 'unchecked_box.png')
+
+
+# -----
+
+doc_folder_path = os.path.join(os.path.dirname(file_path), 'documents')
+
+def get_template_csv() -> str:
+    return os.path.join(doc_folder_path, 'template.csv')
