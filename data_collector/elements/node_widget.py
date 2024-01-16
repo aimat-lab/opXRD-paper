@@ -28,8 +28,10 @@ class NodeWidget(FsNode):
 
         self.child_container = None
         self.total_container = None
+        self.line = None
         self.child_nodes : list[NodeWidget] = []
         self.parent : Optional[NodeWidget] = None
+        self.place_holder = None
 
 
     def initialize_gui(self, gui_parent, level : int):
@@ -37,8 +39,9 @@ class NodeWidget(FsNode):
         self.total_container.bind(minimum_height=self.total_container.setter('height'))
 
         self.labeled_checkbox = self._make_label_checkbox(level=level)
-        line = self._make_line(labeled_checkbox=self.labeled_checkbox)
-        self.total_container.add_widget(line)
+        self.line = self._make_line(labeled_checkbox=self.labeled_checkbox)
+        self.total_container.add_widget(self.line)
+        self.place_holder = self.get_placeholder()
 
         if not self.get_is_file():
             self.child_container = self._get_child_container()
@@ -98,6 +101,11 @@ class NodeWidget(FsNode):
         target_value = 1 - (scroll_height - vp_height) / (new_scroll_height - viewport_height) * s
         self.scroll_view.scroll_y = target_value if target_value < 1 else 1
 
+
+    def unload(self):
+        self.total_container.remove_widget(self.line)
+        self.total_container.add_widget(self.place_holder ,index=0)
+
     # -------------------------------------------
     # get
 
@@ -155,3 +163,11 @@ class NodeWidget(FsNode):
         child_container = BoxLayout(orientation='vertical', size_hint=(1, None))
         child_container.bind(minimum_height=child_container.setter('height'))
         return child_container
+
+
+    def get_placeholder(self):
+        line_container = BoxLayout(orientation='horizontal', size_hint=(1, None))
+        place_holder = Label(size_hint=(None, None), size=(self.height, self.height))
+        line_container.add_widget(place_holder)
+        line_container.bind(minimum_height=line_container.setter('height'))
+        return line_container
