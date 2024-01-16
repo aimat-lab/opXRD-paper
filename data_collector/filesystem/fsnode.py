@@ -89,7 +89,7 @@ class FsNode:
         root_dir = self.path
         file_structure = {}
 
-        for root, dirs, files in os.walk(root_dir):
+        for root, dirs, files in os.walk(root_dir, followlinks=True):
             relative_path = root.replace(root_dir, '').lstrip(os.sep)
             current_level = file_structure
 
