@@ -79,7 +79,7 @@ class DataCollectApp(App):
                              root_path=self.get_rootfolder_path())
 
 
-            self.finish_layout.feedback_widget.text = (f'Wrote {len(checked_paths)} xrd files to .zip file and produced label template at:\n'
+            self.finish_layout.feedback_widget.text = (f'Wrote {len(checked_paths)} xrd files to .zip file and produced label .csv file at:\n'
                                          f'{zipfile_path} \n'
                                          f'{csv_file_path}')
         except:

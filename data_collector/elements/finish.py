@@ -13,8 +13,8 @@ from data_collector.elements.types import BlackLabel
 
 class FinishLayout(BoxLayout):
     def __init__(self, callback: callable, **kwargs):
-        super(FinishLayout, self).__init__(orientation='vertical', size_hint=(1, 0.125), **kwargs)
-        upper_finish = BoxLayout(orientation='horizontal', size_hint=(1, 0.4))
+        super(FinishLayout, self).__init__(orientation='vertical', size_hint=(1, 0.14), **kwargs)
+        upper_finish = BoxLayout(orientation='horizontal', size_hint=(1, 0.3))
 
         note = BlackLabel(text='Target folder:', size_hint=(0.2, 1), font_size=Window.width * 0.02, bold=True)
 
@@ -34,7 +34,7 @@ class FinishLayout(BoxLayout):
         ok_button.bind(on_press=callback)
 
         lower_finish.add_widget(ok_button)
-        self.default_font_size = Window.width * 0.018
+        self.default_font_size = Window.width * 0.016
         self.feedback_widget = self.get_feedback_widget(font_size=self.default_font_size)
         lower_finish.add_widget(self.feedback_widget)
 
