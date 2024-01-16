@@ -73,12 +73,13 @@ class DataCollectApp(App):
             zip_file_list(path_list=checked_paths,
                           zipfile_path=zipfile_path,
                           root_path=self.get_rootfolder_path())
+
             produce_csv_file(absolute_path_list=checked_paths,
                              target_path=csv_file_path,
                              root_path=self.get_rootfolder_path())
 
 
-            self.finish_layout.feedback_widget.text = (f'Done! Wrote {len(checked_paths)} xrd files to .zip file and produced corresponding label .csv file at:\n'
+            self.finish_layout.feedback_widget.text = (f'Done! Wrote {len(checked_paths)} xrd file(s) to .zip file and produced corresponding label .csv file at:\n'
                                          f'{zipfile_path} \n'
                                          f'{csv_file_path}')
         except:
