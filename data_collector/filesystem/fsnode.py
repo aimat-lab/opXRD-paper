@@ -46,16 +46,19 @@ class FsNode:
         for child in self.active_children:
             child.recursively_initialize_filestructure()
             descendants += child.filestructure_desc
+
         self.filestructure_desc = descendants
 
-        xrd_node_des = []
-        for outer_des in self.filestructure_desc:
-            is_relevant = any([des.get_is_file() for des in outer_des.filestructure_desc]) or outer_des.get_is_file()
-            xrd_node_des += [outer_des] if is_relevant else []
+        for fsys_des in self.filestructure_desc:
+            self.xrd_node_des += [fsys_des] if fsys_des.get_is_xrd_relevant() else []
 
-        self.xrd_node_des = xrd_node_des
-        self.xrd_file_des = [des for des in self.xrd_node_des if des.get_is_file()]
+        self.xrd_file_des += [node for node in self.xrd_node_des if node.get_is_xrd_file()]
 
+    def get_is_xrd_file(self):
+        return self._get_path_is_xrd_file(path=self.path)
+
+    def get_is_xrd_relevant(self):
+        return any([des.get_is_file() for des in self.filestructure_desc]) or self.get_is_xrd_file()
 
     def get_is_file(self):
         return os.path.isfile(self.path)

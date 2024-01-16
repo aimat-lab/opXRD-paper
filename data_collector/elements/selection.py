@@ -14,6 +14,7 @@ from data_collector.elements.node_widget import NodeWidget
 from data_collector.elements.types import ThickVerticalSlider, BlackLabel
 
 from data_collector.configs import get_line_height
+import time
 
 # -------------------------------------------
 
@@ -42,7 +43,11 @@ class SelectionLayout(BoxLayout):
 
     def set_content(self, path : str):
         self.root_checkbox: NodeWidget = NodeWidget(path=path, height=get_line_height(), scroll_view=self.scroll_view)
+
+
+        the_time = time.time()
         self.root_checkbox.recursively_initialize_filestructure()
+        print(f'initialization took {time.time() - the_time} seconds')
 
         new_label = self.get_header_widget(num_elements=len(self.root_checkbox.xrd_file_des)).children[2]
         self.header_layout.children[2].text =  new_label.text
