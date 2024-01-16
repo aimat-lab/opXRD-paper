@@ -43,11 +43,10 @@ class SelectionLayout(BoxLayout):
 
     def set_content(self, path : str):
         self.root_checkbox: NodeWidget = NodeWidget(path=path, height=get_line_height(), scroll_view=self.scroll_view)
-
-
-        the_time = time.time()
         self.root_checkbox.initialize_fsys()
-        print(f'initialization took {time.time() - the_time} seconds')
+
+        print(f'Time spent relevancy sorting:{self.root_checkbox.time_relevancy_sorting}')
+        print(f'Time spent filesystem searching:{self.root_checkbox.time_filesystem_searching}')
 
         new_label = self.get_header_widget(num_elements=len(self.root_checkbox.get_xrd_file_des())).children[2]
         self.header_layout.children[2].text =  new_label.text

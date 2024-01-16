@@ -4,12 +4,17 @@ import copy
 import os
 from abc import abstractmethod
 from typing import Optional
+import time
 
 # -------------------------------------------
 
 
+
 class FsNode:
     default_xrd_formats : list = ['raw', 'dif', 'gdf', 'dat', 'ras', 'cpi', 'txt', 'plv', 'xrdml']
+
+    time_filesystem_searching = 0
+    time_relevancy_sorting = 0
 
     @classmethod
     def set_default_formats(cls, format_text : str):
@@ -29,14 +34,18 @@ class FsNode:
         self.fsys_dict = {}
 
 
-    def initialize_fsys(self, file_structure : Optional[dict] = None):
+    def initialize_fsys(self):
+        start_time = time.time()
         self.fsys_dict = self.make_fsys_dict()
 
         for name in self.get_all_potential_sub():
             child = self.make_child(name=name)
             child.fsys_dict = self.fsys_dict[name]
             self.potential_xrd_children += [child]
+        self.time_filesystem_searching += time.time()-start_time
 
+
+        start_time = time.time()
         self.potential_des = copy.copy(self.potential_xrd_children)
         for child in self.potential_xrd_children:
             child.initialize_fsys()
@@ -44,6 +53,8 @@ class FsNode:
 
         for fsys_des in self.potential_des:
             self.xrd_node_des += [fsys_des] if fsys_des.get_is_xrd_relevant() else []
+        self.time_relevancy_sorting += time.time()-start_time
+
 
     @abstractmethod
     def make_child(self, name : str):
