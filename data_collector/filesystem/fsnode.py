@@ -1,7 +1,7 @@
 from __future__ import annotations
-import os, copy
+import os
 from abc import abstractmethod
-# from typing import Optional
+from typing import Optional
 
 # -------------------------------------------
 
@@ -24,20 +24,25 @@ class FsNode:
         self.potential_xrd_children : list = []
         self.fsys_des : list = []
         self.xrd_node_des : list =[]
+        self.fsys_dict = {}
 
-        if not self.get_is_file():
-            try:
-                self.sub_paths : list[str] = [os.path.join(self.path,name) for name in os.listdir(self.path)]
-            except:
-                self.sub_paths: list[str] = []
+        # if not self.get_is_file():
+        #     try:
+        #         self.sub_paths : list[str] = [os.path.join(self.path,name) for name in os.listdir(self.path)]
+        #     except:
+        #         self.sub_paths: list[str] = []
+        #
+        # else:
+        #     self.sub_paths : list[str] = []
 
-        else:
-            self.sub_paths : list[str] = []
 
+    def initialize_fsys(self, file_structure : Optional[dict] = None):
+        if file_structure is None:
+            self.fsys_dict = self.make_fsys_dict()
 
-    def initialize_fsys(self):
         self.potential_xrd_children = [self.make_child(path=path) for path in self.get_all_sub()]
         self.fsys_des = [x for x in self.potential_xrd_children]
+
         for child in self.potential_xrd_children:
             child.initialize_fsys()
             self.fsys_des += child.fsys_des
@@ -56,7 +61,9 @@ class FsNode:
         return any([des.get_is_xrd_file() for des in self.fsys_des]) or self.get_is_xrd_file()
 
     def get_is_xrd_file(self):
-        return self._get_path_is_xrd_file(path=self.path)
+        is_file = os.path.isfile(self.path)
+        is_xrd_format = any([self.path.endswith(f'.{the_format}') for the_format in self.default_xrd_formats])
+        return is_file and is_xrd_format
 
     def get_is_file(self):
         return os.path.isfile(self.path)
@@ -81,9 +88,16 @@ class FsNode:
         return is_file and is_xrd_format
 
     def _get_subnodes(self, criterion : callable):
-        return [path for path in self.sub_paths if criterion(path)]
+        sub_paths = [os.path.join(self.path, name) for name in list(self.fsys_dict.keys())]
+        return [path for path in sub_paths if criterion(path)]
 
-    def get_file_structure(self):
+    def get_fsys_dict(self):
+        if self.fsys_dict is None:
+            self.fsys_dict = self.make_fsys_dict()
+
+        return self.fsys_dict
+
+    def make_fsys_dict(self) -> dict:
         root_dir = self.path
         file_structure = {}
 
