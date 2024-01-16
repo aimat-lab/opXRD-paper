@@ -105,6 +105,11 @@ class NodeWidget(FsNode):
     def unload(self):
         self.total_container.remove_widget(self.line)
         self.total_container.add_widget(self.place_holder ,index=0)
+    
+
+    def load(self):
+        self.total_container.remove_widget(self.place_holder)
+        self.total_container.add_widget(self.line,index=0)
 
     # -------------------------------------------
     # get
