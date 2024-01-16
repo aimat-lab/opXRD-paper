@@ -15,6 +15,7 @@ from data_collector.elements.types import ThickVerticalSlider, BlackLabel
 
 from data_collector.configs import get_line_height
 import time
+from kivy.clock import Clock
 
 # -------------------------------------------
 
@@ -55,6 +56,14 @@ class SelectionLayout(BoxLayout):
         scroll_layout = self.get_scroll_layout(root_checkbox=self.root_checkbox)
         self.scroll_view.add_widget(widget=scroll_layout)
 
+        Clock.schedule_interval(self.test_show_heights, 1)
+
+    def test_show_heights(self, *args):
+        for child in self.root_checkbox.child_nodes:
+            try:
+                print(f'ypos child: {child.get_ypos()}')
+            except:
+                print(f'could not determine ypos of child with path {child.path}')
 
     # -------------------------------------------
     # logic

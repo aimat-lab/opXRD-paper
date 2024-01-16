@@ -28,9 +28,11 @@ class NodeWidget(FsNode):
 
         self.child_container = None
         self.total_container = None
+        self.child_nodes : list[NodeWidget] = []
+        self.parent : Optional[NodeWidget] = None
 
 
-    def initialize_gui(self, master_frame, level : int):
+    def initialize_gui(self, gui_parent, level : int):
         self.total_container = BoxLayout(orientation='vertical', size_hint=(1, None))
         self.total_container.bind(minimum_height=self.total_container.setter('height'))
 
@@ -42,11 +44,15 @@ class NodeWidget(FsNode):
             self.child_container = self._get_child_container()
             self.total_container.add_widget(self.child_container)
 
-        master_frame.add_widget(self.total_container)
+        gui_parent.add_widget(self.total_container)
+
 
     def make_child(self, name : str):
         path = os.path.join(self.path,name)
-        return NodeWidget(path=path, height=self.height, scroll_view=self.scroll_view)
+        child = NodeWidget(path=path, height=self.height, scroll_view=self.scroll_view)
+        child.parent = self
+        self.child_nodes += [child]
+        return child
 
     # -------------------------------------------
     # callbacks
@@ -94,6 +100,21 @@ class NodeWidget(FsNode):
 
     # -------------------------------------------
     # get
+
+    def get_ypos(self) -> int:
+        if self.parent is None:
+            return 0
+
+        parent_gui_children = self.parent.get_gui_child_nodes()
+        child_index = parent_gui_children.index(self)
+        previous_children = parent_gui_children[:child_index+1]
+
+        ypos = self.parent.get_ypos() + sum([child.total_container.height for child in previous_children])
+        return ypos
+
+    def get_gui_child_nodes(self):
+        return [child for child in self.child_nodes if child.total_container]
+
 
     def _make_label_checkbox(self, level : int):
         labeled_checkbox = LabeledCheckBox(text=self._get_text(),
