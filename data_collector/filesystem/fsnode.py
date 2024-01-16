@@ -26,21 +26,12 @@ class FsNode:
         self.xrd_node_des : list =[]
         self.fsys_dict = {}
 
-        # if not self.get_is_file():
-        #     try:
-        #         self.sub_paths : list[str] = [os.path.join(self.path,name) for name in os.listdir(self.path)]
-        #     except:
-        #         self.sub_paths: list[str] = []
-        #
-        # else:
-        #     self.sub_paths : list[str] = []
-
 
     def initialize_fsys(self, file_structure : Optional[dict] = None):
         if file_structure is None:
             self.fsys_dict = self.make_fsys_dict()
 
-        self.potential_xrd_children = [self.make_child(path=path) for path in self.get_all_sub()]
+        self.potential_xrd_children = [self.make_child(path=path) for path in self.get_all_potential_sub()]
         self.fsys_des = [x for x in self.potential_xrd_children]
 
         for child in self.potential_xrd_children:
@@ -50,12 +41,19 @@ class FsNode:
         for fsys_des in self.fsys_des:
             self.xrd_node_des += [fsys_des] if fsys_des.get_is_xrd_relevant() else []
 
-    def get_all_sub(self):
-        return self._get_xrd_subfiles() + self._get_subdirs()
-
     @abstractmethod
     def make_child(self, path : str):
         pass
+
+    # -------------------------------------------
+    # get
+
+    def get_all_potential_sub(self):
+        sub_paths = [os.path.join(self.path, name) for name in list(self.fsys_dict.keys())]
+        potentially_relevant = lambda path : path_is_xrd_file(path) or path_is_dir(path)
+
+        return [path for path in sub_paths if potentially_relevant(path)]
+
 
     def get_is_xrd_relevant(self):
         return any([des.get_is_xrd_file() for des in self.fsys_des]) or self.get_is_xrd_file()
@@ -72,24 +70,7 @@ class FsNode:
         return [node for node in self.xrd_node_des if node.get_is_xrd_file()]
 
     # -------------------------------------------
-
-    def _get_subfiles(self) -> list[str]:
-        return self._get_subnodes(criterion=lambda x : os.path.isfile(x))
-
-    def _get_subdirs(self) -> list[str]:
-        return self._get_subnodes(criterion=lambda x : os.path.isdir(x))
-
-    def _get_xrd_subfiles(self) -> list[str]:
-        return self._get_subnodes(criterion=self._get_path_is_xrd_file)
-
-    def _get_path_is_xrd_file(self, path : str):
-        is_file = os.path.isfile(path)
-        is_xrd_format = any([path.endswith(f'.{the_format}') for the_format in self.default_xrd_formats])
-        return is_file and is_xrd_format
-
-    def _get_subnodes(self, criterion : callable):
-        sub_paths = [os.path.join(self.path, name) for name in list(self.fsys_dict.keys())]
-        return [path for path in sub_paths if criterion(path)]
+    # fsys dict
 
     def get_fsys_dict(self):
         if self.fsys_dict is None:
@@ -114,3 +95,12 @@ class FsNode:
                 current_level[file] = None
 
         return file_structure
+
+
+def path_is_xrd_file(path : str):
+    is_file = os.path.isfile(path)
+    is_xrd_format = any([path.endswith(f'.{the_format}') for the_format in FsNode.default_xrd_formats])
+    return is_file and is_xrd_format
+
+def path_is_dir(path):
+    return os.path.isdir(path)
