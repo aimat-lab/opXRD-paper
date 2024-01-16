@@ -46,7 +46,7 @@ class SelectionLayout(BoxLayout):
 
 
         the_time = time.time()
-        self.root_checkbox.recursively_initialize_filestructure()
+        self.root_checkbox.initialize_fsys()
         print(f'initialization took {time.time() - the_time} seconds')
 
         new_label = self.get_header_widget(num_elements=len(self.root_checkbox.get_xrd_file_des())).children[2]
@@ -130,7 +130,7 @@ class SelectionLayout(BoxLayout):
 
         root_box.initialize_gui(gui_parent, level=indent)
 
-        for child_box in root_box.active_children:
+        for child_box in root_box.potential_xrd_children:
             self.recursively_add_boxes(gui_parent=root_box.child_container,
                                   root_box=child_box,
                                   indent=indent + 1)

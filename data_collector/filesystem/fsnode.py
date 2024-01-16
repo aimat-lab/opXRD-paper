@@ -21,8 +21,8 @@ class FsNode:
         self.path : str = path
         self.name : str = os.path.basename(path)
 
-        self.active_children : list = []
-        self.filestructure_desc : list = []
+        self.potential_xrd_children : list = []
+        self.fsys_des : list = []
         self.xrd_node_des : list =[]
 
         if not self.get_is_file():
@@ -35,37 +35,34 @@ class FsNode:
             self.sub_paths : list[str] = []
 
 
+    def initialize_fsys(self):
+        self.potential_xrd_children = [self.make_child(path=path) for path in self.get_all_sub()]
+        self.fsys_des = [x for x in self.potential_xrd_children]
+        for child in self.potential_xrd_children:
+            child.initialize_fsys()
+            self.fsys_des += child.fsys_des
+
+        for fsys_des in self.fsys_des:
+            self.xrd_node_des += [fsys_des] if fsys_des.get_is_xrd_relevant() else []
+
+    def get_all_sub(self):
+        return self._get_xrd_subfiles() + self._get_subdirs()
+
     @abstractmethod
     def make_child(self, path : str):
         pass
 
-    def recursively_initialize_filestructure(self):
-        self.active_children = [self.make_child(path=path) for path in self.get_all_sub()]
-        descendants = copy.copy(self.active_children)
-        for child in self.active_children:
-            child.recursively_initialize_filestructure()
-            descendants += child.filestructure_desc
-
-        self.filestructure_desc = descendants
-
-        for fsys_des in self.filestructure_desc:
-            self.xrd_node_des += [fsys_des] if fsys_des.get_is_xrd_relevant() else []
-
-    def get_xrd_file_des(self):
-        return [node for node in self.xrd_node_des if node.get_is_xrd_file()]
-
     def get_is_xrd_relevant(self):
-        return any([des.get_is_xrd_file() for des in self.filestructure_desc]) or self.get_is_xrd_file()
+        return any([des.get_is_xrd_file() for des in self.fsys_des]) or self.get_is_xrd_file()
 
     def get_is_xrd_file(self):
         return self._get_path_is_xrd_file(path=self.path)
 
-
     def get_is_file(self):
         return os.path.isfile(self.path)
 
-    def get_all_sub(self):
-        return self._get_xrd_subfiles() + self._get_subdirs()
+    def get_xrd_file_des(self):
+        return [node for node in self.xrd_node_des if node.get_is_xrd_file()]
 
     # -------------------------------------------
 
