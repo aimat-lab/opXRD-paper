@@ -137,11 +137,11 @@ class NodeWidget(FsNode):
 
         parent_gui_children = self.parent.get_gui_child_nodes()
         child_index = parent_gui_children.index(self)
-        print(f'child with path {self.path} has index {child_index}')
+        # print(f'child with path {self.path} has index {child_index}')
 
         previous_children = parent_gui_children[:child_index]
 
-        ypos = self.parent.get_ypos() + sum([child.total_container.height for child in previous_children])
+        ypos = self.parent.get_ypos() + sum([child.total_container.height for child in previous_children]) + self.parent.height
         return ypos
 
     def get_gui_child_nodes(self):
