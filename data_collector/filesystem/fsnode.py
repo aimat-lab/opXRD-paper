@@ -31,12 +31,11 @@ class FsNode:
         self.potential_xrd_children : list = []
         self.potential_des : list = []
         self.xrd_node_des : list =[]
-        self.fsys_dict = {}
+        self.fsys_dict : Optional[dict] = None
 
 
     def initialize_fsys(self):
         start_time = time.time()
-        self.fsys_dict = self.make_fsys_dict()
 
         for name in self.get_all_potential_sub():
             child = self.make_child(name=name)
@@ -64,7 +63,8 @@ class FsNode:
     # get
 
     def get_all_potential_sub(self):
-        sub_paths = [os.path.join(self.path, name) for name in list(self.fsys_dict.keys())]
+        fsys_dict = self.get_fsys_dict()
+        sub_paths = [os.path.join(self.path, name) for name in list(fsys_dict.keys())]
         potentially_relevant = lambda path : path_is_xrd_file(path) or path_is_dir(path)
 
         relevant_paths = [path for path in sub_paths if potentially_relevant(path)]
