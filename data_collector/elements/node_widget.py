@@ -105,7 +105,7 @@ class NodeWidget(FsNode):
     def unload(self):
         self.total_container.remove_widget(self.line)
         self.total_container.add_widget(self.place_holder ,index=0)
-    
+
 
     def load(self):
         self.total_container.remove_widget(self.place_holder)
@@ -114,13 +114,32 @@ class NodeWidget(FsNode):
     # -------------------------------------------
     # get
 
+    @staticmethod
+    def get_subnodes_in_range(node : NodeWidget, start_y : int, end_y : int):
+        selected_nodes = []
+
+        def dfs(current_node):
+            ypos = current_node.get_ypos()
+            if start_y <= ypos <= end_y:
+                selected_nodes.append(current_node)
+
+            if ypos <= end_y:
+                for child in current_node.get_gui_child_nodes():
+                    dfs(child)
+
+        dfs(node)
+        return selected_nodes
+
+
     def get_ypos(self) -> int:
         if self.parent is None:
             return 0
 
         parent_gui_children = self.parent.get_gui_child_nodes()
         child_index = parent_gui_children.index(self)
-        previous_children = parent_gui_children[:child_index+1]
+        print(f'child with path {self.path} has index {child_index}')
+
+        previous_children = parent_gui_children[:child_index]
 
         ypos = self.parent.get_ypos() + sum([child.total_container.height for child in previous_children])
         return ypos

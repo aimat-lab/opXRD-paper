@@ -57,6 +57,12 @@ class SelectionLayout(BoxLayout):
         self.scroll_view.add_widget(widget=scroll_layout)
 
         Clock.schedule_interval(self.test_show_heights, 1)
+        Clock.schedule_interval(self.test_select_children,1)
+
+    def test_select_children(self, *args):
+        subnodes = self.root_checkbox.get_subnodes_in_range(self.root_checkbox,start_y=0, end_y=1000)
+        # for node in subnodes:
+            # print(f'Found subnode with path: {node.path} in range')
 
     def test_show_heights(self, *args):
         for child in self.root_checkbox.child_nodes:
