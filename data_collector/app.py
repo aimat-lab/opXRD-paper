@@ -86,7 +86,7 @@ class DataCollectApp(App):
 
 
     def get_checked_filepaths(self) -> list[str]:
-        all_file_checkboxes = self.selection_layout.root_checkbox.xrd_file_des
+        all_file_checkboxes = self.selection_layout.root_checkbox.get_xrd_file_des()
         return [box.path for box in all_file_checkboxes if box.get_is_checked()]
 
 

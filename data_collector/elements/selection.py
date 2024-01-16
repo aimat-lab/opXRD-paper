@@ -49,7 +49,7 @@ class SelectionLayout(BoxLayout):
         self.root_checkbox.recursively_initialize_filestructure()
         print(f'initialization took {time.time() - the_time} seconds')
 
-        new_label = self.get_header_widget(num_elements=len(self.root_checkbox.xrd_file_des)).children[2]
+        new_label = self.get_header_widget(num_elements=len(self.root_checkbox.get_xrd_file_des())).children[2]
         self.header_layout.children[2].text =  new_label.text
         self.header_layout.opacity = 1
 
@@ -125,7 +125,7 @@ class SelectionLayout(BoxLayout):
         return scroll_layout
 
     def recursively_add_boxes(self,gui_parent, root_box: NodeWidget, indent: int):
-        if not root_box.get_is_file() and len(root_box.xrd_file_des) == 0:
+        if not root_box.get_is_file() and len(root_box.xrd_node_des) == 0:
             return
 
         root_box.initialize_gui(gui_parent, level=indent)
