@@ -44,7 +44,8 @@ class NodeWidget(FsNode):
 
         master_frame.add_widget(self.total_container)
 
-    def make_child(self, path : str):
+    def make_child(self, name : str):
+        path = os.path.join(self.path,name)
         return NodeWidget(path=path, height=self.height, scroll_view=self.scroll_view)
 
     # -------------------------------------------

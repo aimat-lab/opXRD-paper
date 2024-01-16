@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+import copy
 import os
 from abc import abstractmethod
 from typing import Optional
@@ -22,27 +24,29 @@ class FsNode:
         self.name : str = os.path.basename(path)
 
         self.potential_xrd_children : list = []
-        self.fsys_des : list = []
+        self.potential_des : list = []
         self.xrd_node_des : list =[]
         self.fsys_dict = {}
 
 
     def initialize_fsys(self, file_structure : Optional[dict] = None):
-        if file_structure is None:
-            self.fsys_dict = self.make_fsys_dict()
+        self.fsys_dict = self.make_fsys_dict()
 
-        self.potential_xrd_children = [self.make_child(path=path) for path in self.get_all_potential_sub()]
-        self.fsys_des = [x for x in self.potential_xrd_children]
+        for name in self.get_all_potential_sub():
+            child = self.make_child(name=name)
+            child.fsys_dict = self.fsys_dict[name]
+            self.potential_xrd_children += [child]
 
+        self.potential_des = copy.copy(self.potential_xrd_children)
         for child in self.potential_xrd_children:
             child.initialize_fsys()
-            self.fsys_des += child.fsys_des
+            self.potential_des += child.potential_des
 
-        for fsys_des in self.fsys_des:
+        for fsys_des in self.potential_des:
             self.xrd_node_des += [fsys_des] if fsys_des.get_is_xrd_relevant() else []
 
     @abstractmethod
-    def make_child(self, path : str):
+    def make_child(self, name : str):
         pass
 
     # -------------------------------------------
@@ -52,11 +56,14 @@ class FsNode:
         sub_paths = [os.path.join(self.path, name) for name in list(self.fsys_dict.keys())]
         potentially_relevant = lambda path : path_is_xrd_file(path) or path_is_dir(path)
 
-        return [path for path in sub_paths if potentially_relevant(path)]
+        relevant_paths = [path for path in sub_paths if potentially_relevant(path)]
+        relevant_names = [os.path.basename(path) for path in relevant_paths]
+
+        return relevant_names
 
 
     def get_is_xrd_relevant(self):
-        return any([des.get_is_xrd_file() for des in self.fsys_des]) or self.get_is_xrd_file()
+        return any([des.get_is_xrd_file() for des in self.potential_des]) or self.get_is_xrd_file()
 
     def get_is_xrd_file(self):
         is_file = os.path.isfile(self.path)
