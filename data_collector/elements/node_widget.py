@@ -22,7 +22,6 @@ class NodeWidget(FsNode):
     def __init__(self,path : str, height : int, scroll_view):
         super().__init__(path=path)
 
-        self.active_children = [NodeWidget(path=path, height=height, scroll_view=scroll_view) for path in self.get_all_sub()]
         self.height : int = height
         self.labeled_checkbox : Optional[LabeledCheckBox] = None
         self.scroll_view = scroll_view
@@ -45,12 +44,15 @@ class NodeWidget(FsNode):
 
         master_frame.add_widget(self.total_container)
 
+    def make_child(self, path : str):
+        return NodeWidget(path=path, height=self.height, scroll_view=self.scroll_view)
+
     # -------------------------------------------
     # callbacks
 
     def on_check(self, *args)-> None:
         _ = args
-        descendants = self.relevant_des
+        descendants = self.xrd_node_des
         target_value = self.get_is_checked()
         for box in descendants:
             box.set_value(target_value=target_value)

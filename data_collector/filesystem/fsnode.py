@@ -1,5 +1,6 @@
 from __future__ import annotations
 import os, copy
+from abc import ABC, abstractmethod
 # from typing import Optional
 
 # -------------------------------------------
@@ -21,8 +22,8 @@ class FsNode:
         self.name : str = os.path.basename(path)
 
         self.active_children : list = []
-        self.potential_des : list = []
-        self.relevant_des : list =[]
+        self.filestructure_desc : list = []
+        self.xrd_node_des : list =[]
         self.xrd_file_des : list = []
 
         if not self.get_is_file():
@@ -35,20 +36,25 @@ class FsNode:
             self.sub_paths : list[str] = []
 
 
+    @abstractmethod
+    def make_child(self, path : str):
+        pass
+
     def recursively_initialize_filestructure(self):
+        self.active_children = [self.make_child(path=path) for path in self.get_all_sub()]
         descendants = copy.copy(self.active_children)
         for child in self.active_children:
             child.recursively_initialize_filestructure()
-            descendants += child.potential_des
+            descendants += child.filestructure_desc
+        self.filestructure_desc = descendants
 
-        self.potential_des = descendants
-        relevant_des = []
-        for outer_des in self.potential_des:
-            is_relevant = any([des.get_is_file() for des in outer_des.potential_des]) or outer_des.get_is_file()
-            relevant_des += [outer_des] if is_relevant else []
+        xrd_node_des = []
+        for outer_des in self.filestructure_desc:
+            is_relevant = any([des.get_is_file() for des in outer_des.filestructure_desc]) or outer_des.get_is_file()
+            xrd_node_des += [outer_des] if is_relevant else []
 
-        self.relevant_des = relevant_des
-        self.xrd_file_des = [des for des in self.relevant_des if des.get_is_file()]
+        self.xrd_node_des = xrd_node_des
+        self.xrd_file_des = [des for des in self.xrd_node_des if des.get_is_file()]
 
 
     def get_is_file(self):
