@@ -31,7 +31,9 @@ class FsNode:
         self.potential_xrd_children : list = []
         self.potential_des : list = []
         self.xrd_node_des : list =[]
+
         self.fsys_dict : Optional[dict] = None
+        self.cached_is_xrd_relevant : Optional[bool] = None
 
 
     def initialize_fsys(self):
@@ -74,7 +76,17 @@ class FsNode:
 
 
     def get_is_xrd_relevant(self):
-        return any([des.get_is_xrd_file() for des in self.potential_des]) or self.get_is_xrd_file()
+        if not self.cached_is_xrd_relevant is None:
+            return self.cached_is_xrd_relevant
+
+        if self.get_is_file():
+            self.cached_is_xrd_relevant = self.get_is_xrd_file()
+
+        else:
+            self.cached_is_xrd_relevant = any([child.get_is_xrd_relevant() for child in self.potential_xrd_children])
+
+        return self.cached_is_xrd_relevant
+
 
     def get_is_xrd_file(self):
         is_file = os.path.isfile(self.path)
