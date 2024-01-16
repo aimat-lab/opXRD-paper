@@ -72,9 +72,11 @@ class DataCollectApp(App):
         print("Checked Paths:", checked_paths)
         try:
             zip_file_list(path_list=checked_paths,
-                          zipfile_path=zipfile_path)
+                          zipfile_path=zipfile_path,
+                          root_path=self.get_rootfolder_path())
             produce_csv_file(absolute_path_list=checked_paths,
-                             target_path=csv_file_path)
+                             target_path=csv_file_path,
+                             root_path=self.get_rootfolder_path())
 
 
             self.finish_layout.feedback_widget.text = (f'Wrote {len(checked_paths)} xrd files to .zip file and produced label template at:\n'
@@ -89,6 +91,9 @@ class DataCollectApp(App):
         all_file_checkboxes = self.selection_layout.root_checkbox.get_xrd_file_des()
         return [box.path for box in all_file_checkboxes if box.get_is_checked()]
 
+
+    def get_rootfolder_path(self) -> str:
+        return self.selection_layout.root_checkbox.path
 
     def get_targetfolder_path(self) -> str:
         return self.finish_layout.target_path_input.text if self.targt_folder_override is None else self.targt_folder_override

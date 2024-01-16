@@ -1,4 +1,3 @@
-from collections import defaultdict
 from data_collector.resources import get_template_csv
 
 import os
@@ -8,36 +7,23 @@ def log(to_log : str):
     print(to_log)
 
 
-def get_zip_path_mapping(path_list: list[str]) -> dict:
-    name_counter = defaultdict(int)
-    zip_path_dict = {}
+def get_rel_path_dict(path_list: list[str], root_path : str) -> dict:
+    rel_path_dict = {}
 
     for path in path_list:
         try:
-            file_name = os.path.basename(path)
-            foldername = os.path.basename(os.path.dirname(path))
-            base_path = os.path.join(foldername,file_name)
-
-            if not base_path in name_counter:
-                name_counter[base_path] = 1
-            else:
-                name_counter[base_path] += 1
-
-            name = f"{foldername}_{name_counter[base_path]}"
-            zip_path = os.path.join(name, file_name)
+            rel_path = os.path.relpath(path, root_path)
+            rel_path_dict[path] = rel_path
 
         except Exception as e:
-            zip_path = path
             print(f"Error processing path '{path}': {e}")
 
-        zip_path_dict[path] = zip_path
-
-    return zip_path_dict
+    return rel_path_dict
 
 
 
-def zip_file_list(path_list: list[str], zipfile_path : str):
-    zip_path_dict = get_zip_path_mapping(path_list=path_list)
+def zip_file_list(path_list: list[str], zipfile_path : str, root_path : str):
+    zip_path_dict = get_rel_path_dict(path_list=path_list, root_path=root_path)
 
     if os.path.isfile(zipfile_path):
         log(to_log=f'Target path {zipfile_path} already exists. Aborting ...')
@@ -52,8 +38,8 @@ def zip_file_list(path_list: list[str], zipfile_path : str):
 
 
 
-def produce_csv_file(absolute_path_list : list[str], target_path : str):
-    zip_path_dict = get_zip_path_mapping(path_list=absolute_path_list)
+def produce_csv_file(absolute_path_list : list[str], target_path : str, root_path : str):
+    zip_path_dict = get_rel_path_dict(path_list=absolute_path_list, root_path=root_path)
     zip_path_list = list(zip_path_dict.values())
     template_path = get_template_csv()
 

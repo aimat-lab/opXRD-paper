@@ -8,8 +8,6 @@ import time
 
 # -------------------------------------------
 
-
-
 class FsNode:
     default_xrd_formats : list = ['raw', 'dif', 'gdf', 'dat', 'ras', 'cpi', 'txt', 'plv', 'xrdml']
 
