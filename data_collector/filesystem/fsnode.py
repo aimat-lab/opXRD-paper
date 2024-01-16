@@ -37,24 +37,23 @@ class FsNode:
 
 
     def initialize_fsys(self):
-        start_time = time.time()
-
+        fsys_start = time.time()
         for name in self.get_all_potential_sub():
             child = self.make_child(name=name)
             child.fsys_dict = self.fsys_dict[name]
             self.potential_xrd_children += [child]
-        self.time_filesystem_searching += time.time()-start_time
 
-
-        start_time = time.time()
         self.potential_des = copy.copy(self.potential_xrd_children)
         for child in self.potential_xrd_children:
             child.initialize_fsys()
             self.potential_des += child.potential_des
 
+        self.time_filesystem_searching += time.time()-fsys_start
+
+        sorting_start = time.time()
         for fsys_des in self.potential_des:
             self.xrd_node_des += [fsys_des] if fsys_des.get_is_xrd_relevant() else []
-        self.time_relevancy_sorting += time.time()-start_time
+        self.time_relevancy_sorting += time.time()-sorting_start
 
 
     @abstractmethod
