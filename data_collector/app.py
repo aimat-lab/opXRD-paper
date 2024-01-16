@@ -22,7 +22,6 @@ class DataCollectApp(App):
         self.input_folder_override : Optional[str]  = override_input_folder
         self.targt_folder_override : Optional[str] = override_target_folder
 
-
         # PathCheckbox
         self.selection_layout : Optional[SelectionLayout] = None
         self.finish_layout : Optional[FinishLayout] = None
@@ -79,7 +78,7 @@ class DataCollectApp(App):
                              root_path=self.get_rootfolder_path())
 
 
-            self.finish_layout.feedback_widget.text = (f'Wrote {len(checked_paths)} xrd files to .zip file and produced label .csv file at:\n'
+            self.finish_layout.feedback_widget.text = (f'Done! Wrote {len(checked_paths)} xrd files to .zip file and produced corresponding label .csv file at:\n'
                                          f'{zipfile_path} \n'
                                          f'{csv_file_path}')
         except:
