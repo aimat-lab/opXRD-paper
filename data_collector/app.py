@@ -8,6 +8,7 @@ from data_collector.filesystem import zip_file_list, produce_csv_file
 from data_collector.elements import InputDialog
 from data_collector.elements import SelectionLayout, FinishLayout
 
+from kivy.core.window import Window
 
 # -------------------------------------------
 
@@ -26,6 +27,10 @@ class DataCollectApp(App):
         self.selection_layout : Optional[SelectionLayout] = None
         self.finish_layout : Optional[FinishLayout] = None
 
+
+    def _stop(self, *largs):
+        self.root_window.close()
+        super()._stop()
 
     def on_start(self):
         if self.input_folder_override is None:
