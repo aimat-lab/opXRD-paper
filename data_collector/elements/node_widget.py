@@ -107,7 +107,7 @@ class NodeWidget(FsNode):
     def unload(self):
         if self.is_loaded:
             self.total_container.remove_widget(self.line)
-            self.total_container.add_widget(self.place_holder ,index=0)
+            self.total_container.add_widget(self.place_holder ,index=1)
             self.is_loaded = False
         else:
             pass
@@ -116,7 +116,7 @@ class NodeWidget(FsNode):
     def load(self):
         if not self.is_loaded:
             self.total_container.remove_widget(self.place_holder)
-            self.total_container.add_widget(self.line,index=0)
+            self.total_container.add_widget(self.line,index=1)
             self.is_loaded = True
         else:
             pass

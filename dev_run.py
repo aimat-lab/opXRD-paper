@@ -15,7 +15,7 @@ def main():
 
     _, __ = win_test_dir, win_target_test
 
-    linux_input_test = '/home/daniel/aimat/tool_sample_folder'
+    linux_input_test = '/home/daniel/OneDrive'
     linux_target_test = f'/home/daniel/aimat/tool_target_folder'
 
     app = DataCollectApp(override_input_folder=linux_input_test,
