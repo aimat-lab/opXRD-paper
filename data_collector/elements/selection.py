@@ -174,14 +174,14 @@ class SelectionLayout(BoxLayout):
 
         return scroll_view
 
-    def get_scroll_layout(self,root_checkbox: NodeWidget):
+    def get_scroll_layout(self, root_checkbox: NodeWidget):
         scroll_layout = BoxLayout(orientation='vertical', size_hint_y=None)
         scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
         self.recursively_add_boxes(gui_parent=scroll_layout, root_box=root_checkbox, indent=0)
 
         return scroll_layout
 
-    def recursively_add_boxes(self,gui_parent, root_box: NodeWidget, indent: int):
+    def recursively_add_boxes(self, gui_parent, root_box: NodeWidget, indent: int):
         if not root_box.get_is_file() and len(root_box.xrd_node_des) == 0:
             return
 
