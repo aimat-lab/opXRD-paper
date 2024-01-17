@@ -115,7 +115,7 @@ class NodeWidget(FsNode):
     # get
 
     @staticmethod
-    def get_subnodes_in_range(node : NodeWidget, start_y : int, end_y : int):
+    def get_visibile_subnodes_in_range(node : NodeWidget, start_y : int, end_y : int):
         selected_nodes = []
 
         def dfs(current_node):

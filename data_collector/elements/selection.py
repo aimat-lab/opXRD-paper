@@ -22,8 +22,8 @@ from kivy.clock import Clock
 class SelectionLayout(BoxLayout):
     def __init__(self, **kwargs):
         super(SelectionLayout, self).__init__(orientation='horizontal', size_hint=(1, 0.9), **kwargs)
-        self.root_checkbox : Optional[NodeWidget] = None
 
+        self.root_checkbox : Optional[NodeWidget] = None
         self.header_layout = self.get_header_widget(num_elements=0)
 
         self.slider = ThickVerticalSlider(orientation='vertical', min=0, max=1, value=1, size_hint=(0.1, 1))
@@ -55,12 +55,13 @@ class SelectionLayout(BoxLayout):
 
         scroll_layout = self.get_scroll_layout(root_checkbox=self.root_checkbox)
         self.scroll_view.add_widget(widget=scroll_layout)
+        self.scroll_view.bind(scroll_y=self.populate_view)
 
         Clock.schedule_interval(self.test_show_heights, 1)
         Clock.schedule_interval(self.test_select_children,1)
 
     def test_select_children(self, *args):
-        subnodes = self.root_checkbox.get_subnodes_in_range(self.root_checkbox,start_y=0, end_y=100)
+        subnodes = self.root_checkbox.get_visibile_subnodes_in_range(self.root_checkbox, start_y=0, end_y=100)
         for node in subnodes:
             print(f'Found subnode with path: {node.path} in range')
 
@@ -73,6 +74,17 @@ class SelectionLayout(BoxLayout):
 
     # -------------------------------------------
     # logic
+
+    def populate_view(self, instance, value):
+        scroll_y = value
+        total_height = self.scroll_view.children[0].height
+        vp_height = self.scroll_view.height
+
+        vp_ypos = (1-scroll_y)*(total_height-vp_height)
+        print(f'Current ypos is {vp_ypos}')
+        print(f'Total height: {total_height}')
+        print(f'View port height: {vp_height}')
+
 
     def on_scroll_view_scroll(self, instance, value):
         _ = instance
