@@ -12,9 +12,11 @@ from kivy.uix.label import Label
 # from kivy.clock import Clock
 
 from typing import Optional
+
+from data_collector.elements.dynamic_elem import DynamicElem
 # -------------------------------------------
 
-class NodeWidget(FsNode):
+class NodeWidget(FsNode, DynamicElem):
     dim = get_line_height()
     file_img = Image.open(fp=get_fileicon_path()).resize((dim, dim))
     folder_img = Image.open(fp=get_foldericon_path()).resize((dim, dim))
@@ -26,14 +28,13 @@ class NodeWidget(FsNode):
         return cls(path=path,height=parent.height,scroll_view=parent.scroll_view)
 
     def __init__(self,path : str, height : int, scroll_view):
-        super().__init__(path=path)
+        FsNode.__init__(self,path=path)
+        DynamicElem.__init__(self,height=height)
 
         self.height : int = height
         self.labeled_checkbox : Optional[LabeledCheckBox] = None
         self.scroll_view = scroll_view
 
-        self.child_container = None
-        self.total_container = None
         self.line = None
         self.child_nodes : list[NodeWidget] = []
         self.parent : Optional[NodeWidget] = None
@@ -128,34 +129,6 @@ class NodeWidget(FsNode):
 
     # -------------------------------------------
     # get
-
-    @staticmethod
-    def get_visibile_subnodes_in_range(node : NodeWidget, start_y : int, end_y : int) -> list[NodeWidget]:
-        selected_nodes = []
-
-        def dfs(current_node):
-            ypos = current_node.get_ypos()
-            if start_y <= ypos <= end_y:
-                selected_nodes.append(current_node)
-
-            if ypos <= end_y:
-                for child in current_node.get_gui_child_nodes():
-                    dfs(child)
-
-        dfs(node)
-        return selected_nodes
-
-
-    def get_ypos(self) -> int:
-        if self.parent is None:
-            return 0
-
-        parent_gui_children = self.parent.get_gui_child_nodes()
-        child_index = parent_gui_children.index(self)
-        previous_children = parent_gui_children[:child_index]
-
-        ypos = self.parent.get_ypos() + sum([child.total_container.height for child in previous_children]) + self.parent.height
-        return ypos
 
     def get_gui_child_nodes(self):
         return [child for child in self.child_nodes if child.total_container]

@@ -8,27 +8,16 @@ from typing import Optional
 
 class DynamicElem:
 
-    @classmethod
-    @abstractmethod
-    def make_child(cls, name : str, parent : DynamicElem) -> DynamicElem:
-        pass
-
-    def __init__(self):
+    def __init__(self, height : int):
         super().__init__()
 
         self.labeled_checkbox : Optional[LabeledCheckBox] = None
 
         self.child_container = None
         self.total_container = None
+        self.height = height
         self.child_nodes : list[DynamicElem] = []
         self.parent : Optional[DynamicElem] = None
-        self.is_loaded = False
-
-    def add_child(self, name : str):
-        child = self.make_child(name=name, parent=self)
-        child.parent = self
-        self.child_nodes += [child]
-        return child
 
     # -------------------------------------------
     # callbacks
