@@ -8,8 +8,6 @@ from data_collector.filesystem import zip_file_list, produce_csv_file
 from data_collector.elements import InputDialog
 from data_collector.elements import SelectionLayout, FinishLayout
 
-from kivy.core.window import Window
-
 # -------------------------------------------
 
 class DataCollectApp(App):
@@ -26,11 +24,6 @@ class DataCollectApp(App):
         # PathCheckbox
         self.selection_layout : Optional[SelectionLayout] = None
         self.finish_layout : Optional[FinishLayout] = None
-
-
-    def _stop(self, *largs):
-        self.root_window.close()
-        super()._stop()
 
     def on_start(self):
         if self.input_folder_override is None:
@@ -52,6 +45,10 @@ class DataCollectApp(App):
         root_layout.add_widget(self.finish_layout)
 
         return root_layout
+
+    def _stop(self, *largs):
+        self.root_window.close()
+        super()._stop()
 
     # -------------------------------------------
     # callbacks
@@ -79,7 +76,7 @@ class DataCollectApp(App):
                           zipfile_path=zipfile_path,
                           root_path=self.get_rootfolder_path())
 
-            produce_csv_file(absolute_path_list=checked_paths,
+            produce_csv_file(abs_path_list=checked_paths,
                              target_path=csv_file_path,
                              root_path=self.get_rootfolder_path())
 

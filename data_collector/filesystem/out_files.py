@@ -3,30 +3,14 @@ from data_collector.resources import get_template_csv
 import os
 import zipfile, csv
 
-def log(to_log : str):
-    print(to_log)
 
-
-def get_rel_path_dict(path_list: list[str], root_path : str) -> dict:
-    rel_path_dict = {}
-
-    for path in path_list:
-        try:
-            rel_path = os.path.relpath(path, root_path)
-            rel_path_dict[path] = rel_path
-
-        except Exception as e:
-            print(f"Error processing path '{path}': {e}")
-
-    return rel_path_dict
-
-
+# -------------------------------------------
 
 def zip_file_list(path_list: list[str], zipfile_path : str, root_path : str):
-    zip_path_dict = get_rel_path_dict(path_list=path_list, root_path=root_path)
+    zip_path_dict = get_rel_path_dict(abs_path_list=path_list, root_path=root_path)
 
     if os.path.isfile(zipfile_path):
-        log(to_log=f'Target path {zipfile_path} already exists. Aborting ...')
+        print(f'Target path {zipfile_path} already exists. Aborting ...')
         return
 
     with zipfile.ZipFile(zipfile_path, 'a') as zipf:
@@ -38,9 +22,9 @@ def zip_file_list(path_list: list[str], zipfile_path : str, root_path : str):
 
 
 
-def produce_csv_file(absolute_path_list : list[str], target_path : str, root_path : str):
-    zip_path_dict = get_rel_path_dict(path_list=absolute_path_list, root_path=root_path)
-    zip_path_list = list(zip_path_dict.values())
+def produce_csv_file(abs_path_list : list[str], target_path : str, root_path : str):
+    rel_path_dict = get_rel_path_dict(abs_path_list=abs_path_list, root_path=root_path)
+    rel_path_list = list(rel_path_dict.values())
     template_path = get_template_csv()
 
     if os.path.isfile(target_path):
@@ -51,7 +35,7 @@ def produce_csv_file(absolute_path_list : list[str], target_path : str, root_pat
         reader = csv.reader(file)
         data = list(reader)
 
-    for i, string in enumerate(zip_path_list, start=2):  # Starting from index 2 (third row)
+    for i, string in enumerate(rel_path_list, start=2):
         if i < len(data):
             data[i][0] = string
         else:
@@ -62,6 +46,22 @@ def produce_csv_file(absolute_path_list : list[str], target_path : str, root_pat
         writer.writerows(data)
 
     print(f"CSV file created at {target_path}")
+
+
+def get_rel_path_dict(abs_path_list: list[str], root_path : str) -> dict:
+    rel_path_dict = {}
+
+    for path in abs_path_list:
+        try:
+            rel_path = os.path.relpath(path, root_path)
+            rel_path_dict[path] = rel_path
+
+        except Exception as e:
+            print(f"Error processing path '{path}': {e}")
+
+    return rel_path_dict
+
+
 
 
 if __name__ == "__main__":
