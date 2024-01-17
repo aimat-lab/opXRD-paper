@@ -13,7 +13,6 @@ from data_collector.filesystem.lib import make_fsys_dict
 class FsNode:
     default_xrd_formats : list = ['raw', 'dif', 'gdf', 'dat', 'ras', 'cpi', 'txt', 'plv', 'xrdml']
 
-
     @classmethod
     def set_default_formats(cls, format_text : str):
         entries = format_text.split(',')
@@ -33,6 +32,7 @@ class FsNode:
 
         self.time_filesystem_searching = 0
         self.time_relevancy_sorting = 0
+
 
     def init_fsys(self):
         fsys_start = time.time()
@@ -77,6 +77,11 @@ class FsNode:
 
         return relevant_names
 
+    def get_fsys_dict(self):
+        if self.fsys_dict is None:
+            self.fsys_dict = make_fsys_dict(root_dir=self.path)
+
+        return self.fsys_dict
 
     def get_is_xrd_relevant(self):
         if not self.cached_is_xrd_relevant is None:
@@ -90,20 +95,15 @@ class FsNode:
 
         return self.cached_is_xrd_relevant
 
-    def get_is_xrd_file(self):
-        return path_is_xrd_file(path=self.path)
 
     def get_is_file(self):
         return os.path.isfile(self.path)
 
+    def get_is_xrd_file(self):
+        return path_is_xrd_file(path=self.path)
+
     def get_xrd_file_des(self):
         return [node for node in self.xrd_node_des if node.get_is_xrd_file()]
-
-    def get_fsys_dict(self):
-        if self.fsys_dict is None:
-            self.fsys_dict = make_fsys_dict(root_dir=self.path)
-
-        return self.fsys_dict
 
 
 def path_is_xrd_file(path : str):
