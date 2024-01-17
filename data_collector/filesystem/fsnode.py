@@ -13,8 +13,6 @@ from data_collector.filesystem.lib import make_fsys_dict
 class FsNode:
     default_xrd_formats : list = ['raw', 'dif', 'gdf', 'dat', 'ras', 'cpi', 'txt', 'plv', 'xrdml']
 
-    time_filesystem_searching = 0
-    time_relevancy_sorting = 0
 
     @classmethod
     def set_default_formats(cls, format_text : str):
@@ -33,15 +31,17 @@ class FsNode:
         self.fsys_dict : Optional[dict] = None
         self.cached_is_xrd_relevant : Optional[bool] = None
 
+        self.time_filesystem_searching = 0
+        self.time_relevancy_sorting = 0
 
     def init_fsys(self):
         fsys_start = time.time()
         self.initialize_potential_des()
-        FsNode.time_filesystem_searching += time.time()-fsys_start
+        self.time_filesystem_searching += time.time()-fsys_start
 
         sorting_start = time.time()
         self.find_xrd_relevant_nodes()
-        FsNode.time_relevancy_sorting += time.time()-sorting_start
+        self.time_relevancy_sorting += time.time()-sorting_start
 
 
     def initialize_potential_des(self):
