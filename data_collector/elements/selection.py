@@ -14,7 +14,6 @@ from data_collector.elements.node_widget import NodeWidget
 from data_collector.elements.types import ThickVerticalSlider, BlackLabel
 
 from data_collector.configs import get_line_height
-import time
 from kivy.clock import Clock
 
 # -------------------------------------------
@@ -60,10 +59,12 @@ class SelectionLayout(BoxLayout):
         Clock.schedule_interval(self.test_show_heights, 1)
         Clock.schedule_interval(self.test_select_children,1)
 
+
     def test_select_children(self, *args):
         subnodes = self.root_checkbox.get_visibile_subnodes_in_range(self.root_checkbox, start_y=0, end_y=100)
         for node in subnodes:
             print(f'Found subnode with path: {node.path} in range')
+
 
     def test_show_heights(self, *args):
         for child in self.root_checkbox.child_nodes:
@@ -84,6 +85,11 @@ class SelectionLayout(BoxLayout):
         print(f'Current ypos is {vp_ypos}')
         print(f'Total height: {total_height}')
         print(f'View port height: {vp_height}')
+        nodes_to_load = self.root_checkbox.get_visibile_subnodes_in_range(self.root_checkbox,
+                                                                          start_y=vp_ypos-vp_height,
+                                                                          end_y=vp_ypos+2*vp_height)
+        for node in nodes_to_load:
+            node.load()
 
 
     def on_scroll_view_scroll(self, instance, value):

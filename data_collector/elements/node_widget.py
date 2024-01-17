@@ -33,6 +33,8 @@ class NodeWidget(FsNode):
         self.parent : Optional[NodeWidget] = None
         self.place_holder = None
 
+        self.is_loaded = False
+
 
     def initialize_gui(self, gui_parent, level : int):
         self.total_container = BoxLayout(orientation='vertical', size_hint=(1, None))
@@ -40,8 +42,8 @@ class NodeWidget(FsNode):
 
         self.labeled_checkbox = self._make_label_checkbox(level=level)
         self.line = self._make_line(labeled_checkbox=self.labeled_checkbox)
-        self.total_container.add_widget(self.line)
         self.place_holder = self.get_placeholder()
+        self.total_container.add_widget(self.place_holder)
 
         if not self.get_is_file():
             self.child_container = self._get_child_container()
@@ -103,19 +105,27 @@ class NodeWidget(FsNode):
 
 
     def unload(self):
-        self.total_container.remove_widget(self.line)
-        self.total_container.add_widget(self.place_holder ,index=0)
+        if self.is_loaded:
+            self.total_container.remove_widget(self.line)
+            self.total_container.add_widget(self.place_holder ,index=0)
+            self.is_loaded = False
+        else:
+            pass
 
 
     def load(self):
-        self.total_container.remove_widget(self.place_holder)
-        self.total_container.add_widget(self.line,index=0)
+        if not self.is_loaded:
+            self.total_container.remove_widget(self.place_holder)
+            self.total_container.add_widget(self.line,index=0)
+            self.is_loaded = True
+        else:
+            pass
 
     # -------------------------------------------
     # get
 
     @staticmethod
-    def get_visibile_subnodes_in_range(node : NodeWidget, start_y : int, end_y : int):
+    def get_visibile_subnodes_in_range(node : NodeWidget, start_y : int, end_y : int) -> list[NodeWidget]:
         selected_nodes = []
 
         def dfs(current_node):
@@ -137,8 +147,6 @@ class NodeWidget(FsNode):
 
         parent_gui_children = self.parent.get_gui_child_nodes()
         child_index = parent_gui_children.index(self)
-        # print(f'child with path {self.path} has index {child_index}')
-
         previous_children = parent_gui_children[:child_index]
 
         ypos = self.parent.get_ypos() + sum([child.total_container.height for child in previous_children]) + self.parent.height
