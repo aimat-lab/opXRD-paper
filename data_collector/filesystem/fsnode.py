@@ -6,6 +6,8 @@ from abc import abstractmethod
 from typing import Optional
 import time
 
+from data_collector.filesystem.lib import make_fsys_dict
+
 # -------------------------------------------
 
 class FsNode:
@@ -18,41 +20,45 @@ class FsNode:
     def set_default_formats(cls, format_text : str):
         entries = format_text.split(',')
         formats = [entry.strip('.').strip() for entry in entries if '.' in entry]
-
         cls.default_xrd_formats = formats
-
 
     def __init__(self, path : str):
         self.path : str = path
         self.name : str = os.path.basename(path)
 
         self.potential_xrd_children : list = []
-        self.potential_des : list = []
+        self.potential_xrd_des : list = []
         self.xrd_node_des : list =[]
 
         self.fsys_dict : Optional[dict] = None
         self.cached_is_xrd_relevant : Optional[bool] = None
 
 
-    def initialize_fsys(self):
+    def init_fsys(self):
         fsys_start = time.time()
+        self.initialize_potential_des()
+        FsNode.time_filesystem_searching += time.time()-fsys_start
+
+        sorting_start = time.time()
+        self.find_xrd_relevant_nodes()
+        FsNode.time_relevancy_sorting += time.time()-sorting_start
+
+
+    def initialize_potential_des(self):
         for name in self.get_all_potential_sub():
             child = self.make_child(name=name)
             child.fsys_dict = self.fsys_dict[name]
             self.potential_xrd_children += [child]
 
-        self.potential_des = copy.copy(self.potential_xrd_children)
+        self.potential_xrd_des = copy.copy(self.potential_xrd_children)
         for child in self.potential_xrd_children:
-            child.initialize_fsys()
-            self.potential_des += child.potential_des
+            child.init_fsys()
+            self.potential_xrd_des += child.potential_xrd_des
 
-        self.time_filesystem_searching += time.time()-fsys_start
 
-        sorting_start = time.time()
-        for fsys_des in self.potential_des:
+    def find_xrd_relevant_nodes(self):
+        for fsys_des in self.potential_xrd_des:
             self.xrd_node_des += [fsys_des] if fsys_des.get_is_xrd_relevant() else []
-        self.time_relevancy_sorting += time.time()-sorting_start
-
 
     @abstractmethod
     def make_child(self, name : str):
@@ -84,11 +90,8 @@ class FsNode:
 
         return self.cached_is_xrd_relevant
 
-
     def get_is_xrd_file(self):
-        is_file = os.path.isfile(self.path)
-        is_xrd_format = any([self.path.endswith(f'.{the_format}') for the_format in self.default_xrd_formats])
-        return is_file and is_xrd_format
+        return path_is_xrd_file(path=self.path)
 
     def get_is_file(self):
         return os.path.isfile(self.path)
@@ -96,32 +99,11 @@ class FsNode:
     def get_xrd_file_des(self):
         return [node for node in self.xrd_node_des if node.get_is_xrd_file()]
 
-    # -------------------------------------------
-    # fsys dict
-
     def get_fsys_dict(self):
         if self.fsys_dict is None:
-            self.fsys_dict = self.make_fsys_dict()
+            self.fsys_dict = make_fsys_dict(root_dir=self.path)
 
         return self.fsys_dict
-
-    def make_fsys_dict(self) -> dict:
-        root_dir = self.path
-        file_structure = {}
-
-        for root, dirs, files in os.walk(root_dir, followlinks=True):
-            relative_path = root.replace(root_dir, '').lstrip(os.sep)
-            current_level = file_structure
-
-            parts = relative_path.split(os.sep)
-            for part in parts:
-                if part:
-                    current_level = current_level.setdefault(part, {})
-
-            for file in files:
-                current_level[file] = None
-
-        return file_structure
 
 
 def path_is_xrd_file(path : str):
@@ -131,3 +113,4 @@ def path_is_xrd_file(path : str):
 
 def path_is_dir(path):
     return os.path.isdir(path)
+
