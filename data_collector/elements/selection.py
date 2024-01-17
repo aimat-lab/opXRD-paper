@@ -7,6 +7,7 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.image import Image
 from kivy.uix.widget import Widget
+from kivy.clock import Clock
 
 from data_collector.resources import get_logo_path
 from data_collector.filesystem.fsnode import FsNode
@@ -14,7 +15,6 @@ from data_collector.elements.node_widget import NodeWidget
 from data_collector.elements.types import ThickVerticalSlider, BlackLabel
 
 from data_collector.configs import get_line_height
-from kivy.clock import Clock
 import intervals as I
 
 # -------------------------------------------
@@ -41,7 +41,7 @@ class SelectionLayout(BoxLayout):
         self.add_widget(self.checkboxes_layout)
         self.add_widget(self.slider)
 
-        self.last_load_range = I.closed(0, 0)
+        self.last_load_range = I.closed(float('-inf'),float('inf'))
 
 
     def set_content(self, path : str):
@@ -59,10 +59,9 @@ class SelectionLayout(BoxLayout):
         self.scroll_view.add_widget(widget=scroll_layout)
         self.scroll_view.bind(scroll_y=self.populate_view)
 
-        self.populate_view(instance=None,value=1)
-        #
-        # Clock.schedule_interval(self.test_show_heights, 1)
-        # Clock.schedule_interval(self.test_select_children,1)
+        Clock.schedule_interval(self.populate_view,0.25)
+        Clock.schedule_interval(self.test_show_heights, 1)
+        Clock.schedule_interval(self.test_select_children,1)
 
 
     def test_select_children(self, *args):
@@ -83,9 +82,8 @@ class SelectionLayout(BoxLayout):
     # -------------------------------------------
     # logic
 
-    def populate_view(self, instance, value):
-        _ = instance
-        scroll_y = value
+    def populate_view(self, *args, **kwargs):
+        scroll_y = self.scroll_view.scroll_y
         total_height = self.scroll_view.children[0].height
         vp_height = self.scroll_view.height
 
@@ -104,8 +102,6 @@ class SelectionLayout(BoxLayout):
             nodes_to_unload += self.root_checkbox.get_visibile_subnodes_in_range(self.root_checkbox,
                                                                                  start_y=interval.lower,
                                                                                  end_y=interval.upper)
-
-
 
         nodes_to_load = self.root_checkbox.get_visibile_subnodes_in_range(self.root_checkbox,
                                                                           start_y=new_load_range.lower,
