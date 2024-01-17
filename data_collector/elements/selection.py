@@ -15,6 +15,7 @@ from data_collector.elements.types import ThickVerticalSlider, BlackLabel
 
 from data_collector.configs import get_line_height
 from kivy.clock import Clock
+import intervals as I
 
 # -------------------------------------------
 
@@ -40,6 +41,8 @@ class SelectionLayout(BoxLayout):
         self.add_widget(self.checkboxes_layout)
         self.add_widget(self.slider)
 
+        self.last_load_range = I.closed(0, 0)
+
 
     def set_content(self, path : str):
         self.root_checkbox: NodeWidget = NodeWidget(path=path, height=get_line_height(), scroll_view=self.scroll_view)
@@ -56,17 +59,21 @@ class SelectionLayout(BoxLayout):
         self.scroll_view.add_widget(widget=scroll_layout)
         self.scroll_view.bind(scroll_y=self.populate_view)
 
-        Clock.schedule_interval(self.test_show_heights, 1)
-        Clock.schedule_interval(self.test_select_children,1)
+        self.populate_view(instance=None,value=1)
+        #
+        # Clock.schedule_interval(self.test_show_heights, 1)
+        # Clock.schedule_interval(self.test_select_children,1)
 
 
     def test_select_children(self, *args):
+        _ = args
         subnodes = self.root_checkbox.get_visibile_subnodes_in_range(self.root_checkbox, start_y=0, end_y=100)
         for node in subnodes:
             print(f'Found subnode with path: {node.path} in range')
 
 
     def test_show_heights(self, *args):
+        _ = args
         for child in self.root_checkbox.child_nodes:
             try:
                 print(f'ypos child: {child.get_ypos()}')
@@ -77,6 +84,7 @@ class SelectionLayout(BoxLayout):
     # logic
 
     def populate_view(self, instance, value):
+        _ = instance
         scroll_y = value
         total_height = self.scroll_view.children[0].height
         vp_height = self.scroll_view.height
@@ -85,12 +93,33 @@ class SelectionLayout(BoxLayout):
         print(f'Current ypos is {vp_ypos}')
         print(f'Total height: {total_height}')
         print(f'View port height: {vp_height}')
+
+        buffer_range = vp_height/2.
+        new_load_range = I.closed(lower=vp_ypos-buffer_range,upper=vp_ypos+vp_height+buffer_range)
+        unload_ranges = self.last_load_range - new_load_range
+
+        nodes_to_unload = []
+        for interval in unload_ranges:
+            print(f'unloading interval: {interval}')
+            nodes_to_unload += self.root_checkbox.get_visibile_subnodes_in_range(self.root_checkbox,
+                                                                                 start_y=interval.lower,
+                                                                                 end_y=interval.upper)
+
+
+
         nodes_to_load = self.root_checkbox.get_visibile_subnodes_in_range(self.root_checkbox,
-                                                                          start_y=vp_ypos-vp_height,
-                                                                          end_y=vp_ypos+2*vp_height)
+                                                                          start_y=new_load_range.lower,
+                                                                          end_y=new_load_range.upper)
         for node in nodes_to_load:
             node.load()
 
+        for node in nodes_to_unload:
+            node.unload()
+
+        self.last_load_range = new_load_range
+
+        print(f'Number of nodes loaded: {len(nodes_to_load)}')
+        print(f'Number of nodes unloaded: {len(nodes_to_unload)}')
 
     def on_scroll_view_scroll(self, instance, value):
         _ = instance
