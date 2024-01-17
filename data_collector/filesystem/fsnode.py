@@ -46,7 +46,7 @@ class FsNode:
 
     def initialize_potential_des(self):
         for name in self.get_all_potential_sub():
-            child = self.make_child(name=name)
+            child = self.add_child(name=name)
             child.fsys_dict = self.fsys_dict[name]
             self.potential_xrd_children += [child]
 
@@ -61,7 +61,7 @@ class FsNode:
             self.xrd_node_des += [fsys_des] if fsys_des.get_is_xrd_relevant() else []
 
     @abstractmethod
-    def make_child(self, name : str):
+    def add_child(self, name : str):
         pass
 
     # -------------------------------------------

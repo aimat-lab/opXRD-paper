@@ -19,6 +19,12 @@ class NodeWidget(FsNode):
     file_img = Image.open(fp=get_fileicon_path()).resize((dim, dim))
     folder_img = Image.open(fp=get_foldericon_path()).resize((dim, dim))
 
+
+    @classmethod
+    def make_child(cls, name : str, parent : NodeWidget) -> NodeWidget:
+        path = os.path.join(parent.path, name)
+        return cls(path=path,height=parent.height,scroll_view=parent.scroll_view)
+
     def __init__(self,path : str, height : int, scroll_view):
         super().__init__(path=path)
 
@@ -52,9 +58,8 @@ class NodeWidget(FsNode):
         gui_parent.add_widget(self.total_container)
 
 
-    def make_child(self, name : str):
-        path = os.path.join(self.path,name)
-        child = NodeWidget(path=path, height=self.height, scroll_view=self.scroll_view)
+    def add_child(self, name : str):
+        child = self.make_child(name=name, parent=self)
         child.parent = self
         self.child_nodes += [child]
         return child
