@@ -63,7 +63,7 @@ class SelectionLayout(BoxLayout):
         Clock.schedule_interval(self.update_do_scroll, update_rate)
 
         if self.callback:
-            self.callback()
+            Clock.schedule_once(self.callback,-1)
 
     def register_content_done_callback(self, callback : callable):
         self.callback = callback
@@ -153,12 +153,14 @@ class SelectionLayout(BoxLayout):
         if not root_box.get_is_file() and len(root_box.xrd_node_des) == 0:
             return
 
-        root_box.initialize_gui(gui_parent, level=indent)
+        def init_gui(*args, **kwargs):
+            root_box.initialize_gui(gui_parent, level=indent)
+            for child_box in root_box.potential_xrd_children:
+                self.recursively_add_boxes(gui_parent=root_box.child_container,
+                                           root_box=child_box,
+                                           indent=indent + 1)
 
-        for child_box in root_box.potential_xrd_children:
-            self.recursively_add_boxes(gui_parent=root_box.child_container,
-                                  root_box=child_box,
-                                  indent=indent + 1)
+        Clock.schedule_once(init_gui)
 
     @staticmethod
     def get_header_widget(num_elements: int):
