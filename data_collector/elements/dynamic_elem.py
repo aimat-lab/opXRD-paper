@@ -35,7 +35,7 @@ class DynamicElem:
     # get
 
     @staticmethod
-    def get_visibile_subnodes_in_range(node : DynamicElem, start_y : int, end_y : int) -> list:
+    def get_loaded_nodes_in_range(node : DynamicElem, start_y : int, end_y : int) -> list:
         selected_nodes = []
 
         def dfs(current_node):

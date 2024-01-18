@@ -23,8 +23,11 @@ class SelectionLayout(BoxLayout):
     def __init__(self, **kwargs):
         super(SelectionLayout, self).__init__(orientation='horizontal', size_hint=(1, 0.9), **kwargs)
 
+        # attributes
         self.root_checkbox : Optional[NodeElement] = None
+        self.last_load_range = I.closed(float('-inf'),float('inf'))
 
+        # GUI elements
         self.slider = ThickVerticalSlider(orientation='vertical', min=0, max=1, value=1, size_hint=(0.1, 1))
         self.slider.bind(value=self.adjust_scroll_view)
 
@@ -38,9 +41,6 @@ class SelectionLayout(BoxLayout):
         self.add_widget(self.checkboxes_layout)
         self.add_widget(self.slider)
 
-        self.last_load_range = I.closed(float('-inf'),float('inf'))
-
-
     def set_content(self, path : str):
         self.root_checkbox: NodeElement = NodeElement(path=path, height=get_line_height(), scroll_view=self.scroll_view)
         self.root_checkbox.init_fsys()
@@ -51,18 +51,16 @@ class SelectionLayout(BoxLayout):
         new_label = self.get_header_widget(num_elements=len(self.root_checkbox.get_xrd_file_des())).children[2]
         self.header_layout.children[2].text =  new_label.text
 
-        scroll_layout = self.get_scroll_layout(root_checkbox=self.root_checkbox)
-        self.scroll_view.add_widget(widget=scroll_layout)
+        scroll_view_content = self.get_scroll_view_content(root_checkbox=self.root_checkbox)
+        self.scroll_view.add_widget(widget=scroll_view_content)
         self.scroll_view.bind(scroll_y=self.populate_view)
 
         Clock.schedule_interval(self.populate_view,0.25)
-        Clock.schedule_interval(self.test_show_heights, 1)
-        Clock.schedule_interval(self.test_select_children,1)
 
 
     def test_select_children(self, *args):
         _ = args
-        subnodes = self.root_checkbox.get_visibile_subnodes_in_range(self.root_checkbox, start_y=0, end_y=100)
+        subnodes = self.root_checkbox.get_loaded_nodes_in_range(self.root_checkbox, start_y=0, end_y=100)
         for node in subnodes:
             print(f'Found subnode with path: {node.path} in range')
 
@@ -80,29 +78,25 @@ class SelectionLayout(BoxLayout):
 
     def populate_view(self, *args, **kwargs):
         _, __ = args, kwargs
-        scroll_y = self.scroll_view.scroll_y
         total_height = self.scroll_view.children[0].height
         vp_height = self.scroll_view.height
 
-        vp_ypos = (1-scroll_y)*(total_height-vp_height)
-        print(f'Current ypos is {vp_ypos}')
-        print(f'Total height: {total_height}')
-        print(f'View port height: {vp_height}')
-
+        vp_ypos = (1-self.scroll_view.scroll_y)*(total_height-vp_height)
         buffer_range = vp_height/2.
+
         new_load_range = I.closed(lower=vp_ypos-buffer_range,upper=vp_ypos+vp_height+buffer_range)
         unload_ranges = self.last_load_range - new_load_range
 
         nodes_to_unload = []
         for interval in unload_ranges:
             print(f'unloading interval: {interval}')
-            nodes_to_unload += self.root_checkbox.get_visibile_subnodes_in_range(self.root_checkbox,
-                                                                                 start_y=interval.lower,
-                                                                                 end_y=interval.upper)
+            nodes_to_unload += self.root_checkbox.get_loaded_nodes_in_range(self.root_checkbox,
+                                                                            start_y=interval.lower,
+                                                                            end_y=interval.upper)
 
-        nodes_to_load = self.root_checkbox.get_visibile_subnodes_in_range(self.root_checkbox,
-                                                                          start_y=new_load_range.lower,
-                                                                          end_y=new_load_range.upper)
+        nodes_to_load = self.root_checkbox.get_loaded_nodes_in_range(self.root_checkbox,
+                                                                     start_y=new_load_range.lower,
+                                                                     end_y=new_load_range.upper)
         for node in nodes_to_load:
             node.load()
 
@@ -171,7 +165,7 @@ class SelectionLayout(BoxLayout):
 
         return scroll_view
 
-    def get_scroll_layout(self, root_checkbox: NodeElement):
+    def get_scroll_view_content(self, root_checkbox: NodeElement):
         scroll_layout = BoxLayout(orientation='vertical', size_hint_y=None)
         scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
         self.recursively_add_boxes(gui_parent=scroll_layout, root_box=root_checkbox, indent=0)
