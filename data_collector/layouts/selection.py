@@ -24,7 +24,6 @@ class SelectionLayout(BoxLayout):
         super(SelectionLayout, self).__init__(orientation='horizontal', size_hint=(1, 0.9), **kwargs)
 
         self.root_checkbox : Optional[NodeElement] = None
-        self.header_layout = self.get_header_widget(num_elements=0)
 
         self.slider = ThickVerticalSlider(orientation='vertical', min=0, max=1, value=1, size_hint=(0.1, 1))
         self.slider.bind(value=self.adjust_scroll_view)
@@ -33,8 +32,6 @@ class SelectionLayout(BoxLayout):
         self.scroll_view.bind(scroll_y=self.on_scroll_view_scroll)
 
         self.header_layout = self.get_header_widget(num_elements=0)
-        self.header_layout.opacity = 0
-
         self.checkboxes_layout = self.get_checkboxes_layout(file_count_label=self.header_layout,
                                                             scroll_view=self.scroll_view)
 
@@ -53,7 +50,6 @@ class SelectionLayout(BoxLayout):
 
         new_label = self.get_header_widget(num_elements=len(self.root_checkbox.get_xrd_file_des())).children[2]
         self.header_layout.children[2].text =  new_label.text
-        self.header_layout.opacity = 1
 
         scroll_layout = self.get_scroll_layout(root_checkbox=self.root_checkbox)
         self.scroll_view.add_widget(widget=scroll_layout)
