@@ -18,7 +18,6 @@ class NodeElement(FsNode, LoadableElem):
     file_img = Image.open(fp=get_fileicon_path()).resize((dim, dim))
     folder_img = Image.open(fp=get_foldericon_path()).resize((dim, dim))
 
-
     @classmethod
     def make_child(cls, name : str, parent : NodeElement) -> NodeElement:
         path = os.path.join(parent.path, name)
@@ -31,13 +30,13 @@ class NodeElement(FsNode, LoadableElem):
         self.height : int = height
         self.labeled_checkbox : Optional[LabeledCheckBox] = None
         self.scroll_view = scroll_view
+        self.is_loaded = False
+        self.is_initialized = False
 
         self.node_widget = None
         self.child_nodes : list[NodeElement] = []
         self.parent : Optional[NodeElement] = None
         self.place_holder = None
-        self.is_loaded = False
-
 
     def initialize_gui(self, gui_parent, level : int):
         self.root_container = BoxLayout(orientation='vertical', size_hint=(1, None))
@@ -52,6 +51,7 @@ class NodeElement(FsNode, LoadableElem):
             self.root_container.add_widget(self.child_container)
 
         gui_parent.add_widget(self.root_container)
+        self.is_initialized = True
 
 
     def add_child(self, name : str):

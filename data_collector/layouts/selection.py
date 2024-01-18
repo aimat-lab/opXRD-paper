@@ -61,7 +61,7 @@ class SelectionLayout(BoxLayout):
         update_rate = 0.2
         Clock.schedule_interval(self.update_node_population, update_rate)
         Clock.schedule_interval(self.update_do_scroll, update_rate)
-
+        Clock.schedule_interval(self.check_for_dismiss, update_rate)
 
     def register_content_done_callback(self, callback : callable):
         self.callback = callback
@@ -92,9 +92,6 @@ class SelectionLayout(BoxLayout):
             node.unload()
 
         self.last_load_range = new_load_range
-        if self.callback:
-            Clock.schedule_once(self.callback,-1)
-
 
     def update_do_scroll(self, *args, **kwargs):
         _, __ = args, kwargs
@@ -114,6 +111,14 @@ class SelectionLayout(BoxLayout):
     def adjust_scroll_view(self, instance, value):
         _ = instance
         self.scroll_view.scroll_y = value
+
+    def check_for_dismiss(self, *args, **kwargs):
+        _, __ = args, kwargs
+        dismiss_condition = all([node.is_initialized for node in self.root_checkbox.xrd_node_des])
+
+        if dismiss_condition and self.callback:
+            self.callback()
+
 
     # -------------------------------------------
     # get
