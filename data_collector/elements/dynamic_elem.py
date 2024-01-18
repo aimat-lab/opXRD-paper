@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from data_collector.elements.types import LabeledCheckBox
+from data_collector.elements.node_widget import LabeledCheckBox
 from abc import abstractmethod
 
 from typing import Optional

@@ -1,21 +1,11 @@
 from __future__ import annotations
 
-from kivy.uix.image import Image
 from kivy.clock import Clock
 from kivy.graphics import Color, Line
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.checkbox import CheckBox
 from kivy.uix.label import Label
-from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.slider import Slider
-from kivy.uix.togglebutton import ToggleButton
-from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
-
-from data_collector.resources import get_fileicon_path, get_foldericon_path, get_collapsed_icon_path, \
-    get_expanded_icon_path, get_unchecked_box_path, get_checked_box_path
-
-from data_collector.configs.conf import get_line_height
 
 
 class FocusTextInput(TextInput):
@@ -31,65 +21,6 @@ class FocusTextInput(TextInput):
                     self.focus_next.focus = True
             return True  # Indicate that the key was handled
         return super(FocusTextInput, self).keyboard_on_key_down(window, keycode, text, modifiers)
-
-
-class LabeledCheckBox(BoxLayout):
-    indent = get_line_height()*1.5
-
-    def __init__(self, height : int, text :str, check_callback, is_file : bool, indent=0, **kwargs):
-        super().__init__(**kwargs)
-        # Properties
-        self.size_hint_y = None
-        self.height = height
-
-        # Create the CheckBox
-        self.check_box = ImageCheckBox(size_hint=(None, None), size=(self.height, self.height))
-        self.check_box.bind(active=check_callback)
-
-        # Create the Icon
-        icon_path = get_fileicon_path() if is_file else get_foldericon_path()
-        self.icon = Image(source=icon_path, size_hint=(None, None), size=(self.height, self.height))
-        self.add_widget(self.icon)
-
-
-        # Create the Label
-        self.label = BlackLabel(text=text,
-                                font_size=Window.width * 0.018,
-                                size_hint_x=None,
-                                size_hint_y=1,
-                                halign='left',
-                                valign='middle')
-
-        self.add_widget(self.check_box)
-        self.add_widget(self.label)
-        self.padding = [indent * LabeledCheckBox.indent, 0, 0, 0]  # Left padding for indentation
-
-
-class IconToggleButton(RelativeLayout):
-    def __init__(self, **kwargs):
-        super(IconToggleButton, self).__init__(**kwargs)
-
-        height = self.height
-        self.collapsed = Image(source=get_collapsed_icon_path(), size_hint=(None, None),size=(height,height))
-        self.expanded = Image(source=get_expanded_icon_path(), size_hint=(None, None),size=(height,height))
-
-        self.btn = ToggleButton(size_hint=(1, 1), background_color=(0, 0, 0, 0))
-        self.add_widget(self.btn)
-
-        self.icon = self.collapsed if self.btn.state == 'down' else self.expanded
-        self.add_widget(self.icon)
-
-        self.btn.bind(state=self.toggle_image)
-
-
-    def toggle_image(self,instance, value):
-        _ = instance
-        self.remove_widget(self.icon)
-        if value == 'down':
-            self.icon = self.collapsed
-        else:
-            self.icon = self.expanded
-        self.add_widget(self.icon)
 
 
 class AutoSizeLabel(Label):
@@ -113,19 +44,6 @@ class BlackLabel(AutoSizeLabel):
         _ = args
         kwargs.setdefault('color',(0,0,0,1))
         super().__init__(**kwargs, text=text)
-
-
-class ImageCheckBox(CheckBox):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self._checkbox_image = get_unchecked_box_path()
-
-    def on_state(self, widget, value):
-        _ = widget
-        if value == 'down':
-            self._checkbox_image = get_checked_box_path()
-        else:
-            self._checkbox_image = get_unchecked_box_path()
 
 
 class ThickVerticalSlider(Slider):
@@ -152,19 +70,3 @@ class Placeholder(BoxLayout):
         self.bind(minimum_height=self.setter('height'))
                          
 
-class NodeWidget(BoxLayout):
-    def __init__(self, callback : callable, height : int, labeled_checkbox : LabeledCheckBox, is_file : bool):
-        super().__init__(orientation='horizontal', size_hint=(1, None))
-
-        if not is_file:
-            icon_toggle_button = IconToggleButton(size_hint=(None, None),
-                                          size=(height,height))
-
-            icon_toggle_button.btn.bind(state=callback)
-            self.add_widget(icon_toggle_button)
-        else:
-            place_holder = Label(size_hint=(None,None),size=(height,height))
-            self.add_widget(place_holder)
-
-        self.add_widget(labeled_checkbox)
-        self.bind(minimum_height=self.setter('height'))

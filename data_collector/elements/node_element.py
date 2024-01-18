@@ -4,11 +4,13 @@ import os.path
 from PIL import Image
 from typing import Optional
 from kivy.uix.boxlayout import  BoxLayout
-from data_collector.elements.types import LabeledCheckBox,NodeWidget, Placeholder
+
+from data_collector.elements.types import Placeholder
+from data_collector.elements.node_widget import LabeledCheckBox, NodeWidget
+from data_collector.elements.dynamic_elem import DynamicElem
 from data_collector.resources import get_foldericon_path, get_fileicon_path
 from data_collector.filesystem import FsNode
 from data_collector.configs import get_line_height
-from data_collector.elements.dynamic_elem import DynamicElem
 # -------------------------------------------
 
 class NodeElement(FsNode, DynamicElem):
@@ -139,7 +141,7 @@ class NodeElement(FsNode, DynamicElem):
 
 
     def _make_widget(self, labeled_checkbox : LabeledCheckBox):
-        return NodeWidget(callback=self.on_toggle,height=self.height, labeled_checkbox=labeled_checkbox, is_file=self.get_is_file())
+        return NodeWidget(callback=self.on_toggle, height=self.height, labeled_checkbox=labeled_checkbox, is_file=self.get_is_file())
 
     def get_placeholder(self):
         return Placeholder(height=self.height)
@@ -149,3 +151,5 @@ class NodeElement(FsNode, DynamicElem):
         child_container = BoxLayout(orientation='vertical', size_hint=(1, None))
         child_container.bind(minimum_height=child_container.setter('height'))
         return child_container
+
+
