@@ -13,7 +13,7 @@ from kivy.uix.popup import Popup
 from data_collector.elements.types import FocusTextInput
 from data_collector.filesystem import FsNode, get_initial_path
 from kivy.uix.image import Image
-from data_collector.resources.resource_manager import get_logo_path
+from data_collector.resources.resource_manager import get_logo_path, get_blended_logo_path
 # -------------------------------------------
 
 class InputDialog(Popup):
@@ -28,9 +28,9 @@ class InputDialog(Popup):
         self.auto_dismiss = False
         self.callback = callback
         self.content = BoxLayout(orientation='vertical', padding=[10, 10, 10, 10], spacing=10)
+        self.background_color = (100 / 255, 255 / 255, 255 / 255, 1)  # (R, G, B, A)
 
-
-        logo_image = Image(source=get_logo_path(), size_hint=(1, 0.3))
+        logo_image = Image(source=get_blended_logo_path(), size_hint=(1, 0.3))
         first_hint = self.make_hint()
         self.format_input =self.make_format_input()
         second_hint = self.make_second_hint()

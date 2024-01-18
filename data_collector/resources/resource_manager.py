@@ -2,6 +2,9 @@ import os
 file_path = __file__
 images_folder_path = os.path.join(os.path.dirname(file_path), 'images')
 
+def get_blended_logo_path() -> str:
+    return os.path.join(images_folder_path,'blended_logo.png')
+
 def get_logo_path() -> str:
     return os.path.join(images_folder_path, 'logo.png')
 
