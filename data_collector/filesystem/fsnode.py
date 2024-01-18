@@ -11,13 +11,13 @@ from data_collector.filesystem.lib import make_fsys_dict
 # -------------------------------------------
 
 class FsNode:
-    default_xrd_formats : list = ['raw', 'dif', 'gdf', 'dat', 'ras', 'cpi', 'txt', 'plv', 'xrdml']
+    xrd_formats : list = ['raw', 'dif', 'gdf', 'dat', 'ras', 'cpi', 'txt', 'plv', 'xrdml']
 
     @classmethod
     def set_default_formats(cls, format_text : str):
         entries = format_text.split(',')
         formats = [entry.strip('.').strip() for entry in entries if '.' in entry]
-        cls.default_xrd_formats = formats
+        cls.xrd_formats = formats
 
     def __init__(self, path : str):
         self.path : str = path
@@ -108,7 +108,7 @@ class FsNode:
 
 def path_is_xrd_file(path : str):
     is_file = os.path.isfile(path)
-    is_xrd_format = any([path.endswith(f'.{the_format}') for the_format in FsNode.default_xrd_formats])
+    is_xrd_format = any([path.endswith(f'.{the_format}') for the_format in FsNode.xrd_formats])
     return is_file and is_xrd_format
 
 def path_is_dir(path):

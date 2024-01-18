@@ -7,6 +7,9 @@ from kivy.uix.label import Label
 from kivy.uix.slider import Slider
 from kivy.uix.textinput import TextInput
 
+from kivy.uix.image import Image
+from kivy.uix.widget import Widget
+from data_collector.resources import get_logo_path
 
 class FocusTextInput(TextInput):
     def keyboard_on_key_down(self, window, keycode, text, modifiers):
@@ -68,5 +71,29 @@ class Placeholder(BoxLayout):
         label = Label(size_hint=(None, None), size=(height, height))
         self.add_widget(label)
         self.bind(minimum_height=self.setter('height'))
-                         
 
+
+
+
+class HeaderWidget(BoxLayout):
+    def __init__(self, num_elements: int, format_list : list[str]):
+        super().__init__(orientation='horizontal', size_hint=(1, 0.125))
+        with_leading_dot_list = [f'.{the_format}' for the_format in format_list]
+
+        file_count_label = BlackLabel(
+            text=f"Found {num_elements} files that match specified XRD formats:\n {with_leading_dot_list}",
+            size_hint=(0.6, 1),  # Adjusted size hint
+            halign="center",
+            valign="middle"
+        )
+        file_count_label.bind(size=file_count_label.setter('text_size'))
+
+        logo_image = Image(source=get_logo_path(), size_hint=(0.3, 1))
+
+        left_placeholder = Widget(size_hint=(0.4, 1))
+        right_placeholder = Widget(size_hint=(0.1, 1))
+
+        self.add_widget(left_placeholder)  # Placeholder to balance the self
+        self.add_widget(file_count_label)
+        self.add_widget(right_placeholder)  # Placeholder to balance the self
+        self.add_widget(logo_image)

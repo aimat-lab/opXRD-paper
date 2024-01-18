@@ -106,7 +106,7 @@ class InputDialog(Popup):
 
     @staticmethod
     def make_format_input() -> Widget:
-        default_xrd_formats = FsNode.default_xrd_formats
+        default_xrd_formats = FsNode.xrd_formats
         default_xrd_text = ''
         for xrd_format in default_xrd_formats:
             default_xrd_text += f'.{xrd_format},'

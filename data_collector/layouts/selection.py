@@ -5,14 +5,12 @@ from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
 
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.image import Image
-from kivy.uix.widget import Widget
 from kivy.clock import Clock
 
-from data_collector.resources import get_logo_path
+
 from data_collector.filesystem.fsnode import FsNode
 from data_collector.elements.node_element import NodeElement
-from data_collector.elements.types import ThickVerticalSlider, BlackLabel
+from data_collector.elements.types import ThickVerticalSlider, HeaderWidget
 
 from data_collector.configs import get_line_height
 import intervals as I
@@ -102,31 +100,6 @@ class SelectionLayout(BoxLayout):
     # elements
 
     @staticmethod
-    def get_header_widget(num_elements: int) -> Widget:
-        with_leading_dot_list = [f'.{xrd_format}' for xrd_format in FsNode.default_xrd_formats]
-
-        file_count_label = BlackLabel(
-            text=f"Found {num_elements} files that match specified XRD formats:\n {with_leading_dot_list}",
-            size_hint=(0.6, 1),  # Adjusted size hint
-            halign="center",
-            valign="middle"
-        )
-        file_count_label.bind(size=file_count_label.setter('text_size'))
-
-        logo_image = Image(source=get_logo_path(), size_hint=(0.3, 1))
-
-        left_placeholder = Widget(size_hint=(0.4, 1))
-        right_placeholder = Widget(size_hint=(0.1, 1))
-
-        layout = BoxLayout(orientation='horizontal', size_hint=(1, 0.125))
-        layout.add_widget(left_placeholder)  # Placeholder to balance the layout
-        layout.add_widget(file_count_label)
-        layout.add_widget(right_placeholder)  # Placeholder to balance the layout
-        layout.add_widget(logo_image)
-
-        return layout
-
-    @staticmethod
     def get_checkboxes_layout(file_count_label: Label, scroll_view: ScrollView):
         select_layout = BoxLayout(orientation='vertical')
         select_layout.add_widget(widget=file_count_label)
@@ -160,3 +133,7 @@ class SelectionLayout(BoxLayout):
             self.recursively_add_boxes(gui_parent=root_box.child_container,
                                   root_box=child_box,
                                   indent=indent + 1)
+
+    @staticmethod
+    def get_header_widget(num_elements: int):
+        return HeaderWidget(num_elements= num_elements, format_list=FsNode.xrd_formats)
