@@ -11,7 +11,7 @@ from kivy.clock import Clock
 
 from data_collector.resources import get_logo_path
 from data_collector.filesystem.fsnode import FsNode
-from data_collector.elements.node_widget import NodeWidget
+from data_collector.elements.node_element import NodeElement
 from data_collector.elements.types import ThickVerticalSlider, BlackLabel
 
 from data_collector.configs import get_line_height
@@ -23,7 +23,7 @@ class SelectionLayout(BoxLayout):
     def __init__(self, **kwargs):
         super(SelectionLayout, self).__init__(orientation='horizontal', size_hint=(1, 0.9), **kwargs)
 
-        self.root_checkbox : Optional[NodeWidget] = None
+        self.root_checkbox : Optional[NodeElement] = None
         self.header_layout = self.get_header_widget(num_elements=0)
 
         self.slider = ThickVerticalSlider(orientation='vertical', min=0, max=1, value=1, size_hint=(0.1, 1))
@@ -45,7 +45,7 @@ class SelectionLayout(BoxLayout):
 
 
     def set_content(self, path : str):
-        self.root_checkbox: NodeWidget = NodeWidget(path=path, height=get_line_height(), scroll_view=self.scroll_view)
+        self.root_checkbox: NodeElement = NodeElement(path=path, height=get_line_height(), scroll_view=self.scroll_view)
         self.root_checkbox.init_fsys()
 
         print(f'Time spent relevancy sorting:{self.root_checkbox.time_relevancy_sorting}')
@@ -175,14 +175,14 @@ class SelectionLayout(BoxLayout):
 
         return scroll_view
 
-    def get_scroll_layout(self, root_checkbox: NodeWidget):
+    def get_scroll_layout(self, root_checkbox: NodeElement):
         scroll_layout = BoxLayout(orientation='vertical', size_hint_y=None)
         scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
         self.recursively_add_boxes(gui_parent=scroll_layout, root_box=root_checkbox, indent=0)
 
         return scroll_layout
 
-    def recursively_add_boxes(self, gui_parent, root_box: NodeWidget, indent: int):
+    def recursively_add_boxes(self, gui_parent, root_box: NodeElement, indent: int):
         if not root_box.get_is_file() and len(root_box.xrd_node_des) == 0:
             return
 

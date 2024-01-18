@@ -150,7 +150,7 @@ class Placeholder(BoxLayout):
         self.bind(minimum_height=self.setter('height'))
                          
 
-class NodeLine(BoxLayout):
+class NodeWidget(BoxLayout):
     def __init__(self, callback : callable, height : int, labeled_checkbox : LabeledCheckBox):
         super().__init__(orientation='horizontal', size_hint=(1, None))
 

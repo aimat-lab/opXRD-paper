@@ -16,14 +16,14 @@ from typing import Optional
 from data_collector.elements.dynamic_elem import DynamicElem
 # -------------------------------------------
 
-class NodeWidget(FsNode, DynamicElem):
+class NodeElement(FsNode, DynamicElem):
     dim = get_line_height()
     file_img = Image.open(fp=get_fileicon_path()).resize((dim, dim))
     folder_img = Image.open(fp=get_foldericon_path()).resize((dim, dim))
 
 
     @classmethod
-    def make_child(cls, name : str, parent : NodeWidget) -> NodeWidget:
+    def make_child(cls, name : str, parent : NodeElement) -> NodeElement:
         path = os.path.join(parent.path, name)
         return cls(path=path,height=parent.height,scroll_view=parent.scroll_view)
 
@@ -35,27 +35,27 @@ class NodeWidget(FsNode, DynamicElem):
         self.labeled_checkbox : Optional[LabeledCheckBox] = None
         self.scroll_view = scroll_view
 
-        self.line = None
-        self.child_nodes : list[NodeWidget] = []
-        self.parent : Optional[NodeWidget] = None
+        self.node_widget = None
+        self.child_nodes : list[NodeElement] = []
+        self.parent : Optional[NodeElement] = None
         self.place_holder = None
         self.is_loaded = False
 
 
     def initialize_gui(self, gui_parent, level : int):
-        self.total_container = BoxLayout(orientation='vertical', size_hint=(1, None))
-        self.total_container.bind(minimum_height=self.total_container.setter('height'))
+        self.root_container = BoxLayout(orientation='vertical', size_hint=(1, None))
+        self.root_container.bind(minimum_height=self.root_container.setter('height'))
 
         self.labeled_checkbox = self._make_label_checkbox(level=level)
-        self.line = self._make_line(labeled_checkbox=self.labeled_checkbox)
+        self.node_widget = self._make_widget(labeled_checkbox=self.labeled_checkbox)
         self.place_holder = self.get_placeholder()
-        self.total_container.add_widget(self.place_holder)
+        self.root_container.add_widget(self.place_holder)
 
         if not self.get_is_file():
             self.child_container = self._get_child_container()
-            self.total_container.add_widget(self.child_container)
+            self.root_container.add_widget(self.child_container)
 
-        gui_parent.add_widget(self.total_container)
+        gui_parent.add_widget(self.root_container)
 
 
     def add_child(self, name : str):
@@ -91,9 +91,9 @@ class NodeWidget(FsNode, DynamicElem):
 
         with self.scroll_view.canvas:
             if value == 'down':
-                self.total_container.remove_widget(self.child_container)
+                self.root_container.remove_widget(self.child_container)
             else:
-                self.total_container.add_widget(self.child_container)
+                self.root_container.add_widget(self.child_container)
 
             self.adjust_scroll(scroll_height=scroll_height,new_scroll_height=scroll_height + height_delta)
 
@@ -108,8 +108,8 @@ class NodeWidget(FsNode, DynamicElem):
 
     def unload(self):
         if self.is_loaded:
-            self.total_container.remove_widget(self.line)
-            self.total_container.add_widget(self.place_holder ,index=1)
+            self.root_container.remove_widget(self.node_widget)
+            self.root_container.add_widget(self.place_holder, index=1)
             self.is_loaded = False
         else:
             pass
@@ -117,8 +117,8 @@ class NodeWidget(FsNode, DynamicElem):
 
     def load(self):
         if not self.is_loaded:
-            self.total_container.remove_widget(self.place_holder)
-            self.total_container.add_widget(self.line,index=1)
+            self.root_container.remove_widget(self.place_holder)
+            self.root_container.add_widget(self.node_widget, index=1)
             self.is_loaded = True
         else:
             pass
@@ -127,7 +127,7 @@ class NodeWidget(FsNode, DynamicElem):
     # get
 
     def get_gui_child_nodes(self):
-        return [child for child in self.child_nodes if child.total_container]
+        return [child for child in self.child_nodes if child.root_container]
 
 
     def _make_label_checkbox(self, level : int):
@@ -146,7 +146,7 @@ class NodeWidget(FsNode, DynamicElem):
         return f'{modifier}{base_name}'
 
 
-    def _make_line(self, labeled_checkbox : LabeledCheckBox):
+    def _make_widget(self, labeled_checkbox : LabeledCheckBox):
         line_container = BoxLayout(orientation='horizontal', size_hint=(1, None))
 
         if not self.get_is_file():

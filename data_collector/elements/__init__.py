@@ -1,3 +1,3 @@
 from .dialogue import InputDialog
-from .node_widget import NodeWidget
+from .node_element import NodeElement
 from .types import BlackLabel, ThickVerticalSlider

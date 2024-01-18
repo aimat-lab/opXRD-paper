@@ -14,7 +14,7 @@ class DynamicElem:
         self.labeled_checkbox : Optional[LabeledCheckBox] = None
 
         self.child_container = None
-        self.total_container = None
+        self.root_container = None
         self.height = height
         self.child_nodes : list[DynamicElem] = []
         self.parent : Optional[DynamicElem] = None
@@ -59,9 +59,9 @@ class DynamicElem:
         child_index = parent_gui_children.index(self)
         previous_children = parent_gui_children[:child_index]
 
-        ypos = self.parent.get_ypos() + sum([child.total_container.height for child in previous_children]) + self.parent.height
+        ypos = self.parent.get_ypos() + sum([child.root_container.height for child in previous_children]) + self.parent.height
         return ypos
 
     def get_gui_child_nodes(self):
-        return [child for child in self.child_nodes if child.total_container]
+        return [child for child in self.child_nodes if child.root_container]
 
