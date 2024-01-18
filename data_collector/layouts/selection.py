@@ -62,8 +62,6 @@ class SelectionLayout(BoxLayout):
         Clock.schedule_interval(self.update_node_population, update_rate)
         Clock.schedule_interval(self.update_do_scroll, update_rate)
 
-        if self.callback:
-            Clock.schedule_once(self.callback,-1)
 
     def register_content_done_callback(self, callback : callable):
         self.callback = callback
@@ -94,6 +92,8 @@ class SelectionLayout(BoxLayout):
             node.unload()
 
         self.last_load_range = new_load_range
+        if self.callback:
+            Clock.schedule_once(self.callback,-1)
 
 
     def update_do_scroll(self, *args, **kwargs):
