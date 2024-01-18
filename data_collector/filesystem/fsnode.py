@@ -34,12 +34,12 @@ class FsNode:
 
         self.time_filesystem_searching = 0
         self.time_relevancy_sorting = 0
+        self.callback = None
 
 
     def prepare_fsys(self, on_done : callable):
-        threading.Thread(target=self.init_fsys()).start()
-        Clock.schedule_once(on_done)
-
+        self.callback = on_done
+        threading.Thread(target=self.init_fsys).start()
 
     def init_fsys(self):
         fsys_start = time.time()
@@ -50,6 +50,8 @@ class FsNode:
         self.find_xrd_relevant_nodes()
         self.time_relevancy_sorting += time.time()-sorting_start
 
+        if self.callback:
+            Clock.schedule_once(callback=self.callback)
 
     def initialize_potential_des(self):
         for name in self.get_all_potential_sub():
