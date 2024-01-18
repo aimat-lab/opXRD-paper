@@ -5,8 +5,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.app import App
 
 from data_collector.filesystem import zip_file_list, produce_csv_file
-from data_collector.elements import InputDialog
-from data_collector.layouts import SelectionLayout, FinishLayout
+from data_collector.layouts import SelectionLayout, FinishLayout, InputDialog
 
 # -------------------------------------------
 
