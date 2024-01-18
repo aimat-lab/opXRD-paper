@@ -49,17 +49,16 @@ class SelectionLayout(BoxLayout):
 
         scroll_view_content = self.get_scroll_view_content(root_checkbox=self.root_checkbox)
         self.scroll_view.add_widget(widget=scroll_view_content)
-        self.scroll_view.bind(scroll_y=self.populate_view)
+        self.scroll_view.bind(scroll_y=self.update_node_population)
 
-        Clock.schedule_interval(self.populate_view,0.2)
-        # print(f'Time spent relevancy sorting:{self.root_checkbox.time_relevancy_sorting}')
-        # print(f'Time spent filesystem searching:{self.root_checkbox.time_filesystem_searching}')
-
+        update_rate = 0.2
+        Clock.schedule_interval(self.update_node_population, update_rate)
+        Clock.schedule_interval(self.update_do_scroll, update_rate)
 
     # -------------------------------------------
     # logic
 
-    def populate_view(self, *args, **kwargs):
+    def update_node_population(self, *args, **kwargs):
         _, __ = args, kwargs
         total_height = self.get_total_height()
         vp_height = self.get_vp_height()
@@ -84,6 +83,13 @@ class SelectionLayout(BoxLayout):
         self.last_load_range = new_load_range
 
 
+    def update_do_scroll(self, *args, **kwargs):
+        total_height = self.get_total_height()
+        vp_height = self.get_vp_height()
+
+        self.scroll_view.do_scroll_y = total_height > vp_height
+
+
     def on_scroll_view_scroll(self, instance, value):
         _ = instance
         self.slider.unbind(value=self.adjust_scroll_view)
@@ -95,14 +101,13 @@ class SelectionLayout(BoxLayout):
         _ = instance
         self.scroll_view.scroll_y = value
 
-
     # -------------------------------------------
     # get
 
     def get_total_height(self) -> int:
         return self.scroll_view.children[0].height
 
-    def get_vp_height(self):
+    def get_vp_height(self) -> int:
         return self.scroll_view.height
 
 

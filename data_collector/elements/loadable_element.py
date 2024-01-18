@@ -7,7 +7,7 @@ from intervals import Interval
 from typing import Optional
 # -------------------------------------------
 
-class DynamicElem:
+class LoadableElem:
 
     def __init__(self, height : int):
         super().__init__()
@@ -17,8 +17,8 @@ class DynamicElem:
         self.child_container = None
         self.root_container = None
         self.height = height
-        self.child_nodes : list[DynamicElem] = []
-        self.parent : Optional[DynamicElem] = None
+        self.child_nodes : list[LoadableElem] = []
+        self.parent : Optional[LoadableElem] = None
 
     # -------------------------------------------
     # callbacks
@@ -36,7 +36,7 @@ class DynamicElem:
     # get
 
     @staticmethod
-    def get_nodes_in_interval(node : DynamicElem, interval : Interval) -> list:
+    def get_nodes_in_interval(node : LoadableElem, interval : Interval) -> list:
         start_y = interval.lower
         end_y = interval.upper
 

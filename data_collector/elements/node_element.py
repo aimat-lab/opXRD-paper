@@ -7,13 +7,13 @@ from kivy.uix.boxlayout import  BoxLayout
 
 from data_collector.elements.types import Placeholder
 from data_collector.elements.node_widget import LabeledCheckBox, NodeWidget
-from data_collector.elements.dynamic_elem import DynamicElem
+from data_collector.elements.loadable_element import LoadableElem
 from data_collector.resources import get_foldericon_path, get_fileicon_path
 from data_collector.filesystem import FsNode
 from data_collector.configs import get_line_height
 # -------------------------------------------
 
-class NodeElement(FsNode, DynamicElem):
+class NodeElement(FsNode, LoadableElem):
     dim = get_line_height()
     file_img = Image.open(fp=get_fileicon_path()).resize((dim, dim))
     folder_img = Image.open(fp=get_foldericon_path()).resize((dim, dim))
@@ -26,7 +26,7 @@ class NodeElement(FsNode, DynamicElem):
 
     def __init__(self,path : str, height : int, scroll_view):
         FsNode.__init__(self,path=path)
-        DynamicElem.__init__(self,height=height)
+        LoadableElem.__init__(self, height=height)
 
         self.height : int = height
         self.labeled_checkbox : Optional[LabeledCheckBox] = None
