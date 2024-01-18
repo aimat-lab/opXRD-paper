@@ -55,24 +55,24 @@ class SelectionLayout(BoxLayout):
         # print(f'Time spent relevancy sorting:{self.root_checkbox.time_relevancy_sorting}')
         # print(f'Time spent filesystem searching:{self.root_checkbox.time_filesystem_searching}')
 
+
     # -------------------------------------------
     # logic
 
     def populate_view(self, *args, **kwargs):
         _, __ = args, kwargs
-        total_height = self.scroll_view.children[0].height
-        vp_height = self.scroll_view.height
+        total_height = self.get_total_height()
+        vp_height = self.get_vp_height()
 
         vp_ypos = (1-self.scroll_view.scroll_y)*(total_height-vp_height)
         buffer_range = vp_height/2.
 
         new_load_range = I.closed(lower=vp_ypos-buffer_range,upper=vp_ypos+vp_height+buffer_range)
-        unload_ranges = self.last_load_range - new_load_range
+        unload_range_list = self.last_load_range - new_load_range
 
         nodes_to_unload = []
-        for interval in unload_ranges:
-            print(f'unloading interval: {interval}')
-            nodes_to_unload += self.root_checkbox.get_nodes_in_interval(node=self.root_checkbox, interval=unload_ranges)
+        for unload_range in unload_range_list:
+            nodes_to_unload += self.root_checkbox.get_nodes_in_interval(node=self.root_checkbox, interval=unload_range)
 
         nodes_to_load = self.root_checkbox.get_nodes_in_interval(node=self.root_checkbox, interval=new_load_range)
         for node in nodes_to_load:
@@ -97,7 +97,14 @@ class SelectionLayout(BoxLayout):
 
 
     # -------------------------------------------
-    # elements
+    # get
+
+    def get_total_height(self) -> int:
+        return self.scroll_view.children[0].height
+
+    def get_vp_height(self):
+        return self.scroll_view.height
+
 
     @staticmethod
     def get_checkboxes_layout(file_count_label: Label, scroll_view: ScrollView):
