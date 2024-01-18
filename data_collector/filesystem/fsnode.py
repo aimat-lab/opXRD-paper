@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import threading
 import copy
 import os
 from abc import abstractmethod
@@ -7,6 +8,7 @@ from typing import Optional
 import time
 
 from data_collector.filesystem.lib import make_fsys_dict
+from kivy.clock import Clock
 
 # -------------------------------------------
 
@@ -32,6 +34,11 @@ class FsNode:
 
         self.time_filesystem_searching = 0
         self.time_relevancy_sorting = 0
+
+
+    def prepare_fsys(self, on_done : callable):
+        threading.Thread(target=self.init_fsys()).start()
+        Clock.schedule_once(on_done)
 
 
     def init_fsys(self):

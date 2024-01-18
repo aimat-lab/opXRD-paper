@@ -40,10 +40,13 @@ class SelectionLayout(BoxLayout):
         self.add_widget(self.slider)
 
 
-    def set_content(self, path : str):
+    def calculate_content(self, path : str):
         self.root_checkbox: NodeElement = NodeElement(path=path, height=get_line_height(), scroll_view=self.scroll_view)
-        self.root_checkbox.init_fsys()
+        self.root_checkbox.prepare_fsys(on_done=self.set_content)
 
+
+    def set_content(self, *args, **kwargs):
+        _, __ = args, kwargs
         new_label = self.get_header_widget(num_elements=len(self.root_checkbox.get_xrd_file_des())).children[2]
         self.header_layout.children[2].text =  new_label.text
 
@@ -84,6 +87,7 @@ class SelectionLayout(BoxLayout):
 
 
     def update_do_scroll(self, *args, **kwargs):
+        _, __ = args, kwargs
         total_height = self.get_total_height()
         vp_height = self.get_vp_height()
 
