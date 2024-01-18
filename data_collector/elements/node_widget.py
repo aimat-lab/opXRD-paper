@@ -14,12 +14,13 @@ from data_collector.elements.types import BlackLabel
 
 from data_collector.resources import get_unchecked_box_path, get_checked_box_path, get_fileicon_path, \
     get_foldericon_path, get_collapsed_icon_path, get_expanded_icon_path
+from kivy.uix.widget import Widget
 
 # -------------------------------------------
 
 class NodeWidget(BoxLayout):
     def __init__(self, callback : callable, height : int, labeled_checkbox : LabeledCheckBox, is_file : bool):
-        super().__init__(orientation='horizontal', size_hint=(1, None))
+        super().__init__(orientation='horizontal', size_hint=(1, None), height=height)
 
         if not is_file:
             icon_toggle_button = IconToggleButton(size_hint=(None, None),
@@ -28,11 +29,10 @@ class NodeWidget(BoxLayout):
             icon_toggle_button.btn.bind(state=callback)
             self.add_widget(icon_toggle_button)
         else:
-            place_holder = Label(size_hint=(None,None),size=(height,height))
+            place_holder = Widget(size_hint=(None,None),size=(height,height))
             self.add_widget(place_holder)
 
         self.add_widget(labeled_checkbox)
-        self.bind(minimum_height=self.setter('height'))
 
 
 class LabeledCheckBox(BoxLayout):

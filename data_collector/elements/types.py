@@ -65,12 +65,9 @@ class ThickVerticalSlider(Slider):
                  width=line_width)
 
 
-class Placeholder(BoxLayout):
+class Placeholder(Widget):
     def __init__(self, height : int):
-        super().__init__(orientation='horizontal', size_hint=(1, None))
-        label = Label(size_hint=(None, None), size=(height, height))
-        self.add_widget(label)
-        self.bind(minimum_height=self.setter('height'))
+        super().__init__(size_hint=(1, None), size=(height, height))
 
 
 
