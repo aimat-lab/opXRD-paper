@@ -92,9 +92,10 @@ class InputDialog(Popup):
 
     def make_hint(self) -> Widget:
         first_hint_text = (
-            'This application is designed to scan a given input folder for all xrd formats specified. '
-            'You can edit this list to your preferences:'
-        )
+            'This application scans a \"data folder\" and all its subfolders for files matching specified xrd formats. '
+            'Upon confirmation selected files are collected files into a .zip file. '
+            'You can edit this list of formats to your preferences:')
+
         hint = Label(text=first_hint_text,
                           size_hint=(1, None),
                           font_size=InputDialog.font_size)
@@ -106,8 +107,7 @@ class InputDialog(Popup):
 
     def make_second_hint(self) -> Widget:
         second_hint_text = (
-            'Once an input folder is selected, it will be scanned for the specified formats '
-            'and all xrd files matching that directory will be displayed. \n\n'
+            'After the search of the data folder is complete you will be presented with a selection of all files that match any of the specified formats \n\n'
             'You can then check boxes to indicate which folders or individual files you want to share.'
             'On press of the \"ok\" button, the application will collect all selected into a .zip file ready for submission on '
             'xrd.aimat.science along with a corresponding .csv file intended for specifying material properties.'
@@ -148,7 +148,7 @@ class InputDialog(Popup):
 
 
     def make_input_folder_hint(self):
-        hint = Label(text='Input folder path:',
+        hint = Label(text='Data folder path:',
                                          size_hint=(1, None),
                                          font_size=InputDialog.font_size)
         hint.bind(width=lambda *x: setattr(hint, 'text_size', (hint.width, None)))
