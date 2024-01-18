@@ -39,7 +39,6 @@ class NodeWidget(FsNode, DynamicElem):
         self.child_nodes : list[NodeWidget] = []
         self.parent : Optional[NodeWidget] = None
         self.place_holder = None
-
         self.is_loaded = False
 
 
@@ -87,9 +86,6 @@ class NodeWidget(FsNode, DynamicElem):
     def on_toggle(self, instance, value):
         _ = instance
         scroll_height = copy.copy(self.scroll_view.children[0].height)
-        vp_height = copy.copy(self.scroll_view.height)
-        s = copy.copy(1-self.scroll_view.scroll_y)
-
         factor = -1 if value == 'down' else 1
         height_delta =  factor * self.child_container.height
 
@@ -99,14 +95,14 @@ class NodeWidget(FsNode, DynamicElem):
             else:
                 self.total_container.add_widget(self.child_container)
 
-            self.adjust_scroll(scroll_height=scroll_height, vp_height=vp_height,
-                               new_scroll_height=scroll_height + height_delta, s=s)
+            self.adjust_scroll(scroll_height=scroll_height,new_scroll_height=scroll_height + height_delta)
 
 
-    def adjust_scroll(self, scroll_height, vp_height,  new_scroll_height, s):
-        viewport_height = self.scroll_view.height
+    def adjust_scroll(self, scroll_height,  new_scroll_height):
+        vp_height = self.scroll_view.height
+        s = copy.copy(1 - self.scroll_view.scroll_y)
 
-        target_value = 1 - (scroll_height - vp_height) / (new_scroll_height - viewport_height) * s
+        target_value = 1 - (scroll_height - vp_height) / (new_scroll_height - vp_height) * s
         self.scroll_view.scroll_y = target_value if target_value < 1 else 1
 
 
