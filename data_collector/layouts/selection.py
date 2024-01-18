@@ -83,6 +83,7 @@ class SelectionLayout(BoxLayout):
     # logic
 
     def populate_view(self, *args, **kwargs):
+        _, __ = args, kwargs
         scroll_y = self.scroll_view.scroll_y
         total_height = self.scroll_view.children[0].height
         vp_height = self.scroll_view.height
