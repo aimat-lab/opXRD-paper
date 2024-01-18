@@ -48,6 +48,9 @@ class SelectionLayout(BoxLayout):
 
     def set_content(self, *args, **kwargs):
         _, __ = args, kwargs
+        print(f'Time taken to initialize filesystem: {self.root_checkbox.time_filesystem_searching}')
+        print(f'Time taken to search relevancy: {self.root_checkbox.time_relevancy_sorting}')
+
         new_label = self.get_header_widget(num_elements=len(self.root_checkbox.get_xrd_file_des())).children[2]
         self.header_layout.children[2].text =  new_label.text
 
@@ -58,6 +61,7 @@ class SelectionLayout(BoxLayout):
         update_rate = 0.2
         Clock.schedule_interval(self.update_node_population, update_rate)
         Clock.schedule_interval(self.update_do_scroll, update_rate)
+
         if self.callback:
             self.callback()
 
