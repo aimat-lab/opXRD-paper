@@ -140,3 +140,29 @@ class ThickVerticalSlider(Slider):
             Line(points=[self.x + self.width / 2, self.y + line_width / 2,
                          self.x + self.width / 2, self.y + self.height - line_width / 2],
                  width=line_width)
+
+
+class Placeholder(BoxLayout):
+    def __init__(self, height : int):
+        super().__init__(orientation='horizontal', size_hint=(1, None))
+        label = Label(size_hint=(None, None), size=(height, height))
+        self.add_widget(label)
+        self.bind(minimum_height=self.setter('height'))
+                         
+
+class NodeLine(BoxLayout):
+    def __init__(self, callback : callable, height : int, labeled_checkbox : LabeledCheckBox):
+        super().__init__(orientation='horizontal', size_hint=(1, None))
+
+        if not self.get_is_file():
+            icon_toggle_button = IconToggleButton(size_hint=(None, None),
+                                          size=(self.height,self.height))
+
+            icon_toggle_button.btn.bind(state=callback)
+            self.add_widget(icon_toggle_button)
+        else:
+            place_holder = Label(size_hint=(None,None),size=(self.height,self.height))
+            self.add_widget(place_holder)
+
+        self.add_widget(labeled_checkbox)
+        self.bind(minimum_height=self.setter('height'))
