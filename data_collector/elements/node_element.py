@@ -44,7 +44,6 @@ class NodeElement(FsNode, LoadableElem):
         self.root_container.bind(minimum_height=self.root_container.setter('height'))
 
         self.labeled_checkbox = self._make_label_checkbox(level=level)
-        self.node_widget = self._make_widget(labeled_checkbox=self.labeled_checkbox)
         self.place_holder = self.get_placeholder()
         self.root_container.add_widget(self.place_holder)
 
@@ -99,7 +98,7 @@ class NodeElement(FsNode, LoadableElem):
 
     def unload(self):
         if self.is_loaded:
-            self.root_container.remove_widget(self.node_widget)
+            self.root_container.remove_widget(self.get_node_widget())
             self.root_container.add_widget(self.place_holder, index=1)
             self.is_loaded = False
         else:
@@ -109,7 +108,7 @@ class NodeElement(FsNode, LoadableElem):
     def load(self):
         if not self.is_loaded:
             self.root_container.remove_widget(self.place_holder)
-            self.root_container.add_widget(self.node_widget, index=1)
+            self.root_container.add_widget(self.get_node_widget(), index=1)
             self.is_loaded = True
         else:
             pass
@@ -140,8 +139,17 @@ class NodeElement(FsNode, LoadableElem):
         return f'{modifier}{base_name}'
 
 
-    def _make_widget(self, labeled_checkbox : LabeledCheckBox):
-        return NodeWidget(callback=self.on_toggle, height=self.height, labeled_checkbox=labeled_checkbox, is_file=self.get_is_file())
+    def get_node_widget(self):
+        if self.node_widget:
+            return self.node_widget
+
+        else:
+            self.node_widget = NodeWidget(callback=self.on_toggle,
+                                          height=self.height,
+                                          labeled_checkbox=self.labeled_checkbox,
+                                          is_file=self.get_is_file())
+
+        return self.node_widget
 
     def get_placeholder(self):
         return Placeholder(height=self.height)
