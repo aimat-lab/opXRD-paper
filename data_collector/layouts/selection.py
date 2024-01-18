@@ -41,12 +41,10 @@ class SelectionLayout(BoxLayout):
         self.add_widget(self.checkboxes_layout)
         self.add_widget(self.slider)
 
+
     def set_content(self, path : str):
         self.root_checkbox: NodeElement = NodeElement(path=path, height=get_line_height(), scroll_view=self.scroll_view)
         self.root_checkbox.init_fsys()
-
-        print(f'Time spent relevancy sorting:{self.root_checkbox.time_relevancy_sorting}')
-        print(f'Time spent filesystem searching:{self.root_checkbox.time_filesystem_searching}')
 
         new_label = self.get_header_widget(num_elements=len(self.root_checkbox.get_xrd_file_des())).children[2]
         self.header_layout.children[2].text =  new_label.text
@@ -55,23 +53,9 @@ class SelectionLayout(BoxLayout):
         self.scroll_view.add_widget(widget=scroll_view_content)
         self.scroll_view.bind(scroll_y=self.populate_view)
 
-        Clock.schedule_interval(self.populate_view,0.25)
-
-
-    def test_select_children(self, *args):
-        _ = args
-        subnodes = self.root_checkbox.get_loaded_nodes_in_range(self.root_checkbox, start_y=0, end_y=100)
-        for node in subnodes:
-            print(f'Found subnode with path: {node.path} in range')
-
-
-    def test_show_heights(self, *args):
-        _ = args
-        for child in self.root_checkbox.child_nodes:
-            try:
-                print(f'ypos child: {child.get_ypos()}')
-            except:
-                print(f'could not determine ypos of child with path {child.path}')
+        Clock.schedule_interval(self.populate_view,0.2)
+        # print(f'Time spent relevancy sorting:{self.root_checkbox.time_relevancy_sorting}')
+        # print(f'Time spent filesystem searching:{self.root_checkbox.time_filesystem_searching}')
 
     # -------------------------------------------
     # logic
@@ -90,13 +74,9 @@ class SelectionLayout(BoxLayout):
         nodes_to_unload = []
         for interval in unload_ranges:
             print(f'unloading interval: {interval}')
-            nodes_to_unload += self.root_checkbox.get_loaded_nodes_in_range(self.root_checkbox,
-                                                                            start_y=interval.lower,
-                                                                            end_y=interval.upper)
+            nodes_to_unload += self.root_checkbox.get_nodes_in_interval(node=self.root_checkbox, interval=unload_ranges)
 
-        nodes_to_load = self.root_checkbox.get_loaded_nodes_in_range(self.root_checkbox,
-                                                                     start_y=new_load_range.lower,
-                                                                     end_y=new_load_range.upper)
+        nodes_to_load = self.root_checkbox.get_nodes_in_interval(node=self.root_checkbox, interval=new_load_range)
         for node in nodes_to_load:
             node.load()
 
@@ -105,8 +85,6 @@ class SelectionLayout(BoxLayout):
 
         self.last_load_range = new_load_range
 
-        print(f'Number of nodes loaded: {len(nodes_to_load)}')
-        print(f'Number of nodes unloaded: {len(nodes_to_unload)}')
 
     def on_scroll_view_scroll(self, instance, value):
         _ = instance

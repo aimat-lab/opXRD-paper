@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from data_collector.elements.node_widget import LabeledCheckBox
 from abc import abstractmethod
+from intervals import Interval
 
 from typing import Optional
 # -------------------------------------------
@@ -35,7 +36,10 @@ class DynamicElem:
     # get
 
     @staticmethod
-    def get_loaded_nodes_in_range(node : DynamicElem, start_y : int, end_y : int) -> list:
+    def get_nodes_in_interval(node : DynamicElem, interval : Interval) -> list:
+        start_y = interval.lower
+        end_y = interval.upper
+
         selected_nodes = []
 
         def dfs(current_node):
