@@ -67,7 +67,6 @@ class InputDialog(Popup):
 
 
         Clock.schedule_once(lambda dt: self.callback(user_input),0.1)
-        self.dismiss()
 
     def print_warning(self):
         self.notice.text = f'Given input \"{self.path_input.text}\" is not a path to a directory. Please try again'

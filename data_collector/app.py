@@ -25,14 +25,13 @@ class DataCollectApp(App):
         self.finish_layout : Optional[FinishLayout] = None
 
     def on_start(self):
+        input_dialog = InputDialog(callback=self.selection_layout.calculate_content)
+        self.selection_layout.register_content_done_callback(input_dialog.dismiss)
+
         if self.input_folder_override is None:
-            self.show_launch_dialog(callback=self.selection_layout.calculate_content)
+            input_dialog.open()
         else:
             self.selection_layout.calculate_content(path=self.input_folder_override)
-
-    @staticmethod
-    def show_launch_dialog( callback : callable):
-        InputDialog(callback=callback).open()
 
 
     def build(self):

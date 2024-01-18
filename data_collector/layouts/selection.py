@@ -24,6 +24,7 @@ class SelectionLayout(BoxLayout):
         # attributes
         self.root_checkbox : Optional[NodeElement] = None
         self.last_load_range = I.closed(float('-inf'),float('inf'))
+        self.callback = None
 
         # GUI elements
         self.slider = ThickVerticalSlider(orientation='vertical', min=0, max=1, value=1, size_hint=(0.1, 1))
@@ -57,6 +58,11 @@ class SelectionLayout(BoxLayout):
         update_rate = 0.2
         Clock.schedule_interval(self.update_node_population, update_rate)
         Clock.schedule_interval(self.update_do_scroll, update_rate)
+        if self.callback:
+            self.callback()
+
+    def register_content_done_callback(self, callback : callable):
+        self.callback = callback
 
     # -------------------------------------------
     # logic
