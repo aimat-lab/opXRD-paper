@@ -12,29 +12,38 @@ from kivy.uix.popup import Popup
 
 from data_collector.elements.types import FocusTextInput
 from data_collector.filesystem import FsNode, get_initial_path
+from kivy.uix.image import Image
+from data_collector.resources.resource_manager import get_logo_path
 # -------------------------------------------
 
 class InputDialog(Popup):
+
+    font_size = Window.width * 0.0195
+
     def __init__(self, callback: callable, **kwargs):
         super(InputDialog, self).__init__(**kwargs)
-        self.size_hint = (0.8, 0.6)
+        self.size_hint = (0.8, 0.80)
         self.title = 'XRD data collector'
         self.title_align = 'center'
         self.auto_dismiss = False
         self.callback = callback
         self.content = BoxLayout(orientation='vertical', padding=[10, 10, 10, 10], spacing=10)
 
+
+        logo_image = Image(source=get_logo_path(), size_hint=(1, 0.3))
         first_hint = self.make_hint()
         self.format_input =self.make_format_input()
         second_hint = self.make_second_hint()
 
         self.notice = self.make_notice()
+        self.input_folder_hint = self.make_input_folder_hint()
         self.path_input = self.make_path_input()
         confirm_button = self.make_confirm_button()
 
-        for widget in [first_hint,self.format_input,second_hint,self.notice,self.path_input,confirm_button]:
+        for widget in [logo_image,first_hint,self.format_input,second_hint,self.notice,self.input_folder_hint,self.path_input,confirm_button]:
             self.content.add_widget(widget=widget)
         self.set_focus_chain()
+
 
     def set_focus_chain(self):
         self.format_input.focus_next = self.path_input
@@ -82,10 +91,13 @@ class InputDialog(Popup):
     # make widgets
 
     def make_hint(self) -> Widget:
-        first_hint_text = '''This application is designed to scan a given input folder for all xrd formats specified.You can edit this list to your preferences:'''
+        first_hint_text = (
+            'This application is designed to scan a given input folder for all xrd formats specified. '
+            'You can edit this list to your preferences:'
+        )
         hint = Label(text=first_hint_text,
                           size_hint=(1, None),
-                          font_size=Window.width * 0.02)
+                          font_size=InputDialog.font_size)
         hint.bind(width=lambda *x: setattr(hint, 'text_size', (hint.width, None)))
         hint.bind(texture_size=self._update_text_height)
 
@@ -93,10 +105,17 @@ class InputDialog(Popup):
 
 
     def make_second_hint(self) -> Widget:
-        second_hint_text = '''Once an input folder is selected, it will be scanned for the specified formats and all xrd files matching that directory will be displayed. You can then check folders or individual files that you want to share. Once you confirm that selection, the application will produce a .zip file ready for submission on xrd.aimat.science along with a template .csv file for labels.\n\nEnter file path to "input folder"'''
+        second_hint_text = (
+            'Once an input folder is selected, it will be scanned for the specified formats '
+            'and all xrd files matching that directory will be displayed. \n\n'
+            'You can then check boxes to indicate which folders or individual files you want to share.'
+            'On press of the \"ok\" button, the application will collect all selected into a .zip file ready for submission on '
+            'xrd.aimat.science along with a corresponding .csv file intended for specifying material properties.'
+        )
+
         second_hint = Label(text=second_hint_text,
                                          size_hint=(1, None),
-                                         font_size=Window.width * 0.02)
+                                         font_size=InputDialog.font_size)
         second_hint.bind(width=lambda *x: setattr(second_hint, 'text_size', (second_hint.width, None)))
         second_hint.bind(texture_size=self._update_text_height)
 
@@ -112,7 +131,7 @@ class InputDialog(Popup):
 
         format_input = FocusTextInput(text=f'{default_xrd_text}',
                                            size_hint=(1, 0.08),
-                                           font_size=Window.width * 0.02,
+                                           font_size=InputDialog.font_size,
                                            multiline=False)
         Clock.schedule_once(lambda dt: setattr(format_input, 'focus', True), 0.1)
 
@@ -122,15 +141,25 @@ class InputDialog(Popup):
     @staticmethod
     def make_notice() -> Widget:
         return Label(opacity=0,
-                     size_hint=(1, 0.1),
+                     size_hint=(1, 0.05),
                      halign="left",
                      color=[1, 0, 0, 1])
+
+
+
+    def make_input_folder_hint(self):
+        hint = Label(text='Input folder path:',
+                                         size_hint=(1, None),
+                                         font_size=InputDialog.font_size)
+        hint.bind(width=lambda *x: setattr(hint, 'text_size', (hint.width, None)))
+        hint.bind(texture_size=self._update_text_height)
+        return hint
 
 
     def make_path_input(self) -> Widget:
         path_input = FocusTextInput(text=f'{get_initial_path()}',
                                          size_hint=(1, 0.08),
-                                         font_size=Window.width * 0.02,
+                                         font_size=InputDialog.font_size,
                                          multiline=False)
 
         path_input.bind(on_text_validate=self.on_confirm)
@@ -138,6 +167,6 @@ class InputDialog(Popup):
 
 
     def make_confirm_button(self) -> Widget:
-        confirm = Button(text='confirm', size_hint=(1, 0.08))
+        confirm = Button(text='start search', size_hint=(1, 0.08))
         confirm.bind(on_press=self.on_confirm)
         return confirm
