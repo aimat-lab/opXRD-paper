@@ -15,6 +15,8 @@ from kivy.uix.textinput import TextInput
 from data_collector.resources import get_fileicon_path, get_foldericon_path, get_collapsed_icon_path, \
     get_expanded_icon_path, get_unchecked_box_path, get_checked_box_path
 
+from data_collector.configs.conf import get_line_height
+
 
 class FocusTextInput(TextInput):
     def keyboard_on_key_down(self, window, keycode, text, modifiers):
@@ -32,7 +34,7 @@ class FocusTextInput(TextInput):
 
 
 class LabeledCheckBox(BoxLayout):
-    indent = 50
+    indent = get_line_height()*1.5
 
     def __init__(self, height : int, text :str, check_callback, is_file : bool, indent=0, **kwargs):
         super().__init__(**kwargs)
@@ -151,17 +153,17 @@ class Placeholder(BoxLayout):
                          
 
 class NodeWidget(BoxLayout):
-    def __init__(self, callback : callable, height : int, labeled_checkbox : LabeledCheckBox):
+    def __init__(self, callback : callable, height : int, labeled_checkbox : LabeledCheckBox, is_file : bool):
         super().__init__(orientation='horizontal', size_hint=(1, None))
 
-        if not self.get_is_file():
+        if not is_file:
             icon_toggle_button = IconToggleButton(size_hint=(None, None),
-                                          size=(self.height,self.height))
+                                          size=(height,height))
 
             icon_toggle_button.btn.bind(state=callback)
             self.add_widget(icon_toggle_button)
         else:
-            place_holder = Label(size_hint=(None,None),size=(self.height,self.height))
+            place_holder = Label(size_hint=(None,None),size=(height,height))
             self.add_widget(place_holder)
 
         self.add_widget(labeled_checkbox)

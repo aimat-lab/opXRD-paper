@@ -1,18 +1,13 @@
 from __future__ import annotations
-from kivy.uix.boxlayout import  BoxLayout
-
 import copy
 import os.path
 from PIL import Image
-from data_collector.elements.types import LabeledCheckBox, IconToggleButton
+from typing import Optional
+from kivy.uix.boxlayout import  BoxLayout
+from data_collector.elements.types import LabeledCheckBox,NodeWidget, Placeholder
 from data_collector.resources import get_foldericon_path, get_fileicon_path
 from data_collector.filesystem import FsNode
 from data_collector.configs import get_line_height
-from kivy.uix.label import Label
-# from kivy.clock import Clock
-
-from typing import Optional
-
 from data_collector.elements.dynamic_elem import DynamicElem
 # -------------------------------------------
 
@@ -78,24 +73,18 @@ class NodeElement(FsNode, DynamicElem):
     def set_value(self,target_value : bool):
         self.labeled_checkbox.check_box.active = target_value
 
-
-    def get_is_checked(self) -> bool:
-        return self.labeled_checkbox.check_box.active
-
-
     def on_toggle(self, instance, value):
         _ = instance
         scroll_height = copy.copy(self.scroll_view.children[0].height)
         factor = -1 if value == 'down' else 1
         height_delta =  factor * self.child_container.height
 
-        with self.scroll_view.canvas:
-            if value == 'down':
-                self.root_container.remove_widget(self.child_container)
-            else:
-                self.root_container.add_widget(self.child_container)
+        if value == 'down':
+            self.root_container.remove_widget(self.child_container)
+        else:
+            self.root_container.add_widget(self.child_container)
 
-            self.adjust_scroll(scroll_height=scroll_height,new_scroll_height=scroll_height + height_delta)
+        self.adjust_scroll(scroll_height=scroll_height,new_scroll_height=scroll_height + height_delta)
 
 
     def adjust_scroll(self, scroll_height,  new_scroll_height):
@@ -126,6 +115,9 @@ class NodeElement(FsNode, DynamicElem):
     # -------------------------------------------
     # get
 
+    def get_is_checked(self) -> bool:
+        return self.labeled_checkbox.check_box.active
+
     def get_gui_child_nodes(self):
         return [child for child in self.child_nodes if child.root_container]
 
@@ -147,33 +139,13 @@ class NodeElement(FsNode, DynamicElem):
 
 
     def _make_widget(self, labeled_checkbox : LabeledCheckBox):
-        line_container = BoxLayout(orientation='horizontal', size_hint=(1, None))
+        return NodeWidget(callback=self.on_toggle,height=self.height, labeled_checkbox=labeled_checkbox, is_file=self.get_is_file())
 
-        if not self.get_is_file():
-            icon_toggle_button = IconToggleButton(size_hint=(None, None),
-                                          size=(self.height,self.height))
-
-            icon_toggle_button.btn.bind(state=self.on_toggle)
-            line_container.add_widget(icon_toggle_button)
-        else:
-            place_holder = Label(size_hint=(None,None),size=(self.height,self.height))
-            line_container.add_widget(place_holder)
-
-        line_container.add_widget(labeled_checkbox)
-        line_container.bind(minimum_height=line_container.setter('height'))
-        return line_container
-
+    def get_placeholder(self):
+        return Placeholder(height=self.height)
 
     @staticmethod
     def _get_child_container():
         child_container = BoxLayout(orientation='vertical', size_hint=(1, None))
         child_container.bind(minimum_height=child_container.setter('height'))
         return child_container
-
-
-    def get_placeholder(self):
-        line_container = BoxLayout(orientation='horizontal', size_hint=(1, None))
-        place_holder = Label(size_hint=(None, None), size=(self.height, self.height))
-        line_container.add_widget(place_holder)
-        line_container.bind(minimum_height=line_container.setter('height'))
-        return line_container
