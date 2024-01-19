@@ -22,7 +22,7 @@ class InputDialog(Popup):
 
     def __init__(self, callback: callable, **kwargs):
         super(InputDialog, self).__init__(**kwargs)
-        self.size_hint = (0.8, 0.80)
+        self.size_hint = (0.8, 0.825)
         self.title = 'XRD data collector'
         self.title_align = 'center'
         self.auto_dismiss = False
