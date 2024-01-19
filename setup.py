@@ -13,9 +13,9 @@ build_exe_options = {
 }
 
 setup(
-    name="SimpleKivyApp",
-    version="0.1",
-    description="My Kivy GUI application!",
+    name="XRD data collect app",
+    version="1.0",
+    description="Collects selected XRD data given data folder",
     options={"build_exe": build_exe_options},
     executables=[Executable("dev_run.py", base=base)]
 )
