@@ -84,7 +84,7 @@ class DataCollectApp(App):
                                          f'{csv_file_path}')
         except:
             self.finish_layout.feedback_widget.text = f'An error occured during the creating of the zip archive.\nIs "{target_folder_path}" a valid folder path?'
-        self.reveal_feedback_text()
+        self.show_feedback()
 
 
     def get_checked_filepaths(self) -> list[str]:
@@ -99,7 +99,8 @@ class DataCollectApp(App):
         return self.finish_layout.target_path_input.text if self.targt_folder_override is None else self.targt_folder_override
 
 
-    def reveal_feedback_text(self):
-        self.finish_layout.feedback_widget.opacity = 1
-        print(self.finish_layout.feedback_widget.text)
+    def show_feedback(self):
+        self.finish_layout.show()
+        # self.finish_layout.feedback_widget.opacity = 1
+        # print(self.finish_layout.feedback_widget.text)
 

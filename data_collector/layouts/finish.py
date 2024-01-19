@@ -8,6 +8,8 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
 
 from data_collector.elements.types import BlackLabel
+from kivy.uix.popup import Popup
+from kivy.uix.label import Label
 
 # -------------------------------------------
 
@@ -35,16 +37,26 @@ class FinishLayout(BoxLayout):
 
         # lower_finish = BoxLayout(orientation='horizontal', size_hint=(1, 0.6))
 
-        self.default_font_size = Window.width * 0.016
+        self.default_font_size = Window.width * 0.018
         self.feedback_widget = self.get_feedback_widget(font_size=self.default_font_size)
+
+        # Create the Popup
+        self.feedback_popup = Popup(title="Task done",
+                                    content=self.feedback_widget,
+                                    size_hint=(0.8, 0.2))
         # lower_finish.add_widget(self.feedback_widget)
 
         self.add_widget(upper_finish)
         # self.add_widget(lower_finish)
 
+    def show(self):
+        # Configure and show the Popup
+        self.feedback_widget.opacity = 1
+        self.feedback_popup.open()
+
     @staticmethod
     def get_feedback_widget(font_size: float) -> Widget:
-        return BlackLabel(size_hint=(0.8, 1),
+        return Label(size_hint=(0.8, 1),
                           opacity=0,
                           font_size=font_size)
 
