@@ -1,0 +1,1 @@
+pyinstaller prod_run.spec
