@@ -57,11 +57,11 @@ class FinishLayout(BoxLayout):
         container.add_widget(button_layout)
 
         # Create and return the popup
-        return Popup(title="Success!", content=container, size_hint=(1, 0.25),title_align='center', title_size=self.default_font_size)
+        return Popup(title="Success!", content=container, size_hint=(0.95, 0.25),title_align='center', title_size=self.default_font_size)
 
     @staticmethod
     def get_feedback_widget(font_size: float) -> Widget:
-        return Label(size_hint=(0.8, 1),
+        return Label(size_hint=(1, 1),
                           opacity=0,
                           font_size=font_size)
 
