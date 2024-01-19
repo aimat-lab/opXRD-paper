@@ -3,10 +3,12 @@
 
 block_cipher = None
 
+import os
+spec_dir = os.path.dirname(os.path.abspath(__name__))
 
 a = Analysis(
     ['run/prod_run.py'],
-    pathex=['/home/daniel/aimat/datapaper'],
+    pathex=[spec_dir],
     binaries=[],
     datas=[
     ('/home/daniel/aimat/datapaper/data_collector/resources/images/*', 'images'),  # Include all files in the 'images' directory
