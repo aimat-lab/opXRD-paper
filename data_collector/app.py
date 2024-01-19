@@ -36,7 +36,7 @@ class DataCollectApp(App):
 
     def build(self):
         self.selection_layout = SelectionLayout()
-        self.finish_layout = FinishLayout(callback=self.produce_dataset_files)
+        self.finish_layout = FinishLayout(callback=self.produce_dataset_files, exit_funct=self.stop)
 
         root_layout = BoxLayout(orientation='vertical')
         root_layout.add_widget(self.selection_layout)
