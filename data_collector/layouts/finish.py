@@ -41,7 +41,7 @@ class FinishLayout(BoxLayout):
         self.feedback_widget = self.get_feedback_widget(font_size=self.default_font_size)
 
         # Create the Popup
-        self.feedback_popup = Popup(title="Task done",
+        self.feedback_popup = Popup(title="Success!",
                                     content=self.feedback_widget,
                                     size_hint=(0.8, 0.2))
         # lower_finish.add_widget(self.feedback_widget)
@@ -50,7 +50,6 @@ class FinishLayout(BoxLayout):
         # self.add_widget(lower_finish)
 
     def show(self):
-        # Configure and show the Popup
         self.feedback_widget.opacity = 1
         self.feedback_popup.open()
 
