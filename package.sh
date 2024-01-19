@@ -10,7 +10,8 @@ fi
 
 DIST_DIR="$ROOT_DIR/dist"
 BUILD_DIR="$ROOT_DIR/build"
+script_dir="$(cd "$(dirname "$0")" && pwd)"
 
-pyinstaller prod_run.spec --distpath "$DIST_DIR" --workpath "$BUILD_DIR"
+pyinstaller "$script_dir/data_collector/prod_run.spec" --distpath "$DIST_DIR" --workpath "$BUILD_DIR"
 echo "-> Built executable at: $ROOT_DIR/dist/your_app_name"
 echo "done"
