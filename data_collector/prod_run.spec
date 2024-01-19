@@ -4,16 +4,16 @@
 block_cipher = None
 
 import os
-spec_dir = os.path.dirname(os.path.abspath(__name__))
+root_dir = os.path.dirname(os.path.abspath(__name__))
 
 a = Analysis(
     ['run/prod_run.py'],
-    pathex=[spec_dir],
+    pathex=[root_dir],
     binaries=[],
     datas=[
-    ('/home/daniel/aimat/datapaper/data_collector/resources/images/*', 'images'),  # Include all files in the 'images' directory
-    ('/home/daniel/aimat/datapaper/data_collector/resources/documents/*', 'documents'),  # Include all files in the 'documents' directory
-],
+        (os.path.join(root_dir, 'data_collector/resources/images/*'), 'images'),
+        (os.path.join(root_dir, 'data_collector/resources/documents/*'), 'documents'),
+    ],
     hiddenimports=['python-intervals'],
     hookspath=[],
     hooksconfig={},
