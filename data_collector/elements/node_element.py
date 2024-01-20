@@ -2,7 +2,7 @@ from __future__ import annotations
 import copy
 import os.path
 from PIL import Image
-from typing import Optional
+from typing import Optional, List
 from kivy.uix.boxlayout import  BoxLayout
 
 from data_collector.elements.types import Placeholder
@@ -34,7 +34,7 @@ class NodeElement(FsNode, LoadableElem):
         self.is_initialized = False
 
         self.node_widget = None
-        self.child_nodes : list[NodeElement] = []
+        self.child_nodes : List[NodeElement] = []
         self.parent : Optional[NodeElement] = None
         self.place_holder = None
 

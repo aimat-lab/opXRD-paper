@@ -5,6 +5,8 @@ from abc import abstractmethod
 from intervals import Interval
 
 from typing import Optional
+from typing import List
+
 # -------------------------------------------
 
 class LoadableElem:
@@ -17,7 +19,7 @@ class LoadableElem:
         self.child_container = None
         self.root_container = None
         self.height = height
-        self.child_nodes : list[LoadableElem] = []
+        self.child_nodes : List[LoadableElem] = []
         self.parent : Optional[LoadableElem] = None
 
     # -------------------------------------------

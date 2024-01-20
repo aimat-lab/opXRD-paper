@@ -10,6 +10,7 @@ from kivy.uix.textinput import TextInput
 from kivy.uix.image import Image
 from kivy.uix.widget import Widget
 from data_collector.resources import get_logo_path
+from typing import List
 
 class FocusTextInput(TextInput):
     def keyboard_on_key_down(self, window, keycode, text, modifiers):
@@ -73,7 +74,7 @@ class Placeholder(Widget):
 
 
 class HeaderWidget(BoxLayout):
-    def __init__(self, num_elements: int, format_list : list[str]):
+    def __init__(self, num_elements: int, format_list : List[str]):
         super().__init__(orientation='horizontal', size_hint=(1, 0.125))
         with_leading_dot_list = [f'.{the_format}' for the_format in format_list]
 

@@ -159,6 +159,7 @@ class SelectionLayout(BoxLayout):
             return
 
         def init_gui(*args, **kwargs):
+            _, __ = args, kwargs
             root_box.initialize_gui(gui_parent, level=indent)
             for child_box in root_box.potential_xrd_children:
                 self.recursively_add_boxes(gui_parent=root_box.child_container,

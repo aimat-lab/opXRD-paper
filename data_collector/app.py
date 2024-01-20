@@ -3,6 +3,7 @@ from datetime import datetime
 from typing import Optional
 from kivy.uix.boxlayout import BoxLayout
 from kivy.app import App
+from typing import List
 
 from data_collector.filesystem import zip_file_list, produce_csv_file
 from data_collector.layouts import SelectionLayout, FinishLayout, InputDialog
@@ -87,7 +88,7 @@ class DataCollectApp(App):
         self.show_feedback()
 
 
-    def get_checked_filepaths(self) -> list[str]:
+    def get_checked_filepaths(self) -> List[str]:
         all_file_checkboxes = self.selection_layout.root_checkbox.get_xrd_file_des()
         return [box.path for box in all_file_checkboxes if box.get_is_checked()]
 

@@ -2,11 +2,12 @@ from data_collector.resources import get_template_csv
 
 import os
 import zipfile, csv
+from typing import List
 
 
 # -------------------------------------------
 
-def zip_file_list(path_list: list[str], zipfile_path : str, root_path : str):
+def zip_file_list(path_list: List[str], zipfile_path : str, root_path : str):
     zip_path_dict = get_rel_path_dict(abs_path_list=path_list, root_path=root_path)
 
     if os.path.isfile(zipfile_path):
@@ -22,7 +23,7 @@ def zip_file_list(path_list: list[str], zipfile_path : str, root_path : str):
 
 
 
-def produce_csv_file(abs_path_list : list[str], target_path : str, root_path : str):
+def produce_csv_file(abs_path_list : List[str], target_path : str, root_path : str):
     rel_path_dict = get_rel_path_dict(abs_path_list=abs_path_list, root_path=root_path)
     rel_path_list = list(rel_path_dict.values())
     template_path = get_template_csv()
@@ -48,7 +49,7 @@ def produce_csv_file(abs_path_list : list[str], target_path : str, root_path : s
     print(f"CSV file created at {target_path}")
 
 
-def get_rel_path_dict(abs_path_list: list[str], root_path : str) -> dict:
+def get_rel_path_dict(abs_path_list: List[str], root_path : str) -> dict:
     rel_path_dict = {}
 
     for path in abs_path_list:

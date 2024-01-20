@@ -13,7 +13,7 @@ from kivy.uix.popup import Popup
 from data_collector.elements.types import FocusTextInput
 from data_collector.filesystem import FsNode, get_initial_path
 from kivy.uix.image import Image
-from data_collector.resources.resource_manager import get_logo_path, get_blended_logo_path
+from data_collector.resources.resource_manager import get_blended_logo_path
 # -------------------------------------------
 
 class InputDialog(Popup):
