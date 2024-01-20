@@ -1,4 +1,5 @@
 #!/bin/bash
+#using: pyhon3.X -m venv legacyVenv
 
 set -e
 
