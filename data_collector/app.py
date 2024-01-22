@@ -81,7 +81,7 @@ class DataCollectApp(App):
             produce_csv_file(abs_path_list=checked_paths,
                              target_path=csv_file_path,
                              root_path=self.get_rootfolder_path())
-            self.finish_layout.o
+            self.finish_layout.ok_button.text = 'working ...'
 
             Clock.schedule_once(self.show_feedback)
 
@@ -112,6 +112,7 @@ class DataCollectApp(App):
     def show_feedback(self, *args, **kwargs):
         _, __ = args, kwargs
         self.finish_layout.show()
+        self.finish_layout.ok_button.text = 'bundle files'
         # self.finish_layout.feedback_widget.opacity = 1
         # print(self.finish_layout.feedback_widget.text)
 

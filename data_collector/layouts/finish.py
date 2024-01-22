@@ -27,12 +27,12 @@ class FinishLayout(BoxLayout):
                                            font_size=Window.width * 0.02,
                                            multiline=False)
         buffer = BlackLabel(text='', size_hint=(0.075, 1))
-        ok_button = self.get_ok_button()
-        ok_button.bind(on_press=callback)
+        self.ok_button = self.get_ok_button()
+        self.ok_button.bind(on_press=callback)
 
         upper_finish.add_widget(note)
         upper_finish.add_widget(self.target_path_input)
-        upper_finish.add_widget(ok_button)
+        upper_finish.add_widget(self.ok_button)
         upper_finish.add_widget(buffer)
 
         self.exit_funct = exit_funct
