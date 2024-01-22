@@ -68,6 +68,6 @@ class FinishLayout(BoxLayout):
 
     @staticmethod
     def get_ok_button() -> Widget:
-        ok_button = Button(text="OK", size_hint=(0.2, 1))
+        ok_button = Button(text="bundle files", size_hint=(0.2, 1))
         ok_button.background_color = (0, 1, 0, 1)  # (R, G, B, A)
         return ok_button

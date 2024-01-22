@@ -113,7 +113,7 @@ class InputDialog(Popup):
         second_hint_text = (
             'After the search of the data folder is complete you will be presented with a selection of all files that match any of the specified formats. '
             'You can then check boxes to indicate which folders or individual files you want to share.'
-            '\n\nOn press of the \"ok\" button, the application will collect all selected into a .zip file ready for submission on '
+            '\n\nOn press of the \"bundle files\" button, the application will collect all selected into a .zip file ready for submission on '
             'xrd.aimat.science along with a corresponding .csv file intended for specifying material properties.'
         )
 
