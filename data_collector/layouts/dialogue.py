@@ -31,7 +31,7 @@ class InputDialog(Popup):
         self.background_color = (100 / 255, 255 / 255, 255 / 255, 1)  # (R, G, B, A)
 
         # logo_image = Image(source=get_blended_logo_path(), size_hint=(1, 0.3))
-        logo_image = get_kivy_image(width=Window.width*0.4, imgPath=get_blended_logo_path(), size_hint =(1,0.3))
+        logo_image = get_kivy_image(width=Window.width*0.4, imgPath=get_blended_logo_path(), size_hint =(1,0.25))
         print(f'Width of the blended logo: {Window.width*0.4}')
         first_hint = self.make_hint()
         self.format_input =self.make_format_input()
@@ -109,9 +109,9 @@ class InputDialog(Popup):
 
     def make_second_hint(self) -> Widget:
         second_hint_text = (
-            'After the search of the data folder is complete you will be presented with a selection of all files that match any of the specified formats \n\n'
+            'After the search of the data folder is complete you will be presented with a selection of all files that match any of the specified formats. '
             'You can then check boxes to indicate which folders or individual files you want to share.'
-            'On press of the \"ok\" button, the application will collect all selected into a .zip file ready for submission on '
+            '\n\nOn press of the \"ok\" button, the application will collect all selected into a .zip file ready for submission on '
             'xrd.aimat.science along with a corresponding .csv file intended for specifying material properties.'
         )
 
@@ -143,7 +143,8 @@ class InputDialog(Popup):
     @staticmethod
     def make_notice() -> Widget:
         return Label(opacity=0,
-                     size_hint=(1, 0.05),
+                     size_hint=(1, 0.075),
+                     font_size = InputDialog.font_size,
                      halign="left",
                      color=[1, 0, 0, 1])
 
