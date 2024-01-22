@@ -9,7 +9,7 @@ from kivy.uix.textinput import TextInput
 from kivy.core.window import Window
 
 from kivy.uix.widget import Widget
-from data_collector.configs import get_app_width
+from data_collector.configs import get_scaled_down_app_width
 from data_collector.resources import get_logo_path, get_kivy_image
 from typing import List
 
@@ -89,7 +89,7 @@ class HeaderWidget(BoxLayout):
         file_count_label.bind(size=file_count_label.setter('text_size'))
 
         # logo_image = Image(source=get_logo_path(), size_hint=(0.3, 1))
-        img_width = get_app_width()*0.3
+        img_width = get_scaled_down_app_width() * 0.3
         logo_image = get_kivy_image(width=img_width, imgPath=get_logo_path(), size_hint=(0.3,1))
         print(f'Width of the header widget:{img_width}')
 

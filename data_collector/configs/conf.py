@@ -33,7 +33,7 @@ def set_configs():
     Config.set('graphics', 'fullscreen', 0)
     # Config.set('graphics', 'resizable', '1')
 
-    app_width, app_height = get_app_width(), get_app_height()
+    app_width, app_height = get_scaled_down_app_width(), get_scaled_down_app_height()
 
     print(f'[INFO]: Unscaled width, height: {app_width},{app_height}')
 
@@ -41,21 +41,31 @@ def set_configs():
     Config.set('graphics', 'height', str(app_height))
 
 
-def get_app_width() -> int:
+def get_scaled_down_app_width() -> int:
+    width = int(get_true_width() / get_scaling_factor())
+    return width
+
+
+def get_scaled_down_app_height() -> int:
+    height = int(get_true_height() / get_scaling_factor())
+    return height
+
+
+def get_true_width() -> int:
     primary_monitor = get_primary_monitor()
-    scaling_factor = get_scaling_factor()
     relative_width = 0.75
 
-    app_width = int(primary_monitor.width * relative_width / scaling_factor)
+    app_width = int(primary_monitor.width * relative_width)
     return app_width
 
 
-def get_app_height() -> int:
+def get_true_height() -> int:
     primary_monitor = get_primary_monitor()
-    scaling_factor = get_scaling_factor()
     relative_height = 0.8
-    app_height = int(primary_monitor.height * relative_height / scaling_factor)
+
+    app_height = int(primary_monitor.height * relative_height)
     return app_height
+
 
 def get_line_height():
     std_width = 1920

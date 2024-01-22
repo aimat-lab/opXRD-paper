@@ -10,7 +10,7 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 
-from data_collector.configs import get_app_width
+from data_collector.configs import get_scaled_down_app_width, get_true_width
 from data_collector.elements.types import FocusTextInput
 from data_collector.filesystem import FsNode, get_initial_path
 from data_collector.resources.resource_manager import get_blended_logo_path, get_kivy_image
@@ -28,10 +28,10 @@ class InputDialog(Popup):
         self.auto_dismiss = False
         self.callback = callback
 
-        l = 12*get_app_width()/1600.
+        l = 12 * get_true_width () / 1600.
         self.content = BoxLayout(orientation='vertical', padding=[l, l, l, l], spacing=l)
 
-        print(f'App width is: {get_app_width()}')
+        print(f'App width is: {get_scaled_down_app_width()}')
 
         self.background_color = (100 / 255, 255 / 255, 255 / 255, 1)  # (R, G, B, A)
 
