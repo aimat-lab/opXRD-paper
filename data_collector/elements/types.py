@@ -6,10 +6,10 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
 from kivy.uix.slider import Slider
 from kivy.uix.textinput import TextInput
+from kivy.core.window import Window
 
-from kivy.uix.image import Image
 from kivy.uix.widget import Widget
-from data_collector.resources import get_logo_path
+from data_collector.resources import get_logo_path, get_kivy_image
 from typing import List
 
 class FocusTextInput(TextInput):
@@ -86,7 +86,9 @@ class HeaderWidget(BoxLayout):
         )
         file_count_label.bind(size=file_count_label.setter('text_size'))
 
-        logo_image = Image(source=get_logo_path(), size_hint=(0.3, 1))
+        # logo_image = Image(source=get_logo_path(), size_hint=(0.3, 1))
+        logo_image = get_kivy_image(width=Window.width*0.3, imgPath=get_logo_path(), size_hint=(0.3,1))
+        print(f'Width of the header widget:{self.width}')
 
         left_placeholder = Widget(size_hint=(0.4, 1))
         right_placeholder = Widget(size_hint=(0.1, 1))

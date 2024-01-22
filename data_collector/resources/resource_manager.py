@@ -1,6 +1,12 @@
 import os
 import sys
 
+from kivy.core.image import Image as CoreImage
+from kivy.uix.image import Image as kiImage
+from io import BytesIO
+from PIL import Image
+
+
 # Determine the base path for resources based on whether the app is bundled or run as a script
 if getattr(sys, 'frozen', False):
     # The app is bundled with PyInstaller
@@ -41,3 +47,20 @@ def get_unchecked_box_path() -> str:
 
 def get_template_csv() -> str:
     return os.path.join(doc_folder_path, 'template.csv')
+
+
+def pil_to_kivy_image(pil_image, size_hint):
+    data = BytesIO()
+    pil_image.save(data, format='png')
+    data.seek(0)
+    core_image = CoreImage(BytesIO(data.read()), ext='png')
+    kivy_image = kiImage(size_hint=size_hint)
+    kivy_image.texture = core_image.texture
+    return kivy_image
+
+def get_kivy_image(width, imgPath, size_hint):
+    pil_image = Image.open(imgPath)
+    aspect_ratio = pil_image.height / pil_image.width
+    new_height = int(width * aspect_ratio)
+    resized_image = pil_image.resize((int(width), new_height), Image.LANCZOS)
+    return pil_to_kivy_image(resized_image, size_hint)
