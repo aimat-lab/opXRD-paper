@@ -49,18 +49,18 @@ def get_template_csv() -> str:
     return os.path.join(doc_folder_path, 'template.csv')
 
 
-def pil_to_kivy_image(pil_image, size_hint):
+def pil_to_kivy_image(pil_image, **kwargs):
     data = BytesIO()
     pil_image.save(data, format='png')
     data.seek(0)
     core_image = CoreImage(BytesIO(data.read()), ext='png')
-    kivy_image = kiImage(size_hint=size_hint)
+    kivy_image = kiImage(**kwargs)
     kivy_image.texture = core_image.texture
     return kivy_image
 
-def get_kivy_image(width, imgPath, size_hint):
+def get_kivy_image(width, imgPath,**kwargs):
     pil_image = Image.open(imgPath)
     aspect_ratio = pil_image.height / pil_image.width
     new_height = int(width * aspect_ratio)
     resized_image = pil_image.resize((int(width), new_height), Image.LANCZOS)
-    return pil_to_kivy_image(resized_image, size_hint)
+    return pil_to_kivy_image(resized_image, **kwargs)

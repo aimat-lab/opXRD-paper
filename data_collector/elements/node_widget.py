@@ -12,7 +12,7 @@ from data_collector.configs import get_line_height
 from data_collector.elements.types import BlackLabel
 
 from data_collector.resources import get_unchecked_box_path, get_checked_box_path, get_fileicon_path, \
-    get_foldericon_path, get_collapsed_icon_path, get_expanded_icon_path
+    get_foldericon_path, get_collapsed_icon_path, get_expanded_icon_path, get_kivy_image
 from kivy.uix.widget import Widget
 
 # -------------------------------------------
@@ -67,8 +67,10 @@ class IconToggleButton(RelativeLayout):
         super(IconToggleButton, self).__init__(**kwargs)
 
         height = self.height
-        self.collapsed = Image(source=get_collapsed_icon_path(), size_hint=(None, None),size=(height,height))
-        self.expanded = Image(source=get_expanded_icon_path(), size_hint=(None, None),size=(height,height))
+        # self.collapsed = Image(source=get_collapsed_icon_path(), size_hint=(None, None),size=(height,height))
+        # self.expanded = Image(source=get_expanded_icon_path(), size_hint=(None, None),size=(height,height))
+        self.collapsed = get_kivy_image(width=height, imgPath=get_collapsed_icon_path(), size_hint=(None, None), size=(height,height))
+        self.expanded = get_kivy_image(width=height, imgPath=get_expanded_icon_path(), size_hint=(None, None), size=(height,height))
 
         self.btn = ToggleButton(size_hint=(1, 1), background_color=(0, 0, 0, 0))
         self.add_widget(self.btn)
