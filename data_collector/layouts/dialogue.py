@@ -30,6 +30,9 @@ class InputDialog(Popup):
 
         l = 12*get_app_width()/1600.
         self.content = BoxLayout(orientation='vertical', padding=[l, l, l, l], spacing=l)
+
+        print(f'App width is: {get_app_width()}')
+
         self.background_color = (100 / 255, 255 / 255, 255 / 255, 1)  # (R, G, B, A)
 
         # logo_image = Image(source=get_blended_logo_path(), size_hint=(1, 0.3))

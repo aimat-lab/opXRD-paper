@@ -18,7 +18,8 @@ class FinishLayout(BoxLayout):
         l = 15 * get_app_width() / 1600.
         super(FinishLayout, self).__init__(orientation='vertical', size_hint=(1, 0.085),padding=(0, l, 0, l),**kwargs)
 
-        upper_finish = BoxLayout(orientation='horizontal', size_hint=(1, 0.3),spacing=10)
+        s = 10 * get_app_width() / 1600.
+        upper_finish = BoxLayout(orientation='horizontal', size_hint=(1, 0.3),spacing=s)
         note = BlackLabel(text='Target folder:', size_hint=(0.2, 1), font_size=Window.width * 0.02, bold=True)
         self.target_path_input = TextInput(text=f'{os.getcwd()}',
                                            size_hint=(0.7, 1),
