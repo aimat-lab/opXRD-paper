@@ -31,16 +31,9 @@ def get_scaling_factor():
 
 def set_configs():
     Config.set('graphics', 'fullscreen', 0)
-    Config.set('graphics', 'resizable', '0')
+    # Config.set('graphics', 'resizable', '1')
 
-    primary_monitor = get_primary_monitor()
-    scaling_factor = get_scaling_factor()
-
-    relative_width = 0.5
-    relative_height = 0.75
-
-    app_width = int(primary_monitor.width * relative_width / scaling_factor)
-    app_height = int(primary_monitor.height * relative_height / scaling_factor)
+    app_width, app_height = get_app_width(), get_app_height()
 
     print(f'[INFO]: Unscaled width, height: {app_width},{app_height}')
 
@@ -48,9 +41,25 @@ def set_configs():
     Config.set('graphics', 'height', str(app_height))
 
 
+def get_app_width() -> int:
+    primary_monitor = get_primary_monitor()
+    scaling_factor = get_scaling_factor()
+    relative_width = 0.8
+
+    app_width = int(primary_monitor.width * relative_width / scaling_factor)
+    return app_width
+
+
+def get_app_height() -> int:
+    primary_monitor = get_primary_monitor()
+    scaling_factor = get_scaling_factor()
+    relative_height = 0.75
+    app_height = int(primary_monitor.height * relative_height / scaling_factor)
+    return app_height
+
 def get_line_height():
     std_width = 1920
-    std_line_height = 30
+    std_line_height = 50
 
     line_height =int(std_line_height * get_primary_monitor_width()/std_width)
 

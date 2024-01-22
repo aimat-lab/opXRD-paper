@@ -13,12 +13,12 @@ from kivy.uix.popup import Popup
 from data_collector.elements.types import FocusTextInput
 from data_collector.filesystem import FsNode, get_initial_path
 from kivy.uix.image import Image
-from data_collector.resources.resource_manager import get_blended_logo_path
+from data_collector.resources.resource_manager import get_blended_logo_path, get_kivy_image
 # -------------------------------------------
 
 class InputDialog(Popup):
 
-    font_size = Window.width * 0.0195
+    font_size = Window.width * 0.0145
 
     def __init__(self, callback: callable, **kwargs):
         super(InputDialog, self).__init__(**kwargs)
@@ -30,7 +30,9 @@ class InputDialog(Popup):
         self.content = BoxLayout(orientation='vertical', padding=[10, 10, 10, 10], spacing=10)
         self.background_color = (100 / 255, 255 / 255, 255 / 255, 1)  # (R, G, B, A)
 
-        logo_image = Image(source=get_blended_logo_path(), size_hint=(1, 0.3))
+        # logo_image = Image(source=get_blended_logo_path(), size_hint=(1, 0.3))
+        logo_image = get_kivy_image(width=Window.width*0.4, imgPath=get_blended_logo_path(), size_hint =(1,0.3))
+        print(f'Width of the blended logo: {Window.width*0.4}')
         first_hint = self.make_hint()
         self.format_input =self.make_format_input()
         second_hint = self.make_second_hint()

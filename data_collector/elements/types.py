@@ -87,11 +87,11 @@ class HeaderWidget(BoxLayout):
         file_count_label.bind(size=file_count_label.setter('text_size'))
 
         # logo_image = Image(source=get_logo_path(), size_hint=(0.3, 1))
-        logo_image = get_kivy_image(width=Window.width*0.3, imgPath=get_logo_path(), size_hint=(0.3,1))
+        logo_image = get_kivy_image(width=self.width*0.3, imgPath=get_logo_path(), size_hint=(0.3,1))
         print(f'Width of the header widget:{self.width}')
 
-        left_placeholder = Widget(size_hint=(0.4, 1))
-        right_placeholder = Widget(size_hint=(0.1, 1))
+        left_placeholder = Widget(size_hint=(0.3, 1))
+        right_placeholder = Widget(size_hint=(0.2, 1))
 
         self.add_widget(left_placeholder)  # Placeholder to balance the self
         self.add_widget(file_count_label)
