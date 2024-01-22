@@ -105,7 +105,8 @@ class ImageCheckBox(CheckBox):
         self.checked_image = CoreImage(get_checked_box_path()).texture
         self.unchecked_image = CoreImage(get_unchecked_box_path()).texture
 
-        self._checkbox_image = get_empty_path()
+        self.background_checkbox_down = get_empty_path()
+        self.background_checkbox_normal = get_empty_path()
 
         with self.canvas:
             self.rect = Rectangle(texture=self.unchecked_image, pos=self.pos, size=self.size)
@@ -118,8 +119,8 @@ class ImageCheckBox(CheckBox):
             return True
         return super().on_touch_down(touch)
 
-    def _on_state(self, instance, value):
-        pass
+    # def _on_state(self, instance, value):
+    #     self._checkbox_image = get_empty_path()
 
     def update_rect(self, *args):
         self.rect.pos = self.pos
