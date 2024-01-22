@@ -1,6 +1,14 @@
 #!/bin/bash
 #using: pyhon3.X -m venv legacyVenv
 
+#setup before executing package.sh:
+
+#sudo apt install python 3.X python3.X-dev python3.X-venv
+#python3.X -m venv legacyVenv
+#source legacyVenv/bin/activate
+#sudo apt install binutils
+#pip install -r requirements.txt
+
 set -e
 
 # Define the root directory where the script and build should be located
