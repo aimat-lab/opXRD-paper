@@ -48,6 +48,8 @@ def get_unchecked_box_path() -> str:
 def get_template_csv() -> str:
     return os.path.join(doc_folder_path, 'template.csv')
 
+def get_empty_path() -> str:
+    return os.path.join(images_folder_path, 'empty.png')
 
 def pil_to_kivy_image(pil_image, **kwargs):
     data = BytesIO()

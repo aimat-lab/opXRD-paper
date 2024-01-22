@@ -12,7 +12,7 @@ from data_collector.configs import get_line_height
 from data_collector.elements.types import BlackLabel
 
 from data_collector.resources import get_unchecked_box_path, get_checked_box_path, get_fileicon_path, \
-    get_foldericon_path, get_collapsed_icon_path, get_expanded_icon_path, get_kivy_image
+    get_foldericon_path, get_collapsed_icon_path, get_expanded_icon_path, get_kivy_image, get_empty_path
 from kivy.uix.widget import Widget
 
 # -------------------------------------------
@@ -90,16 +90,39 @@ class IconToggleButton(RelativeLayout):
             self.icon = self.expanded
         self.add_widget(self.icon)
 
-
+from kivy.uix.widget import Widget
+from kivy.graphics import Rectangle, Color
+from kivy.core.image import Image as CoreImage
+from kivy.properties import BooleanProperty, ObjectProperty
 
 class ImageCheckBox(CheckBox):
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self._checkbox_image = get_unchecked_box_path()
+    active = BooleanProperty(False)
+    checked_image = ObjectProperty(None)
+    unchecked_image = ObjectProperty(None)
 
-    def on_state(self, widget, value):
-        _ = widget
-        if value == 'down':
-            self._checkbox_image = get_checked_box_path()
-        else:
-            self._checkbox_image = get_unchecked_box_path()
+    def __init__(self,**kwargs):
+        super().__init__(**kwargs)
+        self.checked_image = CoreImage(get_checked_box_path()).texture
+        self.unchecked_image = CoreImage(get_unchecked_box_path()).texture
+
+        self._checkbox_image = get_empty_path()
+
+        with self.canvas:
+            self.rect = Rectangle(texture=self.unchecked_image, pos=self.pos, size=self.size)
+
+        self.bind(pos=self.update_rect, size=self.update_rect, active=self.update_rect)
+
+    def on_touch_down(self, touch):
+        if self.collide_point(*touch.pos):
+            self.active = not self.active
+            return True
+        return super().on_touch_down(touch)
+
+    def _on_state(self, instance, value):
+        pass
+
+    def update_rect(self, *args):
+        self.rect.pos = self.pos
+        self.rect.size = self.size
+        self.rect.texture = self.checked_image if self.active else self.unchecked_image
+
