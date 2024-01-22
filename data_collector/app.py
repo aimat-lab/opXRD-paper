@@ -1,9 +1,12 @@
 import os
+import threading
 from datetime import datetime
 from typing import Optional
 from kivy.uix.boxlayout import BoxLayout
 from kivy.app import App
 from typing import List
+
+from kivy.clock import Clock
 
 from data_collector.filesystem import zip_file_list, produce_csv_file
 from data_collector.layouts import SelectionLayout, FinishLayout, InputDialog
@@ -69,8 +72,8 @@ class DataCollectApp(App):
         zipfile_path = os.path.join(target_folder_path, f'xrd_data_collected_on_{datetime_stamp}.zip')
         csv_file_path = os.path.join(target_folder_path,f'xrd_labels_generated_on_{datetime_stamp}.csv')
 
-        print("Checked Paths:", checked_paths)
-        try:
+
+        def produce_files():
             zip_file_list(path_list=checked_paths,
                           zipfile_path=zipfile_path,
                           root_path=self.get_rootfolder_path())
@@ -78,14 +81,20 @@ class DataCollectApp(App):
             produce_csv_file(abs_path_list=checked_paths,
                              target_path=csv_file_path,
                              root_path=self.get_rootfolder_path())
+            self.finish_layout.o
 
+            Clock.schedule_once(self.show_feedback)
+
+        print("Checked Paths:", checked_paths)
+        try:
+            produce_files_thread = threading.Thread(target=produce_files)
+            produce_files_thread.start()
 
             self.finish_layout.feedback_widget.text = (f'Done! Wrote {len(checked_paths)} xrd file(s) to .zip file and produced corresponding label .csv file at:\n'
                                          f'{zipfile_path} \n'
                                          f'{csv_file_path}')
         except:
             self.finish_layout.feedback_widget.text = f'An error occured during the creating of the zip archive.\nIs "{target_folder_path}" a valid folder path?'
-        self.show_feedback()
 
 
     def get_checked_filepaths(self) -> List[str]:
@@ -100,7 +109,8 @@ class DataCollectApp(App):
         return self.finish_layout.target_path_input.text if self.targt_folder_override is None else self.targt_folder_override
 
 
-    def show_feedback(self):
+    def show_feedback(self, *args, **kwargs):
+        _, __ = args, kwargs
         self.finish_layout.show()
         # self.finish_layout.feedback_widget.opacity = 1
         # print(self.finish_layout.feedback_widget.text)
