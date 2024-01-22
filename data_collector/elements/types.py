@@ -82,6 +82,7 @@ class HeaderWidget(BoxLayout):
         file_count_label = BlackLabel(
             text=f"Found {num_elements} files that match specified XRD formats:\n {with_leading_dot_list}",
             size_hint=(0.6, 1),  # Adjusted size hint
+            font_size=Window.width * 0.0145,
             halign="center",
             valign="middle"
         )
@@ -92,7 +93,7 @@ class HeaderWidget(BoxLayout):
         logo_image = get_kivy_image(width=img_width, imgPath=get_logo_path(), size_hint=(0.3,1))
         print(f'Width of the header widget:{img_width}')
 
-        left_placeholder = Widget(size_hint=(0.3, 1))
+        left_placeholder = Widget(size_hint=(0.4, 1))
         right_placeholder = Widget(size_hint=(0.2, 1))
 
         self.add_widget(left_placeholder)  # Placeholder to balance the self

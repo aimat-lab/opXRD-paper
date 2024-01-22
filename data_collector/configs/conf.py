@@ -44,7 +44,7 @@ def set_configs():
 def get_app_width() -> int:
     primary_monitor = get_primary_monitor()
     scaling_factor = get_scaling_factor()
-    relative_width = 0.8
+    relative_width = 0.75
 
     app_width = int(primary_monitor.width * relative_width / scaling_factor)
     return app_width
@@ -53,13 +53,13 @@ def get_app_width() -> int:
 def get_app_height() -> int:
     primary_monitor = get_primary_monitor()
     scaling_factor = get_scaling_factor()
-    relative_height = 0.75
+    relative_height = 0.8
     app_height = int(primary_monitor.height * relative_height / scaling_factor)
     return app_height
 
 def get_line_height():
     std_width = 1920
-    std_line_height = 50
+    std_line_height = 40
 
     line_height =int(std_line_height * get_primary_monitor_width()/std_width)
 

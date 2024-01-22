@@ -10,9 +10,9 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 
+from data_collector.configs import get_app_width
 from data_collector.elements.types import FocusTextInput
 from data_collector.filesystem import FsNode, get_initial_path
-from kivy.uix.image import Image
 from data_collector.resources.resource_manager import get_blended_logo_path, get_kivy_image
 # -------------------------------------------
 
@@ -22,12 +22,14 @@ class InputDialog(Popup):
 
     def __init__(self, callback: callable, **kwargs):
         super(InputDialog, self).__init__(**kwargs)
-        self.size_hint = (0.8, 0.825)
+        self.size_hint = (0.65, 0.825)
         self.title = 'XRD data collector'
         self.title_align = 'center'
         self.auto_dismiss = False
         self.callback = callback
-        self.content = BoxLayout(orientation='vertical', padding=[10, 10, 10, 10], spacing=10)
+
+        l = 12*get_app_width()/1600.
+        self.content = BoxLayout(orientation='vertical', padding=[l, l, l, l], spacing=l)
         self.background_color = (100 / 255, 255 / 255, 255 / 255, 1)  # (R, G, B, A)
 
         # logo_image = Image(source=get_blended_logo_path(), size_hint=(1, 0.3))

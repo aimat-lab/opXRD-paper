@@ -10,12 +10,13 @@ from kivy.uix.widget import Widget
 from data_collector.elements.types import BlackLabel
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
-
+from data_collector.configs import get_app_width
 # -------------------------------------------
 
 class FinishLayout(BoxLayout):
     def __init__(self, callback: callable, exit_funct : callable, **kwargs):
-        super(FinishLayout, self).__init__(orientation='vertical', size_hint=(1, 0.14*0.5),padding=(0, 10, 0, 10),**kwargs)
+        l = 15 * get_app_width() / 1600.
+        super(FinishLayout, self).__init__(orientation='vertical', size_hint=(1, 0.085),padding=(0, l, 0, l),**kwargs)
 
         upper_finish = BoxLayout(orientation='horizontal', size_hint=(1, 0.3),spacing=10)
         note = BlackLabel(text='Target folder:', size_hint=(0.2, 1), font_size=Window.width * 0.02, bold=True)
