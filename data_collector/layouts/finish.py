@@ -37,21 +37,20 @@ class FinishLayout(BoxLayout):
 
         self.exit_funct = exit_funct
         self.default_font_size = get_true_width() * 0.018
-        self.feedback_widget = self.get_feedback_widget(font_size=self.default_font_size)
+        self.feedback_label = self.get_feedback_label(font_size=self.default_font_size)
         self.feedback_popup = self.get_feedback_popup()
 
         self.add_widget(upper_finish)
 
 
     def show(self):
-        self.feedback_widget.opacity = 1
         self.feedback_popup.open()
 
     def get_feedback_popup(self):
         container = BoxLayout(orientation='vertical')
-        container.add_widget(self.feedback_widget)
+        container.add_widget(self.feedback_label)
 
-        button_layout = BoxLayout(size_hint_y=None, height=50)
+        button_layout = BoxLayout(size_hint_y=0.2)
         dismiss_button = Button(text='Dismiss', on_press=lambda instance: self.feedback_popup.dismiss())
         exit_button = Button(text='Exit', on_press=self.exit_funct)
         button_layout.add_widget(dismiss_button)
@@ -60,13 +59,15 @@ class FinishLayout(BoxLayout):
         container.add_widget(button_layout)
 
         # Create and return the popup
-        return Popup(title="Success!", content=container, size_hint=(0.95, 0.25),title_align='center', title_size=self.default_font_size)
+        return Popup(title="Success!", content=container, size_hint=(0.95, 0.4),title_align='center', title_size=self.default_font_size)
 
     @staticmethod
-    def get_feedback_widget(font_size: float) -> Widget:
-        return Label(size_hint=(1, 1),
-                          opacity=0,
-                          font_size=font_size)
+    def get_feedback_label(font_size: float) -> Widget:
+        text_label =  Label(size_hint=(1, 0.8),
+                            halign='left',
+                            font_size=font_size)
+        text_label.bind(size=text_label.setter('text_size'))
+        return text_label
 
     @staticmethod
     def get_ok_button() -> Widget:

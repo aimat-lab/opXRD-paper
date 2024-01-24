@@ -89,7 +89,7 @@ class DataCollectApp(App):
                              root_path=self.get_rootfolder_path())
 
             self.finish_layout.feedback_popup.title = 'Success!'
-            self.finish_layout.feedback_widget.text = (
+            self.finish_layout.feedback_label.text = (
                 f'Done! Wrote {len(checked_paths)} xrd file(s) to .zip file and produced corresponding label .csv file at:\n'
                 f'{zipfile_path} \n'
                 f'{csv_file_path}')
@@ -97,9 +97,9 @@ class DataCollectApp(App):
 
         except Exception as e:
             self.finish_layout.feedback_popup.title = 'Failed to bundle files!'
-            self.finish_layout.feedback_widget.text = (f'An error occured during the creating of the zip archive: {e}\n'
-                                                       f'Is "{target_folder_path}" a valid folder path?'
-                                                       f'Does the executable have permission to view all selected files?')
+            self.finish_layout.feedback_label.text = (f'An error occured during the creating of the zip archive:\n {e}'
+                                                       f'\nIs "{target_folder_path}" a valid folder path?'
+                                                       f'\nDoes the executable have permission to view all selected files?')
 
         Clock.schedule_once(self.show_feedback)
 
