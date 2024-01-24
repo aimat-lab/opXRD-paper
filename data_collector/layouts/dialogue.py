@@ -160,7 +160,7 @@ class InputDialog(Popup):
 
     def make_input_folder_hint(self):
         hint = Label(text='Data folder path:',
-                                         size_hint=(1, None),
+                                         size_hint=(1, 0.1),
                                          font_size=InputDialog.font_size)
         hint.bind(width=lambda *x: setattr(hint, 'text_size', (hint.width, None)))
         hint.bind(texture_size=self._update_text_height)
