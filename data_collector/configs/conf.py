@@ -7,16 +7,6 @@ import logging
 logging.basicConfig(level=logging.INFO)
 # -------------------------------------------
 
-def get_primary_monitor():
-    monitors = get_monitors()
-    for monitor in monitors:
-        if monitor.is_primary:
-            return monitor
-    return None
-
-
-def get_primary_monitor_width():
-    return get_primary_monitor().width
 
 def get_scaling_factor():
     ui_scale = 1
@@ -68,12 +58,24 @@ def get_true_height() -> int:
 
 
 def get_line_height():
-    std_width = 1920
+    std_width = 1080
     std_line_height = 40
-
-    line_height =int(std_line_height * get_primary_monitor_width()/std_width)
-
+    line_height =int(std_line_height * get_primary_monitor_height()/std_width)
     print(line_height)
 
     return line_height
 
+
+def get_primary_monitor():
+    monitors = get_monitors()
+    for monitor in monitors:
+        if monitor.is_primary:
+            return monitor
+    return None
+
+
+def get_primary_monitor_width():
+    return get_primary_monitor().width
+
+def get_primary_monitor_height():
+    return get_primary_monitor().height
