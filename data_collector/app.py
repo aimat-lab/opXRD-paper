@@ -74,6 +74,8 @@ class DataCollectApp(App):
 
 
         def produce_files():
+            self.finish_layout.ok_button.text = 'working ...'
+
             zip_file_list(path_list=checked_paths,
                           zipfile_path=zipfile_path,
                           root_path=self.get_rootfolder_path())
@@ -81,7 +83,6 @@ class DataCollectApp(App):
             produce_csv_file(abs_path_list=checked_paths,
                              target_path=csv_file_path,
                              root_path=self.get_rootfolder_path())
-            self.finish_layout.ok_button.text = 'working ...'
 
             Clock.schedule_once(self.show_feedback)
 
