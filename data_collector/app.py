@@ -114,6 +114,4 @@ class DataCollectApp(App):
         _, __ = args, kwargs
         self.finish_layout.show()
         self.finish_layout.ok_button.text = 'bundle files'
-        # self.finish_layout.feedback_widget.opacity = 1
-        # print(self.finish_layout.feedback_widget.text)
 

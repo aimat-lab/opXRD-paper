@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import copy
 from typing import Optional
 from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
@@ -103,14 +104,23 @@ class SelectionLayout(BoxLayout):
 
     def on_scroll_view_scroll(self, instance, value):
         _ = instance
+
         self.slider.unbind(value=self.adjust_scroll_view)
-        self.slider.value = value
+
+        if self.scroll_view.scroll_y < 0:
+            self.scroll_view.scroll_y = 0
+
+        if self.scroll_view.scroll_y > 1:
+            self.scroll_view.scroll_y = 1
+
+        self.slider.value = copy.copy(self.scroll_view.scroll_y)
         self.slider.bind(value=self.adjust_scroll_view)
 
 
     def adjust_scroll_view(self, instance, value):
         _ = instance
         self.scroll_view.scroll_y = value
+
 
     def check_for_dismiss(self, *args, **kwargs):
         _, __ = args, kwargs
