@@ -36,7 +36,7 @@ class InputDialog(Popup):
         self.background_color = (100 / 255, 255 / 255, 255 / 255, 1)  # (R, G, B, A)
 
         # logo_image = Image(source=get_blended_logo_path(), size_hint=(1, 0.3))
-        logo_image = get_kivy_image(width=Window.width*0.4, imgPath=get_blended_logo_path(), size_hint =(1,0.25))
+        logo_image = get_kivy_image(width=Window.width*0.4, imgPath=get_blended_logo_path(), size_hint =(1,0.2))
         print(f'Width of the blended logo: {Window.width*0.4}')
         first_hint = self.make_hint()
         self.format_input =self.make_format_input()
