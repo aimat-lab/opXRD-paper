@@ -13,7 +13,7 @@ from data_collector.filesystem.fsnode import FsNode
 from data_collector.elements.node_element import NodeElement
 from data_collector.elements.types import ThickVerticalSlider, HeaderWidget
 
-from data_collector.configs import get_line_height
+from data_collector.configs import get_line_height, get_true_height
 import intervals as I
 
 # -------------------------------------------
@@ -142,7 +142,7 @@ class SelectionLayout(BoxLayout):
 
     @staticmethod
     def get_checkboxes_layout(file_count_label: Label, scroll_view: ScrollView):
-        select_layout = BoxLayout(orientation='vertical')
+        select_layout = BoxLayout(orientation='vertical', spacing = 15 * get_true_height() / 900.)
         select_layout.add_widget(widget=file_count_label)
         select_layout.add_widget(widget=scroll_view)
 
