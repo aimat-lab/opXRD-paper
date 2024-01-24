@@ -10,13 +10,13 @@ from kivy.uix.widget import Widget
 from data_collector.elements.types import BlackLabel
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
-from data_collector.configs import get_scaled_down_app_width, get_true_width
+from data_collector.configs import get_true_height, get_true_width
 # -------------------------------------------
 
 class FinishLayout(BoxLayout):
     def __init__(self, callback: callable, exit_funct : callable, **kwargs):
 
-        l = 15 * get_true_width() / 1600.
+        l = 15 * get_true_height() / 900.
         super(FinishLayout, self).__init__(orientation='vertical', size_hint=(1, 0.085),padding=(0, l, 0, l),**kwargs)
 
         s = 10 * get_true_width() / 1600.
@@ -24,7 +24,7 @@ class FinishLayout(BoxLayout):
         note = BlackLabel(text='Target folder:', size_hint=(0.2, 1), font_size=Window.width * 0.02, bold=True)
         self.target_path_input = TextInput(text=f'{os.getcwd()}',
                                            size_hint=(0.7, 1),
-                                           font_size=Window.width * 0.02,
+                                           font_size=get_true_width() * 0.02,
                                            multiline=False)
         buffer = BlackLabel(text='', size_hint=(0.075, 1))
         self.ok_button = self.get_ok_button()
@@ -36,7 +36,7 @@ class FinishLayout(BoxLayout):
         upper_finish.add_widget(buffer)
 
         self.exit_funct = exit_funct
-        self.default_font_size = Window.width * 0.018
+        self.default_font_size = get_true_width() * 0.018
         self.feedback_widget = self.get_feedback_widget(font_size=self.default_font_size)
         self.feedback_popup = self.get_feedback_popup()
 

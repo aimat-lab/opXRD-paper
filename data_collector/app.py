@@ -88,6 +88,7 @@ class DataCollectApp(App):
                              target_path=csv_file_path,
                              root_path=self.get_rootfolder_path())
 
+            self.finish_layout.feedback_popup.title = 'Success!'
             self.finish_layout.feedback_widget.text = (
                 f'Done! Wrote {len(checked_paths)} xrd file(s) to .zip file and produced corresponding label .csv file at:\n'
                 f'{zipfile_path} \n'
@@ -95,6 +96,7 @@ class DataCollectApp(App):
 
 
         except Exception as e:
+            self.finish_layout.feedback_popup.title = 'Failed to bundle files!'
             self.finish_layout.feedback_widget.text = (f'An error occured during the creating of the zip archive: {e}\n'
                                                        f'Is "{target_folder_path}" a valid folder path?'
                                                        f'Does the executable have permission to view all selected files?')
