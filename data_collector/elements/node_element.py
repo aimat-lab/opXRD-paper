@@ -97,7 +97,7 @@ class NodeElement(FsNode, LoadableElem):
 
 
     def unload(self):
-        if self.is_loaded:
+        if self.is_loaded and self.is_initialized:
             self.root_container.remove_widget(self.get_node_widget())
             self.root_container.add_widget(self.place_holder, index=1)
             self.is_loaded = False
@@ -106,7 +106,7 @@ class NodeElement(FsNode, LoadableElem):
 
 
     def load(self):
-        if not self.is_loaded:
+        if not self.is_loaded and self.is_initialized:
             self.root_container.remove_widget(self.place_holder)
             self.root_container.add_widget(self.get_node_widget(), index=1)
             self.is_loaded = True

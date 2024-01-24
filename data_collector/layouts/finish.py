@@ -64,7 +64,6 @@ class FinishLayout(BoxLayout):
     @staticmethod
     def get_feedback_label(font_size: float) -> Widget:
         text_label =  Label(size_hint=(1, 0.8),
-                            halign='left',
                             font_size=font_size)
         text_label.bind(size=text_label.setter('text_size'))
         return text_label
