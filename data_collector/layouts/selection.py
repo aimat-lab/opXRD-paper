@@ -106,13 +106,6 @@ class SelectionLayout(BoxLayout):
         _, __ = instance, value
 
         self.slider.unbind(value=self.adjust_scroll_view)
-
-        if self.scroll_view.scroll_y < 0:
-            self.scroll_view.scroll_y = 0
-
-        if self.scroll_view.scroll_y > 1:
-            self.scroll_view.scroll_y = 1
-
         self.slider.value = copy.copy(self.scroll_view.scroll_y)
         self.slider.bind(value=self.adjust_scroll_view)
 
