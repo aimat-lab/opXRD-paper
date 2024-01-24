@@ -178,7 +178,7 @@ class InputDialog(Popup):
 
 
     def make_confirm_button(self) -> Widget:
-        confirm = Button(text='start search', size_hint=(1, 0.08), )
+        confirm = Button(text='start search', size_hint=(1, 0.08), font_size=InputDialog.font_size/1.2)
         confirm.background_color = (0, 1, 0, 0.6)  # (R, G, B, A)
         confirm.bind(on_press=self.on_confirm)
         return confirm
