@@ -10,7 +10,7 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 
-from data_collector.configs import get_scaled_down_app_width, get_true_width
+from data_collector.configs import get_scaled_down_app_width, get_true_width, get_true_height
 from data_collector.elements.types import FocusTextInput
 from data_collector.filesystem import FsNode, get_initial_path
 from data_collector.resources.resource_manager import get_blended_logo_path, get_kivy_image
@@ -28,8 +28,11 @@ class InputDialog(Popup):
         self.auto_dismiss = False
         self.callback = callback
 
-        l = 12 * get_true_width () / 1600.
-        self.content = BoxLayout(orientation='vertical', padding=[l, l, l, l], spacing=l)
+        horizontal_spacing = 12 * get_true_width() / 1600.
+        vertical_spacing = 12 * get_true_height() / 900.  # Assuming 900 is a relevant measure for height
+        self.content = BoxLayout(orientation='vertical',
+                                 padding=[horizontal_spacing, vertical_spacing, horizontal_spacing, vertical_spacing],
+                                 spacing=vertical_spacing)
 
         print(f'App width is: {get_scaled_down_app_width()}')
 
