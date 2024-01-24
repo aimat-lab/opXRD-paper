@@ -18,7 +18,7 @@ from data_collector.resources.resource_manager import get_blended_logo_path, get
 
 class InputDialog(Popup):
 
-    font_size = Window.width * 0.0145
+    font_size = get_true_width() * 0.0145
 
     def __init__(self, callback: callable, **kwargs):
         super(InputDialog, self).__init__(**kwargs)
@@ -36,7 +36,7 @@ class InputDialog(Popup):
         self.background_color = (100 / 255, 255 / 255, 255 / 255, 1)  # (R, G, B, A)
 
         # logo_image = Image(source=get_blended_logo_path(), size_hint=(1, 0.3))
-        logo_image = get_kivy_image(width=Window.width*0.4, imgPath=get_blended_logo_path(), size_hint =(1,0.2))
+        logo_image = get_kivy_image(width=Window.width*0.4, imgPath=get_blended_logo_path(), size_hint =(1,0.25))
         print(f'Width of the blended logo: {Window.width*0.4}')
         first_hint = self.make_hint()
         self.format_input =self.make_format_input()
