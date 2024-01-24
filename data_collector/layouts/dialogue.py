@@ -17,7 +17,6 @@ from data_collector.resources.resource_manager import get_blended_logo_path, get
 # -------------------------------------------
 
 class InputDialog(Popup):
-
     font_size = get_true_width() * 0.0145
 
     def __init__(self, callback: callable, **kwargs):
@@ -27,20 +26,15 @@ class InputDialog(Popup):
         self.title_align = 'center'
         self.auto_dismiss = False
         self.callback = callback
+        self.background_color = (100 / 255, 1, 1, 1)  # (R, G, B, A)
 
-        horizontal_spacing = 12 * get_true_width() / 1600.
-        vertical_spacing = 12 * get_true_height() / 900.  # Assuming 900 is a relevant measure for height
+        h_space = 12 * get_true_width() / 1600.
+        v_space = 12 * get_true_height() / 900.
         self.content = BoxLayout(orientation='vertical',
-                                 padding=[horizontal_spacing, vertical_spacing, horizontal_spacing, vertical_spacing],
-                                 spacing=vertical_spacing)
+                                 padding=[h_space, v_space, h_space, v_space],
+                                 spacing=v_space)
 
-        print(f'App width is: {get_scaled_down_app_width()}')
-
-        self.background_color = (100 / 255, 255 / 255, 255 / 255, 1)  # (R, G, B, A)
-
-        # logo_image = Image(source=get_blended_logo_path(), size_hint=(1, 0.3))
         logo_image = get_kivy_image(width=Window.width*0.4, imgPath=get_blended_logo_path(), size_hint =(1,0.25))
-        print(f'Width of the blended logo: {Window.width*0.4}')
         first_hint = self.make_hint()
         self.format_input =self.make_format_input()
         second_hint = self.make_second_hint()
@@ -70,10 +64,10 @@ class InputDialog(Popup):
     def _update_text_height(instance, texture_size):
         instance.height = texture_size[1]  # Set the height to the text height
 
-    def on_confirm(self, instance):
-        FsNode.set_default_formats(self.format_input.text)
 
+    def on_confirm(self, instance):
         _ = instance
+        FsNode.set_default_formats(self.format_input.text)
         user_input = self.path_input.text
 
         print(f"User input: {user_input}")
@@ -83,7 +77,6 @@ class InputDialog(Popup):
             return
         else:
             self.print_wait()
-
 
         Clock.schedule_once(lambda dt: self.callback(user_input),0.1)
 

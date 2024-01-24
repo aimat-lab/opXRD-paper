@@ -62,12 +62,3 @@ def get_rel_path_dict(abs_path_list: List[str], root_path : str) -> dict:
 
     return rel_path_dict
 
-
-
-
-# if __name__ == "__main__":
-#     source_path = ["/home/work/Desktop/test1/asdf2.png"]
-#     the_target_path = "/home/work/Desktop/target"
-#
-#     zip_file_list(source_path, the_target_path)
-
