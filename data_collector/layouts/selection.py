@@ -11,7 +11,7 @@ from kivy.clock import Clock
 
 from data_collector.filesystem.fsnode import FsNode
 from data_collector.elements.node_element import NodeElement
-from data_collector.elements.types import ThickVerticalSlider, HeaderWidget
+from data_collector.elements.types import ThickVerticalSlider, HeaderWidget, Placeholder
 
 from data_collector.configs import get_line_height, get_true_height
 import intervals as I
@@ -160,6 +160,7 @@ class SelectionLayout(BoxLayout):
     def get_scroll_view_content(self, root_checkbox: NodeElement):
         scroll_layout = BoxLayout(orientation='vertical', size_hint_y=None)
         scroll_layout.bind(minimum_height=scroll_layout.setter('height'))
+        scroll_layout.add_widget(Placeholder(height=get_line_height()/4.))
         self.recursively_add_boxes(gui_parent=scroll_layout, root_box=root_checkbox, indent=0)
 
         return scroll_layout
