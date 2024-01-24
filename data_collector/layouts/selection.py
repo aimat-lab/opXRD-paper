@@ -103,7 +103,7 @@ class SelectionLayout(BoxLayout):
 
 
     def on_scroll_view_scroll(self, instance, value):
-        _ = instance
+        _, __ = instance, value
 
         self.slider.unbind(value=self.adjust_scroll_view)
 
@@ -151,7 +151,7 @@ class SelectionLayout(BoxLayout):
     @staticmethod
     def get_scroll_view():
         scroll_view = ScrollView(size_hint=(1, 1), bar_width=0)
-        scrol_unit = 200
+        scrol_unit = get_true_height()/10.
         scroll_view.scroll_distance = scrol_unit
         scroll_view.scroll_wheel_distance = scrol_unit
 
