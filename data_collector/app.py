@@ -97,9 +97,10 @@ class DataCollectApp(App):
 
         except Exception as e:
             self.finish_layout.feedback_popup.title = 'Failed to bundle files!'
-            self.finish_layout.feedback_label.text = (f'An error occured during the creating of the zip archive:\n {e}'
-                                                       f'\nIs "{target_folder_path}" a valid folder path?'
-                                                       f'\nDoes the executable have permission to view all selected files?')
+            self.finish_layout.feedback_label.text = (f'An error occured during the creation of the zip archive:'
+                                                       f'\n{e}'
+                                                       f'\n\nIs "{target_folder_path}" a valid folder path?'
+                                                       f'Does the executable have permission to view all selected files?')
 
         Clock.schedule_once(self.show_feedback)
 
