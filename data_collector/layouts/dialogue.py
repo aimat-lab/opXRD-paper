@@ -107,7 +107,7 @@ class InputDialog(Popup):
             'You can edit this list of formats to your preferences:')
 
         hint = Label(text=first_hint_text,
-                          size_hint=(1, None),
+                          size_hint=(1, 0.2),
                           font_size=InputDialog.font_size)
         hint.bind(width=lambda *x: setattr(hint, 'text_size', (hint.width, None)))
         hint.bind(texture_size=self._update_text_height)
@@ -124,7 +124,7 @@ class InputDialog(Popup):
         )
 
         second_hint = Label(text=second_hint_text,
-                                         size_hint=(1, None),
+                                         size_hint=(1, 0.35),
                                          font_size=InputDialog.font_size)
         second_hint.bind(width=lambda *x: setattr(second_hint, 'text_size', (second_hint.width, None)))
         second_hint.bind(texture_size=self._update_text_height)
