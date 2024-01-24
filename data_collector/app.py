@@ -59,21 +59,25 @@ class DataCollectApp(App):
         _ = args
         print('Triggered callback of ok button')
         checked_paths = self.get_checked_filepaths()
-
-        current_date = datetime.now()
-        datetime_stamp = current_date.strftime('%d_%m_%Y_%H_%M_%S')
-
         target_folder_path = self.get_targetfolder_path()
 
         if target_folder_path is None:
             print(f'No target folder provided. Check setup')
             return
 
+        print("Checked Paths:", checked_paths)
+        produce_files_thread = threading.Thread(target=self.produce_files, args=(target_folder_path,checked_paths,))
+        produce_files_thread.start()
+
+
+
+    def produce_files(self, target_folder_path: str, checked_paths : List[str]):
+        current_date = datetime.now()
+        datetime_stamp = current_date.strftime('%d_%m_%Y_%H_%M_%S')
         zipfile_path = os.path.join(target_folder_path, f'xrd_data_collected_on_{datetime_stamp}.zip')
-        csv_file_path = os.path.join(target_folder_path,f'xrd_labels_generated_on_{datetime_stamp}.csv')
+        csv_file_path = os.path.join(target_folder_path, f'xrd_labels_generated_on_{datetime_stamp}.csv')
 
-
-        def produce_files():
+        try:
             self.finish_layout.ok_button.text = 'working ...'
 
             zip_file_list(path_list=checked_paths,
@@ -84,19 +88,18 @@ class DataCollectApp(App):
                              target_path=csv_file_path,
                              root_path=self.get_rootfolder_path())
 
-            Clock.schedule_once(self.show_feedback)
+            self.finish_layout.feedback_widget.text = (
+                f'Done! Wrote {len(checked_paths)} xrd file(s) to .zip file and produced corresponding label .csv file at:\n'
+                f'{zipfile_path} \n'
+                f'{csv_file_path}')
 
-        print("Checked Paths:", checked_paths)
-        try:
-            produce_files_thread = threading.Thread(target=produce_files)
-            produce_files_thread.start()
 
-            self.finish_layout.feedback_widget.text = (f'Done! Wrote {len(checked_paths)} xrd file(s) to .zip file and produced corresponding label .csv file at:\n'
-                                         f'{zipfile_path} \n'
-                                         f'{csv_file_path}')
-        except:
-            self.finish_layout.feedback_widget.text = f'An error occured during the creating of the zip archive.\nIs "{target_folder_path}" a valid folder path?'
+        except Exception as e:
+            self.finish_layout.feedback_widget.text = (f'An error occured during the creating of the zip archive: {e}\n'
+                                                       f'Is "{target_folder_path}" a valid folder path?'
+                                                       f'Does the executable have permission to view all selected files?')
 
+        Clock.schedule_once(self.show_feedback)
 
     def get_checked_filepaths(self) -> List[str]:
         all_file_checkboxes = self.selection_layout.root_checkbox.get_xrd_file_des()
