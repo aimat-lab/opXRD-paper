@@ -140,7 +140,7 @@ class InputDialog(Popup):
             default_xrd_text += f'.{xrd_format},'
 
         format_input = FocusTextInput(text=f'{default_xrd_text}',
-                                           size_hint=(1, 0.08),
+                                           size_hint=(1, 0.085),
                                            font_size=InputDialog.font_size,
                                            multiline=False)
         Clock.schedule_once(lambda dt: setattr(format_input, 'focus', True), 0.1)
@@ -169,7 +169,7 @@ class InputDialog(Popup):
 
     def make_path_input(self) -> Widget:
         path_input = FocusTextInput(text=f'{get_initial_path()}',
-                                         size_hint=(1, 0.08),
+                                         size_hint=(1, 0.085),
                                          font_size=InputDialog.font_size,
                                          multiline=False)
 
