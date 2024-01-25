@@ -1,0 +1,168 @@
+% --- Fonts ---
+
+\usepackage{sourceserifpro}
+\usepackage{sourcecodepro}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb,amsthm,eucal,bbold,bm}
+\usepackage[italic,eulergreek,symbolmisc]{mathastext}
+\usepackage[hyphens]{url}
+\usepackage{microtype}
+
+% Correct spacing around letters in math
+\MTsetmathskips{f}{3mu}{0mu}
+\MTsetmathskips{g}{1mu}{0mu}
+\MTsetmathskips{y}{2mu}{0mu}
+\MTsetmathskips{p}{1mu}{0mu}
+\MTsetmathskips{l}{0mu}{1mu}
+\MTsetmathskips{Q}{0mu}{1mu}
+\MTsetmathskips{j}{1mu}{1mu}
+\MTsetmathskips{i}{0mu}{1mu}
+
+% Copiable text in PDF
+\input{glyphtounicode}
+\pdfgentounicode=1
+
+% --- Spacing ---
+
+\usepackage[onehalfspacing]{setspace}
+\AtBeginDocument{\frenchspacing}
+
+% --- Color ---
+
+\usepackage[x11names]{xcolor}
+
+% --- Title page ---
+
+% Title font
+\usepackage{titling}
+\pretitle{\begin{center}\bfseries\huge} 
+
+% No thanks mark
+\renewcommand{\tamark}{}
+\setlength{\thanksmarkwidth}{0em}
+\setlength{\thanksmargin}{0em}
+
+% No indentation for abstract
+\usepackage{etoolbox}
+\AtBeginEnvironment{titlepage}{\pagestyle{empty}\setlength{\parindent}{0pt}}
+
+% --- Headings ---
+
+\usepackage{titlesec}
+\titleformat*{\section}{\centering\large\bfseries}
+\titleformat*{\subsection}{\bfseries}
+\titleformat{\paragraph}[runin]{\itshape}{}{}{}[.]
+\titlelabel{\thetitle.\quad}
+
+% --- Theorems & proofs ---
+
+\newtheoremstyle{paper}{}{}{\itshape}{}{\scshape}{.}{.5em}{}
+\theoremstyle{paper}
+\newtheorem{theorem}{theorem}
+\newtheorem{proposition}{proposition}
+\newtheorem{lemma}{lemma}
+\newtheorem{corollary}{corollary}
+\newtheorem{definition}{definition}
+\newtheorem{assumption}{assumption}
+\newtheorem{remark}{remark}
+
+% Proof label font
+\renewcommand{\proofname}{\upshape\scshape proof}
+
+% --- Tables & figures ---
+
+\usepackage{multirow,booktabs,rotating,graphicx}
+\renewcommand{\floatpagefraction}{0}
+\renewcommand{\arraystretch}{1.1}
+\renewcommand{\figurename}{\textsc{figure}}
+\renewcommand{\tablename}{\textsc{table}}
+\BeforeBeginEnvironment{tabular*}{\footnotesize}
+\AtBeginDocument{\allowdisplaybreaks[1]}
+
+% Captions
+\usepackage{caption,subcaption}
+\captionsetup{labelsep=period}
+\captionsetup[sub]{labelformat=simple,labelsep=period,size=footnotesize}
+\captionsetup[table]{position=top}
+\renewcommand{\thesubfigure}{\Alph{subfigure}}
+
+% Centered figures & tables
+\makeatletter\g@addto@macro\@floatboxreset\centering\makeatother 
+
+% Notes below tables & figures
+\newcommand{\note}[2][]{\parbox{\textwidth}{\footnotesize\vspace*{10pt}\textit{#1}#2}}
+
+% Spacing in figures
+\newcommand{\fspace}{\\\vspace*{4mm}}
+
+% --- Lists ---
+
+\usepackage{enumitem}
+\setlist{nosep}
+\setlist[itemize,1]{leftmargin=\parindent,label=\color{gray}{\upshape\textbullet}}
+\setlist[itemize,2]{leftmargin=2\parindent,label=\color{gray}{\upshape\textendash}}
+\setlist[enumerate,1]{leftmargin=\parindent,label=\color{gray}{\upshape\alph*.}}
+\setlist[enumerate,2]{leftmargin=2\parindent,label=\color{gray}{\upshape\roman*.}}
+
+% --- Bibliography ---
+
+\usepackage{natbib}
+\setcitestyle{aysep={}}
+\renewcommand{\bibfont}{\small}
+\setlength{\bibsep}{0pt}
+\setlength{\bibhang}{1.5em}
+
+% Reduced spacing in bibliography
+\AtBeginEnvironment{thebibliography}{\setstretch{1.1}}
+
+% --- Appendix ---
+
+\AfterEndEnvironment{thebibliography}{
+\setcounter{theorem}{0}
+\setcounter{proposition}{0} 
+\setcounter{lemma}{0}
+\setcounter{corollary}{0}
+\setcounter{definition}{0}
+\setcounter{assumption}{0}
+\setcounter{remark}{0}
+\setcounter{table}{0}
+\setcounter{figure}{0}
+\setcounter{equation}{0} 
+\renewcommand{\thetheorem}{A\arabic{theorem}}
+\renewcommand{\theproposition}{A\arabic{proposition}}
+\renewcommand{\thelemma}{A\arabic{lemma}}
+\renewcommand{\thecorollary}{A\arabic{corollary}}
+\renewcommand{\thedefinition}{A\arabic{definition}}
+\renewcommand{\theassumption}{A\arabic{assumption}}
+\renewcommand{\theremark}{A\arabic{remark}}
+\renewcommand{\thetable}{A\arabic{table}}
+\renewcommand{\thefigure}{A\arabic{figure}}
+\renewcommand{\theequation}{A\arabic{equation}}
+\titleformat{\section}{\centering\large\bfseries}{Appendix~\thesection.}{1em}{}}
+
+% --- Hyperlinks (last package) ---
+
+\usepackage{fancyhdr} % Before hyperref
+\usepackage[pdftex,hidelinks,hypertexnames=false,pdfpagemode=UseNone,pdfdisplaydoctitle=true]{hyperref}
+
+% --- Layout (after hyperref) ---
+
+\usepackage[margin=1.1in,footskip=0.7in]{geometry}
+
+% --- Headers & footers (after hyperref & geometry) ---
+
+% No header line
+\renewcommand{\headrule}{}
+
+% Centered page numbers on regular pages
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+
+% Footers for title pages
+\fancypagestyle{plain}{\fancyhf{}}
+\usepackage{xparse}
+\NewDocumentCommand{\available}{o g}{%
+\fancypagestyle{plain}{\fancyfoot[C]{\color{gray}\footnotesize%
+\IfValueT{#1}{Published in \emph{#1}\;\textbullet\;}%
+Available at \url{#2}}}}

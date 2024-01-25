@@ -1,0 +1,267 @@
+\documentclass[letterpaper,12pt,leqno]{article}
+\usepackage{paper}
+\bibliographystyle{bibliography}
+% Enter paper title:
+\hypersetup{pdftitle={Paper Title}}
+% Enter permanent URL to paper
+\available{https://github.com/pmichaillat/latex-paper}
+% Enter BibTeX file with references:
+\newcommand{\bib}{bibliography.bib}
+% Enter PDF file with figures here:
+\newcommand{\pdf}{figures.pdf}
+
+
+\begin{document}
+\title{A high quality X-ray diffraction dataset}
+\author{Daniel Hollarek
+\thanks{Adie Alwen}
+\date{Nov 2023}                       
+\begin{titlepage}\maketitle
+
+This is the abstract. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+
+\end{titlepage}\section{Introduction}\label{s:introduction}
+ 
+\paragraph{Research question} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.\footnote{Excepteur sint, sunt in culpa qui officia deserunt mollit anim id est laborum.}
+
+\paragraph{Positioning in the literature} Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipiscing velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.
+
+\paragraph{Answer to the question} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\footnote{Sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident. Sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident. Sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident.} Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+
+\paragraph{Paragraph with citations} Citations can be appended at the end of a sentence, in parenthesis \citep{LMS18a}. Citations can also include page numbers or other bibliographical information \citep[p. 1305]{MS19}. Citations can be in text: for instance, \citet{M12} found this and \citet{M14} found that. It's also possible to collate several citations to the same author: for instance, \citet{M12,M14} found things. It is also possible to cite the authors of a study by name, or the year of a study: for instance, \citeauthor{EMM21} wrote a paper in \citeyear{EMM21}.
+
+\section{Section title}\label{s:section}
+
+This is a section. This is the section introduction. Below are the subsections. 
+
+\subsection{Subsection title}
+
+Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipiscing velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem. 
+
+Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. 
+
+\subsection{Subsection with itemized lists}
+
+Lists are not very common in scientific papers, but they are sometimes useful. Here is an itemized list with two levels:
+\begin{itemize}
+\item Et harum quidem rerum facilis est et expedita distinctio.
+\item Nam libero tempore, cum soluta nobis est eligendi optio.
+\item Emporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet. Nam libero tempore, cum soluta nobis est eligendi optio:
+\begin{itemize}
+\item Cumque nihil impedit
+\item Quo minus id, quod maxime placeat
+\item Facere possimus, omnis voluptas assumenda est
+\end{itemize}
+\item Et harum quidem rerum facilis est et expedita distinctio.
+\item Nam libero tempore, cum soluta nobis est eligendi optio.
+\end{itemize}
+
+\subsection{Subsection with numbered lists}\label{s:lists}
+
+And here is a numbered lists with two levels:
+\begin{enumerate}
+\item Et harum quidem rerum facilis est et expedita distinctio.
+\item Nam libero tempore, cum soluta nobis est eligendi optio.
+\item Emporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet. Nam libero tempore, cum soluta nobis est eligendi optio:
+\begin{enumerate}
+	\item Cumque nihil impedit
+	\item Quo minus id, quod maxime placeat
+	\item Facere possimus, omnis voluptas assumenda est
+\end{enumerate}
+\item Et harum quidem rerum facilis est et expedita distinctio.
+\item Nam libero tempore, cum soluta nobis est eligendi optio.
+\end{enumerate}
+Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. 
+
+\subsection{Some math} 
+
+\begin{itemize}
+\item Here are some Greek letters in math: $\alpha + \Gamma - \zeta \times \Lambda$.
+\item Here are some blackboard bold letters: $\mathbb{R} + \mathbb{Q} - \mathbb{Z}$.
+\item Here are some calligraphic letters: $\mathcal{A} - \mathcal{B} + \mathcal{Q}$. 
+\item Here are some symbols: $Z \in Q \to R$ and $\sum_i [x(i)]^2 \subset \prod_j [y(j)]^2 \geq \int [g(h)]^2dh $.
+\item Here are some operators: $\max_x \pi(x) = \ln(u)/\exp(v) \mapsto \cos(\Theta) + \sin(\Omega)$.
+\end{itemize}
+
+\subsection{Some equations} 
+
+Here are equations in text: $\prod_i\alpha_i(\bm{X}) \geq 2 \implies \mathcal{X} \to 5$ but  $\sum_{x=1}^4 \xi^x(j) \quad \forall j\in \mathbb{R}$. Here are equations without labels:
+\begin{align*}
+\frac{\mathcal{S}(z^*)}{1 -\theta + \theta \mathcal{S}(z^*)} &= \sum_{i=0}^{+\infty}F^{i} - \Lambda(i) = \left\lbrace\sum_{i=0}^{+\infty}G^{i} - \Omega(i)\right\rbrace\\
+\frac{\mathbb{S}(z^*)}{1 -\mu + \xi \mathbb{S}(z^*)} &= \prod_{i=0}^{+\infty}F^{i} - \Phi(i) = \left\lbrace\int_{i=0}^{+\infty}\frac{G^{i}}{\epsilon(i)} di\right\rbrace.
+\end{align*}
+And here is a single equation with a label:
+\begin{equation}
+\sum_{j=0}^{+\infty}\mathcal{S}^j(z^{\ast}) = S(z) \times \mathbb{E}(N(z)) + \mathbb{\mu} \bm{\beta} - \prod_{i=0}^{+\infty}\mathcal{F}^{i}-\exp(\lambda \mu).
+\label{e:type1steps}\end{equation}
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua.
+
+\subsection{Some theorems}
+
+Here is a proposition with some more math:   
+
+\begin{proposition}\label{p:type1}  Lorem ipsum dolor sit amet, consectetur adipiscing elit:
+\begin{equation}
+\sum_k\bm{S}_{k_x}(z) \approx \frac{S(z)^x}{k / 23 -\zeta\gamma [45- S(z)] + \ln(y) - j^2+x(l)}.
+\label{e:type1}\end{equation}
+Ut enim ad minim veniam, sunt in culpa qui officia deserunt mollit anim id est laborum. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+\end{proposition}
+
+\begin{proof} Here is the proof to the proposition.\end{proof} 
+
+Here is a lemma:
+
+\begin{lemma}\label{p:cv} Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat:
+\begin{equation}
+z^* = \int_{0}^{\infty} \alpha(i) \cdot \frac{1-\beta}{1-\alpha(i)\beta}\,di.
+\label{e:cv}\end{equation}
+Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua $\mathcal{Z}(\alpha)$. 
+\begin{equation*}
+\frac{\sum_i z^i}{\prod_i q^i} = \frac{\int_{0}^{\infty} \alpha(i) \cdot [1-\beta]\,di}{1-\exp(\alpha)\sin(\beta)}.
+\end{equation*}
+Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
+\end{lemma}
+
+And here is a corollary following the lemma:
+
+\begin{corollary} Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua:
+\begin{equation*}
+\mathbb{E}(N(z^*)) \approx \frac{1-\mathbb{P}(\alpha\pi)}{1-\pi}- \frac{f(y)}{z(p)^*} + P(\Gamma).
+\end{equation*}
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.\end{corollary}
+
+\section{Section with graphs}\label{s:graphs}
+
+Here is a section with a variety of graphs. At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. 
+
+\subsection{Subsection with graphs at the top of the page}
+
+A simple two-panel graph is on figure \ref{f:graph1}. It will be placed at the top of the page, just about here. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae.
+
+\begin{figure}[t]
+\subcaptionbox{Caption for first panel\label{f:panel1}}{\includegraphics[scale=0.2,page=1]{\pdf}}\hfill
+\subcaptionbox{Caption for second panel\label{f:panel2}}{\includegraphics[scale=0.2,page=2]{\pdf}}
+\caption{Caption for the graph}
+\note{Note for the graph. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus.}
+\label{f:graph1}\end{figure}
+
+\subsection{Subsection with references to figures and panels} 
+
+As usual, it is easy to refer to a figure: see figure \ref{f:graph1}. It is possible to refer to a specific panel in a figure, for instance figure \ref{f:panel1} or figure \ref{f:panel2}. Its also possible to refer to the entire figure, for instance figure \ref{f:graph1} or figure \ref{f:graph2}. It is also possible to refer to a panel within a figure by itself, for instance panel \subref{f:panel1} or panel \subref{f:panel2} in figure \ref{f:graph1}.
+
+\subsection{A subsection with a full-page graph}
+
+A full-page graph is on figure \ref{f:graph2}. It will be placed in a full page about here.
+
+\begin{figure}[p]
+\subcaptionbox{Caption for panel}{\includegraphics[scale=0.2,page=1]{\pdf}}\hfill
+\subcaptionbox{Caption for panel}{\includegraphics[scale=0.2,page=2]{\pdf}}\fspace
+\subcaptionbox{Caption for panel}{\includegraphics[scale=0.2,page=3]{\pdf}}\hfill
+\subcaptionbox{Caption for panel}{\includegraphics[scale=0.2,page=4]{\pdf}}\fspace
+\subcaptionbox{Caption for panel}{\includegraphics[scale=0.2,page=5]{\pdf}}\hfill
+\subcaptionbox{Caption for panel}{\includegraphics[scale=0.2,page=1]{\pdf}}
+\caption{Caption for the graph}
+\note{Note for the graph. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat.}
+\label{f:graph2}\end{figure}
+
+At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. 
+
+\section{A section with table}
+
+Here is a section with a variety of tables. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. 
+
+\subsection{A subsection with a simple table}
+
+Table \ref{t:table1} is a simple table with one panel. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. 
+
+\begin{table}[t]
+\caption{Table caption}
+\begin{tabular*}{\textwidth}[]{p{3.3cm}@{\extracolsep\fill}cccc}
+\toprule
+& Column 1 &  Column 2 &  Column 3  &  Column 4 \\
+\midrule
+Line 1: & A & B & C  & d \\
+Line 2: & E &  F & G  & H   \\
+Line 3: & K & V & P  & K  \\
+Line 4: & J & M & N  & K  \\
+\bottomrule
+\end{tabular*}
+\note{Note for table.}
+\label{t:table1}\end{table}
+
+Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.
+
+\subsection{A subsection with a multi-panel table}
+
+Table \ref{t:table2} is a more sophisticated table with several panels. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat. 
+
+\begin{table}[t]
+\caption{Table caption}
+\begin{tabular*}{\textwidth}[]{p{2.5cm}@{\extracolsep\fill}ccccccc}
+\toprule
+    & Column 1 &  Column 2 &  Column 3  &  Column 4 &  Column 5 &  Column 6 &  Column 7 \\
+\midrule
+\multicolumn{8}{l}{A. First panel}\\
+Line 1: & A & C & V  & -- & -- & K & A\\
+Line 2: & X &  H & O  & -- & -- & K & A  \\
+\midrule
+\multicolumn{8}{l}{B. Second panel}\\
+Line 3: & U & B & J  & K & A & K & A\\
+Line 4: & N & Y & T  & L & T & K & A\\
+Line 5: & G & S & Q  & P & Q & K & A\\
+\midrule
+\multicolumn{8}{l}{C. Third panel}\\
+Line 3: & U & B & J  & K & K & K & A\\
+Line 4: & N & Y & T  & L & T & K & A\\
+Line 5: & G & S & Q  & P & Q & K & A\\
+\bottomrule
+\end{tabular*}
+\note{Note for table. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat.}
+\label{t:table2}\end{table}
+
+Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae.
+
+\section{A section with cross-references}
+
+As usual, it is possible to reference an equation, such as equation \eqref{e:cv}. It is also possible to reference a section, such as section \ref{s:graphs}, or a subsection, such as section \ref{s:lists}. It is also possible to reference an appendix, such as appendix \ref{a:appendix1}, or a subsection in an appendix, such as appendix~\ref{a:subappendix}. Of course it is possible to reference figures, such as figure \ref{f:graph2}, or tables, such as table~\ref{t:table1}.
+
+
+\section{Conclusion}\label{s:ccl}
+
+Here is a conclusion. At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint.
+
+\bibliography{\bib}
+
+% Fill out appendix:
+\appendix
+\section{Appendix title}\label{a:appendix1}
+
+This is a first appendix. Obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. 
+
+\subsection{Subsection title} 
+
+This is a subsection in the appendix. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum. 
+
+\subsection{A subsection with results}
+
+Here is a result in the appendix:
+
+\begin{corollary} Similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga:
+\begin{equation*}
+\mathbb{E}(\Omega) = \mathbb{P}(\omega\cdot \mu - \xi) - \sum_{i=0}^{m}\sum_{j=-\infty}^{n} \sigma(i,j) + 123^{56}.
+\end{equation*}\end{corollary}
+
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+
+
+\end{document}
