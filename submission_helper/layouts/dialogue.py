@@ -10,10 +10,10 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 
-from data_collector.configs import get_true_width, get_true_height
-from data_collector.elements.types import FocusTextInput
-from data_collector.filesystem import FsNode, get_initial_path
-from data_collector.resources.resource_manager import get_blended_logo_path, get_kivy_image
+from submission_helper.configs import get_true_width, get_true_height
+from submission_helper.elements.types import FocusTextInput
+from submission_helper.filesystem import FsNode, get_initial_path
+from submission_helper.resources.resource_manager import get_blended_logo_path, get_kivy_image
 # -------------------------------------------
 
 class InputDialog(Popup):

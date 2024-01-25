@@ -8,11 +8,11 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.clock import Clock
 
 
-from data_collector.filesystem.fsnode import FsNode
-from data_collector.elements.node_element import NodeElement
-from data_collector.elements.types import ThickVerticalSlider, HeaderWidget, Placeholder
+from submission_helper.filesystem.fsnode import FsNode
+from submission_helper.elements.node_element import NodeElement
+from submission_helper.elements.types import ThickVerticalSlider, HeaderWidget, Placeholder
 
-from data_collector.configs import get_line_height, get_true_height
+from submission_helper.configs import get_line_height, get_true_height
 import intervals as I
 
 # -------------------------------------------

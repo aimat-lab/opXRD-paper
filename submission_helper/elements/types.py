@@ -9,8 +9,8 @@ from kivy.uix.textinput import TextInput
 from kivy.core.window import Window
 
 from kivy.uix.widget import Widget
-from data_collector.configs import get_scaled_down_app_width
-from data_collector.resources import get_logo_path, get_kivy_image
+from submission_helper.configs import get_scaled_down_app_width
+from submission_helper.resources import get_logo_path, get_kivy_image
 from typing import List
 
 class FocusTextInput(TextInput):

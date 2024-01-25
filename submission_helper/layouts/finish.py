@@ -7,10 +7,10 @@ from kivy.core.window import Window
 from kivy.uix.textinput import TextInput
 from kivy.uix.widget import Widget
 
-from data_collector.elements.types import BlackLabel
+from submission_helper.elements.types import BlackLabel
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
-from data_collector.configs import get_true_height, get_true_width
+from submission_helper.configs import get_true_height, get_true_width
 # -------------------------------------------
 
 class FinishLayout(BoxLayout):

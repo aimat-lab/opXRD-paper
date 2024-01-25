@@ -11,10 +11,10 @@ from kivy.graphics import Rectangle
 from kivy.core.image import Image as CoreImage
 from kivy.properties import BooleanProperty, ObjectProperty
 
-from data_collector.configs import get_line_height
-from data_collector.elements.types import BlackLabel
+from submission_helper.configs import get_line_height
+from submission_helper.elements.types import BlackLabel
 
-from data_collector.resources import get_unchecked_box_path, get_checked_box_path, get_fileicon_path, \
+from submission_helper.resources import get_unchecked_box_path, get_checked_box_path, get_fileicon_path, \
     get_foldericon_path, get_collapsed_icon_path, get_expanded_icon_path, get_kivy_image, get_empty_path
 
 # -------------------------------------------

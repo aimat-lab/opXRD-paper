@@ -1,11 +1,11 @@
-from data_collector.configs import set_configs
+from submission_helper.configs import set_configs
 set_configs()
 
 from kivy.core.window import Window
 Window.clearcolor = (1, 1, 1, 1)
 
 from kivy.modules import inspector
-from data_collector.app import DataCollectApp
+from submission_helper.app import DataCollectApp
 # -------------------------------------------
 
 

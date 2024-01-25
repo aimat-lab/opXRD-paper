@@ -5,12 +5,12 @@ from PIL import Image
 from typing import Optional, List
 from kivy.uix.boxlayout import  BoxLayout
 
-from data_collector.elements.types import Placeholder
-from data_collector.elements.node_widget import LabeledCheckBox, NodeWidget
-from data_collector.elements.loadable_element import LoadableElem
-from data_collector.resources import get_foldericon_path, get_fileicon_path
-from data_collector.filesystem import FsNode
-from data_collector.configs import get_line_height
+from submission_helper.elements.types import Placeholder
+from submission_helper.elements.node_widget import LabeledCheckBox, NodeWidget
+from submission_helper.elements.loadable_element import LoadableElem
+from submission_helper.resources import get_foldericon_path, get_fileicon_path
+from submission_helper.filesystem import FsNode
+from submission_helper.configs import get_line_height
 # -------------------------------------------
 
 class NodeElement(FsNode, LoadableElem):

@@ -8,8 +8,8 @@ from typing import List
 
 from kivy.clock import Clock
 
-from data_collector.filesystem import zip_file_list, produce_csv_file
-from data_collector.layouts import SelectionLayout, FinishLayout, InputDialog
+from submission_helper.filesystem import zip_file_list, produce_csv_file
+from submission_helper.layouts import SelectionLayout, FinishLayout, InputDialog
 
 # -------------------------------------------
 

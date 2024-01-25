@@ -7,7 +7,7 @@ from abc import abstractmethod
 from typing import Optional
 import time
 
-from data_collector.filesystem.lib import make_fsys_dict
+from submission_helper.filesystem.lib import make_fsys_dict
 from kivy.clock import Clock
 
 # -------------------------------------------

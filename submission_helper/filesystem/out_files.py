@@ -1,4 +1,4 @@
-from data_collector.resources import get_template_csv
+from submission_helper.resources import get_template_csv
 
 import os
 import zipfile, csv
