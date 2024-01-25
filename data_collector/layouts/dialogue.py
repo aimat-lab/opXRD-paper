@@ -10,7 +10,7 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 
-from data_collector.configs import get_scaled_down_app_width, get_true_width, get_true_height
+from data_collector.configs import get_true_width, get_true_height
 from data_collector.elements.types import FocusTextInput
 from data_collector.filesystem import FsNode, get_initial_path
 from data_collector.resources.resource_manager import get_blended_logo_path, get_kivy_image
