@@ -25,7 +25,7 @@ class SelectionLayout(BoxLayout):
         # attributes
         self.root_checkbox : Optional[NodeElement] = None
         self.last_load_range = I.closed(float('-inf'),float('inf'))
-        self.callback = None
+        self.dismiss_popup = None
 
         # GUI elements
         self.slider = ThickVerticalSlider(orientation='vertical', min=0, max=1, value=1, size_hint=(0.1, 1))
@@ -57,15 +57,14 @@ class SelectionLayout(BoxLayout):
 
         scroll_view_content = self.get_scroll_view_content(root_checkbox=self.root_checkbox)
         self.scroll_view.add_widget(widget=scroll_view_content)
-        self.scroll_view.bind(scroll_y=self.update_node_population)
 
         update_rate = 0.2
         Clock.schedule_interval(self.update_node_population, update_rate)
         Clock.schedule_interval(self.update_do_scroll, update_rate)
-        Clock.schedule_interval(self.check_for_dismiss, update_rate)
+        Clock.schedule_interval(self.check_selection_readiness, update_rate)
 
     def register_content_done_callback(self, callback : callable):
-        self.callback = callback
+        self.dismiss_popup = callback
 
     # -------------------------------------------
     # logic
@@ -77,15 +76,14 @@ class SelectionLayout(BoxLayout):
 
         vp_ypos = (1-self.scroll_view.scroll_y)*(total_height-vp_height)
         buffer_range = vp_height/2.
-
         new_load_range = I.closed(lower=vp_ypos-buffer_range,upper=vp_ypos+vp_height+buffer_range)
         unload_range_list = self.last_load_range - new_load_range
 
+        nodes_to_load = self.root_checkbox.get_nodes_in_interval(node=self.root_checkbox, interval=new_load_range)
         nodes_to_unload = []
         for unload_range in unload_range_list:
             nodes_to_unload += self.root_checkbox.get_nodes_in_interval(node=self.root_checkbox, interval=unload_range)
 
-        nodes_to_load = self.root_checkbox.get_nodes_in_interval(node=self.root_checkbox, interval=new_load_range)
         for node in nodes_to_load:
             node.load()
 
@@ -96,10 +94,7 @@ class SelectionLayout(BoxLayout):
 
     def update_do_scroll(self, *args, **kwargs):
         _, __ = args, kwargs
-        total_height = self.get_total_height()
-        vp_height = self.get_vp_height()
-
-        self.scroll_view.do_scroll_y = total_height > vp_height
+        self.scroll_view.do_scroll_y = self.get_total_height() > self.get_vp_height()
 
 
     def on_scroll_view_scroll(self, instance, value):
@@ -115,12 +110,11 @@ class SelectionLayout(BoxLayout):
         self.scroll_view.scroll_y = value
 
 
-    def check_for_dismiss(self, *args, **kwargs):
+    def check_selection_readiness(self, *args, **kwargs):
         _, __ = args, kwargs
         dismiss_condition = all([node.is_initialized for node in self.root_checkbox.xrd_node_des])
-
-        if dismiss_condition and self.callback:
-            self.callback()
+        if dismiss_condition and self.dismiss_popup:
+            self.dismiss_popup()
 
 
     # -------------------------------------------
