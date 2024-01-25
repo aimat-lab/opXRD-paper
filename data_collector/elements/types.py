@@ -77,26 +77,35 @@ class Placeholder(Widget):
 class HeaderWidget(BoxLayout):
     def __init__(self, num_elements: int, format_list : List[str]):
         super().__init__(orientation='horizontal', size_hint=(1, 0.125))
-        with_leading_dot_list = [f'.{the_format}' for the_format in format_list]
+        self.format_list = format_list
+        self.num_elements = num_elements
 
-        file_count_label = BlackLabel(
-            text=f"Found {num_elements} files that match specified XRD formats:\n {with_leading_dot_list}",
-            size_hint=(0.6, 1),  # Adjusted size hint
+        self.file_count_label = BlackLabel(
+            text=self._get_text(),
+            size_hint=(0.6, 1),
             font_size=Window.width * 0.0145,
             halign="center",
             valign="middle"
         )
-        file_count_label.bind(size=file_count_label.setter('text_size'))
-
-        # logo_image = Image(source=get_logo_path(), size_hint=(0.3, 1))
-        img_width = get_scaled_down_app_width() * 0.3
-        logo_image = get_kivy_image(width=img_width, imgPath=get_logo_path(), size_hint=(0.3,1))
-        print(f'Width of the header widget:{img_width}')
+        self.file_count_label.bind(size=self.file_count_label.setter('text_size'))
+        logo_image = get_kivy_image(width=get_scaled_down_app_width() * 0.3,
+                                    imgPath=get_logo_path(),
+                                    size_hint=(0.3,1))
 
         left_placeholder = Widget(size_hint=(0.4, 1))
         right_placeholder = Widget(size_hint=(0.2, 1))
 
-        self.add_widget(left_placeholder)  # Placeholder to balance the self
-        self.add_widget(file_count_label)
-        self.add_widget(right_placeholder)  # Placeholder to balance the self
+        self.add_widget(left_placeholder)
+        self.add_widget(self.file_count_label)
+        self.add_widget(right_placeholder)
         self.add_widget(logo_image)
+
+    def update_number_of_elements(self, num_elements : int):
+        self.num_elements = num_elements
+        self.file_count_label.text = self._get_text()
+
+
+
+    def _get_text(self) -> str:
+        format_with_leading_dots = [f'.{the_format}' for the_format in self.format_list]
+        return f"Found {self.num_elements} files that match specified XRD formats:\n {format_with_leading_dots}"

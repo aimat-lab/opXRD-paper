@@ -51,8 +51,7 @@ class SelectionLayout(BoxLayout):
         print(f'Time taken to initialize filesystem: {self.root_checkbox.time_filesystem_searching}')
         print(f'Time taken to search relevancy: {self.root_checkbox.time_relevancy_sorting}')
 
-        new_label = self.get_header_widget(num_elements=len(self.root_checkbox.get_xrd_file_des())).children[2]
-        self.header_layout.children[2].text =  new_label.text
+        self.header_layout.update_number_of_elements(num_elements=len(self.root_checkbox.get_xrd_file_des()))
         self.scroll_view.add_widget(widget=self.get_scroll_view_content(root_checkbox=self.root_checkbox))
 
         update_rate = 0.2
@@ -87,6 +86,7 @@ class SelectionLayout(BoxLayout):
             node.unload()
 
         self.last_load_range = new_load_range
+
 
     def do_scroll(self, initiator, value):
         self.scroll_view.do_scroll_y = self.get_total_height() > self.get_vp_height()
