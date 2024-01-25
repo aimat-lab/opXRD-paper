@@ -4,15 +4,18 @@
 block_cipher = None
 
 import os
-root_dir = os.path.dirname(os.path.abspath(__name__))
+src_dir =os.path.dirname(os.path.abspath(__name__))
+root_dir = os.path.dirname(src_dir)
+print(f'root dir: {root_dir}')
+print(f'src dir: {src_dir}')
 
 a = Analysis(
     ['run/prod_run.py'],
     pathex=[root_dir],
     binaries=[],
     datas=[
-        (os.path.join(root_dir, 'data_collector/resources/images/*'), 'images'),
-        (os.path.join(root_dir, 'data_collector/resources/documents/*'), 'documents'),
+        (os.path.join(src_dir, 'resources/images/*'), 'images'),
+        (os.path.join(src_dir, 'resources/documents/*'), 'documents'),
     ],
     hiddenimports=['python-intervals'],
     hookspath=[],

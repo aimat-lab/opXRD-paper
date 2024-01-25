@@ -10,8 +10,8 @@ if not exist "%ROOT_DIR%" (
 
 set "DIST_DIR=%ROOT_DIR%\dist"
 set "BUILD_DIR=%ROOT_DIR%\build"
-for /f %%i in ('cd') do set "script_dir=%%~fi"
+@REM for /f %%i in ('cd') do set "script_dir=%%~fi"
 
-pyinstaller "%script_dir%\submission_helper\prod_run.spec" --distpath "%DIST_DIR%" --workpath "%BUILD_DIR%"
+pyinstaller "prod_run.spec" --distpath "%DIST_DIR%" --workpath "%BUILD_DIR%"
 echo -> Built executable under %ROOT_DIR%\dist
 echo done

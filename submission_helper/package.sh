@@ -23,6 +23,6 @@ DIST_DIR="$ROOT_DIR/dist"
 BUILD_DIR="$ROOT_DIR/build"
 script_dir="$(cd "$(dirname "$0")" && pwd)"
 
-pyinstaller "$script_dir/submission_helper/prod_run.spec" --distpath "$DIST_DIR" --workpath "$BUILD_DIR"
+pyinstaller "prod_run.spec" --distpath "$DIST_DIR" --workpath "$BUILD_DIR"
 echo "-> Built executable under $ROOT_DIR/dist"
 echo "done"
