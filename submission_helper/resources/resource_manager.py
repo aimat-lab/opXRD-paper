@@ -7,7 +7,6 @@ from io import BytesIO
 from PIL import Image
 
 
-# Determine the base path for resources based on whether the app is bundled or run as a script
 if getattr(sys, 'frozen', False):
     # The app is bundled with PyInstaller
     base_path = sys._MEIPASS  # PyInstaller's base directory
@@ -17,6 +16,9 @@ else:
 
 images_folder_path = os.path.join(base_path, 'images')
 doc_folder_path = os.path.join(base_path, 'documents')
+
+# -------------------------------------------
+# images
 
 def get_blended_logo_path() -> str:
     return os.path.join(images_folder_path, 'blended_logo.png')
@@ -45,11 +47,17 @@ def get_checked_box_path() -> str:
 def get_unchecked_box_path() -> str:
     return os.path.join(images_folder_path, 'unchecked_box.png')
 
+# -------------------------------------------
+# documents
+
 def get_template_csv() -> str:
     return os.path.join(doc_folder_path, 'template.csv')
 
 def get_empty_path() -> str:
     return os.path.join(images_folder_path, 'empty.png')
+
+# -------------------------------------------
+# resizing with PIL instead of kivy
 
 def pil_to_kivy_image(pil_image, **kwargs):
     data = BytesIO()

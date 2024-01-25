@@ -26,6 +26,7 @@ class FinishLayout(BoxLayout):
                                            size_hint=(0.7, 1),
                                            font_size=get_true_width() * 0.02,
                                            multiline=False)
+
         buffer = BlackLabel(text='', size_hint=(0.075, 1))
         self.ok_button = self.get_ok_button()
         self.ok_button.bind(on_press=callback)
@@ -53,6 +54,7 @@ class FinishLayout(BoxLayout):
         button_layout = BoxLayout(size_hint_y=0.2)
         dismiss_button = Button(text='Dismiss', on_press=lambda instance: self.feedback_popup.dismiss())
         exit_button = Button(text='Exit', on_press=self.exit_funct)
+
         button_layout.add_widget(dismiss_button)
         button_layout.add_widget(exit_button)
 
