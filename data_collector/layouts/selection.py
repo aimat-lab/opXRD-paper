@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import copy
 from typing import Optional
 from kivy.uix.label import Label
 from kivy.uix.scrollview import ScrollView
@@ -29,10 +28,10 @@ class SelectionLayout(BoxLayout):
 
         # GUI elements
         self.slider = ThickVerticalSlider(orientation='vertical', min=0, max=1, value=1, size_hint=(0.1, 1))
-        self.slider.bind(value=self.adjust_scroll_view)
+        self.slider.bind(value=self.do_scroll)
 
         self.scroll_view = self.get_scroll_view()
-        self.scroll_view.bind(scroll_y=self.on_scroll_view_scroll)
+        self.scroll_view.bind(scroll_y=self.do_scroll)
 
         self.header_layout = self.get_header_widget(num_elements=0)
         self.checkboxes_layout = self.get_checkboxes_layout(file_count_label=self.header_layout,
@@ -54,13 +53,10 @@ class SelectionLayout(BoxLayout):
 
         new_label = self.get_header_widget(num_elements=len(self.root_checkbox.get_xrd_file_des())).children[2]
         self.header_layout.children[2].text =  new_label.text
-
-        scroll_view_content = self.get_scroll_view_content(root_checkbox=self.root_checkbox)
-        self.scroll_view.add_widget(widget=scroll_view_content)
+        self.scroll_view.add_widget(widget=self.get_scroll_view_content(root_checkbox=self.root_checkbox))
 
         update_rate = 0.2
         Clock.schedule_interval(self.update_node_population, update_rate)
-        Clock.schedule_interval(self.update_do_scroll, update_rate)
         Clock.schedule_interval(self.check_selection_readiness, update_rate)
 
     def register_content_done_callback(self, callback : callable):
@@ -92,22 +88,13 @@ class SelectionLayout(BoxLayout):
 
         self.last_load_range = new_load_range
 
-    def update_do_scroll(self, *args, **kwargs):
-        _, __ = args, kwargs
+    def do_scroll(self, initiator, value):
         self.scroll_view.do_scroll_y = self.get_total_height() > self.get_vp_height()
 
-
-    def on_scroll_view_scroll(self, instance, value):
-        _, __ = instance, value
-
-        self.slider.unbind(value=self.adjust_scroll_view)
-        self.slider.value = copy.copy(self.scroll_view.scroll_y)
-        self.slider.bind(value=self.adjust_scroll_view)
-
-
-    def adjust_scroll_view(self, instance, value):
-        _ = instance
-        self.scroll_view.scroll_y = value
+        if initiator == self.slider and self.scroll_view.scroll_y != value:
+            self.scroll_view.scroll_y = value
+        elif initiator == self.scroll_view and self.slider.value != value:
+            self.slider.value = value
 
 
     def check_selection_readiness(self, *args, **kwargs):
@@ -115,7 +102,6 @@ class SelectionLayout(BoxLayout):
         dismiss_condition = all([node.is_initialized for node in self.root_checkbox.xrd_node_des])
         if dismiss_condition and self.dismiss_popup:
             self.dismiss_popup()
-
 
     # -------------------------------------------
     # get

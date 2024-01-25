@@ -2,23 +2,20 @@ from __future__ import annotations
 
 from kivy.core.window import Window
 from kivy.uix.boxlayout import BoxLayout
-
 from kivy.uix.checkbox import CheckBox
 from kivy.uix.image import Image
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.togglebutton import ToggleButton
+from kivy.uix.widget import Widget
+from kivy.graphics import Rectangle
+from kivy.core.image import Image as CoreImage
+from kivy.properties import BooleanProperty, ObjectProperty
 
 from data_collector.configs import get_line_height
 from data_collector.elements.types import BlackLabel
 
 from data_collector.resources import get_unchecked_box_path, get_checked_box_path, get_fileicon_path, \
     get_foldericon_path, get_collapsed_icon_path, get_expanded_icon_path, get_kivy_image, get_empty_path
-from kivy.uix.widget import Widget
-from kivy.uix.widget import Widget
-from kivy.graphics import Rectangle, Color
-from kivy.core.image import Image as CoreImage
-from kivy.properties import BooleanProperty, ObjectProperty
-
 
 # -------------------------------------------
 
@@ -71,11 +68,12 @@ class IconToggleButton(RelativeLayout):
     def __init__(self, **kwargs):
         super(IconToggleButton, self).__init__(**kwargs)
 
-        self.collapsed = get_kivy_image(width=self.height, imgPath=get_collapsed_icon_path(),
+        height = self.height
+        self.collapsed = get_kivy_image(width=height, imgPath=get_collapsed_icon_path(),
                                         size_hint=(None, None),
                                         size=(height,height))
 
-        self.expanded = get_kivy_image(width=self.height,
+        self.expanded = get_kivy_image(width=height,
                                        imgPath=get_expanded_icon_path(),
                                        size_hint=(None, None),
                                        size=(height,height))
@@ -124,6 +122,7 @@ class ImageCheckBox(CheckBox):
         return super().on_touch_down(touch)
 
     def update_rect(self, *args):
+        _ = args
         self.rect.pos = self.pos
         self.rect.size = self.size
         self.rect.texture = self.checked_image if self.active else self.unchecked_image
