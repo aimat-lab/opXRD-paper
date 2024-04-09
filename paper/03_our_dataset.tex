@@ -1,0 +1,362 @@
+    \subsection{Synthetic distribution} \label{sec:synth_distribution}
+
+    \begin{figure}[!htb]
+    \centering
+    \includegraphics{./figures/example_structures.pdf}
+    \caption{a) Some \replaced{randomly chosen and thus representative}{randomly picked} examples of ICSD crystals. b) Some \replaced{randomly chosen and thus representative}{randomly
+    picked} examples of synthetically generated crystals. While coordination and
+    distances are not chemically correct for the synthetic crystals, crystal
+    symmetries are reproduced correctly.}
+    \label{fig:example_structures}
+    \end{figure}
+
+    \begin{figure}[!htb]
+    \centering
+    \includegraphics{./figures/histograms/histograms.png} 
+    \caption{Histograms comparing the distributions of descriptors of the
+    synthetically generated crystals with the ICSD distribution in the test
+    dataset. a) density factor $ \frac{V_\text{unit cell}}{\sum_i 4/3 \pi
+    \left(\frac{r_{i\text{;cov}} + r_{i\text{;VdW}}}{2}\right)^3} =
+    \frac{V_\text{unit cell}}{V_\text{atomic}}$, b) crystallite sizes, c) unit cell
+    volume (conventional cell settings), d) number of atoms in the asymmetric
+    unit. The probability density of the ICSD is visualized by a stacked bar
+    histogram, where the green portion of the bar was correctly classified and
+    the red portion was incorrectly classified. The probability density of the
+    synthetic crystals is visualized by the dark blue line. The portion between the
+    dark blue line and the light blue line was correctly classified, the portion below the
+    light blue line was incorrectly classified. The reported classification
+    performance is based on the ResNet-101 model trained on diffractograms from
+    synthetic crystals.}
+    \label{fig:histograms}
+    \end{figure}
+
+    We first present an analysis of the generated synthetic crystals.
+    Figure~\ref{fig:example_structures} shows some \replaced{randomly chosen and thus representative examples of}{randomly selected} ICSD and
+    synthetic crystal structures side-by-side. Visually, the crystals appear very
+    similar. However, no physical or chemical considerations regarding stability, clashing atoms, and element combinations are taken into account in the generation of synthetic crystals. As discussed earlier, our goal is to demonstrate that this is
+    not problematic when using these crystals for the extraction of structural
+    information from powder diffractograms. On the contrary, we expect the synthetic crystals to be a better basis for generalization to fundamentally new crystal structures than existing finite databases.
+
+    To compare the distribution of ICSD crystals with the synthetic
+    distribution, we evaluated structural descriptors, i.e. density factors, crystallite sizes, unit cell volumes, and numbers of atoms in the asymmetric unit, and compare their histograms
+    in Figure~\ref{fig:histograms}.
+    One can see that the overall distributions of
+    the synthetic and ICSD crystals are very similar for all four descriptors.
+    This shows that our chosen generation algorithm reproduces crystals that are
+    similar to ICSD crystals in terms of these more general descriptors.
+
+    \subsection{Classification results} \label{sec:classification_results} 
+    
+    The main results of our experiments (see Section~\ref{sec:models_and_experiments}) to
+    classify the space group of powder diffractograms can be
+    found in Table~\ref{tab:results}. \added{In SI Table S2, we further provide the training time and total number of unique diffractograms for each computational experiment.}
+    The goal of our experiments is to systematically analyse and quantify the changes in classification accuracy introduced by our two main contributions: A more challenging dataset split, and training on continuously generated synthetic data.
+
+    We started by repeating previously reported
+    experiments\supercite{parkClassificationCrystalStructure2017} trained
+    directly using ICSD crystals with a random train-test split instead of the
+    split based on structure types. This model achieved a very high test
+    accuracy of 83.2\%. We note that the previous publication that we compare
+    our results to\supercite{parkClassificationCrystalStructure2017} removed
+    data from the training dataset, ``[...] heavily duplicated data
+    [...]''\supercite{parkClassificationCrystalStructure2017}, but did not
+    specify the exact criterions used. In contrast, we did not exclude any
+    duplicates in this experiment based on a random train-test split.
+    Furthermore, as discussed in Section~\ref{sec:generate_crystals}, we
+    excluded crystals with a very high unit cell volume and a very high number
+    of atoms in the asymmetric unit. This is likely the reason for the slightly
+    higher classification accuracy that we observed, compared to the originally
+    reported 81.1\%. 
+    
+    When splitting randomly, the model merely needs to recognize structures or
+    structure types and assign the correct space group. This task is much easier
+    than actually extracting the space group using more general patterns. When
+    going from random splits to structure type-based splits (see
+    Section~\ref{sec:dataset_split}), it becomes obvious that both the ``parkCNN
+    big'' as well as the ``parkCNN medium'' models overfit the training data and
+    do not generalize well to unseen structure types in the test set \added{(see
+    Table \ref{tab:results})}. \added{The ``parkCNN medium'' model, which
+    achieved 83.2\% on a random split, now only yields 55.9\% with the structure
+    type-based split.}
+
+    \replaced{Training the models by
+    \citeauthor{parkClassificationCrystalStructure2017}}{Training the same
+    model}, in particular the ``parkCNN big'' model, on synthetic crystals leads
+    to a 1.6 percentage points higher test accuracy than the ``parkCNN big''
+    model trained on ICSD diffractograms. At the same time, the training
+    accuracy drops from \added{the} 87.2\% \added{when we trained the model
+    directly on the ICSD} to 74.2\% \added{on the synthetic distribution}
+    indicating that the model is now limited more by missing capacity rather
+    than by overfitting, which is why we explored larger models, which will be
+    discussed later. The gap between training and test accuracy is $31.1$
+    percentage points when training on ICSD data, while for training using
+    synthetic crystals, the gap is only $16.5$ percentage points. We note that
+    this gap between training using synthetic crystals and testing using ICSD
+    crystals cannot stem from overfitting, since no diffractograms are repeated
+    for the synthetic training. The difference rather stems from the differences
+    between the synthetic distribution and the ICSD distribution of crystals.
+
+    \begin{table}[!htb]
+        \begin{center}
+        \caption{Results of training on diffractograms simulated from ICSD crystals (random splits as well as structure type-based splits) compared to when training on diffractograms from synthetic
+        crystals. Test accuracy
+        in all cases refers to the accuracy when testing on the ICSD test
+        dataset. The training accuracies are averaged over the last 10 epochs of
+        the respective run.
+        Experiments trained directly on ICSD data
+        overfitted to the training data. Training longer would have further
+        increased the training accuracy, while not increasing the test
+        accuracy.}
+        \vspace*{2mm}
+        
+        \begin{tabular}{ccccccc} 
+            \toprule
+            Split & \begin{tabular}{@{}c@{}}Training \\ dataset\end{tabular} & \begin{tabular}{@{}c@{}}Testing \\ dataset\end{tabular} & Model & \begin{tabular}{@{}c@{}}Number of \\ parameters\end{tabular}& \begin{tabular}{@{}c@{}}Training acc. \\ / \%\end{tabular} & \begin{tabular}{@{}c@{}}Test acc. \\ / \%\end{tabular} \\
+            \midrule
+            Random & ICSD & ICSD & parkCNN medium & 4\,246\,797 & 88.4 & 83.2 \\
+            \midrule
+            Structure& \multirow{2}{*}{ICSD} & \multirow{2}{*}{ICSD}& parkCNN big & 4\,959\,585 & 87.2 & 56.1 \\
+            type&&& parkCNN medium & 4\,246\,797 & 90.9 & 55.9 \\
+            \midrule
+            & \multirow{4}{*}{synthetic} & \multirow{4}{*}{ICSD} &parkCNN big & 4\,959\,585 & 74.2 & 57.7 \\
+            Structure&&& ResNet-10 & 9\,395\,025 & 87.2 & 73.4 \\
+            type$^{1}$ &&& ResNet-50 & 41\,362\,385 & 91.8 & 79.3 \\
+            &&& ResNet-101 & 60\,354\,513 & 92.2 & \textbf{79.9} \\
+            \bottomrule
+        \end{tabular}\label{tab:results}
+        \end{center} 
+        \footnotesize{$^{1}$Here, the split type refers to the statistics and the test dataset, rather than the training and the test dataset.}
+    \end{table}
+
+    While the ``parkCNN big'' model trained on synthetic crystals outperforms
+    the approach of training directly on ICSD crystals by only 1.6 percentage
+    points, the advantage of training on an infinite stream of synthetic data increases when using models with more parameters and thus higher capacity. In
+    contrast to training directly on a finite set of ICSD crystals, it is possible to train
+    very large models using the infinite synthetic data stream without the
+    potential of overfitting. As found in the last lines of Table~\ref{tab:results}, ResNet-10, ResNet-50, and ResNet-101 based models achieve ICSD test accuracies of 73.4\%,
+    79.3\%, and 79.9\%. This is a significant increase from the 57.7\% achieved
+    by the ``parkCNN big'' model. Figure~S4 in the SI further shows the top-$k$ accuracy over $k$ for the ResNet-101 model. With increasing $k$ the accuracy exceeds 95\% at $k=5$.
+    This means that our model can not only determine the correct space group with a high probability but can also generate an almost complete list of possible space group candidates.
+    
+    Figure~\ref{fig:training_curve} shows the ICSD test accuracy, the training
+    accuracy (on synthetic data), and the ICSD top-5 test accuracy for all three ResNet variants
+    as a function of epochs trained. For all three metrics, the difference
+    between ResNet-50 and ResNet-101 is comparably small, while the step from
+    ResNet-10 to ResNet-50 is substantial (5.9 percentage points in ICSD test
+    accuracy, see Table~\ref{tab:results}). This shows that going beyond the
+    model size of the ResNet-101 will likely not yield a big improvement in
+    accuracy. In contrast to the 79.9\% accuracy reached in the top-1 ICSD test accuracy, the top-5 ICSD test accuracy of the ResNet-101 model reaches
+    96\%. However, for all three ResNet variants, a gap between training using synthetic
+    crystals and testing using the ICSD remains (12.3 percentage points for
+    ResNet-101). As also shown in Figure~S5 in the SI, the accuracy convergence can be approximately described by a power law, indicating that exponentially more training time will substantially reduce classification errors and thus potentially lead to top-1 accuracies of 90\% and above, at the cost of a 100-fold increase in training times\replaced{. Considering the current training times provided in Table S2 of the SI, this is currently infeasible or only possible with tremendous hardware resources.}{, which is currently infeasible.}
+
+    \begin{figure}[!htbp] 
+    \centering
+    \includegraphics{figures/training_curves/training_curve_main.png}
+    \caption{Test accuracy (ICSD), training accuracy (synthetic crystals), and
+    test top-5 accuracy (ICSD) as a function of epochs\added{ (bottom axis). Since each additional epoch contains newly generated unique diffractograms, we further show the accuracies as a function of the total number of unique synthetic diffractograms (top axis)}. We show all three
+    metrics for the models ResNet-101, ResNet-50, and ResNet-10. To better show
+    the scaling behavior, both axes use logarithmic scaling. \added{Figure S6
+    shows the same plot but without logarithmic scaling.} To better see the
+    exponential behaviour, see Figure~S5 in the SI. }
+    \label{fig:training_curve} 
+    \end{figure}
+
+    The histograms in Figure~\ref{fig:histograms} show, next to the overall
+    distribution, also the fraction of diffractograms classified wrongly for
+    testing on the ICSD (red bar) and on the synthetic data (below the light blue line)
+    for the ResNet-101 model. First, one can see that throughout almost all
+    regions of the distributions, the accuracy on the synthetic data is slightly
+    higher than that on the ICSD. This is related to the aforementioned gap of 12.3
+    percentage points between train and test accuracy and can be attributed to
+    differences between the synthetic and ICSD distribution of crystals. This
+    will be discussed in detail in the next section. It is surprising to see that the
+    dependence on crystallite sizes is rather weak, as smaller crystallite sizes
+    result in broader peaks (see Scherrer equation, Eq.~\ref{eq:scherrer}), potentially making the
+    classification harder due to more peak overlaps.
+
+    In summary, the maximum ICSD test accuracy of 79.9\% that we achieved using
+    the ResNet-101 model almost reaches the previously
+    reported\supercite{parkClassificationCrystalStructure2017} 81.14\% for the
+    space group classification. However, our accuracy is based on a train-test
+    split based on structure types, in contrast to a random split. This creates
+    a much harder but also realistic task to solve since the model needs to
+    generalize to other structure types without merely recognizing
+    diffractograms or structure types that it has already seen during training.
+    This becomes especially apparent from our experiment directly trained on
+    diffractograms from ICSD crystals with the split based on structure types,
+    which reached only 56.1\% instead of the previously
+    reported\supercite{parkClassificationCrystalStructure2017} 81.14\%.
+
+    \subsubsection*{Experimental results}
+    To go beyond simulated diffractograms, we trained ResNet-50 models on
+    calculated diffractograms with background, noise, and impurities and applied
+    the trained models to the RRUFF mineral database. Our results (see Figure~S3
+    in the SI) show that it is essential to include impurity phases in the
+    training data. By doing so, we obtain a top-1 accuracy of 25.2\% and a
+    top-10 accuracy of over 60\%. This is of high practical relevance since
+    having a short list of potential space groups is often sufficient as a first
+    step to further refinement and analysis.
+
+    \citeauthor{vecseiNeuralNetworkBased2019} performed similar experiments of
+    space group classification on the same database. Using an ensemble of 10
+    fully connected neural networks, they reached a classification accuracy of
+    54\%\supercite{vecseiNeuralNetworkBased2019}. While our obtained accuracy is
+    significantly lower, our approach is much more general: In contrast to our
+    approach, the training dataset was based on simulated diffractograms of
+    structures of the ICSD\supercite{vecseiNeuralNetworkBased2019}, which
+    contains almost all RRUFF structures, leading to high similarities of
+    training and \replaced{test}{testing} data. Therefore, the model needed to
+    simply recognize the minerals, instead of directly inferring the space group
+    using the symmetry elements - as our method needs to do.
+
+    We want to emphasize that our efforts to apply the methodology to
+    experimental data are only preliminary. We expect improved results with an
+    improved data generation protocol since the procedure contains many
+    parameters to be tuned. Ideally, one would use a generative machine learning
+    approach to add the experimental effects (noise, background, impurities) to
+    the pure diffractograms. We also want to point out that the noise level and
+    quality of data in the RRUFF dataset are limited. Application of the
+    presented methodology \replaced{to}{on} other experimental datasets is
+    desirable. \deleted{We will address these points in future work, where we
+    focus on improved ways of modeling experimental imperfections.}
+    \added{As discussed above, for the
+    classification of pure diffractograms we observed the ResNet-50 to have the
+    best cost-benefit ratio, since the ResNet-101 yielded only slight
+    improvements. For the more complicated problem of classifying diffractograms
+    with experimental imperfections, bigger models and longer training times
+    might be necessary.}
+    
+    \added{Next to improving the modeling of experimental imperfections and therefore the overall accuracy on experimental data, the practical application of deep neural networks for analyzing powder diffractograms yields further challenges that we want to discuss. Since experimental setups differ, e.g., concerning the used wavelength, a different $2\theta$ step size, or a different $2\theta$ range, a new neural network would need to be trained for each situation. Since our largest model requires a significant computational investment, this might not be feasible in all situations. Arguably, though, for large high-throughput experiments, the 11-day training of a ResNet-50 should not be unreasonable, especially if it can speed up the data analysis significantly and allow in-loop adaptive experimentation. For smaller setups, where this is not feasible, other solutions must be found. First, one can use a form of transfer learning from a pre-trained model to fine-tune to the desired experimental setup. This, however, would only work for a change in wavelength, since a change in step size or $2\theta$ range would change the input dimensions of the network. However, to handle a change in the $2\theta$ range, it might be possible to include a form of zero-masking in the synthetic training data, such that different input ranges (with zeros where no measurement was made) can be used, which would lead to a more flexible model, not requiring new training data when applied to a new $2\theta$ range. For a change in the step size, a cubic spline interpolation might be helpful. We plan to address these challenges in future work.}
+
+    \deleted{As discussed above, for the classification of pure diffractograms we
+    observed the ResNet-50 to have the best cost-benefit ratio, since the
+    ResNet-101 yielded only slight improvements. For the more complicated
+    problem of classifying diffractograms with experimental imperfections,
+    bigger models and longer training times might be necessary.}
+
+    \added{Furthermore, analysis of the loss value or gradient norm associated with particular samples, i.e. crystal structures, during training on synthesis crystals or during transfer learning from synthetic to experimental data can help to better understand the relevance and informativeness of given samples for the model. This can help in generating more relevant synthetic data based on experimental crystal structures that are underrepresented in the synthetic data distribution.}
+
+    \subsection{Differences between synthetic crystals and ICSD crystals}
+    We showed that training directly on crystals from the ICSD yields a gap
+    between the training and test accuracy due to overfitting. The training on
+    the synthetic dataset also shows a gap between the training and test
+    accuracy (see Table~\ref{tab:results}), but it is smaller than when training
+    directly on ICSD crystals. Furthermore, this gap is not due to overfitting,
+    since overfitting to singular diffractograms is not possible when the model
+    is trained using an infinite stream of generated synthetic crystals. The gap
+    rather stems from systematic differences between the synthetic and ICSD
+    distribution of crystals.
+
+    To analyze those differences, we created three modifications of the ICSD
+    test dataset \added{(see SI Section~S3 for details)}. In the first modification, the fractional coordinates of the
+    atoms in the asymmetric unit of the crystals of the ICSD test dataset were
+    randomly uniformly resampled (as in the synthetic crystal generation
+    algorithm). In the second modification, the lattice parameters were
+    randomized following the \replaced{kernel density estimate}{KDE} used in the synthetic generation algorithm. The
+    third modification combines both previous modifications, i.e. both the
+    coordinates and the lattice parameters were resampled. These three modified
+    test datasets bring the ICSD test dataset closer to the distribution used
+    for training and let us quantify which factors contribute to the gap between
+    training \added{on synthetic crystals} and testing \added{on the ICSD}. 
+
+    We evaluated the test accuracies on \replaced{the randomized}{these}
+    datasets for the experiment using the ResNet-101 model trained using
+    synthetic crystals. We found that randomizing the coordinates yields an
+    increase in test accuracy of \replaced{$4.89$}{$5.96$} percentage points.
+    Randomizing the lattice parameters results in an increase of
+    \replaced{$0.79$}{$1.31$} percentage points. Randomizing both the
+    coordinates and the lattice parameters leads to an increase of
+    \replaced{$5.70$}{$6.32$} percentage points, explaining
+    \replaced{almost}{approximately} half of the gap of 12.3 percentage points
+    between synthetic training and ICSD test accuracy.
+
+    \added{So far, we have randomized the lattice parameters and coordinates of the test dataset, such that they follow a distribution that is based on the statistics extracted from the statistics dataset. However, this does not take into account the different Wyckoff position occupation probabilities between the test and statistics datasets. For this, we repeated
+    a similar analysis, for which we applied the
+    randomizations to the statistics dataset rather than the test dataset.
+    Without any modifications, testing on the statistics dataset instead of the test dataset yielded $3.89$ percentage points higher accuracy. This can be explained by slight differences in the overall statistics between the test and statistics datasets.
+    Randomizing the coordinates yields a further increase of $4.72$
+    percentage points, randomizing the lattice $1.16$ percentage points, and
+    randomizing both the coordinates and the lattice parameters $6.68$ percentage points.
+    In total, testing on the statistics dataset with randomized coordinates and
+    lattice parameters yields a $10.57$ percentage points higher accuracy than on the
+    unmodified test dataset. This almost completely explains the gap
+    of $12.3$ percentage points between the training accuracy on synthetic crystals and the test accuracy on the ICSD. The
+    remaining part is likely due to our algorithm that places atoms on Wyckoff
+    positions 
+    not reproducing the ICSD distribution exactly. 
+    However, the
+    remaining difference is remarkably small.}
+
+    \deleted{We also tested the ResNet-101 model on diffractograms simulated
+    based on the statistics dataset from which the statistics for our generation
+    algorithm have been extracted. This returns a $4.33$ percentage points
+    higher accuracy than on the test dataset. This is due to the different
+    structure types present in the test and statistics dataset yielding
+    different occupation probabilities (potentially also 0) for Wyckoff
+    positions and overall slightly different statistics for the synthetic
+    generation algorithm.}
+    \deleted{To summarize, the contributions to the gap stem from differences in the
+    distribution of lattice parameters and coordinates with $6.32$ percentage
+    points and from the differences between the statistics dataset and test
+    dataset with $4.33$ percentage points. Added together (assuming the effects of geometry and Wyckoff position occupation probabilities are unrelated and thus additive), the contributions
+    almost completely explain the gap of $12.3$ percentage points between
+    training and test accuracy. The remaining part is likely due to our
+    algorithm that places atoms on Wyckoff positions not reproducing the ICSD
+    distribution exactly. However, the remaining difference is remarkably small.}
+
+    \begin{figure}[!htb]
+    \centering
+    \includegraphics{./figures/histograms/histograms_rel.png}
+    \caption{Classification \replaced{error}{performance} for each bin of a) the unit cell volume
+    (conventional cell settings) and b) the number of atoms in the asymmetric
+    unit. \deleted{The classification performance when testing on the ICSD is shown using
+    a stacked bar plot, where the red bar indicates the classification error and
+    the green bar indicates the correctly classified portion of each bin. When
+    testing on the synthetic distribution, the classification error is given by
+    the light blue line, the rest (between dark blue and light blue line) was correctly
+    classified.} The reported classification performance is based on the
+    ResNet-101 model trained on diffractograms from synthetic crystals. This
+    visualization clearly shows the error rate within each bin, in contrast to
+    Figure~\ref{fig:histograms}, which additionally includes the relative
+    proportion of the crystals of the respective bin to the total amount of
+    crystals.}
+    \label{fig:histograms_rel}
+    \end{figure}
+
+    In Figure~\ref{fig:histograms_rel} we show the test classification error in
+    each bin for the unit cell volume and the number of atoms in the asymmetric
+    unit using the ResNet-101 model trained on diffractograms of synthetic
+    crystals. The classification error is shown both for testing on
+    diffractograms from synthetic crystals and on ICSD diffractograms. One can
+    see that for small volumes and a small number of atoms in the asymmetric
+    unit, the difference between classifying ICSD diffractograms and
+    diffractograms from synthetic crystals is relatively small. As the volume
+    and number of atoms in the asymmetric unit increase, the gap between the two
+    errors increases, too. We already identified the uniformly sampled atom
+    coordinates in the synthetic distribution as the main contributor to the gap
+    in accuracy between the synthetic crystals and ICSD crystals. Therefore, it
+    seems that the uniform sampling of atom coordinates works well for small 
+    number of atoms in the asymmetric unit and small volumes, while the error 
+    due to this sampling strategy increases slightly for higher volumes and higher
+    number of atoms in the asymmetric unit.
+    
+    When looking at the distribution of crystals in the ICSD, the number of
+    atoms in the asymmetric unit tends to be larger for lower-symmetry space
+    groups (for example, in the triclinic crystal system) than for
+    higher-symmetry space groups such as those from the cubic crystal system.
+    Therefore, the increasing test error on diffractograms from ICSD crystals
+    with a higher number of atoms in the asymmetric unit is especially relevant
+    for these lower-symmetry space groups.
+    It might be possible that a different scheme of generating atom positions in
+    the unit cell (compared to the independent uniform sampling that we used)
+    works better for a high number of atoms in the asymmetric unit.
+
+    Overall, it is important to note that the distribution of ICSD crystals is (apart from a few Wyckoff position occupation probabilities which are exactly zero in the statistics dataset\footnote{Setting them to small non-zero values typically leads to the generation of rather large unit cells, as the general Wyckoff positions have high multiplicities.}) almost completely encompassed by the much larger distribution of snynthetic crystals that we used for training.
+    However, due to finite training times and model capacity, a performance gap remains. This gap can be improved by using (substantially) more computing power or by narrowing the very general synthetic distribution, e.g., by using a different algorithm to generate atom positions.
+    This indicates an inherent challenge in XRD classification but more generally in materials property prediction:
+    Machine learning models are ultimately trained to be employed in real-world tasks, which are typically related to novel, i.e. yet unseen materials and structures.
+    At the same time, the machine learning models are tested based on an IID assumption, i.e. the assumption that the distribution of training and testing data is the same.
+    While not being a contradiction in the limit of infinite training data and model capacity, this becomes an (unsolvable) challenge in reality, when facing finite datasets and models.
+    In our case, our model trained on a large distribution of synthetic crystal structures will likely generalize better to completely new crystal structures different from any crystal structure contained in the ICSD database.
+    At the same time, it suffers from smaller ICSD test set errors, even though the ICSD distribution is contained in the synthetic data generation distribution.

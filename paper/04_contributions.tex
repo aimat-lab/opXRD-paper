@@ -1,0 +1,43 @@
+We developed an algorithm based on the symmetry operations of the space groups
+to generate synthetic crystals that follow the distribution found in the ICSD
+database in terms of general descriptors like volume, density, or types of
+elements. The generated crystals have randomly sampled coordinates and span a
+wide range of structure types, many of which do not appear in the ICSD. We
+showed that, compared to using ICSD crystals directly, simulating the training
+data based on the synthetic crystals can improve the performance of tasks that
+extract structural information from powder diffractograms, in this case, the
+space group. \replaced{The more general dataset that also contains unstable structures helps to classify unseen stable crystal structures.}{Our results verify our hypothesis that crystals forming the
+training dataset do not need to be stable or chemically viable.}
+
+We trained on an infinite on-the-fly generated stream of synthetic crystals and simulated
+batches of diffractograms using a distributed framework based on the
+\emph{Python} library \emph{Ray}\supercite{moritzRayDistributedFramework2018a}.
+This allows the training of very large networks without overfitting. The
+best-performing model (ResNet-101) reached a space group classification accuracy
+of 79.9\% vs. 56.1\% when training on ICSD structures directly. By performing
+the train-test split using the structure type, we forced our models to not just
+recognize structure types or individual structures, but to actually learn rules
+to distinguish different space groups by their symmetry elements. This shows the
+true generalization capabilities to new structure types and novel classes of
+materials. We also demonstrated first steps toward applying the presented methodology to an experimental dataset. We expect further improvements in this area using improved models of experimental imperfections, as well as larger ML models and longer training times.
+
+Even though models trained on the synthetic distribution transfer well when
+tested on ICSD crystals, we found a gap of 12.3 percentage points (ResNet-101)
+between the training accuracy on synthetic crystals and test accuracy on the
+ICSD. We showed that the main contribution to this gap stems from the
+independently uniformly sampled atom coordinates. An improved approach may be
+needed to artificially generate more ordered structures, which contain more
+ordered diffraction planes than a cloud of uniformly sampled points. This might
+be especially important for crystals with a high number of atoms in the
+asymmetric unit.
+
+Lastly, the developed algorithm to synthetically generate crystals can be used
+for other XRD-related tasks in the future, such as the extraction of crystallite sizes, lattice
+parameters, information about the occupation of Wyckoff positions, etc.
+Furthermore, instead of generating \replaced{synthetic}{completely random} crystals of all space
+groups, one can also generate \deleted{random} crystals of given structure types to solve
+more specialized tasks. This would allow the use of very large models for tasks
+that are typically strongly limited by the dataset size when using only the entries of
+the ICSD. Also, tasks concerning multi-phase diffractograms or augmentations such as
+strain in given crystal structures can benefit from our batch-wise online
+learning approach.

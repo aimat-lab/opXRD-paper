@@ -1,0 +1,278 @@
+\subsection{Generating synthetic crystals} \label{sec:generate_crystals} 
+
+    To generate synthetic crystals, we randomly place atoms on the Wyckoff
+    positions of a given space group \added{following the Wyckoff occupation probabilities extracted from the ICSD} and
+    then apply the respective symmetry operations. The algorithm is
+    explained in the following (see also Figure~\ref{fig:generation_and_distributed}a for a flow diagram of the algorithm).
+    We only explain the most important steps, details can be found in Section~S1 of the SI.
+
+    \begin{enumerate}
+        \itemsep0em
+        \item \replaced{Sampling of a space group from the space group distribution of the ICSD.}{Random selection of a space group. We follow the space group distribution of the ICSD to allow comparison with previous work.}
+        \item Sample unique elements of the crystal and their number of repetitions in the asymmetric unit.
+        \item Place atoms onto the Wyckoff positions and draw uniform coordinates for each.
+        \item Draw lattice parameters from a \replaced{kernel density estimate}{KDE} based on the ICSD.
+        \item Apply space group symmetry operations.
+    \end{enumerate}
+
+    Parts of this algorithm were inspired by the generation algorithm of the
+    \emph{Python} library \emph{PyXtal}
+    \supercite{fredericksPyXtalPythonLibrary2021}. 
+    We only keep generated crystals for training if the
+    conventional unit cell volume is below \SI{7000}{\angstrom\cubed} and if
+    there are less than 100 atoms in the asymmetric unit. 
+    We did not employ any form of
+    distance checks on the coordinates, as we found this to have no meaningful
+    impact on space group classification accuracy. We only prevented the
+    algorithm from placing more than one atom onto a Wyckoff position that does not
+    have a degree of freedom. We also did not use partial occupancies. We chose
+    this algorithm for its simplicity and its capability to reproduce many
+    important characteristics of ICSD crystals adequately (see Section~
+    \ref{sec:synth_distribution}).
+
+    \begin{figure}[h]
+    \centering
+    \includegraphics{./figures/distribution_spgs_arrows.pdf}
+    \caption{Distribution (logarithmic scale in blue, linear scale in red)
+    of space groups in the ICSD. Space groups are sorted by count\added{ (see Figure S13 in the SI for the distribution without sorting by count)}. The population of the space groups varies by
+    multiple orders of magnitude, showing that the ICSD is a highly imbalanced
+    dataset regarding space groups. The space groups excluded due to insufficient
+    statistics are visualized with black stripes. \replaced{The histogram displays the distribution of the full ICSD, while the exclusion of space groups that do not contain enough samples is based on the statistics dataset (which does not include the test dataset, see Section~\ref{sec:dataset_split}) that we used to guide the random crystal generation. Therefore, the excluded space groups are not exactly the first 85 counted from the left.}{Since the exclusion is based on 
+    the statistics dataset and this histogram shows the full ICSD,
+    the excluded space groups are not exactly the first 85 counted from the left.}}
+    \label{fig:histogram_dist_spgs}
+    \end{figure}
+   
+    For some space groups, there are not enough crystals in the ICSD to form a
+    representative \replaced{kernel density estimate}{KDE} for the volume or to calculate suitable occupation
+    probabilities for individual Wyckoff positions. Therefore, we chose to only
+    perform the classification on space groups with 50 or more crystals
+    available in the statistics dataset we used to extract the probabilities
+    (see Section~\ref{sec:dataset_split}), resulting in the exclusion of 85
+    space groups (see Figure~\ref{fig:histogram_dist_spgs}). A classifier trained directly on ICSD data of all space groups will likely not be able to properly identify these space
+    groups containing very few samples.
+
+    If a similar performance for all space groups is desired, a uniform
+    distribution of space groups in the training dataset is needed. This is
+    trivially possible with our synthetic approach, in contrast to training
+    directly on the ICSD, where weighting, over-, or undersampling methods are
+    needed \supercite{sunClassificationImbalancedData2009}. To allow a direct
+    and fair comparison between our approach and the original approach of
+    training directly on ICSD entries, we still followed the same distribution
+    of space groups of the ICSD in our synthetic training dataset. This
+    eliminates the problem that the effective number of total space groups is
+    smaller when training on a highly imbalanced dataset, making it easier to
+    reach high accuracies.
+
+    \added{Our choice of not sampling the space groups uniformly and using
+    general statistics extracted from the ICSD to guide the crystal generation
+    algorithm further builds upon the hypothesis that future crystals will
+    roughly follow the more general statistics already present in the ICSD. With
+    the chosen crystal generation algorithm we tried to find a middle ground
+    between being much more general than using the ICSD crystals directly and
+    not being too general such that it is very hard to extract structural
+    information at all.}
+
+    \begin{figure}[!htb] 
+    \centering
+    \includegraphics{./figures/combined_generation_and_distributed_system.pdf}
+    \caption{a) Flowchart of how the generation algorithm produces synthetic
+    crystals. Atoms are independently placed on the Wyckoff positions and random
+    coordinates are drawn. b) Overview of the distributed computing system
+    implemented using the \emph{Python} library
+    \emph{Ray}\supercite{moritzRayDistributedFramework2018a}. Two compute nodes
+    (that generate and simulate diffractograms) are connected to the \emph{Ray}
+    head node using a \emph{Ray queue} object.}
+    \label{fig:generation_and_distributed}
+    \end{figure}
+
+    \subsection{Simulating diffractograms} \label{sec:simulation} 
+
+    To simulate powder X-ray diffractograms based on the generated crystals, we used
+    the implementation found in the \emph{Python} library \emph{Pymatgen}
+    \supercite{ongPythonMaterialsGenomics2013}. We optimized the simulation code
+    using the LLVM just-in-time compiler \emph{Numba}
+    \supercite{lamNumbaLLVMbasedPython2015}. This increases the performance of
+    the main loop over the reciprocal lattice vectors of the crystal
+    significantly and makes the continuous simulation while training (discussed
+    in the next section) possible.
+
+    We used the wavelength \SI{1.5406}{\angstrom} (\replaced{Cu K$\alpha_1$}{Cu K$_\alpha$} line) to
+    simulate all diffractograms. The obtained peaks were further broadened with
+    a Gaussian peak profile to form the full diffractogram. To obtain the peak
+    widths, we used the Scherrer
+    equation\supercite{gilmoreInternationalTablesCrystallography2019}
+    \begin{equation}
+        \beta=\frac{K \lambda}{L \cos \theta} \text{,} \label{eq:scherrer}
+    \end{equation}
+    where $ \beta $ is the line broadening at half maximum intensity (on the
+    $2\theta$-scale), $K$ is a shape factor, $\lambda$ is the wavelength, and
+    $L$ is the (average) thickness of crystallites. We drew crystallite sizes
+    from the range $ \left[ 20, 100 \right] $ \si{\nano \metre} and used 
+    $K=0.9$.
+
+    Diffractograms were generated in the range $ 2 \theta \in \left[ 5, 90
+    \right] \si{\degree} $ with step size \SI{0.01}{\degree}. After generating
+    each diffractogram, it was rescaled to fit in the intensity range $ \left[
+    0,1 \right]$. \added{In Figure S9 of the SI we show an exemplary diffractogram simulated 
+    from the ICSD, Figure S10 shows an exemplary diffractogram simulated from a synthetic 
+    crystal.}
+
+    \subsection{Continuous generation of training data}\label{sec:online_learning} 
+    
+    Typically, machine learning models are trained with a fixed dataset predefined at the beginning of training. Sometimes, data augmentation
+    is applied to further increase the effective size of this dataset. In
+    contrast to that, we generated our dataset on-the-fly, parallel to model training. The
+    main advantage of using this approach compared to a fixed-size dataset is
+    the eliminated possibility to overfit to individual diffractograms since
+    every diffractogram is only used once. Furthermore, not having to
+    pre-simulate a dataset before training makes this approach more flexible
+    when changing simulation parameters.
+
+    We used a distributed architecture on multiple nodes using the \emph{Python}
+    framework \emph{Ray} \supercite{moritzRayDistributedFramework2018a}, which enabled the training on 1-2 GPUs and simultaneous generation of training data on more than 200 CPU cores (see Figure~\ref{fig:generation_and_distributed}b and SI Section~S2.2). 
+    Depending on
+    the model size and corresponding training speed, this setup allows
+    training with up to millions of unique diffractograms per hour.
+
+    \subsection{Dataset split} \label{sec:dataset_split} 
+    
+    The ICSD database contains many structures that are very similar with
+    slightly different lattice parameters and coordinates. For example, there
+    are 25 entries for \ce{NaCl} (October 2022). Furthermore,
+    there are 3898 entries that have the same structure type as \ce{NaCl} and
+    thus also similar powder diffractograms. If some of them appear in the
+    training dataset and some in the test dataset, the classification will be
+    simplified to recognizing the structure type or structure. In that case, the
+    test set accuracy will not represent the true generalization performance of the neural
+    network. To quantify the true generalization performance, we split the
+    dataset in such a way that the same structure type appears either only in
+    the training or in the test dataset. We used the structure type definitions
+    provided by the ICSD. The obtained accuracy on the test dataset reflects the
+    accuracy of our network when being used on a novel sample with a structure
+    type not yet present in the ICSD database.
+
+    We want to emphasize that the used test split is very important for the task of
+    space group classification and not a trivial choice. The ICSD contains many
+    subtypes of structure types (for example, subtypes of perovskites), which we
+    regarded as separate structure types in our split. Considering the subtypes
+    as the same structure type may also be a viable option when performing the
+    split. A combination of a split based on structure type and sum formula or
+    similar approaches are also possible. \deleted{However, we think that our choice of
+    splitting the dataset is able to effectively measure the generalization
+    performance while still being relatively simple.}
+
+    \added{Depending on the experimental setting, it further might make more sense in some cases to not do a structure type-based split. If the likelihood of finding structures similar to already-discovered structure types in the planned experiment is high, training should definitely include those structure types to evaluate the performance of the model. However, in a pure discovery setting, new structure types can appear. To evaluate the expected model performance in this scenario and thus quantify the true generalization error to unseen data, we chose the most strict structure type-based split.}
+
+    We divided the ICSD (database version 2021, June 15) in a 70:30 split. For
+    our synthetic crystal approach, the 70\% part (\replaced{which we
+    call}{called} statistics or training dataset) was only used to create the
+    \replaced{kernel density estimates}{KDEs} and to calculate the Wyckoff
+    occupation probabilities needed for the generation algorithm. Since we can
+    judge the performance of the synthetic generation algorithm by comparing the
+    training accuracy (on synthetic crystals) with the accuracy tested on
+    diffractograms simulated directly from the statistics dataset, an additional
+    validation dataset was not needed. For comparison with the original approach
+    of directly training on ICSD
+    crystals\supercite{parkClassificationCrystalStructure2017}, we simulated
+    crystals directly from the statistics dataset and trained on them.
+
+    Analogous to the synthetic generation, we only used crystals with a
+    conventional unit cell volume below \SI{7000}{\angstrom\cubed} and with less
+    than 100 atoms in the asymmetric unit for the statistics and test dataset.
+    This covers $ \approx 94\% $ of the ICSD crystals.
+
+    \subsection{Models and \added{computational} experiments} \label{sec:models_and_experiments}
+
+    \subsubsection*{Models}
+    We will briefly introduce the models we used for the classification
+    of space groups. A more detailed description can be found in the SI
+    Section~S2.1.
+
+    As a baseline, we first used the CNN models introduced by
+    \citeauthor{parkClassificationCrystalStructure2017}\supercite{parkClassificationCrystalStructure2017}.
+    They used three models, one for the classification of crystal systems
+    (``parkCNN small''), one for extinction groups (``parkCNN medium''), and one
+    for space groups (``parkCNN big''). All models have three convolution layers
+    with two hidden fully connected layers and one output layer. The
+    three models differ in the number of neurons in the hidden fully connected
+    layers, increasing the number of model parameters with the number of target
+    labels. Here, we only used the models ``parkCNN medium'' and ``parkCNN big''
+    and applied both to the classification of space groups. When using ICSD
+    crystals to train the ``parkCNN'' models, dropout was used, while the
+    training of the ``parkCNN'' models on synthetic crystals did not use
+    dropout.
+
+    Since the approach of using an infinite stream of generated training data
+    eliminates the problem of overfitting, we further used deeper models with a
+    higher number of model parameters. For this, we used the deep convolutional
+    neural networks ResNet-10, ResNet-50, and ResNet-101, which were introduced
+    by
+    \citeauthor{heDeepResidualLearning2016}\supercite{heDeepResidualLearning2016}
+    in 2015.
+
+    Details of the machine learning setup can be found in the SI Section~2.2. Overall, our setup allowed us the training of models over up to 2000 epochs with more than $100\,000$ unique, newly generated crystals and corresponding diffractograms in each epoch \added{(see the upper x-axis of Figure \ref{fig:training_curve})}.
+
+    \subsubsection*{\replaced{Computational experiments}{Experiments}}
+
+    We performed two sets of experiments to evaluate our new dataset split as well as our synthetic crystal generation approach and compare it to state-of-the-art models in literature: Firstly, we trained and tested models on ICSD crystals only, and secondly, we trained on synthetic crystals and tested on ICSD crystals.
+
+    In particular, we first performed an experiment with the ``parkCNN medium''
+    model trained directly on the diffractograms simulated from the ICSD
+    statistics dataset with a fully random train-test split (similar to
+    \supercite{parkClassificationCrystalStructure2017}), instead of splitting by
+    the structure type of the crystals. This experiment makes a comparison of
+    the two different methods of train-test split possible. We then trained the
+    ``parkCNN big'' model using the structure type-based split, again directly
+    on ICSD diffractograms. We further repeated the same experiment using the
+    smaller model ``parkCNN medium'' to resolve potential overfitting to the
+    ICSD diffractograms.
+
+    For the experiments performed on our continuously generated
+    dataset based on synthetic crystals, we used the structure type-
+    based split. As discussed in Section~\ref{sec:dataset_split}, the training / 
+    statistics dataset was only used to extract more general statistics, such as the 
+    element distribution.
+    First, we trained the ``parkCNN big'' model. For each
+    batch, we generated $ 435 $ random crystals and simulated two diffractograms
+    with different crystallite sizes for each of them. This resulted in the
+    batch size of $ 870 $. 
+    Since our synthetic crystal generation algorithm yields an infinite stream
+    of unique diffractograms to train on, using much larger models than for the
+    fixed ICSD dataset is possible without overfitting. We performed experiments
+    for the ResNet-10, ResNet-50, and ResNet-101 models. Instead of generating
+    two diffractograms with different uniformly sampled crystallite sizes for each generated crystal (as
+    we did for the ``parkCNN big'' model), we now created only one diffractogram
+    for each of the $ 145 $ crystals generated for one batch. This is due to 
+    the slower training of the ResNet models, which means that reusing the same 
+    diffractogram with different crystallite sizes is not necessary to generate
+    training data fast enough.
+    
+    To obtain the
+    highest-possible ICSD test accuracy, we further applied the square root
+    function as a preprocessing step to the input diffractograms of the
+    network when using the ResNet models. This was suggested by
+    \citeauthor{zalogaCrystalSymmetryClassification2020}
+    \supercite{zalogaCrystalSymmetryClassification2020} and in their case
+    improved classification accuracy by approximately 2 percentage points. Some
+    initial tests suggested that this approach also yields a higher accuracy in our
+    case, so we used this preprocessing step to train the ResNet
+    models.
+
+    While we focused mainly on the methodology of using synthetic crystals to
+    extract structural information from powder diffractograms, we also show some
+    initial steps toward applying our methods to experimental data. We used the
+    publicly available RRUFF mineral database
+    \supercite{lafuentePowerDatabasesRRUFF2015} which provides experimental
+    measurements, including powder diffractograms \added{(see Figure S11 in the
+    SI for an exemplary diffractogram from the RRUFF)}. In order to imitate
+    experimental diffractograms, we added Gaussian additive and multiplicative
+    noise \added{(similar to
+    \supercite{vecseiNeuralNetworkBased2019,szymanskiProbabilisticDeepLearning2021})}
+    and a background function based on samples from a Gaussian process to our
+    simulated diffractograms. Furthermore, we added a small amount of an
+    impurity phase to each diffractogram. Details about the experimental data
+    generation protocol can be found in the SI Section~S4\added{, Figure S12
+    shows an exemplary synthetic diffractogram with noise, background and an
+    impurity phase.} Using the ResNet-50 model, we performed two experiments for
+    experimental data, one with the mentioned impurity phase, and one without.

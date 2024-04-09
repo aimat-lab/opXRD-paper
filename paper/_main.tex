@@ -1,0 +1,125 @@
+\documentclass[a4paper]{article}
+
+\pdfoutput=1
+\usepackage[utf8]{inputenc}
+
+%\usepackage[
+%backend=biber,
+%%style=numeric,
+%style=nature,
+%sorting=none,
+%doi=true,
+%maxbibnames=99,
+%date=iso,
+%seconds=true,
+%urldate=iso
+%%citestyle=numeric-comp
+%]{biblatex}
+
+\usepackage[super,sort&compress,comma]{natbib} 
+\newcommand{\supercite}[1]{\cite{#1}}
+
+%% Language and font encodings
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{csquotes}
+
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+
+%% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, allcolors=blue}
+\usepackage{authblk}
+\usepackage{multirow}
+\usepackage{nomencl}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{textcomp} 
+\usepackage{amsfonts}
+\usepackage{outlines} %%same
+\usepackage{subfig}
+\usepackage[version=4]{mhchem}
+\usepackage{siunitx}
+\usepackage{bm}
+\usepackage[normalem]{ulem} %%temporary, for organization purposes
+
+
+\date{}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\DeclareSIUnit\angstrom{\text {Å}}
+
+
+
+\usepackage[final]{changes}
+%\newcommand*\samethanks[1][\value{footnote}]{\footnotemark[#1]}
+\newcommand*\samethanks[1][\value{footnote}]{\footnotemark[#1]}
+
+
+\interfootnotelinepenalty=10000
+\title{Towards a high quality public powder X-ray diffraction dataset}
+
+
+\author[1,2]{Daniel Hollarek}
+\author[1,2]{Henrik Schopmans}
+\author[1,2]{Pasc1al Friederich}
+\author[2]{Ben Breitung}
+\author[2]{Simon Schweidler}
+\author[3]{Andrea Hodge}
+\author[3]{Adie Alwen}
+\author[4]{Mriganka Singh}
+\author[4]{Carolin Sutter-Fella}
+\author[4]{Tim Kodalle}
+\author[4]{Maged Abdelsamie}
+
+
+% I made the affiliations smaller because there's a lot of them
+\renewcommand\Affilfont{\small}
+
+\affil[1]{Institute of Theoretical Informatics, Karlsruhe Institute of Technology, Engler-Bunte-Ring 8, 76131 Karlsruhe, Germany}
+\affil[2]{Institute of Nanotechnology, Karlsruhe Institute of Technology, Hermann-von-Helmholtz-Platz 1, 76344 Eggenstein-Leopoldshafen, Germany}
+\affil[3]{Department of Aerospace and Mechanical Engineering, University of Southern California, 3650 McClintock Ave, Los Angeles, CA 90089, USA}
+\affil[4]{Department of Chemical Engineering and Materials Science, University of Southern California, 925 Bloom Walk, HED 216, Los Angeles, CA 90089, USA}
+\affil[5]{Lawrence Berkeley National Laboratory, Molecular Foundry Division, 1 Cyclotron Rd., Berkeley, 94720 CA, USA}
+
+\begin{document}
+
+
+
+\maketitle
+\begin{abstract}
+    \input{00_abstract.tex}
+\end{abstract}
+
+\section{Motivation}
+\input{paper/01_motivation}
+
+\section{Existing datasets}
+\input{paper/02_existing_datasets}
+
+\section{Our dataset}
+\input{paper/03_our_dataset}
+
+\section{Contributions}
+\input{paper/04_survey}
+
+\subsection*{Acknowledgements}
+\input{07_acknowledgements.tex}
+
+\printnomenclature
+
+\clearpage
+
+%\listofchanges
+%\clearpage
+
+%\nocite{*}
+%\TheBibliography
+%\printbibliography[heading=bibintoc]
+
+\bibliography{bib}
+\bibliographystyle{rsc} %the RSC's .bst file
+
+\end{document}

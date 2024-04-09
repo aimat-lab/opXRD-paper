@@ -1,0 +1,114 @@
+Machine learning techniques have emerged as a powerful tool in the toolkit of
+materials scientists. While they are often used to make predictions on
+the properties of materials or find new materials with certain properties, an increasingly interesting domain is the automated analysis of raw experimental measurements
+guided by machine learning\supercite{radovicMachineLearningEnergy2018}.
+
+With the advent of high-throughput experiments, the amount of gathered data is
+vast and the analysis often becomes a bottleneck in the processing pipeline
+\supercite{rahmanianEnablingModularAutonomous2022}. Powder X-ray diffraction
+(XRD) is an important measurement technique used to obtain structural
+information from polycrystalline samples\supercite{harrisContemporaryAdvancesUse2001}. 
+The diffractograms are an
+information-dense fingerprint of the structure of the material. However,
+analyzing these diffractograms is not an easy task\supercite{holderTutorialPowderXray2019}. 
+Full structure solutions and
+Rietveld refinement take time and require expert knowledge, both about the
+analysis technique and the materials class at hand. This is not feasible in high-throughput experiments on a larger
+scale. Therefore, the question arises whether it is possible to automatically 
+analyze powder diffractograms with machine learning models trained on large
+amounts of data, making it possible to run inference almost instantaneously.
+
+During the last few years, there have been several studies tackling this
+objective by applying machine learning models to various tasks concerning the
+analysis of powder diffractograms such as phase
+classification\supercite{leeDeeplearningTechniquePhase2020,maffettoneCrystallographyCompanionAgent2021,schuetzkeEnhancingDeeplearningTraining2021,szymanskiProbabilisticDeepLearning2021,wangRapidIdentificationXray2020},
+phase fraction determination\supercite{leeDatadrivenXRDAnalysis2021}, space
+group
+classification\supercite{parkClassificationCrystalStructure2017,oviedoFastInterpretableClassification2019,zalogaCrystalSymmetryClassification2020,vecseiNeuralNetworkBased2019,suzukiSymmetryPredictionKnowledge2020,chakrabortyDeepCrystalStructure2022},
+machine-learning-guided Rietveld
+refinement\supercite{ozakiAutomatedCrystalStructure2020,fengMethodArtificialIntelligence2019},
+extraction of lattice
+parameters\supercite{dongDeepConvolutionalNeural2021,chitturiAutomatedPredictionLattice2021,chakrabortyDeepCrystalStructure2022,
+habershonPowderDiffractionIndexing2004} and crystallite
+sizes\supercite{dongDeepConvolutionalNeural2021,chakrabortyDeepCrystalStructure2022},
+and also novelty detection based on unsupervised techniques\supercite{bankoDeepLearningVisualization2021}.
+Since an abundant source of experimental diffractograms is hard to come by, most
+applications train their models on simulated diffractograms from the Inorganic
+Crystal Structure Database (ICSD)\supercite{bergerhoff1987}, which contains a total of 272\,260 structures (October 2022).
+
+\citeauthor{leeDeeplearningTechniquePhase2020} used a deep convolutional neural
+network (CNN) trained on a large dataset of multiphase compositions from the
+quaternary \ce{Sr-Li-Al-O} pool to classify present phases in the
+diffractogram\supercite{leeDeeplearningTechniquePhase2020}. In a follow-up
+study, they further showed good results for phase fraction inference in the
+quaternary \ce{Li-La-Zr-O} pool\supercite{leeDatadrivenXRDAnalysis2021}.
+\citeauthor{schuetzkeEnhancingDeeplearningTraining2021} performed phase
+classification on iron ores and cement compounds and used data augmentation with
+respect to lattice parameters, crystallite sizes, and preferred orientation
+\supercite{schuetzkeEnhancingDeeplearningTraining2021}. They showed that
+especially the lattice parameter variations enhance the classification accuracy
+significantly.
+
+Instead of the analysis of phase composition,
+\citeauthor{dongDeepConvolutionalNeural2021} performed regression of scale
+factors, lattice parameters, and crystallite sizes in a five-phase catalytic
+materials system\supercite{dongDeepConvolutionalNeural2021}. In contrast to
+supervised tasks, \citeauthor{bankoDeepLearningVisualization2021} used a
+variational autoencoder to visualize variations in space group, preferred
+orientation, crystallite size, and peak
+shifts\supercite{bankoDeepLearningVisualization2021}.
+\citeauthor{parkClassificationCrystalStructure2017} used a deep CNN to classify
+space groups of single-phase diffractograms, reaching a test accuracy of 81.14\%
+on simulated diffractograms.\supercite{parkClassificationCrystalStructure2017} 
+However, as we will show later in this paper, this accuracy is highly overestimated and drops to 56.1\% when test splits are designed in a way to reduce data leakage in non-IID datasets such as the ICSD.
+\citeauthor{vecseiNeuralNetworkBased2019}\supercite{vecseiNeuralNetworkBased2019} developed
+a similar approach and applied their classifier to experimental diffractograms
+from the RRUFF mineral database\supercite{lafuentePowerDatabasesRRUFF2015},
+reaching an experimental test accuracy of 54\%.
+
+While the ICSD contains a large number of structures spanning many different
+classes of materials, it still falls short in size, distribution, and generality
+compared to the datasets used to train very large state-of-the-art models of
+other fields such as computer vision.
+%for image classification (ImageNet
+%challenge\supercite{russakovskyImageNetLargeScale2015}). 
+Furthermore, the ICSD
+database is highly imbalanced with respect to space groups, as can be seen
+in the histogram in Figure~\ref{fig:histogram_dist_spgs}. This makes the classification of
+space groups more difficult, as shown and discussed by
+\citeauthor{zalogaCrystalSymmetryClassification2020}
+\supercite{zalogaCrystalSymmetryClassification2020}. The ICSD also contains a
+limited number of different structure types that may not adequately represent
+the crystal structures analyzed in future experiments.
+
+To overcome these shortcomings, we propose to train machine learning models on
+diffractograms simulated from synthetic crystal structures randomly generated
+based on the symmetry operations of the space groups. This makes it possible to
+train on structures with new structure types not present in the ICSD. We used
+the crystals from the ICSD only to determine vague statistics guiding the random
+generation and for calculating the test accuracy. Our approach goes one step
+further than classical data augmentation by fully detaching itself from the
+individual entries in the ICSD database.
+\replaced{The generated synthetic crystals form a training dataset that includes stable ICSD crystal structures, unstable crystal structures,
+but also stable structures that are not yet present in the ICSD. By training a model on the full dataset, we can also expect improvements on the unknown stable crystal structures.}{It is our hypothesis that when trying
+to solve more general tasks concerning the extraction of structural details from
+powder diffractograms, the crystals from which the training dataset is simulated
+do not need to be stable or chemically viable.} \replaced{Furthermore, we}{We} propose viewing the problem
+\deleted{simply} as a mathematical task of getting back some of the real-space information
+leading to given powder X-ray diffractograms. \added{Therefore, even the unstable structures included in our generated dataset will help to learn to classify the stable structures.}
+
+Here, we applied this approach to the classification of the crystal symmetry,
+namely the space group. The space group is usually one of the first structural
+pieces of information needed after synthesizing a new material. This task is
+well-suited to showcase the strengths of using a synthetic dataset and to
+benchmark it. We further show the results of using our methodology to infer space group labels of an experimental dataset.
+
+We embedded our synthetic generation algorithm in a framework with
+distributed computing capabilities to generate and simulate diffractograms on
+multiple nodes in parallel using the \emph{Python} library \emph{Ray}
+\supercite{moritzRayDistributedFramework2018a}. In contrast to the traditional
+approach of generating a simulated dataset before training, we used this
+distributed computing architecture to build an infinite stream of \replaced{synthetically}{randomly}
+generated and simulated diffractograms to perform batch-wise online learning.
+This increases the generalization performance, eliminates the problem of
+overfitting, and allows very large models to be trained.
