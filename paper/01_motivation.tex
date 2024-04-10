@@ -74,11 +74,20 @@ of real experimental powder x-ray diffraction data of sufficient size to train a
 that can be useful in practice is next to impossible and is not the aim of this dataset.
 Rather we hope that this dataset can enable machine learning researchers to evaluate how closely their simulations
 represent actual experimental data, identify what features are missing and modify their simulations algorithms
-accordingly to arrive at a simulation that nearly perfectly mirrors how data appears in reality.
-Secondly we would like to also present this dataset as a challenge: The fraction of labeled data can be used to
-easily test the performance of the model on a broad range of data as it appears in reality, which can be used
-to gauge how well models would perform in practice. 
+accordingly to arrive at a simulation that nearly perfectly mirrors how data appears in reality. \\
 
+Secondly we would like to also present this dataset as a challenge: The fraction of labeled data can be used to
+easily numerically evalute the performance of the model on a broad range of data as it appears in experiment, which can be used
+to gauge how well models would perform in practice. \\
+But even the unlabeled portion of the dataset can be used to test the performance of models: The least a model
+has to do in order to prove useful in practice is to make a guess about the crystal structure that is good enough
+for Rietveld refinement to converge toward the true structure. \\
+Hence, the performance of the model can be tested by evaluating if the inital guess of the model is sufficient for
+Rietveld refinment to refine the initial guess to a structure that produces a diffractogram matching the one observed in experiment.
+Finally, by inviting the application of models to data as it appears in experiment we would like to bring attention
+to some of the practical difficulties that need to be addressed in applying a model to a wide variety of x-ray diffractograms
+collected from different sources: For example the angle and the step size of the diffractograms will in general be variable
+which is something that any model that aims to perform well on this dataset but be equipped to handle.
 
 
 % Reference library required and analysis software required, reference library may be incomplete
