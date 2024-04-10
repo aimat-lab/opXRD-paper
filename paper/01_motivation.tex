@@ -35,12 +35,29 @@ from an initial guess provided by the operator of the analysis software, is assu
 is simulated.
 The parameters of the working model of the sample are then adjusted to minimize the difference between the simulated
 diffraction pattern and the one observed in experiment.
-This workflow often works well, since usually the operator of the experiment will be able
+Critically, this process does not generally guarantee to guide the working model towards a global minimum of the difference
+in diffractograms and hence arrive at an accurate model of the sample.
+In practice the refinement process may only guide the working model towards the nearest local minimum
+starting from the initial guess.
+Hence, the result of the refinement procedure is in general only as good as the initial guess it was provided with.
+Still this workflow often works well, since usually the operator of the experiment will be able
 to provide an at least somewhat accurate initial guess of the crystal structure.
 
-However, employing manually operated Rietveld Refinement is not without issues and it is certainly not
-scalable to the degree that would be required to keep up with advances
-in throughput and efficiency in other steps of the experimentation pipeline, if just due to the manual effort involved.
+However, employing manually operated Rietveld Refinement is not without issues.
+It is certainly not scalable to the degree that would be required to keep up with advances
+in throughput and efficiency in other steps of the experimentation pipeline, even just due to the manual effort involved.
+But beyond the lacking scalability of this workflow we also wish to highlight the following issue:
+Providing the analysis software with an initial guess of the structure requires consulting a reference library
+of crystal structures with corresponding simulated diffractograms and
+identifying a crystal structure that is likely to be similar to that of the investigated sample.
+Since the number of chemically viable crystal structures is infinite, any such library will always be incomplete.
+The best that can be done to remedy this is to continually update such a reference library both on the side
+of the distributor and the user, which in itself represents an undesirable overhead.
+Especially for novel material discovery it may be impossible to find a sufficiently accurate match in the reference
+library to apply Rietveld Refinement successfully.
+
+Machine learning is a very promising candidate to eliminate both the need for manual inputs and the need for reference
+libraries in powder x-ray diffraction analysis. 
 
 % Reference library required and analysis software required, reference library may be incomplete
 % software training required, doesnt always converge or not to true minimum,
@@ -126,60 +143,12 @@ orientation, crystallite size, and peak
 shifts\supercite{bankoDeepLearningVisualization2021}.
 \citeauthor{parkClassificationCrystalStructure2017} used a deep CNN to classify
 space groups of single-phase diffractograms, reaching a test accuracy of 81.14\%
-on simulated diffractograms.\supercite{parkClassificationCrystalStructure2017} 
+on simulated diffractograms.\supercite{parkClassificationCrystalStructure2017}
 However, as we will show later in this paper, this accuracy is highly overestimated and drops to 56.1\% when test splits are designed in a way to reduce data leakage in non-IID datasets such as the ICSD.
 \citeauthor{vecseiNeuralNetworkBased2019}\supercite{vecseiNeuralNetworkBased2019} developed
 a similar approach and applied their classifier to experimental diffractograms
 from the RRUFF mineral database\supercite{lafuentePowerDatabasesRRUFF2015},
 reaching an experimental test accuracy of 54\%.
-
-While the ICSD contains a large number of structures spanning many different
-classes of materials, it still falls short in size, distribution, and generality
-compared to the datasets used to train very large state-of-the-art models of
-other fields such as computer vision.
-%for image classification (ImageNet
-%challenge\supercite{russakovskyImageNetLargeScale2015}). 
-Furthermore, the ICSD
-database is highly imbalanced with respect to space groups, as can be seen
-in the histogram in Figure~\ref{fig:histogram_dist_spgs}. This makes the classification of
-space groups more difficult, as shown and discussed by
-\citeauthor{zalogaCrystalSymmetryClassification2020}
-\supercite{zalogaCrystalSymmetryClassification2020}. The ICSD also contains a
-limited number of different structure types that may not adequately represent
-the crystal structures analyzed in future experiments.
-
-To overcome these shortcomings, we propose to train machine learning models on
-diffractograms simulated from synthetic crystal structures randomly generated
-based on the symmetry operations of the space groups. This makes it possible to
-train on structures with new structure types not present in the ICSD. We used
-the crystals from the ICSD only to determine vague statistics guiding the random
-generation and for calculating the test accuracy. Our approach goes one step
-further than classical data augmentation by fully detaching itself from the
-individual entries in the ICSD database.
-\replaced{The generated synthetic crystals form a training dataset that includes stable ICSD crystal structures, unstable crystal structures,
-but also stable structures that are not yet present in the ICSD. By training a model on the full dataset, we can also expect improvements on the unknown stable crystal structures.}{It is our hypothesis that when trying
-to solve more general tasks concerning the extraction of structural details from
-powder diffractograms, the crystals from which the training dataset is simulated
-do not need to be stable or chemically viable.} \replaced{Furthermore, we}{We} propose viewing the problem
-\deleted{simply} as a mathematical task of getting back some of the real-space information
-leading to given powder X-ray diffractograms. \added{Therefore, even the unstable structures included in our generated dataset will help to learn to classify the stable structures.}
-
-Here, we applied this approach to the classification of the crystal symmetry,
-namely the space group. The space group is usually one of the first structural
-pieces of information needed after synthesizing a new material. This task is
-well-suited to showcase the strengths of using a synthetic dataset and to
-benchmark it. We further show the results of using our methodology to infer space group labels of an experimental dataset.
-
-We embedded our synthetic generation algorithm in a framework with
-distributed computing capabilities to generate and simulate diffractograms on
-multiple nodes in parallel using the \emph{Python} library \emph{Ray}
-\supercite{moritzRayDistributedFramework2018a}. In contrast to the traditional
-approach of generating a simulated dataset before training, we used this
-distributed computing architecture to build an infinite stream of \replaced{synthetically}{randomly}
-generated and simulated diffractograms to perform batch-wise online learning.
-This increases the generalization performance, eliminates the problem of
-overfitting, and allows very large models to be trained.
-
 
 
 % PDF pricing
