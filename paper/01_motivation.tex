@@ -63,10 +63,21 @@ rather than diffractograms from experiment and hence cannot either provide a dat
 from experiment. \\
 
 Models trained on datasets with simulated diffractograms have already shown very strong performance in predicting
-lattice parameters, spacegroup and crystallite size from simulated diffractograms.
-There is every reason to believe, that this performance can translate to predicting crystal structure properties
-of diffractograms originating from experiment, given that the models are trained on a dataset that accurately
-reflects diffractograms as they appear in experiment.\\
+lattice parameters, spacegroup and crystallite size from simulated diffractograms but the performance drops off immensely
+when these models are applied to data originating from experiment.
+There is every reason to believe, that the strong performance observed in the domain of purely simulated diffractograms
+can translate to predicting crystal structure properties of diffractograms originating from experiment, given that
+models are trained on a dataset that accurately reflects diffractograms as they appear in experiment. \\
+
+However due to the scarcity of labeled diffractograms originating from experiment, collecting a labeled dataset
+of real experimental powder x-ray diffraction data of sufficient size to train a model
+that can be useful in practice is next to impossible and is not the aim of this dataset.
+Rather we hope that this dataset can enable machine learning researchers to evaluate how closely their simulations
+represent actual experimental data, identify what features are missing and modify their simulations algorithms
+accordingly to arrive at a simulation that nearly perfectly mirrors how data appears in reality.
+Secondly we would like to also present this dataset as a challenge: The fraction of labeled data can be used to
+easily test the performance of the model on a broad range of data as it appears in reality, which can be used
+to gauge how well models would perform in practice. 
 
 
 
