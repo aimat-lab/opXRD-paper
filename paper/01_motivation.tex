@@ -1,9 +1,3 @@
-%but it requires a good initial guess of the structure possibly combined with manual adjustments. Both \textbf{}
-
-
-
-
-
 
 % Autonomous laboratory
 % https://www.nature.com/articles/s41586-023-06734-w
@@ -16,8 +10,7 @@
 
 The advent of high-throughput experiments, holds the prospect of accelerating the speed materials discovery multiple times over.
 The synthesis and probing of novel materials is becoming increasingly efficient and automated,
-which has correspondingly increased the throughput of samples in these steps
-of the experimentation pipeline.
+which has correspondingly increased the throughput of samples in these steps of the experimentation pipeline.
 
 % Rietveld Refinement (3.9 Profile fitting and rietveld analysis)
 %https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/rietveld-refinement
@@ -34,30 +27,46 @@ This is done through a technique called Rietveld refinement: A working model of 
 from an initial guess provided by the operator of the analysis software, is assumed and the corresponding diffractogram
 is simulated.
 The parameters of the working model of the sample are then adjusted to minimize the difference between the simulated
-diffraction pattern and the one observed in experiment.
+diffraction pattern and the pattern observed in experiment.
 Critically, this process does not generally guarantee to guide the working model towards a global minimum of the difference
 in diffractograms and hence arrive at an accurate model of the sample.
-In practice the refinement process may only guide the working model towards the nearest local minimum
+In general one can only assume the refinement process to guide the working model towards the nearest local minimum
 starting from the initial guess.
 Hence, the result of the refinement procedure is in general only as good as the initial guess it was provided with.
 Still this workflow often works well, since usually the operator of the experiment will be able
-to provide an at least somewhat accurate initial guess of the crystal structure.
+to provide an at least somewhat accurate initial guess of the crystal structure.\\
 
 However, employing manually operated Rietveld Refinement is not without issues.
 It is certainly not scalable to the degree that would be required to keep up with advances
 in throughput and efficiency in other steps of the experimentation pipeline, even just due to the manual effort involved.
 But beyond the lacking scalability of this workflow we also wish to highlight the following issue:
-Providing the analysis software with an initial guess of the structure requires consulting a reference library
-of crystal structures with corresponding simulated diffractograms and
-identifying a crystal structure that is likely to be similar to that of the investigated sample.
+Providing the analysis software with an initial guess of the structure requires manually or algorithmically
+consulting a reference library of crystal structures with corresponding simulated or sometimes real diffractograms.
+From that reference library a crystal structure must be identified that is likely to be similar
+to that of the investigated sample which can then serve as the initial guess provided to the analysis software.
 Since the number of chemically viable crystal structures is infinite, any such library will always be incomplete.
-The best that can be done to remedy this is to continually update such a reference library both on the side
-of the distributor and the user, which in itself represents an undesirable overhead.
-Especially for novel material discovery it may be impossible to find a sufficiently accurate match in the reference
+The best that can be done to remedy this is to continually update the library both on the side
+of the distributor and the user, which is an undesirable overhead.
+Especially for novel material discovery, it may be impossible to find a sufficiently accurate match in the reference
 library to apply Rietveld Refinement successfully.
 
 Machine learning is a very promising candidate to eliminate both the need for manual inputs and the need for reference
-libraries in powder x-ray diffraction analysis. 
+libraries in powder x-ray diffraction analysis, resulting in a streamlined and automated analysis process that can
+keep pace with an automated high-throughput experimentation environment. \\
+
+Models can be trained to predict crystal structure properties given only the diffractogram itself, given that
+the model can be trained on dataset consisting of pairs of diffractograms and corresponding crystal structures.
+So far however, due to an absence of sufficiently large labeled datasets with diffractograms from experiment,
+machine learning in this domain has largely relied on simulated diffractograms.
+Note, that reference libraries which are used for Rietveld Refinement by in large use simulated diffractograms
+rather than diffractograms from experiment and hence cannot either provide a dataset with diffractograms coming
+from experiment.
+
+Within the domain of predicting the properties of simulated diffractograms 
+
+
+
+
 
 % Reference library required and analysis software required, reference library may be incomplete
 % software training required, doesnt always converge or not to true minimum,
