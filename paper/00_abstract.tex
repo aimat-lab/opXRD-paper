@@ -1,34 +1,16 @@
-In powder x-ray diffraction, the analysis of the diffractograms still presents a significant bottleneck
-in high-throughput experimentation that remains to be solved, in order to match the increased throughput
+Powder X-ray diffraction (pXRD) experiments are a cornerstone for materials structure characterization.
+Despite its widespread application, the analysis of the diffractograms still presents a significant bottleneck
+in high-throughput experimentation that remains to be solved in order to match the increased throughput
 of the prior stages of experimentation.
-While Rietveld refinement can identify the phases and extract the structural information found
-in the diffractograms, each sample requires manual inputs and careful configuration of the analysis software
-from trained staff, which is infeasible for highly automated high-throughput experiments.
-
-In the current landscape of powder x-ray diffraction analysis, machine learning has emerged as a very promising direction of research resolving this bottleneck by enabling fully automated powder diffraction analysis.
-A noteable difficulty in applying machine learning to this domain is the lack of labeled datasets i.e.\
+%While Rietveld refinement can identify the phases and extract the structural information found
+%in the diffractograms, each sample requires manual inputs and careful configuration of the analysis software
+%from trained staff, which is infeasible for highly automated high-throughput experiments.
+In the current landscape of powder X-ray diffraction analysis, machine learning has emerged as a promising research direction to resolve this bottleneck by enabling automated powder diffraction analysis.
+A notable difficulty in applying machine learning to this domain is the lack of labeled datasets, i.e.\
 diffraction patterns originating from experiment with accompanying structure solutions, which has relegated machine learning
-researchers to training on simulated data.
-Since these simulations largely fail to accurately reflect experiment, the performance of models trained
-on this simulated data, also by in large fails to transfer to experiment and provide value in practice.
+researchers to train on simulated data.
+Since these simulations largely fail to accurately reflect the experiment, the performance of models trained
+on this simulated data by and large fails to transfer to experiment and provide value in practice.
 We aim to remedy this by providing a freely available and easily accessible dataset of partially labeled
-powder diffraction data, providing machine learning researchers with a large quantity of real experimental diffractograms
-collected from a broad range of samples.
-We hope that this can guide machine learning research towards more realistic
-simulations and potentially enable training and testing models on real experimental data.
-
-
-
-%Machine learning techniques have successfully been used to extract structural information such as the crystal space group from powder X-ray diffractograms.
-%However, training directly on simulated diffractograms from databases such as
-%the ICSD is challenging due to its limited size, class-inhomogeneity, and bias
-%toward certain structure types. We propose an alternative approach of generating
-%synthetic crystals with random coordinates by using the symmetry operations of
-%each space group. Based on this approach, we 
-%demonstrate online training of deep ResNet-like models on up to a few
-%million unique on-the-fly generated synthetic diffractograms per hour. For our chosen task of
-%space group classification, we achieved a test accuracy of 79.9\% on unseen ICSD
-%structure types from most space groups. This surpasses the 56.1\% accuracy of the current state-of-the-art approach of training on ICSD crystals directly. Our results demonstrate that synthetically generated crystals can be
-%used to extract structural information from ICSD powder diffractograms, which makes it possible to apply very large state-of-the-art machine learning models in the area of powder X-ray diffraction.
-%We further show first steps toward applying our methodology to experimental data, where automated XRD data analysis is crucial, especially in high-throughput settings.
-%While we focused on the prediction of the space group, our approach has the potential to be extended to related tasks in the future.
+powder diffraction data, providing machine learning researchers with a large quantity of real experimental diffractograms collected from a broad range of samples.
+We hope that this can guide machine learning research toward more realistic handling of experimental imperfections to enable the improvement of current automated analysis workflows.
