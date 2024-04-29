@@ -1,5 +1,19 @@
-% Sharing raw powder x-ray diffraction data: Challenges and benefits https://www.researchgate.net/publication/329256004_Sharing_powder_diffraction_raw_data_Challenges_and_benefits
-
-
+% Notes:
 % The subsections of this section should be the 
 % individual contributions that we get from labs
+
+% Sharing raw powder x-ray diffraction data: Challenges and benefits https://www.researchgate.net/publication/329256004_Sharing_powder_diffraction_raw_data_Challenges_and_benefits
+
+In collaboration with several other institutions we have collected a dataset of diffractograms stemming from experiment, some of them labeled with corresponding structural information. \\
+Currently, institutions that contributed towards our dataset include:
+\item Institute of Nanotechnology at Karlsruhe institute of technology
+\item University of Southern California
+\item Lawrence Berkeley National Laboratory
+
+We are still in the process of growing the dataset and additional contributions are still very welcome. 
+To find out more about how to contribute to this dataset, visit our website specially designed for the purpose of collecting this dataset, https://xrd.aimat.science \\
+
+A major advantage of this dataset over other comparable datasets is that is is very easy to handle in python and in PyTorch. \\
+Our accompanying python library xrdpattern (https://github.com/aimat-lab/xrdpattern) provides a means to read in as much of the dataset as fits in memory simply by using PatternDB.load(data_dirpath). The patterns attribute of this class is a list of the indivdual pattern diffractograms, each of which supports a standardize, plot and to tensor method. \\
+The standardize method returns a "standardized" version of the pattern with a fixed angle range, a fixed number of entries and intensities normalized to the $[0,1]$ interval.
+
