@@ -96,9 +96,9 @@ represent actual experimental data, identify what features are missing and modif
 
 There are roughly speaking two paths towards improving the simulation: The first is to more accurately model the sample and the processes taking place within it during the simulation of the powder diffraction pattern. This would for example necessitate modelling absorption of the incoming X-ray radiation and its re-emission in the form of characteristic radiation and modeling the effect of stress and motion within the crystal on the diffractogram. \\
 An alternative route to obtaining a more accurate simulation is to try to learn these "imperfections" compared to an idealized simulation using machine learning techniques by extracting them from this dataset. \\
-As an example of this could be done we can look at results from other domains, where a transfer of core data between different "styles" of representation was attempted:
-%\cite{Ganin2015} -> Attempted to 
-
+As an example of this could be done, we can investigate results from other areas of research, where a transfer of data content between different "styles" of representation was attempted: \\
+Ganin et al.\cite{Ganin2015} proposed a mechanism for training a classifier which performs well independently of which style the input data is represented in, which only requires labeled data from one style and unlabeled data from other styles. This corresponds precisely to the situation at hand, where the number of labeled simulated diffractograms is virtually unlimited and a large amount of unlabeled real diffractograms are available, but labeled real diffractogram are in short suppply. This algorithm could be applied to train a "style-invariant" structure properties prediction model using a combination of our dataset and simulated labeled patterns. \\
+Another approach by Gatys et al. \cite{Gatys2016} achieves style transfer of images, by requiring that the content of the output image remain the same, while the style must match that of another image, chosen to represent the target style. This procedure could be applied to transfer the style of simulated diffractorams to that of real diffractograms, which could then be used to train the model data that is more faithful to powder diffractograms as they appear in experiment.
 
 
 %A first hint of how closely a given simulation reflects experiment could be obtained by
