@@ -1,4 +1,25 @@
 
+\begin{itemize}
+    \item Plan for Figures / Tables
+    \begin{itemize}
+        \item Figure 1: Multiple panels showing histograms of some key metrics: Space group, unit cell volume (normalizable?), ...
+        \item Table 1: List of existing powder XRD datasets
+        \item Table 2: List of existing ML approaches for pXRD
+        \item Table 3: New pXRD datasets offered by this paper
+    \end{itemize}
+
+    \item Additional thoughts
+    \begin{itemize}
+        \item General structure of the paper:
+        \begin{itemize}
+            \item Introduction
+            \item Introduce existing datasets and already show why they are not enough / too small
+            \item Summarize SOTA ML that has been applied to experimental pXRD, discuss the limits and gap between performance on simulated data and exp. data (find some good example papers where this is very apparent)
+            \item Summary of our dataset, including paragraphs of the different contributions by other groups; comparison with existing datasets, especially in terms of size
+        \end{itemize} 
+    \end{itemize}
+\end{itemize}
+
 % Autonomous laboratory
 % https://www.nature.com/articles/s41586-023-06734-w
 
@@ -17,7 +38,6 @@ which has correspondingly increased the throughput of samples in these steps of 
 
 % Rietveld Refinement: Half a century anniversary
 % https://pubs.acs.org/doi/10.1021/acs.cgd.1c00854
-
 
 % On Rietveld refinement
 The objective of powder x-ray diffraction experiments is to extract as much information about the crystal structure
@@ -98,9 +118,8 @@ Hence, the performance of the model can be tested by evaluating if the inital gu
 Rietveld refinment to refine the initial guess to a structure that produces a diffractogram matching the one observed in experiment.
 Finally, by inviting the application of models to data as it appears in experiment we would like to bring attention
 to some of the practical difficulties that need to be addressed in applying a model to a wide variety of x-ray diffractograms
-collected from different sources: For example the angle and the step size of the diffractograms will differ between sources
-, which is something that any model that aims to perform well on this dataset must be equipped to handle.
-
+collected from different sources: For example the angle and the step size of the diffractograms will differ between sources, 
+which is something that any model that aims to perform well on this dataset must be equipped to handle.
 
 % Reference library required and analysis software required, reference library may be incomplete
 % software training required, doesnt always converge or not to true minimum,
@@ -117,11 +136,8 @@ collected from different sources: For example the angle and the step size of the
 %matter how
 
 
-
-
 % Crystallographic open database
 % https://www.crystallography.net/cod/
-
 
 %
 %
@@ -192,7 +208,6 @@ collected from different sources: For example the angle and the step size of the
 %a similar approach and applied their classifier to experimental diffractograms
 %from the RRUFF mineral database\supercite{lafuentePowerDatabasesRRUFF2015},
 %reaching an experimental test accuracy of 54\%.
-
 
 % PDF pricing
 %https://www.icdd.com/assets/files/2023-Purchase-Options.pdf
