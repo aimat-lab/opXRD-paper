@@ -121,96 +121,16 @@ to some of the practical difficulties that need to be addressed in applying a mo
 collected from different sources: For example the angle and the step size of the diffractograms will differ between sources, 
 which is something that any model that aims to perform well on this dataset must be equipped to handle.
 
-% Reference library required and analysis software required, reference library may be incomplete
-% software training required, doesnt always converge or not to true minimum,
-% sometimes sample is truely unknown,  manual labor required in any case
 
-% -> This is too detailed for this paper, but can use it for thesis
-%For one, under normal circumstances, the initial guess of the structure requires manually or computationally consulting
-%a reference library of pairs of patterns and structures.
-%The reference library is an undesirable overhead that needs to be distributed along with the analysis software and
-%maintained to remain up to date and interoperable with the anlysis software.
-%The industry standard in terms of such reference libraries is the Powder Diffraction File and costs around 1000\$ per
-%year to license from its maintainer, the International Centre for Diffraction Data.
-%Another issue is that since the number of chemically viable crystal structures is infinite any reference library, no
-%matter how
+% TODOS:
+% - This paper talks about the importance of sharing raw powder x-ray diffraction data. I'd definitely cite it ->  \cite{Aranda2018}
+% - The image diff.png shows the difference between a powder diffractogram calculated from single x-ray diffraction data
+% and a real powder diffractogram of the same material. The difference is enormous. I'd include it to highlight
+% that simulating powder diffractino patterns from single crystal data only goes so far
+%https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/rietveld-refinement
 
-
-% Crystallographic open database
-% https://www.crystallography.net/cod/
-
-%
-%
-%Machine learning techniques have emerged as a powerful tool in the toolkit of
-%materials scientists. While they are often used to make predictions on
-%the properties of materials or find new materials with certain properties, an increasingly interesting domain is the automated analysis of raw experimental measurements
-%guided by machine learning\supercite{radovicMachineLearningEnergy2018}.
-%
-%With the advent of high-throughput experiments, the amount of gathered data is
-%vast and the analysis often becomes a bottleneck in the processing pipeline
-%\supercite{rahmanianEnablingModularAutonomous2022}. Powder X-ray diffraction
-%(XRD) is an important measurement technique used to obtain structural
-%information from polycrystalline samples\supercite{harrisContemporaryAdvancesUse2001}.
-%The diffractograms are an
-%information-dense fingerprint of the structure of the material. However,
-%analyzing these diffractograms is not an easy task\supercite{holderTutorialPowderXray2019}.
-%Full structure solutions and
-%Rietveld refinement take time and require expert knowledge, both about the
-%analysis technique and the materials class at hand. This is not feasible in high-throughput experiments on a larger
-%scale. Therefore, the question arises whether it is possible to automatically
-%analyze powder diffractograms with machine learning models trained on large
-%amounts of data, making it possible to run inference almost instantaneously.
-%
-%During the last few years, there have been several studies tackling this
-%objective by applying machine learning models to various tasks concerning the
-%analysis of powder diffractograms such as phase
-%classification\supercite{leeDeeplearningTechniquePhase2020,maffettoneCrystallographyCompanionAgent2021,schuetzkeEnhancingDeeplearningTraining2021,szymanskiProbabilisticDeepLearning2021,wangRapidIdentificationXray2020},
-%phase fraction determination\supercite{leeDatadrivenXRDAnalysis2021}, space
-%group
-%classification\supercite{parkClassificationCrystalStructure2017,oviedoFastInterpretableClassification2019,zalogaCrystalSymmetryClassification2020,vecseiNeuralNetworkBased2019,suzukiSymmetryPredictionKnowledge2020,chakrabortyDeepCrystalStructure2022},
-%machine-learning-guided Rietveld
-%refinement\supercite{ozakiAutomatedCrystalStructure2020,fengMethodArtificialIntelligence2019},
-%extraction of lattice
-%parameters\supercite{dongDeepConvolutionalNeural2021,chitturiAutomatedPredictionLattice2021,chakrabortyDeepCrystalStructure2022,
-%habershonPowderDiffractionIndexing2004} and crystallite
-%sizes\supercite{dongDeepConvolutionalNeural2021,chakrabortyDeepCrystalStructure2022},
-%and also novelty detection based on unsupervised techniques\supercite{bankoDeepLearningVisualization2021}.
-%Since an abundant source of experimental diffractograms is hard to come by, most
-%applications train their models on simulated diffractograms from the Inorganic
-%Crystal Structure Database (ICSD)\supercite{bergerhoff1987}, which contains a total of 272\,260 structures (October 2022).
-%
-%\citeauthor{leeDeeplearningTechniquePhase2020} used a deep convolutional neural
-%network (CNN) trained on a large dataset of multiphase compositions from the
-%quaternary \ce{Sr-Li-Al-O} pool to classify present phases in the
-%diffractogram\supercite{leeDeeplearningTechniquePhase2020}. In a follow-up
-%study, they further showed good results for phase fraction inference in the
-%quaternary \ce{Li-La-Zr-O} pool\supercite{leeDatadrivenXRDAnalysis2021}.
-%\citeauthor{schuetzkeEnhancingDeeplearningTraining2021} performed phase
-%classification on iron ores and cement compounds and used data augmentation with
-%respect to lattice parameters, crystallite sizes, and preferred orientation
-%\supercite{schuetzkeEnhancingDeeplearningTraining2021}. They showed that
-%especially the lattice parameter variations enhance the classification accuracy
-%significantly.
-%
-%Instead of the analysis of phase composition,
-%\citeauthor{dongDeepConvolutionalNeural2021} performed regression of scale
-%factors, lattice parameters, and crystallite sizes in a five-phase catalytic
-%materials system\supercite{dongDeepConvolutionalNeural2021}. In contrast to
-%supervised tasks, \citeauthor{bankoDeepLearningVisualization2021} used a
-%variational autoencoder to visualize variations in space group, preferred
-%orientation, crystallite size, and peak
-%shifts\supercite{bankoDeepLearningVisualization2021}.
-%\citeauthor{parkClassificationCrystalStructure2017} used a deep CNN to classify
-%space groups of single-phase diffractograms, reaching a test accuracy of 81.14\%
-%on simulated diffractograms.\supercite{parkClassificationCrystalStructure2017}
-%However, as we will show later in this paper, this accuracy is highly overestimated and drops to 56.1\% when test splits are designed in a way to reduce data leakage in non-IID datasets such as the ICSD.
-%\citeauthor{vecseiNeuralNetworkBased2019}\supercite{vecseiNeuralNetworkBased2019} developed
-%a similar approach and applied their classifier to experimental diffractograms
-%from the RRUFF mineral database\supercite{lafuentePowerDatabasesRRUFF2015},
-%reaching an experimental test accuracy of 54\%.
-
-% PDF pricing
-%https://www.icdd.com/assets/files/2023-Purchase-Options.pdf
+%-----------------------------------------------------------%
+% Sources on rietveld refinement
 
 % Computationally intensive -> Probably outdated. If it used to take minutes in 2010
 % it probably only takes seconds by now.
