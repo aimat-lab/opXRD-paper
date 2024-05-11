@@ -1,1 +1,5 @@
-Maybe a small tutorial with a few python commands to show how damn easy it is to use this thing.
+TODO: A small tutorial with a few python commands to show how easy it is to use our dataset through the provided API.
+
+A major advantage of this dataset over other comparable datasets is that it is very easy to handle in python and in PyTorch.
+Our accompanying python library xrdpattern (https://github.com/aimat-lab/xrdpattern) provides a means to read in as much of the dataset as fits in memory simply by using PatternDB.load(data\_dirpath). The patterns attribute of this class is a list of the indivdual pattern diffractograms, each of which supports a standardize, plot and to tensor method. \\
+The standardize method returns a "standardized" version of the pattern with a fixed angle range, a fixed number of entries and intensities normalized to the $[0,1]$ interval.
