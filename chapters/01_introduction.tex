@@ -7,18 +7,10 @@
     \label{fig:overview}
 \end{figure*}
 
-% Autonomous laboratory
-% https://www.nature.com/articles/s41586-023-06734-w
-
-% Accelerating material discovery
-% https://www.nature.com/articles/s41524-022-00765-z
-
-%High-throughput experiments facilitate materials innovation: A review
-%https://link.springer.com/article/10.1007/s11431-018-9369-9#:~:text=High%2Dthroughput%20materials%20experiments%20including,at%20a%20fraction%20of%20cost.
-
-The advent of high-throughput experiments holds the prospect of significantly accelerating the speed of materials discovery.
+% High throughput experimentation
+The advent of high-throughput experiments holds the prospect of significantly accelerating the speed of materials discovery. \cite{Liu2019}
 The synthesis and characterization of novel materials is becoming increasingly efficient and automated,
-which increases the throughput of samples in experimentation pipelines.\cite{Ozaki2020} \cite{Ludwig2019}
+increasing the throughput of samples in experimentation pipelines. \cite{MacLeod2019} \cite{Ludwig2019} \cite{Ozaki2020}
 
 % On Rietveld refinement
 After fabricating a new material, a number of analysis techniques can be used to characterize the sample.
@@ -44,7 +36,7 @@ However, for novel observed structure types, simply matching to a database of kn
 %library to apply Rietveld Refinement successfully.
 
 Machine learning has the potential to speed up the manual analysis of powder diffractograms and keep pace with an automated high-throughput experimentation environment. \cite{Agrawal2019} \cite{Surdu2023}
-Models can be trained to predict crystal structure information directly given a diffractogram, or models can be used to automate the conventional workflow of finding an initial guess and running ML-automated Rietveld refinement.
+Models can be trained to predict crystal structure information directly given a diffractogram, or models can be used to automate the conventional workflow of finding an initial guess and running ML-automated Rietveld refinement. \cite{Surdu2023} 
 %However, the current limiting factor is the availability of sufficiently large labeled datasets.
 So far, however, due to an absence of labeled datasets with experimental diffractograms, machine learning in this domain has largely relied on diffractograms simulated from known structures (such as from the ICSD) or, most recently, from generated synthetic crystals.
 
@@ -69,10 +61,10 @@ This is similar to the concept of style transfer\cite{Gatys2016,Ganin2015} found
 Here, the objective is to obtain a classification or regression model when only labeled images of one style (simulated data) and unlabeled or partially labeled images of another style (experimental data) are available.
 
 In this publication, we provide a new open powder X-ray diffraction (opXRD) dataset that collects a broad range of patterns from experiment, exceeding the currently available amount of openly accessible experimental patterns by XX.
-Our opXRD dataset has been curated by collecting the accumulated powder data from multiple large research groups and institutions with high-throughput XRD facilities.
+Our opXRD dataset has been curated by collecting the accumulated powder data from multiple large research groups and institutions with high-throughput XRD facilities. It contains pXRD patterns from single and multiphase materials from a wide variety of materials classes, including XXX, YYY, and ZZZ. Details about the experiments of contributing research groups are discussed in this paper, along with a detailed description of how to contribute further data and how to use the data.
 
 % How to contribute? This aspect deserves a separate paragraph
-The opXRD database is planned as a growing, community-driven initiative. The dataset we present here is the first version, but we hope to further increase the dataset size though active engagement with the pXRD community. In order to xxx. We further provide an online platform that can be used to easily submit new pXRD data to the dataset, which will be used to extend the existing dataset in the future (Figure~\ref{fig:overview}).
+The opXRD database is planned as a growing, community-driven initiative. The dataset we present here is the first version, but we hope to further increase the dataset size through active engagement with the pXRD community. Our primary object. We further provide an online platform that can be used to easily submit new pXRD data to the dataset, which will be used to extend the existing dataset in the future (Figure~\ref{fig:overview}).
 TODO: Make this longer?
 
 
