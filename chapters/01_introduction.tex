@@ -1,3 +1,12 @@
+
+
+\begin{figure*}[!ht]
+    \centering
+    \includegraphics{figures/overview.pdf}
+    \caption{Overview of the data collection pipeline. Datasets are submitted using an online submission form or our submission helper software. After post-processing and data homogenization, we create a Zenodo entry for each user submission and subsequently include the submission in the opXRD database.}
+    \label{fig:overview}
+\end{figure*}
+
 % Autonomous laboratory
 % https://www.nature.com/articles/s41586-023-06734-w
 
@@ -7,35 +16,20 @@
 %High-throughput experiments facilitate materials innovation: A review
 %https://link.springer.com/article/10.1007/s11431-018-9369-9#:~:text=High%2Dthroughput%20materials%20experiments%20including,at%20a%20fraction%20of%20cost.
 
-\begin{figure*}[!ht]
-    \centering
-    \includegraphics{figures/overview.pdf}
-    \caption{Overview of the data collection pipeline. Datasets are submitted using an online submission form or our submission helper software. After post-processing and data homogenization, we create a Zenodo entry for each user submission and subsequently include the submission in the opXRD database.}
-    \label{fig:overview}
-\end{figure*}
-
-The advent of high-throughput experiments holds the prospect of significantly accelerating the speed of materials discovery. 
+The advent of high-throughput experiments holds the prospect of significantly accelerating the speed of materials discovery.
 The synthesis and characterization of novel materials is becoming increasingly efficient and automated,
-which increases the throughput of samples in experimentation pipelines.
-
-% Rietveld Refinement (3.9 Profile fitting and rietveld analysis)
-%https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/rietveld-refinement
-
-% Rietveld Refinement: Half a century anniversary
-% https://pubs.acs.org/doi/10.1021/acs.cgd.1c00854
+which increases the throughput of samples in experimentation pipelines.\cite{Ozaki2020} \cite{Ludwig2019}
 
 % On Rietveld refinement
 After fabricating a new material, a number of analysis techniques can be used to characterize the sample.
 The most important method to determine the crystal structure of a new material is powder X-ray diffraction. 
-%In the case of multi-phase samples, this includes identifying the phases present in the sample and quantifying their fractions.
-To analyze pXRD data, an initial guess is optimized using Rietveld refinement. In this process, an initial crystal structure including unit cell parameters is provided by the operator of the analysis software and fitted to the observed diffractogram in an iterative optimization process based on simulated forward prediction of expected pXRD diffractograms given the current crystal structure.
-%The unit cell parameters of the crystal structure are adjusted to minimize the difference between the simulated diffraction pattern and the pattern observed in the experiment. 
+To analyze pXRD data, an initial guess is optimized using Rietveld refinement. In this process, an initial crystal structure including unit cell parameters is provided by the operator of the analysis software and fitted to the observed diffractogram in an iterative optimization process based on simulated forward prediction of expected pXRD diffractograms given the current crystal structure.\cite{Dinnebier2019} \cite{Cano2021}
 As Rietveld refinement is a local optimization method, the result of the refinement procedure is generally only as good as the initial guess it was provided with.
 Therefore, it strongly relies on the experience of the operator to provide an accurate initial guess of the crystal structure.
 
 Employing manually operated Rietveld refinement, including determining a good initial structure for the optimization, is not without issues.
 It is certainly not scalable to the degree required to keep up with advances in throughput and efficiency in other steps of the experimentation pipeline.
-Automation of the Rietveld refinement requires the automation of finding initial guess structures, which is highly non-trivial, and the automation of the iterative optimization procedure, which can be done using black-box optimization algorithms.
+Automation of the Rietveld refinement requires the automation of finding initial guess structures, which is highly non-trivial, and the automation of the iterative optimization procedure, which can be done using black-box optimization algorithms. \cite{Ozaki2020}
 Initial guesses for Rietveld refinement are often obtained by matching the observed diffractogram to patterns from a database.
 %But beyond the lack of scalability of this workflow we also wish to highlight the following issue:
 %Providing the analysis software with an initial guess of the structure requires manually or algorithmically
@@ -43,7 +37,7 @@ Initial guesses for Rietveld refinement are often obtained by matching the obser
 %From that reference library, a crystal structure must be identified that is likely to be similar
 %to that of the investigated sample which can then serve as the initial guess provided to the analysis software.
 %Since the number of chemically viable crystal structures is infinite, any such library will always be incomplete.
-However, in the case of novel observed structure types, simply matching to a database of known structures will not yield good results. Therefore, more complex crystal structure solution approaches need to be applied to find suitable crystal structure guesses.
+However, for novel observed structure types, simply matching to a database of known structures will not yield good results. Therefore, more complex crystal structure solution approaches need to be applied to find suitable crystal structure guesses.
 %The best that can be done to remedy this is to continually update the library both on the side
 %of the distributor and the user, which is an undesirable overhead.
 %Especially for novel material discovery, it may be impossible to find a sufficiently accurate match in the reference
