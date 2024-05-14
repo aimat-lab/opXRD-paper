@@ -92,58 +92,6 @@ The broad range of available experimental samples contained in our dataset makes
 We hope that this will yield more advanced automated ML approaches in the future, which can readily be applied in high-throughput experimentation pipelines.
 
 
-
-
-
-
-
-
-
-
-
-
-
-%We hope that this will yield more attempts of ML-guided XRD analysis in the future, where also open challenges such as different angle step sizes, different radiation sources, will be addressed.
-
-%However, there is still reason to believe that the strong performance observed in the domain of purely simulated diffractograms can to a large extent translate to predicting crystal structure properties from diffractograms originating from experiment, given that models are trained on a dataset that accurately reflects diffractograms as they appear in experiment.
-
-%There are roughly speaking two paths towards improving the simulation: The first is to more accurately model the sample and the processes taking place within it during the simulation of the powder diffraction pattern. This would for example necessitate modelling absorption of the incoming X-ray radiation and its re-emission in the form of characteristic radiation and modeling the effect of stress and motion within the crystal on the diffractogram.
-
-%An alternative route to obtaining a more accurate simulation is to try to learn these "imperfections" compared to an idealized simulation using machine learning techniques by extracting them from this dataset.
-
-%As an example of this could be done, we can investigate results from other areas of research, where a transfer of data content between different "styles" of representation was attempted:
-
-%Ganin et al.\cite{Ganin2015} proposed a mechanism for training a classifier which performs well independently of which style the input data is represented in, which only requires labeled data from one style and unlabeled data from other styles. This corresponds precisely to the situation at hand, where the number of labeled simulated diffractograms is virtually unlimited and a large amount of unlabeled real diffractograms are available, but labeled real diffractogram are in short suppply. This algorithm could be applied to train a "style-invariant" structure properties prediction model using a combination of our dataset and simulated labeled patterns.
-
-%Another approach by Gatys et al. \cite{Gatys2016} achieves style transfer of images, by requiring that the content of the output image remain the same, while the style must match that of another image, chosen to represent the target style. This procedure could be applied to transfer the style of simulated diffractorams to that of real diffractograms, which could then be used to train the model data that is more faithful to powder diffractograms as they appear in experiment.
-
-%A first hint of how closely a given simulation reflects experiment could be obtained by
-%training a machine learning model, which attempts to classify between simulated and real diffractograms. \\
-%If the simulation is very accurate, we would expect the classifier to not have few to no features which it can use to distinguish between simulated and real diffractograms and hence perform poorly. \\
-%Conversely, if the classifier performs well and is not difficult to train, that would be an indicator that the simulation doesn't reflect experiment sufficiently well. \\
-
-%For a set of given sample properties there is only one corresponding simulated diffractogram, but there may be an infinite amount of variations in how the diffractogram of a sample could look like in experiment for example due varying measurement apperatus, noise
-%, sample impurities and lattice defects.
-%In order for a simulated dataset to closely resemble experiment it is critical that the simulation also represents these
-%statistical variations.
-%Determining the nature of these variations is a much a harder task than making individual diffractograms look like they
-%originated from experiment and cannot be accomplished by simply training a classifier.
-%Nevertheless, we hope that this dataset can at least provide clues of how to take this aspect into account during
-%simulation as well.
-
-%But even the unlabeled portion of the dataset can be used to test the performance of models, if the model attempts to predict the entire crystal structure. From the predicted crystal structure, the corresponding diffractogram can be simulated, which can then be compared to the real diffractogram that was used as input for the prediction. While a nearly matching diffractogram doesn't necessarily mean a correctly predicted structure, a non-matching diffractogram certainly means an incorrectly predicted structure.
-
-%Finally, by inviting the application of models to data as it appears in experiment we would like to bring attention
-%to some of the practical difficulties that need to be addressed in applying a model to a wide variety of X-ray diffractograms
-%collected from different sources: For example the angle and the step size of the diffractograms will differ between sources, 
-%which is something that any model that aims to perform well on this dataset must be equipped to handle.
-
-
-% - The image diff.png shows the difference between a powder diffractogram calculated from single x-ray diffraction data
-% and a real powder diffractogram of the same material. The difference is enormous. I'd include it to highlight
-% that simulating powder diffractino patterns from single crystal data only goes so far
-%https://www.sciencedirect.com/topics/biochemistry-genetics-and-molecular-biology/rietveld-refinement
-
 %-----------------------------------------------------------%
 % Sources on rietveld refinement
 
