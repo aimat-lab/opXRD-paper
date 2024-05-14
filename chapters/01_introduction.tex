@@ -28,11 +28,11 @@ However, for novel observed structure types, simply matching to a database of kn
 
 Machine learning has the potential to speed up the manual analysis of powder diffractograms and keep pace with an automated high-throughput experimentation environment. \cite{Agrawal2019, Surdu2023}
 Models can be trained to predict crystal structure information directly given a diffractogram, or models can be used to automate the conventional workflow of finding an initial guess and running ML-automated Rietveld refinement. \cite{Surdu2023,Feng2019} 
-So far, however, due to an absence of labeled datasets with experimental diffractograms\cite{Wang2020} , machine learning in this domain has largely relied on diffractograms simulated from known structures\cite{Park2017} \cite{Lee2023} or, most recently, from generated synthetic crystals. \cite{Schopmans2023}
+So far, however, due to an absence of labeled datasets with experimental diffractograms\cite{Wang2020} , machine learning in this domain has largely relied on diffractograms simulated from known structures\cite{Park2017, Lee2023} or, most recently, from generated synthetic crystals. \cite{Schopmans2023}
 
 % Predicting structure information with machine learning
 Models trained on datasets with simulated diffractograms have already shown very strong performance in predicting
-lattice parameters, spacegroup, and crystallite size from simulated diffractograms.
+lattice parameters, spacegroup \cite{Schopmans2023, Oviedo2018, Park2017, Vecsei2018, Zaloga2020, Suzuki2020, Chakraborty2021}, and crystallite size from simulated diffractograms.
 However, the performance substantially drops off when these models are applied to data originating from experiments [cite 2-3 papers, incl. ours].
 The patterns observed in experiments suffer from a host of imperfections that need to be modeled accurately in order to be able to transfer models trained on simulated data to experimental patterns. This includes noise, background, preferred orientation of the sample, ...
 Most approaches currently model these imperfections as a simple signal based on a heuristic functional form added to the simulated diffractograms.
@@ -45,7 +45,7 @@ The most advanced ML models currently are trained on approximately $10^7 - 10^8$
 
 However, even small labeled and also unlabeled experimental diffractograms hold significant value in practice. First of all, labeled data can be used to better test and benchmark existing and new automated analysis approaches, which yields a better comparison than when using the very limited currently available datasets, such as the commonly used RRUFF mineral dataset.
 
-Furthermore, even completely unlabeled data can enable machine learning researchers to evaluate how closely their simulations represent actual experimental data, identify what features are missing, and modify their simulation algorithms accordingly to arrive at a simulation that mirrors how data appears in reality.
+Furthermore, even completely unlabeled data can enable machine learning researchers to evaluate how closely their simulations represent experimental data, identify what features are missing, and modify their simulation algorithms accordingly to arrive at a simulation that mirrors how data appears in reality.
 One can bring the simulated patterns closer to experiment by improving the simulation itself by properly modeling more of the observed physical effects such as preferred orientation, peak shapes resulting from different sources, etc.
 Additionally, some of the observed imperfections, such as background and noise, can be modeled using machine learning approaches.
 This is similar to the concept of style transfer\cite{Gatys2016, Ganin2015} found in the domain of machine learning applied to images.
