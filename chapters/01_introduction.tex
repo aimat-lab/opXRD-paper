@@ -28,14 +28,15 @@ which increases the throughput of samples in experimentation pipelines.
 After fabricating a new material, a number of analysis techniques can be used to characterize the sample.
 The most important method to determine the crystal structure of a new material is powder X-ray diffraction. 
 %In the case of multi-phase samples, this includes identifying the phases present in the sample and quantifying their fractions.
-To analyze pXRD data, an initial guess is optimized using Rietveld refinement. In this process, an initial crystal structure, including unit cell parameters, provided by the operator of the analysis software, is fitted to the observed diffractogram in an iterative optimization process based on simulated forward prediction of expected pXRD diffractograms given the current crystal structure.
+To analyze pXRD data, an initial guess is optimized using Rietveld refinement. In this process, an initial crystal structure including unit cell parameters is provided by the operator of the analysis software and fitted to the observed diffractogram in an iterative optimization process based on simulated forward prediction of expected pXRD diffractograms given the current crystal structure.
 %The unit cell parameters of the crystal structure are adjusted to minimize the difference between the simulated diffraction pattern and the pattern observed in the experiment. 
 As Rietveld refinement is a local optimization method, the result of the refinement procedure is generally only as good as the initial guess it was provided with.
 Therefore, it strongly relies on the experience of the operator to provide an accurate initial guess of the crystal structure.
 
 Employing manually operated Rietveld refinement, including determining a good initial structure for the optimization, is not without issues.
 It is certainly not scalable to the degree required to keep up with advances in throughput and efficiency in other steps of the experimentation pipeline.
-Furthermore, initial guesses for Rietveld refinement are often obtained by matching the observed diffractogram to patterns from a database.
+Automation of the Rietveld refinement requires the automation of finding initial guess structures, which is highly non-trivial, and the automation of the iterative optimization procedure, which can be done using black-box optimization algorithms.
+Initial guesses for Rietveld refinement are often obtained by matching the observed diffractogram to patterns from a database.
 %But beyond the lack of scalability of this workflow we also wish to highlight the following issue:
 %Providing the analysis software with an initial guess of the structure requires manually or algorithmically
 %consulting a reference library of crystal structures with corresponding simulated or sometimes real diffractograms.
@@ -64,23 +65,29 @@ Most approaches currently model these imperfections as a simple signal based on 
 
 At the moment, the number of openly available datasets for experimental powder data is very limited.
 The main sources for experimental patterns are XXX, YYY, and ZZZ.
-In this publication, we provide a new dataset that collects a broad range of patterns from experiment, exceeding the currently available amount of openly accessible experimental patterns by XX.
-The dataset has been curated by collecting the accumulated powder data from multiple large research groups and institutions with high-throughput XRD facilities.
+Further commercial datasets such as KKK and LLL exist, but license fees and restrictions in their use to train publishable models or even publish the training data limit their usability.
+Collecting a labeled dataset of raw experimental powder X-ray diffraction data of sufficient size to directly train a model that predicts crystal structure information is likely out of reach.
+The most advanced ML models currently are trained on approximately x simulated diffractograms, which is x orders of magnitude higher than the largest currently curated experimental dataset.
 
-% How to contribute? This aspect deserves a separate paragraph
-We further provide an online platform that can be used to easily submit new pXRD data to the dataset, which will be used to extend the existing dataset in the future (Figure~\ref{fig:overview}).
-TODO: Make this longer?
+However, even small labeled and also unlabeled experimental diffractograms hold significant value in practice. First of all, labeled data can be used to better test and benchmark existing and new automated analysis approaches, which yields a better comparison than when using the very limited currently available datasets, such as the commonly used RRUFF mineral dataset.
 
-Collecting a labeled dataset of raw experimental powder X-ray diffraction data of sufficient size to directly train a model that predicts crystal structure information is still out of reach.
-The most advanced ML models currently are trained on approximately x simulated diffractograms, which is x orders of magnitude higher than the initial state of the opXRD database presented here.
-However, our dataset still holds significant value in practice. First of all, the dataset can be used to better test and benchmark existing and new automated analysis approaches, which yields a better comparison than when using the very limited currently available datasets, such as the commonly used RRUFF mineral dataset.
-
-Furthermore, we hope that our dataset can enable machine learning researchers to evaluate how closely their simulations
-represent actual experimental data, identify what features are missing, and modify their simulation algorithms accordingly to arrive at a simulation that mirrors how data appears in reality.
+Furthermore, even completely unlabeled data can enable machine learning researchers to evaluate how closely their simulations represent actual experimental data, identify what features are missing, and modify their simulation algorithms accordingly to arrive at a simulation that mirrors how data appears in reality.
 One can bring the simulated patterns closer to experiment by improving the simulation itself by properly modeling more of the observed physical effects such as preferred orientation, peak shapes resulting from different sources, etc.
 Additionally, some of the observed imperfections, such as background and noise, can be modeled using machine learning approaches.
 This is similar to the concept of style transfer\cite{Gatys2016,Ganin2015} found in the domain of machine learning applied to images.
 Here, the objective is to obtain a classification or regression model when only labeled images of one style (simulated data) and unlabeled or partially labeled images of another style (experimental data) are available.
+
+In this publication, we provide a new open powder X-ray diffraction (opXRD) dataset that collects a broad range of patterns from experiment, exceeding the currently available amount of openly accessible experimental patterns by XX.
+Our opXRD dataset has been curated by collecting the accumulated powder data from multiple large research groups and institutions with high-throughput XRD facilities.
+
+% How to contribute? This aspect deserves a separate paragraph
+The opXRD database is planned as a growing, community-driven initiative. The dataset we present here is the first version, but we hope to further increase the dataset size though active engagement with the pXRD community. In order to xxx. We further provide an online platform that can be used to easily submit new pXRD data to the dataset, which will be used to extend the existing dataset in the future (Figure~\ref{fig:overview}).
+TODO: Make this longer?
+
+
+
+
+
 The broad range of available experimental samples contained in our dataset makes it possible to apply these state-of-the-art ML approaches to the domain of powder XRD analysis.
 We hope that this will yield more advanced automated ML approaches in the future, which can readily be applied in high-throughput experimentation pipelines.
 
@@ -131,8 +138,7 @@ We hope that this will yield more advanced automated ML approaches in the future
 %collected from different sources: For example the angle and the step size of the diffractograms will differ between sources, 
 %which is something that any model that aims to perform well on this dataset must be equipped to handle.
 
-% TODOS:
-% - This paper talks about the importance of sharing raw powder x-ray diffraction data. I'd definitely cite it ->  \cite{Aranda2018}
+
 % - The image diff.png shows the difference between a powder diffractogram calculated from single x-ray diffraction data
 % and a real powder diffractogram of the same material. The difference is enormous. I'd include it to highlight
 % that simulating powder diffractino patterns from single crystal data only goes so far
