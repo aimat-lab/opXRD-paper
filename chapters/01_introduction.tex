@@ -19,6 +19,7 @@ To analyze pXRD data, an initial guess is optimized using Rietveld refinement. I
 As Rietveld refinement is a local optimization method, the result of the refinement procedure is generally only as good as the initial guess it was provided with.
 Therefore, it strongly relies on the experience of the operator to provide an accurate initial guess of the crystal structure.
 
+% Manual vs (ML) automated Refinement
 Employing manually operated Rietveld refinement, including determining a good initial structure for the optimization, is not without issues.
 It is certainly not scalable to the degree required to keep up with advances in throughput and efficiency in other steps of the experimentation pipeline.
 Automation of the Rietveld refinement requires the automation of finding initial guess structures, which is highly non-trivial, and the automation of the iterative optimization procedure, which can be done using black-box optimization algorithms. \cite{Ozaki2020} 
@@ -27,9 +28,9 @@ However, for novel observed structure types, simply matching to a database of kn
 
 Machine learning has the potential to speed up the manual analysis of powder diffractograms and keep pace with an automated high-throughput experimentation environment. \cite{Agrawal2019, Surdu2023}
 Models can be trained to predict crystal structure information directly given a diffractogram, or models can be used to automate the conventional workflow of finding an initial guess and running ML-automated Rietveld refinement. \cite{Surdu2023}    \cite{Feng2019} 
-%However, the current limiting factor is the availability of sufficiently large labeled datasets.
-So far, however, due to an absence of labeled datasets with experimental diffractograms, machine learning in this domain has largely relied on diffractograms simulated from known structures (such as from the ICSD) or, most recently, from generated synthetic crystals.
+So far, however, due to an absence of labeled datasets with experimental diffractograms, machine learning in this domain has largely relied on diffractograms simulated from known structures (such as from the ICSD) or, most recently, from generated synthetic crystals. \cite{Wang2020, Lee2023} 
 
+% Predicting structure information with machine leraning
 Models trained on datasets with simulated diffractograms have already shown very strong performance in predicting
 lattice parameters, spacegroup, and crystallite size from simulated diffractograms.
 However, the performance substantially drops off when these models are applied to data originating from experiments [cite 2-3 papers, incl. ours].
