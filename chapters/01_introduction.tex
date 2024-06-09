@@ -17,22 +17,22 @@ After fabricating a new material, a number of analysis techniques can be used to
 The most important method to determine the crystal structure of a new material is powder X-ray diffraction. 
 To analyze pXRD data, an initial guess is optimized using Rietveld refinement. In this process, an initial crystal structure including unit cell parameters is provided by the operator of the analysis software and fitted to the observed diffractogram in an iterative optimization process based on simulated forward prediction of expected pXRD diffractograms given the current crystal structure.\cite{Dinnebier2019, Cano2021}
 As Rietveld refinement is a local optimization method, the result of the refinement procedure is generally only as good as the initial guess it was provided with.
-Therefore, it strongly relies on the experience of the operator to provide an accurate initial guess of the crystal structure.
+%Therefore, it strongly relies on the experience of the operator to provide an accurate initial guess of the crystal structure.
 
 % Manual vs (ML) automated Refinement
 Employing manually operated Rietveld refinement, including determining a good initial structure for the optimization, is not without issues.
 It is certainly not scalable to the degree required to keep up with advances in throughput and efficiency in other steps of the experimentation pipeline.
 Automation of the Rietveld refinement requires the automation of finding initial guess structures, which is highly non-trivial, and the automation of the iterative optimization procedure, which can be done using black-box optimization algorithms. \cite{Ozaki2020} 
-Initial guesses for Rietveld refinement are often obtained by matching the observed diffractogram to patterns from a database. \cite{Belsky2002, GatesRector2019}
-However, for novel observed structure types, simply matching to a database of known structures will not yield good results. Therefore, more complex crystal structure solution approaches need to be applied to find suitable crystal structure guesses.
-
+Initial guesses for Rietveld refinement are often obtained by matching the observed diffractogram to patterns from a database. Commonly used databases include the "Powder Diffraction File"\cite{GatesRector2019}, the "Inorganic Crystal Structure Database" \cite{Belsky2002} and the "Crystallography Open Database" \cite{Grazulis2009}.
+An initial guess obtained from such a database is by no means guaranteed to lead to an accurate structure solution, even if it is iteratively revised, either manually or using blackbox optimization.\cite{Ozaki2020}
+Especially for novel observed structure types, simply matching to a database of known structures will not yield good results. Therefore, more complex crystal structure solution approaches need to be applied to find suitable crystal structure guesses.
 Machine learning has the potential to speed up the manual analysis of powder diffractograms and keep pace with an automated high-throughput experimentation environment. \cite{Agrawal2019, Surdu2023}
-Models can be trained to predict crystal structure information directly given a diffractogram, or models can be used to automate the conventional workflow of finding an initial guess and running ML-automated Rietveld refinement. \cite{Surdu2023,Feng2019} 
-So far, however, due to an absence of labeled datasets with experimental diffractograms\cite{Wang2020} , machine learning in this domain has largely relied on diffractograms simulated from known structures\cite{Park2017, Lee2023} or, most recently, from generated synthetic crystals. \cite{Schopmans2023}
+Models can be trained to predict crystal structure information directly given a diffractogram, or models can be used to automate the conventional workflow of finding an initial guess \cite{Surdu2023} and running ML-automated Rietveld refinement. \cite{Feng2019} 
+So far, however, due to an absence of labeled datasets with experimental diffractograms\cite{Wang2020}, machine learning in this domain has largely relied on diffractograms simulated from known structures\cite{Park2017, Lee2023} or, most recently, from generated synthetic crystals. \cite{Schopmans2023}
 
 % Predicting structure information with machine learning
 Models trained on datasets with simulated diffractograms have already shown very strong performance in predicting
-lattice parameters\cite{Dong2021, Chitturi2021, Habershon2004}, spacegroup \cite{Schopmans2023, Oviedo2018, Park2017, Vecsei2018, Zaloga2020, Suzuki2020, Chakraborty2021}, and crystallite size \cite{Dong2021, Chakraborty2021}from simulated diffractograms.
+lattice parameters\cite{Dong2021, Chitturi2021, Habershon2004}, spacegroup \cite{Schopmans2023, Oviedo2018, Park2017, Vecsei2018, Zaloga2020, Suzuki2020, Chakraborty2021}, and crystallite size \cite{Dong2021, Chakraborty2021} from simulated diffractograms.
 However, the performance substantially drops off when these models are applied to data originating from experiments [cite 2-3 papers, incl. ours].
 The patterns observed in experiments suffer from a host of imperfections that need to be modeled accurately in order to be able to transfer models trained on simulated data to experimental patterns. This includes noise, background, preferred orientation of the sample, ...
 Most approaches currently model these imperfections as a simple signal based on a heuristic functional form added to the simulated diffractograms.
@@ -43,7 +43,7 @@ Further commercial datasets such as KKK and LLL exist, but license fees and rest
 Collecting a labeled dataset of raw experimental powder X-ray diffraction data of sufficient size to directly train a model that predicts crystal structure information is likely out of reach.
 The most advanced ML models currently are trained on approximately $10^7 - 10^8$ simulated diffractograms, which is x orders of magnitude higher than the largest currently curated experimental dataset and x orders of magnitude larger than the opXRD dataset we present here.
 
-However, even small labeled and also unlabeled experimental diffractograms hold significant value in practice. First of all, labeled data can be used to better test and benchmark existing and new automated analysis approaches, which yields a better comparison than when using the very limited currently available datasets, such as the commonly used RRUFF mineral dataset.
+However, even small labeled and also unlabeled experimental diffractograms hold significant value in practice. First of all, labeled data can be used to better test and benchmark existing and new automated analysis approaches, which yields a better comparison than when using the very limited currently available datasets, such as the commonly used RRUFF mineral dataset. \cite{Armbruster2015}
 
 Furthermore, even completely unlabeled data can enable machine learning researchers to evaluate how closely their simulations represent experimental data, identify what features are missing, and modify their simulation algorithms accordingly to arrive at a simulation that mirrors how data appears in reality.
 One can bring the simulated patterns closer to experiment by improving the simulation itself by properly modeling more of the observed physical effects such as preferred orientation, peak shapes resulting from different sources, etc.
