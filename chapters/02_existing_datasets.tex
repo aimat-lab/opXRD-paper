@@ -1,59 +1,34 @@
-% Sources to mention
-% Zenodo -> A good amount of raw powder data there but spread into smaller datasets; Inhomogenous, not specially prepared to be worked with by others, therefore difficult to work with especially at scale
-
-% Crystal structures with corresponding simulated diffractograms;
-% ->  ICSD 
-% - 230k structures;
-% - Proprietary
-
-% -> PDF  -> 
-%- 1200k "material data sets" (structures?) 
-% + 19 k entries with "Experimental raw data digital patterns"; 
-%  Proprietary (% PDF pricing: https://www.icdd.com/assets/files/2023-Purchase-Options.pdf)
-%The PDF itself lists the following data sources:
-
-% ->  COD (https://www.crystallography.net/cod/)
-% -  513k structures,
-% - Fully open
-
-% Datset listing (Done on: 20.06.24)
-% I would list here *all* crystallography databases but evaluate/determine that they lack or don't provide convenient access to raw powder diffraction data
-
+% Datset listing (List written on 20.06.24)
 % Some other Lists of Crystallographic databases
-% - IUCR: "Crystallographyic databases and related resources" (https://www.iucr.org/resources/data/databases)
+% - IUCR: "Crystallographic databases and related resources" (https://www.iucr.org/resources/data/databases)
 % - Bruno et al. (2017): "Crystallography and Databases" (https://datascience.codata.org/articles/10.5334/dsj-2017-038)
 % - University of Virginia "Crystallographic data" (https://guides.lib.virginia.edu/c.php?g=514782&p=3568808)
 
-%->1 PDF5+ (https://www.icdd.com/,https://www.icdd.com/pdf-5/)
-% - Data sources of the PDF
-% (1.1): ICDD Powders
-% (1.2): FIZ ICSD (https://icsd.products.fiz-karlsruhe.de/)
-% (1.3): NIST ICSD https://icsd.nist.gov/
-% (1.4): Linus Pauling File (https://paulingfile.com/index.php?p=about%20us)
-% (1.5): ICDD Single Crystal data
-%-> 2 COD (https://www.crystallography.net/cod/)
-%-> 3 RRUFF (American Mineralogist Crystal Structure Database)
-%-> 4 CCDC (https://www.ccdc.cam.ac.uk/)
-%-> 5 The Material Project (https://legacy.materialsproject.org/)
-%-> 6 Crystal Lattice Structures (https://www.atomic-scale-physics.de/lattice/)
-%-> 7 Crystallographic and Crystallochemical Database for Minerals and their Structural Analogues (https://database.iem.ac.ru/mincryst/)
-%-> 8 Mineralogy Database (https://webmineral.com/)
-%-> 9 IUCr Raw data letters (https://iucrdata.iucr.org/)
-%-> 10 Bilbao Crystallographic server  (https://www.cryst.ehu.es/)
-%-> 11 PowBase (http://www.cristal.org/powbase/index.html)
-%-> 12 Athena (https://athena.unige.ch/athena/mineral/mineral.html)
-%-> 13 Protein database (https://www.rcsb.org/)
-%-> 14 SDPD (Structure Determination from Powder Diffraction - Database)
-%-> 15 Crystal Met (https://cds.dl.ac.uk/cds/datasets/crys/mdf/llmdf.html)
-%-> 16 NAKB (https://www.nakb.org/)
-%-> 17 Pearson's Crystal data (https://www.crystalimpact.com/pcd/)
-%-> 18 Biological macromolecule Crystallization Database (http://bmcd.ibbr.umd.edu/)
-
-%TODO: Also include plans for NOMAD and highlight their efforts
+% [X] 1 PDF5+ (https://www.icdd.com/,https://www.icdd.com/pdf-5/) -> 19000 structures with pXRD patterns | I checked with their support
+    % (1.1): ICDD Powders
+    % (1.2): FIZ ICSD (https://icsd.products.fiz-karlsruhe.de/)
+    % (1.3): NIST ICSD https://icsd.nist.gov/
+    % (1.4): Linus Pauling File (https://paulingfile.com/index.php?p=about%20us)
+    % (1.5): ICDD Single Crystal data
+% [x]: 2 COD (https://www.crystallography.net/cod/) -> ~ 1000 structures with real pXRD patterns | These patterns were extracted by PSL university
+% [x]: 3 RRUFF (American Mineralogist Crystal Structure Database) -> ~ 1000 structures with real pXRD patterns | We downloaded the entire dataset and discarded single crystal data
+% [x]: 4 CCDC (https://www.ccdc.cam.ac.uk/) -> No exp pXRD | There is only mention of simulated powder diffraction data. Of 20 sampled cifs none contained powder diffraction data
+% [x]: 5 The Material Project (https://legacy.materialsproject.org/) -> No exp pXRD | The only mention of available X-ray diffraction data is of simulated data
+% [x]: 6 Crystal Lattice Structures (https://www.atomic-scale-physics.de/lattice/) -> No exp pXRD | Their entries provide no X-ray diffraction data, and also most links appear broken
+% [x]: 7 Crystallographic and Crystallochemical Database for Minerals and their Structural Analogues (https://database.iem.ac.ru/mincryst/) -> No exp pXRD | The given powder diffraction data is simulated (see: Powder X-ray Diffraction Standards (CPDS) @ https://database.iem.ac.ru/mincryst/descript.htm)
+% [x]: 8 Mineralogy Database (https://webmineral.com/) -> No exp pXRD | I checked with the author of the site
+% [x]: 9 IUCr Raw data letters (https://iucrdata.iucr.org/) -> No exp pXRD | There are only two raw data letters, both of them single crystal data
+% [x]: 10 Bilbao Crystallographic server  (https://www.cryst.ehu.eus/bincstrdb/search/) No exp pXRD | Of 20 sampled CIFs out of 256 entries none contained pXRD data
+% [x]: 11 PowBase (http://www.cristal.org/powbase/index.html) -> 169 real pXRD patterns some of which have at least partial labels; The described submission process and the lack of crystal structures indicate that the patterns are not simulated
+% [x]: 12 Athena (https://athena.unige.ch/athena/mineral/mineral.html) -> No exp pXRD | No mention of diffraction data anywhere
+% [x]: 13 Protein database (https://www.rcsb.org/) / NAKB (https://www.nakb.org/) / BMCD ((http://bmcd.ibbr.umd.edu/)  -> Little to no exp pXRD | Of the 230k structures only 21 showed up when searching experimental method = Powder diffraction
+% [x]: 14 Crystal Met (https://cds.dl.ac.uk/cds/datasets/crys/mdf/llmdf.html) -> No exp pXRD | The only mention of diffraction data is simulated data
+% [x]: 15 Pearson's Crystal data (https://www.crystalimpact.com/pcd/) -> 21700 experimental powder diffraction patterns (As per https://www.crystalimpact.com/pcd/) | The Pearson's crystal data evolved from the Linus Pauling File which is a data source of the PDF, so there may be significant overlap in these patterns
+% [x]: 16 Zenodo powder diffraction data (https://zenodo.org/search?q=powder%20diffraction&l=list&p=1&s=10&sort=bestmatch) -> Some pXRD data but hard to quantify, probably <= 4000 patterns most of which are unlabeled | 1600 datasets matching "powder diffraction". From probing among the first 100 matches I estimate only about 1 in 10 contain powder diffraction patterns. The probed datasets that did contain powder diffraction data only contained <= 30 patterns and only one of them came with corresponding crystal structures
 
 %TODO: Summarize the existing datasets shortly, including number of entries, etc.
 
-\paragraph{Existing powder diffraction datasets} To contextualize opXRD within the current environment of experimental powder diffraction data, the following list provides an overview of the largest crystal structure databases that include powder diffraction data. 
+\paragraph{Existing experimental powder diffraction datasets} To contextualize opXRD within the current environment of experimental powder diffraction data, the following list provides an overview of the largest crystal structure databases that include powder diffraction data. 
 
 \begin{itemize}
 \item \textbf{Powder Diffraction File:} \footnote{More information on the Powder Diffraction File can be found under \url{https://www.icdd.com/pdf-5/}.} The Powder Diffraction File (PDF), published and maintained by the International Center for diffraction data, is currently the largest collection of powder diffraction data available to researchers. Though its latest release contains over a million entries, almost all are simulated patterns. Only 19000 entries represent powder diffraction data originating from experiments, and of those, only about 11000 come with accompanying atomic coordinates. It is widely used as a reference database in Rietveld refinement to identify crystal structures from which the refinement process can begin based on their powder diffraction patterns. As of November 2024, the latest release of the PDF, the PDF5+, is available to researchers through a purchase starting at a price point of \$6,265.00.
@@ -61,8 +36,10 @@
 \item \textbf{Crystallography Open Database:}\footnote{More information on the crystallography open database can be found under \url{https://www.crystallography.net/cod/}.} The Crystallography Open Database (COD)\cite{Graulis2009cod} is an open-access collection of crystal structures. It provides over 500.000 crystal structures in the form of .cif files. Of these files, 1063 contained the experimental powder diffraction data that was used to determine the underlying crystal structures of the investigated samples.
 
 \item Scattered experimental datasets on Zenodo (TODO: roughly estimate size)
+
 \item \textbf{RRUFF}: The RRUFF Mineral Database \cite{Armbruster2015} provides detailed information on minerals, including their chemical compositions, crystallography, and spectroscopic data. Managed by the University of Arizona, it was created to serve as a public repository for mineral identification and research. It contains \num{908} distinct structures with experimental x-ray diffraction patterns.
-\item ...
+
+
 \end{itemize}
 
 Some major crystal structure databases, such as the ICSD, do not appear in the above list, as they do not include powder diffraction data. This is because most structure solutions are achieved through single-crystal diffraction rather than powder diffraction.
