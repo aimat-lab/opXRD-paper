@@ -948,13 +948,20 @@ FUNCTION {mastersthesis}
 FUNCTION {misc}
 { output.bibitem
   format.authors output
+  author format.key output
   title howpublished new.block.checkb
+  format.title output
+  howpublished new.block.checka
+  howpublished output
   format.date output
+  format.issn output
+  format.url output
   new.block
-  generate.doi output
   format.eprint output
-  format.note output
+  generate.doi output
+  note output
   fin.entry
+  empty.misc.check
 }
 
 
