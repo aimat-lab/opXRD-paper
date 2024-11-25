@@ -1,5 +1,5 @@
 % Datset listing (List written on 20.06.24)
-% Lists of Crystallographic databases; Our list contains all of the databases given in the lists linked below
+% Lists of Crystallographic databases; The commented list contains all of the databases given in the lists linked below
 % - IUCR: "Crystallographic databases and related resources" (https://www.iucr.org/resources/data/databases)
 % - Bruno et al. (2017): "Crystallography and Databases" (https://datascience.codata.org/articles/10.5334/dsj-2017-038)
 % - University of Virginia "Crystallographic data" (https://guides.lib.virginia.edu/c.php?g=514782&p=3568808)
@@ -26,8 +26,6 @@
 % [x]: 15 Pearson's Crystal data (https://www.crystalimpact.com/pcd/) -> 21700 experimental powder diffraction patterns (As per https://www.crystalimpact.com/pcd/) | The Pearson's crystal data evolved from the Linus Pauling File which is a data source of the PDF, so there may be significant overlap in these patterns
 % [x]: 16 Zenodo powder diffraction data (https://zenodo.org/search?q=powder%20diffraction&l=list&p=1&s=10&sort=bestmatch) -> Some pXRD data but hard to quantify, probably <= 4000 patterns most of which are unlabeled | 1600 datasets matching "powder diffraction". From probing among the first 100 matches I estimate only about 1 in 10 contain powder diffraction patterns. The probed datasets that did contain powder diffraction data only contained <= 30 patterns and only one of them came with corresponding crystal structures
 
-%TODO: Summarize the existing datasets shortly, including number of entries, etc.
-
 \pagebreak
 
 \subsubsection*{Existing experimental powder diffraction databases}
@@ -45,7 +43,4 @@ To contextualize opXRD within the current environment of experimental powder dif
 \textbf{PowBase}:\footnote{More information on PowBase can be found under \url{http://www.cristal.org/powbase/index.html}. PowBase was an initiative suggested in the Structure Determination by
 Powder Diffractometry (SDPD) mailing list which was hosted on the same site. The COD was another community initiative that grew out of this mailing list.} PowBase is a database of 169 mostly unlabeled experimental powder diffraction patterns collected and maintained by crystallography researcher Armel Le Bail starting in 1999. As of November 2024, all 169 patterns are still freely available for download. \\
 
-
-
-Some major crystal structure databases, such as the ICSD, do not appear in the above list, as they do not include powder diffraction data. This is because most structure solutions are achieved through single-crystal diffraction rather than powder diffraction.
- 
+There is also much publicly available powder diffraction data uploaded to datasets on Zenodo. However, this data is split into disparate entries that typically only contain the work of a single research project. Additionally, extracting powder diffraction data at scale is hindered by the fact that the data is often given in plain text files in non-standardized formats, which are difficult to parse programmatically. Some major crystal structure databases, such as the ICSD, do not appear in the above list, as they do not include powder diffraction data. This is because most structure solutions are achieved through single-crystal diffraction rather than powder diffraction.
