@@ -295,7 +295,10 @@ FUNCTION {format.url}
 
 FUNCTION {format.eprint}
 {
-  "" archivePrefix * ":" * " " * eprint * " [" * primaryClass * "]" *
+  eprint empty$
+    { "" }  % Do nothing if eprint is empty
+    { archivePrefix * ":" * eprint * " [" * primaryClass * "]" * }  % Concatenate all if eprint is not empty
+  if$
 }
 
 FUNCTION {generate.doi}
