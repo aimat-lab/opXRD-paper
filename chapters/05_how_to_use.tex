@@ -1,12 +1,6 @@
-\subsubsection*{How to contribute and how to use}
+Next to the availability of the opXRD dataset on Zenodo, we further provide an easy-to-use Python library (\url{https://github.com/aimat-lab/xrdpattern}) to download and interface the dataset.
+The dataset can be accessed using the simple command 
+\pyth{PatternDB.load(data_dirpath)}. Our tool further includes options for standardization, plotting, and the conversion to \emph{PyTorch} tensors.
+We provide the following Jupyter notebook that showcases the functionality of the library in more detail: <Link to github Jupyter notebook on Colab>
 
-We will continue growing the opXRD dataset, thus additional contributors are very welcome to contact us and submit data through the website. To find out more about how to contribute to this dataset, visit our website\footnote{Datasets can be contributed to opXRD under \url{https://xrd.aimat.science}.} specially designed to collect this dataset.
-
-TODO: A small tutorial with a few python commands to show how easy it is to use our dataset through the provided API.
-
-A major advantage of this dataset over other comparable datasets is that it is very easy to handle in python and in PyTorch.
-Our accompanying python library xrdpattern (\url{https://github.com/aimat-lab/xrdpattern}) provides a means to read the dataset simply by using PatternDB.load(data\_dirpath). The patterns attribute of this class is a list of the indivdual pattern diffractograms, each of which supports a standardize, plot and to tensor method. \\
-The standardize method returns a "standardized" version of the pattern with a fixed angle range, a fixed number of entries and intensities normalized to the $[0,1]$ interval.
-
-% 
-We have launched Xqueryer (\url{http://xqueryer.caobin.asia/}), a cutting-edge, free online platform for intelligent structure identification. Users can upload experimental pXRD data to identify crystal structures and extract all relevant information available in the Materials Project database. All usage complies with Xqueryer's terms of service. Uploaded data are securely stored and integrated into the opXRD database.
+%The patterns attribute of this class is a list of the indivdual pattern diffractograms, each of which supports a standardize, plot and to tensor method. The standardize method returns a "standardized" version of the pattern with a fixed angle range, a fixed number of entries and intensities normalized to the $[0,1]$ interval.
