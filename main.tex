@@ -12,7 +12,6 @@
 \usepackage[T1]{fontenc}
 \usepackage{csquotes}
 \usepackage{doi}
-\usepackage{eurosym}
 %% Sets page size and margins
 \usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
 
@@ -32,13 +31,15 @@
 \usepackage{outlines} %%same
 \usepackage{subfig}
 \usepackage[version=4]{mhchem}
-\usepackage{siunitx}
+\usepackage{eurosym}
+\usepackage[locale = DE]{siunitx}
 \usepackage{bm}
 \usepackage[normalem]{ulem} %%temporary, for organization purposes
 \usepackage{pythonhighlight}
 
 \date{}
 \newcommand{\red}[1]{\textcolor{red}{#1}}
+\DeclareSIUnit{\myeuro}{\text{\euro}}
 \DeclareSIUnit\angstrom{\text {Å}}
 \usepackage[final]{changes}
 
@@ -100,11 +101,10 @@ Science and Technology (Guangzhou), Guangzhou 511400, China}
 \newpage
 \section{Introduction}\label{sec:Introduction}
 \input{chapters/01_introduction}
+\input{chapters/02_SOTA_ML}
 
-\subsection*{Existing datasets}
-\input{chapters/02_existing_datasets}
-
-\input{chapters/03_SOTA_ML}
+\section{Existing datasets}
+\input{chapters/03_existing_datasets}
 
 \pagebreak
 \section{opXRD database}\label{sec:our_dataset}

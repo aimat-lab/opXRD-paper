@@ -1,6 +1,8 @@
-Next to the availability of the opXRD dataset on Zenodo, we further provide an easy-to-use Python library (\url{https://github.com/aimat-lab/xrdpattern}) to download and interface the dataset.
-The dataset can be accessed using the simple command 
-\pyth{PatternDB.load(data_dirpath)}. Our tool further includes options for standardization, plotting, and the conversion to \emph{PyTorch} tensors.
+The opXRD database is hosted on Zenodo\footnote{The dataset can be found at \url{https://zenodo.org/records/14254271}.} and can be downloaded by any user without any barriers or restrictions. The database comes in two files, \"opxrd.zip\" and \"opxrd\_in\_situ.zip\". The latter contains the in-situ data which contains highly correlated patterns recorded through time series measurements. Patterns belonging to time series measurements have filenames that indicate the measurement series they belong to as well as their order in that series. \\
+
+Next to the availability of the opXRD dataset on Zenodo, we also provide a Python library \"opxrd\" to easily download and interface with the dataset. The instructions for how to install this library can be found in the repository associated with the library.\footnote{The repository to this library can is located at \url{https://github.com/aimat-lab/opxrd}.} The opxrd library allows the dataset to be accessed using one simple command \pyth{OpXRD.load(root_dirpath)}. If the database is locally available under \pyth{root_dirpath} this command loads the library from this location. If the database is not available locally at this location, the database is automatically downloaded from Zenodo to \pyth{root_dirpath}. \\
+
+Our tool further includes options for standardization, plotting, and the conversion to \emph{PyTorch} tensors.
 We provide the following Jupyter notebook that showcases the functionality of the library in more detail: <Link to github Jupyter notebook on Colab>
 
 %The patterns attribute of this class is a list of the indivdual pattern diffractograms, each of which supports a standardize, plot and to tensor method. The standardize method returns a "standardized" version of the pattern with a fixed angle range, a fixed number of entries and intensities normalized to the $[0,1]$ interval.
