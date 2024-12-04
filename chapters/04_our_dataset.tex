@@ -2,34 +2,23 @@ In collaboration with several other institutions we have collected a dataset of 
 
 \begin{table}[!htb]
 \centering
-\caption{Labeled opXRD database entries}
-\label{tab:labeled}
-\begin{tabular}{@{}ccc@{}} % Adjusted columns
+\caption{Merged opXRD database entries}
+\label{tab:merged}
+\begin{tabular}{@{}cccc@{}}
 \toprule
-Institution & Research project & No. patterns\footnote{This number is subject to change} \\
+Institution & Research Project & No. Patterns & Available labels \\ 
 \midrule
-CNRS        & Extracted from the Crystallography open database & 895 \\
-USC         & Study of CuNi and CuAl alloys & 338 \\
-HKUST(GZ)   & Reference database for phase identification & 21 \\
-EMPA        & Tin halide perovskites and combinatorial Zn-V-N library & 790 \\
+CNRS        & Extracted from the COD         & 895          & Spg, Lattice, Unit cell, Comp   \\ 
+HKUST(GZ)   & Phase identification reference database              & 21           & Spg, Lattice, Unit cell, Comp   \\ 
+USC         & Study of CuNi and CuAl alloys                            & 338          & Spg, Lattice, Comp   \\ 
+EMPA        & Tin halide perovskites, Zn-V-N library  & 790          & Spg, Comp   \\ 
+INT         & Compilation of various projects                 & 19780        & None \\ 
+IKFT        & Commercial catalysts, bulk materials                 & 64           & None \\ 
+LBNL        & Time series recordings of Perovskites            & n/a          & None \\ 
 \bottomrule
 \end{tabular}
 \end{table}
 
-\begin{table}[!htb]
-\centering
-\caption{Unlabeled opXRD database entries}
-\label{tab:unlabeled}
-\begin{tabular}{@{}ccc@{}} % Adjusted columns
-\toprule
-Institution & Research project & No. patterns\footnote{This number is subject to change} \\
-\midrule
-INT         & Compilation of various research projects & 19780 \\
-IKFT        & Compilation of various research projects & 64 \\
-LBNL        & Time series recording of in-situ measurements & n/a \\
-\bottomrule
-\end{tabular}
-\end{table}
 
 %TODO: A paragraph on how data is correlated
 
@@ -44,13 +33,40 @@ LBNL        & Time series recording of in-situ measurements & n/a \\
 %% Paragraph by FX Coudert and Arthur Hardiagon
 \subsubsection*{Chimie ParisTech, PSL University}
 
-Experimental pXRD data was extracted from the Crystallography Open Database (COD)\cite{Grazulis2009, Vaitkus2023}.
-
-%We extracted experimental pXRD data from the Crystallography Open Database . 
-
-The COD is, to our knowledge, the largest open-access collection of experimental crystal structures of organic, inorganic, and metal-organic compounds and minerals, containing more than 500,000 entries. The data in the COD is placed in the public domain and licensed under the CC0 License. Of the entire COD database 5432 structures contained at least one tag from the {CIF\_POW} dictionary, i.e., a tag relating to powder diffraction studies. These 5432 structures only account for 1\% of the total COD database, but this is to be expected since most crystal structures are resolved from single-crystal diffraction. Of these 5432 files, most contained only metadata related to the powder diffraction experiment, but did not include the raw data of the pattern itself. We could extract raw experimental pXRD patterns from 1063 files in total, after curation of a small number of files with clearly invalid data. \\
+Experimental pXRD data was extracted from the Crystallography Open Database (COD)\cite{Grazulis2009, Vaitkus2023}. The COD is, to our knowledge, the largest open-access collection of experimental crystal structures of organic, inorganic, and metal-organic compounds and minerals, containing more than 500,000 entries. The data in the COD is placed in the public domain and licensed under the CC0 License. Of the entire COD database 5432 structures contained at least one tag from the {CIF\_POW} dictionary, i.e., a tag relating to powder diffraction studies. These 5432 structures only account for 1\% of the total COD database, but this is to be expected since most crystal structures are resolved from single-crystal diffraction. Of these 5432 files, most contained only metadata related to the powder diffraction experiment, but did not include the raw data of the pattern itself. We could extract raw experimental pXRD patterns from 1063 files in total, after curation of a small number of files with clearly invalid data. \\
 
 The pXRD data from the COD database are of high quality, with a median resolution of $\Delta(2\theta) = 0.013\degree$ and an average number of 9190 points measured per pattern. They span a wide chemical space, including organic, inorganic, and hybrid structures, and 75 different elements of the periodic table.
+
+
+% Paragraph by Bin Cao and Tong-yi Zhang
+\subsubsection*{Guangzhou Municipal Key Laboratory of Materials Informatics, HKUST(GZ)}
+
+%In the past two years, we established a small-scale experimental PXRD database called the X-Ray Phase Identification Public Experimental Dataset. The data in XRed is generated in our lab using instruments such as the Empyrean 3.0, Aeris, and Bruker D8 Advance diffractometers under Cu targets. Hundreds of PXRD patterns have been refined, labeled with CIF files, and organized by elemental systems. The dataset includes original experimental files across single-phase to five-phase mixtures. This project is progressing toward integration with the comprehensive opXRD database to establish a large-scale, long-term experimental resource. 
+
+A small-scale experimental powder X-ray database called the X-Ray Phase Identification Public Experimental Dataset (XRed) was established over the past two years.\footnote{XRed can be accessed on GitHub at \url{https://github.com/WPEM/XRED}.} The primary objective of this database is to support the development of intelligent phase identification technology, serving as a foundation for data collection for future large-scale machine learning calculations. \\
+
+The data in XRed were generated in our laboratory using instruments such as the Empyrean 3.0, Aeris, and Bruker D8 Advance diffractometers, all utilizing \ce{Cu} X-ray sources. Hundreds of pXRD patterns have been obtained through XRD refinement, enabling the determination of detailed lattice constants, atomic sizes, and other structural parameters. These patterns are labeled with CIF files that document the refined structures. The dataset is organized by elemental systems and includes original experimental files ranging from single-phase to five-phase mixtures, as well as mixtures studied for different tasks. \\
+
+Additionally, Xqueryer,\footnote{Xqueryer can be accessed at \url{http://xqueryer.caobin.asia/}.} a cutting-edge free online platform for intelligent structure identification has been launched. Users can upload experimental pXRD data to identify crystal structures and extract all relevant information available in the Materials Project database. Uploaded data are securely stored and integrated into the comprehensive opXRD database to progress toward a large-scale, long-term experimental resource. All usage complies with Xqueryer's terms of service.
+
+
+% Paragraph by Adie Alwen and Andrea Hodge
+\subsubsection*{Department of Chemical Engineering and Materials Science, USC}
+
+Combinatorial \ce{CuNi} and \ce{CuAl} samples were synthesized at the University of Southern California (USC) via magnetron co-sputtering from \ce{Cu} (99.999\%) and \ce{Ni} (99.995\%) or \ce{Al} (99.999\%) targets (Plasmaterials) onto stationary $10 \si{cm}$ \ce{Si} (100) substrates yielding 169 unique $5 \times 5 \ \si{mm}$ squares per wafer. These alloys were selected to study compositional effects on stacking fault and growth twin boundary formation in sputtered materials \cite{2024AcMat.27019839A,alwen2024combinatorial}. \\
+
+XRD spectra were collected using a Malvern Panalytical Empyrean X-ray diffractometer at the Forschungszentrum Julich (FZJ) Institute for Energy and Climate Research, Structure and Function of Materials (IEK-2), which enabled automated XRD characterization due to its programmable XY stage and laser sensor for Z height correction. XRD analysis was used to link changes in defect formation in the sputtered films with varied phases and crystal structures. Each composition was characterized using \ce{Cu} $K_\alpha$ X-rays that were collimated to probe an area of $4 \times 4 \ \si{mm}$ using a step size of $0.026\degree$ and scan duration of $0.3$ seconds per step over a 2 range from $30\degree - 110\degree$. Measurement parameters were chosen to resolve at least six or more points above the full-width half maximum of each XRD peak.
+
+% Paragraph by Alexander Wieczorek and Sebastiann Siol
+\subsubsection*{Laboratory for Surface Science and Coating Technologies, Empa}
+
+Each combinatorial Zn–V–N library was synthesized using radio-frequency co-sputtering of Zn and V in a mixed Ar and \ce{N2} plasma. An orthogonal deposition temperature and composition gradient was created, resulting in a deposition temperature of $220\degree$C for samples 1~–~9 and $114\degree$C for samples 37~–~45. The composition for each sample was determined using X-ray fluorescence (XRF) spectroscopy which was further calibrated through Rutherford backscattering spectroscopy (RBS) based on selected samples. The newly identified and isolated semiconductor \ce{Zn2VN3} was identified to exhibit a cation-disordered wurtzite structure as verified by additional GI-XRD and SAED measurements\cite{Zhuk2021}. \\
+Tin halide perovskites were deposited using single-step spin-coating as reported elsewhere\cite{Wieczorek2023}. Methylammonium lead iodide libraries with varying degrees of residual \ce{PbI2} were deposited using a two-step procedure involving both thermal evaporation of \ce{PbI2} and subsequent spin-coating of a methylammonium solution. The relative phase fractions were quantified using supplementary azimuthal angle scans coupled with structural factors and geometrical factors as reported elsewhere\cite{Wieczorek2024}. Fully inorganic lead perovskite libraries were prepared using thermal co-evaporation of lead and cesium halide salts.
+All metal halide perovskite libraries were measured within a custom-made X-Ray transparent inert-gas dome, resulting in the presence of minor additional features within the $\theta=19 \text{–}31\degree$ range. For all combinatorial libraries where any phases are specified, the complete set of phases is reported in the metadata. \\
+
+XRD data was measured using a Bruker D8 Discover equipped with a Cu radiation source in a Bragg-Brentano geometry. For the reported data sets the instrument was equipped with a Goebel mirror effectively removing the Cu~K$\beta$ radiation. The data set originates from the combinatorial exploration of the Zn–V–N compositional space, as well as data gathered from multiple research activities on more established metal halide perovskite semiconductors. All data was collected from thin films deposited on borosilicate glass. The Zn–V–N films showed some preferential out-of-plane orientation, while for the perovskites the preferential orientation was minimal, resulting in the presence of all reflections. \\
+
+
 
 %% Paragraph by Ben Breitung
 \subsubsection*{Institute of Nanotechnology, KIT}
@@ -66,12 +82,7 @@ A variety of samples were analyzed including commercial catalysts, bulk referenc
 
 X-ray diffraction (XRD) was conducted with an X’Pert Pro MPD (Panalytical) in Bragg-Brentano geometry using a \ce{Cu} X-ray source. The patterns were acquired in the $2\theta$ range of $5-80\degree$ with a step size of $0.016711\degree$ or $0.033420\degree$ and a total acquisition time of 40 to 120 min. \\
 
-% Paragraph by Adie Alwen and Andrea Hodge
-\subsubsection*{Department of Chemical Engineering and Materials Science, USC}
 
-Combinatorial \ce{CuNi} and \ce{CuAl} samples were synthesized at the University of Southern California (USC) via magnetron co-sputtering from \ce{Cu} (99.999\%) and \ce{Ni} (99.995\%) or \ce{Al} (99.999\%) targets (Plasmaterials) onto stationary $10 \si{cm}$ \ce{Si} (100) substrates yielding 169 unique $5 \times 5 \ \si{mm}$ squares per wafer. These alloys were selected to study compositional effects on stacking fault and growth twin boundary formation in sputtered materials \cite{2024AcMat.27019839A,alwen2024combinatorial}. \\
-
-XRD spectra were collected using a Malvern Panalytical Empyrean X-ray diffractometer at the Forschungszentrum Julich (FZJ) Institute for Energy and Climate Research, Structure and Function of Materials (IEK-2), which enabled automated XRD characterization due to its programmable XY stage and laser sensor for Z height correction. XRD analysis was used to link changes in defect formation in the sputtered films with varied phases and crystal structures. Each composition was characterized using \ce{Cu} $K_\alpha$ X-rays that were collimated to probe an area of $4 \times 4 \ \si{mm}$ using a step size of $0.026\degree$ and scan duration of $0.3$ seconds per step over a 2 range from $30\degree - 110\degree$. Measurement parameters were chosen to resolve at least six or more points above the full-width half maximum of each XRD peak.
 
 % Paragraph by Tim Kodalle
 \subsubsection*{Molecular Foundry Division \& Advanced Light Source \& Chemical Sciences Division, LBNL}
@@ -83,23 +94,4 @@ Data collection was performed in situ during thin-film deposition using a custom
 Experimental XRD data were collected at beamline 12.3.2 of the Advanced Light Source, the synchrotron at Lawrence Berkeley National Laboratory. The data were collected using a photon energy of 10 $\si{keV}$ ($\lambda = 1.23984 \text{\AA}$), selected using a Si(111) monochromator. Measurements were taken in grazing incidence geometry, i.e. using a beam incidence angle of $1\degree$. Two-dimensional diffraction images were recorded using a Dectris Pilatus 1M area detector at an angle between $34\degree$ and $36\degree$ with a sample-to-detector distance of roughly $190 \ \si{mm}$. The two-dimensional data were calibrated using an Al$_{2}$O$_{3}$ calibration standard and integrated along the azimuthal angle. \\
 
 
-% Paragraph by Bin Cao and Tong-yi Zhang
-\subsubsection*{Guangzhou Municipal Key Laboratory of Materials Informatics, HKUST(GZ)}
-
-%In the past two years, we established a small-scale experimental PXRD database called the X-Ray Phase Identification Public Experimental Dataset. The data in XRed is generated in our lab using instruments such as the Empyrean 3.0, Aeris, and Bruker D8 Advance diffractometers under Cu targets. Hundreds of PXRD patterns have been refined, labeled with CIF files, and organized by elemental systems. The dataset includes original experimental files across single-phase to five-phase mixtures. This project is progressing toward integration with the comprehensive opXRD database to establish a large-scale, long-term experimental resource. 
-
-A small-scale experimental powder X-ray database called the X-Ray Phase Identification Public Experimental Dataset (XRed) was established over the past two years.\footnote{XRed can be accessed on GitHub at \url{https://github.com/WPEM/XRED}.} The primary objective of this database is to support the development of intelligent phase identification technology, serving as a foundation for data collection for future large-scale machine learning calculations. \\
-
-The data in XRed were generated in our laboratory using instruments such as the Empyrean 3.0, Aeris, and Bruker D8 Advance diffractometers, all utilizing \ce{Cu} X-ray sources. Hundreds of pXRD patterns have been obtained through XRD refinement, enabling the determination of detailed lattice constants, atomic sizes, and other structural parameters. These patterns are labeled with CIF files that document the refined structures. The dataset is organized by elemental systems and includes original experimental files ranging from single-phase to five-phase mixtures, as well as mixtures studied for different tasks. \\
-
-Additionally, Xqueryer,\footnote{Xqueryer can be accessed at \url{http://xqueryer.caobin.asia/}.} a cutting-edge free online platform for intelligent structure identification has been launched. Users can upload experimental pXRD data to identify crystal structures and extract all relevant information available in the Materials Project database. Uploaded data are securely stored and integrated into the comprehensive opXRD database to progress toward a large-scale, long-term experimental resource. All usage complies with Xqueryer's terms of service.
-
-% Paragraph by Alexander Wieczorek and Sebastiann Siol
-\subsubsection*{Laboratory for Surface Science and Coating Technologies, Empa}
-
-Each combinatorial Zn–V–N library was synthesized using radio-frequency co-sputtering of Zn and V in a mixed Ar and \ce{N2} plasma. An orthogonal deposition temperature and composition gradient was created, resulting in a deposition temperature of $220\degree$C for samples 1~–~9 and $114\degree$C for samples 37~–~45. The composition for each sample was determined using X-ray fluorescence (XRF) spectroscopy which was further calibrated through Rutherford backscattering spectroscopy (RBS) based on selected samples. The newly identified and isolated semiconductor \ce{Zn2VN3} was identified to exhibit a cation-disordered wurtzite structure as verified by additional GI-XRD and SAED measurements\cite{Zhuk2021}. \\
-Tin halide perovskites were deposited using single-step spin-coating as reported elsewhere\cite{Wieczorek2023}. Methylammonium lead iodide libraries with varying degrees of residual \ce{PbI2} were deposited using a two-step procedure involving both thermal evaporation of \ce{PbI2} and subsequent spin-coating of a methylammonium solution. The relative phase fractions were quantified using supplementary azimuthal angle scans coupled with structural factors and geometrical factors as reported elsewhere\cite{Wieczorek2024}. Fully inorganic lead perovskite libraries were prepared using thermal co-evaporation of lead and cesium halide salts.
-All metal halide perovskite libraries were measured within a custom-made X-Ray transparent inert-gas dome, resulting in the presence of minor additional features within the $\theta=19 \text{–}31\degree$ range. For all combinatorial libraries where any phases are specified, the complete set of phases is reported in the metadata. \\
-
-XRD data was measured using a Bruker D8 Discover equipped with a Cu radiation source in a Bragg-Brentano geometry. For the reported data sets the instrument was equipped with a Goebel mirror effectively removing the Cu~K$\beta$ radiation. The data set originates from the combinatorial exploration of the Zn–V–N compositional space, as well as data gathered from multiple research activities on more established metal halide perovskite semiconductors. All data was collected from thin films deposited on borosilicate glass. The Zn–V–N films showed some preferential out-of-plane orientation, while for the perovskites the preferential orientation was minimal, resulting in the presence of all reflections. \\
 
