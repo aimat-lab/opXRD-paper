@@ -1,15 +1,18 @@
 In collaboration with several other institutions we have collected a dataset of diffractograms stemming from experiments, some of them labeled with corresponding structural information. The following paragraphs detail the contribution of each research group. Most data was collected using \ce{Cu} radiaton sources which have a  $K_{\alpha1}$ wavelength of $\lambda=1.54056\text{\AA}$ and a $K_{\alpha2}$ wavelength of $\lambda=1.54439\text{\AA}$.
 
+\newcommand{\partialexclam}[1]{\textcolor{orange}{\ding{52}(#1\%)}}
+
+
 \begin{table}[!htb]
 \centering
 \caption{opXRD database entries}
 \label{tab:merged}
 \scalebox{0.92}{
-\begin{tabular}{@{}clcccccl@{}}
+\begin{tabular}{@{}clccclll@{}}
 \toprule
-Institution & No. Patterns & Comp. & Spg & Lattice & Unit Cell & Research Project \\ 
+Institution & No. Patterns & Comp. & Spg & Lattice & Basis & Research Project \\ 
 \midrule
-CNRS        & \qquad 1052          & \cmark   & \cmark   & \cmark   & \cmark   & Extracted from the COD                 \\ 
+CNRS        & \qquad 1052          & \cmark   & \cmark   & \cmark   &  \partialexclam{79}   & Extracted from the COD                 \\ 
 HKUST(GZ)   & \qquad 21           & \cmark   & \cmark   & \cmark   & \cmark   & Phase identification reference database \\ 
 USC         & \qquad 338          & \cmark   & \cmark   & \cmark   & \xmark   & Study of CuNi and CuAl alloys          \\ 
 EMPA        & \qquad 790          & \cmark   & \cmark   & \xmark   & \xmark   & Tin halide perovskites, Zn-V-N library \\ 
