@@ -1,28 +1,31 @@
-In collaboration with several other institutions we have collected a dataset of diffractograms stemming from experiments, some of them labeled with corresponding structural information. The following paragraphs detail the contribution of each research group. Most data was collected using \ce{Cu} radiaton sources which have a  $K_{\alpha1}$ wavelength of $\lambda=1.54056\text{\AA}$ and a $K_{\alpha2}$ wavelength of $\lambda=1.54439\text{\AA}$.
+In collaboration with several other institutions we have collected a dataset of diffractograms stemming from experiments, some of them labeled with corresponding structural information. The following paragraphs detail the contribution of each research group. Most data was collected using \ce{Cu} radiaton sources which have a  $K_{\alpha1}$ wavelength of $\lambda=1.54056\text{\AA}$ and a $K_{\alpha2}$ wavelength of $\lambda=1.54439\text{\AA}$. We filtered the submitted datasets to exclude patterns with invalid features such as patterns with only one unique recorded angle, patterns in which all intensities were zero, or patterns that contained less than 50 recorded angles. \\
 
-\newcommand{\partialcheck}[1]{\textcolor{orange}{\ding{52}(#1\%)}}
-
+The below table Tab.$\eqref{tab:merged}$ provides an overview of the opXRD database. The columns to the right of No. patterns indicate the availability of properties of the underlying samples. The column titled ``Comp.'' indicates the availability of the chemical composition, and the column titled ``Spg'' indicates the availability of the spacegroup. The ``Lattice'' and ``Atom coords.'' columns indicate the availability of lattice parameters and atomic coordinates respectively.\\
 
 \begin{table}[!htb]
 \centering
-\caption{opXRD database entries}
+\caption{The opXRD database}
 \label{tab:merged}
-\scalebox{0.90}{
+\scalebox{0.9}{
+\begin{adjustbox}{center}
 \begin{tabular}{@{}lllllll@{}}
 \toprule
-Institution & No. Patterns & Comp. & Spg & Lattice & Atom coords. & Research Project \\ 
+Institution & No. patterns & Comp. & Spg. & Lattice & Atom coords. & Research Project \\ 
 \midrule
-CNRS        & \qquad 1052          & \cmark   & \partialcheck{85}   & \cmark   &  \partialcheck{85}   & Extracted from the COD \\ 
-HKUST(GZ)   & \qquad 21           & \cmark   & \cmark   & \cmark   & \cmark   & Phase identification reference database \\ 
-USC         & \qquad 338          & \cmark   & \cmark   & \partialcheck{90}   & \xmark   & Study of CuNi and CuAl alloys          \\ 
-EMPA        & \qquad 790          & \cmark   & \partialcheck{63}   & \xmark   & \xmark   & Tin halide perovskites, Zn-V-N library \\ 
-INT         & \qquad 19,780        & \xmark   & \xmark   & \xmark   & \xmark   & Compilation of various projects        \\ 
-IKFT        & \qquad 64           & \xmark   & \xmark   & \xmark   & \xmark   & Commercial catalysts, bulk materials   \\ 
-LBNL        & \qquad n/a          & \xmark   & \xmark   & \xmark   & \xmark   & Time series recordings of Perovskites  \\ 
+CNRS        &  1052          & \cmark   & \partialcheck{85}   & \cmark   &  \partialcheck{85}   & Extracted from the COD \\ 
+HKUST(GZ)   &  21           & \cmark   & \cmark   & \cmark   & \cmark   & Phase identification reference database \\ 
+USC         &  338          & \cmark   & \cmark   & \partialcheck{90}   & \xmark   & Study of CuNi and CuAl alloys          \\ 
+EMPA        &  790          & \cmark   & \partialcheck{63}   & \xmark   & \xmark   & Tin halide perovskites, Zn-V-N library \\ 
+INT         &  19,780        & \xmark   & \xmark   & \xmark   & \xmark   & Compilation of various projects        \\ 
+IKFT        &  64           & \xmark   & \xmark   & \xmark   & \xmark   & Commercial catalysts, bulk materials   \\ 
+LBNL        &  n/a          & \xmark   & \xmark   & \xmark   & \xmark   & Time series recordings of Perovskites  \\ 
 \bottomrule
-\end{tabular}}
+\end{tabular}
+\end{adjustbox}}
 \end{table}
 
+%TODO: A paragraph on how data is correlated
+The degree of variation between the patterns is different for each contribution. For example, the CRNS and the INT contributions each are collections that encompass many research projects over a large period of time and hence exhibit a high degree of variability between individual patterns. In contrast, the contributions by the USC and the LBNL contain many very similar patterns. The patterns in the USC datasets are similar because the underlying samples are all variations of CuNi and CuAl alloys collected on the same machine. The LBNL patterns are similar because they stem from in-situ recordings where several hundred or several thousand patterns were collected over time per sample while they were undergoing physical processes. The following paragraphs describe each contribution individually. \\
 
 %TODO:
 % The three datasets shown here are (1): USC CuNi, (2): USC CuAl, (3): HKUST
@@ -42,14 +45,14 @@ LBNL        & \qquad n/a          & \xmark   & \xmark   & \xmark   & \xmark   & 
     \label{fig:enter-label}
 \end{figure}
 
-%TODO: A paragraph on how data is correlated
-
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{figures/quantities_hist.png}
     \caption{Histograms detailing spacegroups of labeled data and number of entries, starting angle value and final angle value for all data}
     \label{fig:enter-label}
 \end{figure}
+
+
 
 \pagebreak
 %% Paragraph by FX Coudert and Arthur Hardiagon
