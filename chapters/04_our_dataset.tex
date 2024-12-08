@@ -1,21 +1,21 @@
 In collaboration with several other institutions we have collected a dataset of diffractograms stemming from experiments, some of them labeled with corresponding structural information. The following paragraphs detail the contribution of each research group. Most data was collected using \ce{Cu} radiaton sources which have a  $K_{\alpha1}$ wavelength of $\lambda=1.54056\text{\AA}$ and a $K_{\alpha2}$ wavelength of $\lambda=1.54439\text{\AA}$.
 
-\newcommand{\partialexclam}[1]{\textcolor{orange}{\ding{52}(#1\%)}}
+\newcommand{\partialcheck}[1]{\textcolor{orange}{\ding{52}(#1\%)}}
 
 
 \begin{table}[!htb]
 \centering
 \caption{opXRD database entries}
 \label{tab:merged}
-\scalebox{0.92}{
-\begin{tabular}{@{}clccclll@{}}
+\scalebox{0.90}{
+\begin{tabular}{@{}lllllll@{}}
 \toprule
-Institution & No. Patterns & Comp. & Spg & Lattice & Basis & Research Project \\ 
+Institution & No. Patterns & Comp. & Spg & Lattice & Atom coords. & Research Project \\ 
 \midrule
-CNRS        & \qquad 1052          & \cmark   & \cmark   & \cmark   &  \partialexclam{79}   & Extracted from the COD                 \\ 
+CNRS        & \qquad 1052          & \cmark   & \partialcheck{85}   & \cmark   &  \partialcheck{85}   & Extracted from the COD \\ 
 HKUST(GZ)   & \qquad 21           & \cmark   & \cmark   & \cmark   & \cmark   & Phase identification reference database \\ 
-USC         & \qquad 338          & \cmark   & \cmark   & \cmark   & \xmark   & Study of CuNi and CuAl alloys          \\ 
-EMPA        & \qquad 790          & \cmark   & \cmark   & \xmark   & \xmark   & Tin halide perovskites, Zn-V-N library \\ 
+USC         & \qquad 338          & \cmark   & \cmark   & \partialcheck{90}   & \xmark   & Study of CuNi and CuAl alloys          \\ 
+EMPA        & \qquad 790          & \cmark   & \partialcheck{63}   & \xmark   & \xmark   & Tin halide perovskites, Zn-V-N library \\ 
 INT         & \qquad 19,780        & \xmark   & \xmark   & \xmark   & \xmark   & Compilation of various projects        \\ 
 IKFT        & \qquad 64           & \xmark   & \xmark   & \xmark   & \xmark   & Commercial catalysts, bulk materials   \\ 
 LBNL        & \qquad n/a          & \xmark   & \xmark   & \xmark   & \xmark   & Time series recordings of Perovskites  \\ 
@@ -113,6 +113,20 @@ Data collection was performed in situ during thin-film deposition using a custom
  \ 1/\si{s}$ and $0.54 \ 1/\si{s}$. Each in situ measurement consisted of about 500 to 1000 individual diffractograms. Depending on the substrate, each series of diffractograms shows an evolution from substrate only to a combination of polycrystalline perovskite, $\ce{PbI2}$ and substrate via several intermediate phases. \\
 
 Experimental XRD data were collected at beamline 12.3.2 of the Advanced Light Source, the synchrotron at Lawrence Berkeley National Laboratory. The data were collected using a photon energy of 10 $\si{keV}$ ($\lambda = 1.23984 \text{\AA}$), selected using a Si(111) monochromator. Measurements were taken in grazing incidence geometry, i.e. using a beam incidence angle of $1\degree$. Two-dimensional diffraction images were recorded using a Dectris Pilatus 1M area detector at an angle between $34\degree$ and $36\degree$ with a sample-to-detector distance of roughly $190 \ \si{mm}$. The two-dimensional data were calibrated using an Al$_{2}$O$_{3}$ calibration standard and integrated along the azimuthal angle. \\
+
+% Paragraph by Gregoire Heymans
+
+\subsubsection*{\textit{In situ} XRD (RT $\le$ T$_{annealing}$ $\le$ 850$\degree$C)}
+
+The phase evolution of the Mn-Sb-O system varying with annealing temperature was measured using the \textit{in situ} XRD (Rigaku-SmartLab3kW XRD, Figure \ref{fig:stability} (a)). This tool operates with SmartLab Studio II software, which is able to measure the X-ray diffraction during the annealing process. This enables to show directly all the phase transitions when annealing in various atmospheres such as O$_2$, Ar and NH$_3$. This device can theoretically operate up to 1000$\degree$C in a 20\% O$_2$ atmosphere. For safety reasons, phase transitions are analyzed with the \textit{in situ} XRD tool up to 850$\degree$C in this work.
+
+Most of the \textit{in situ} experiments were performed under an air-like 20\% O$_2$ and 80\% argon (Ar) environment is chosen (Ar flow: 50 sccm, O$_2$ flow: 10 sccm). When a 100\% Ar environment is fixed, an Ar flow of 60 sccm is input.
+
+Concerning the geometry, the Bragg-Brentano (BB) mode is preferred because it is more adapted in the analysis of scarce phases (i.e., MnSb$_2$O$_6$ rutile). The step is 0.01$\degree$ and the scanning rate is 10$\degree$/min. The step gives information about the resolution and the scanning rate (or speed duration time) results in the quality of the signal-to-noise ratio.
+
+Figure \ref{fig:temp} shows the temperature profile during the \textit{in situ} XRD measurements. The temperatures used to annalyze the crystal structure of the Mn-Sb-O system were chosen depending on the number of phase transitions appearing for a certain temperature range. As explained in details in chapter \ref{res}, few changes in the crystal structure appear between RT and 300$\degree$C and phase transitions appeared from 300$\degree$C until 850$\degree$C. No phase transition appeared when cooling down. Therefore, the crystal structure was measured every 100$\degree$C between RT and 300$\degree$C; every 50$\degree$C between 300$\degree$C and 850$\degree$C; and every 200$\degree$C when cooling down. The heating and cooling rates are fixed for all the experiments at 50$\degree$C/min and the holding time is fixed at 2 min.
+
+% end of Gregoire Heymans
 
 
 
