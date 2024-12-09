@@ -1,12 +1,12 @@
-In collaboration with several other institutions we have collected a dataset of diffractograms stemming from experiments, some of them labeled with corresponding structural information. The following paragraphs detail the contribution of each research group. Most data was collected using \ce{Cu} radiaton sources which have a  $K_{\alpha1}$ wavelength of $\lambda=1.54056\text{\AA}$ and a $K_{\alpha2}$ wavelength of $\lambda=1.54439\text{\AA}$. We filtered the submitted datasets to exclude patterns with invalid features such as patterns with only one unique recorded angle, patterns in which all intensities were zero, or patterns that contained less than 50 recorded angles. \\
+In collaboration with several other institutions we have collected a dataset of diffractograms stemming from experiments, some of them labeled with corresponding structural information. The following paragraphs detail the contribution of each research group. Most data was collected using \ce{Cu} radiaton sources which have a  $K_{\alpha1}$ wavelength of $\lambda=1.54056\text{\AA}$ and a $K_{\alpha2}$ wavelength of $\lambda=1.54439\text{\AA}$. We filtered the submitted datasets to exclude patterns with invalid features such as the pattern containing only one unique recorded angle, the pattern containing less than 50 recorded angles total, or all intensities being zero. \\
 
-The below table Tab.$\eqref{tab:merged}$ provides an overview of the opXRD database. The availability of the chemical composition, spacegroups, lattice parameters, and atomic coordinates of the underlying samples are indicated by the columns ``Comp.'', ``Spg.'', ``Lattice'' and ``Atom coords.'' respectively.\ \
+The below table Tab.$\eqref{tab:merged}$ provides an overview of the opXRD database. The availability of the chemical composition, spacegroups, lattice parameters, and atomic coordinates of the underlying samples are indicated by the columns ``Comp.'', ``Spg.'', ``Lattice'' and ``Atom coords.'' respectively.
 
 \begin{table}[!htb]
 \centering
 \caption{The opXRD database}
 \label{tab:merged}
-\scalebox{0.9}{
+\scalebox{0.81}{
 \begin{adjustbox}{center}
 \begin{tabular}{@{}lllllll@{}}
 \toprule
@@ -58,7 +58,7 @@ The degree of variation between the patterns is different for each contribution.
 %% Paragraph by FX Coudert and Arthur Hardiagon
 \subsubsection*{Chimie ParisTech, PSL University}
 
-Experimental pXRD data was extracted from the Crystallography Open Database (COD)\cite{Grazulis2009, Vaitkus2023}. The COD is, to our knowledge, the largest open-access collection of experimental crystal structures of organic, inorganic, and metal-organic compounds and minerals, containing more than 500,000 entries. The data in the COD is placed in the public domain and licensed under the CC0 License. Of the entire COD database 5432 structures contained at least one tag from the {CIF\_POW} dictionary, i.e., a tag relating to powder diffraction studies. These 5432 structures only account for 1\% of the total COD database, but this is to be expected since most crystal structures are resolved from single-crystal diffraction. Of these 5432 files, most contained only metadata related to the powder diffraction experiment, but did not include the raw data of the pattern itself. We could extract raw experimental pXRD patterns from 1052 files in total, after curation of a small number of files with clearly invalid data. \\
+Experimental pXRD data was extracted from the Crystallography Open Database (COD)\cite{Grazulis2009, Vaitkus2023}. The COD is, to our knowledge, the largest open-access collection of experimental crystal structures of organic, inorganic, and metal-organic compounds and minerals, containing more than 500,000 entries. The data in the COD are placed in the public domain and licensed under the CC0 License. Of the entire COD database 5432 structures contained at least one tag from the {CIF\_POW} dictionary, i.e., a tag relating to powder diffraction studies. These 5432 structures only account for 1\% of the total COD database, but this is to be expected since most crystal structures are resolved from single-crystal diffraction. Of these 5432 files, most contained only metadata related to the powder diffraction experiment, but did not include the raw data of the pattern itself. We could extract raw experimental pXRD patterns from 1052 files in total, after curation of a small number of files with clearly invalid data. \\
 
 The pXRD data from the COD database are of high quality, with a median resolution of $\Delta(2\theta) = 0.013\degree$ and an average number of 9190 points measured per pattern. They span a wide chemical space, including organic, inorganic, and hybrid structures, and 75 different elements of the periodic table.
 
@@ -71,7 +71,7 @@ A small-scale experimental powder X-ray database called the X-Ray Phase Identifi
 
 The data in XRed were generated in our laboratory using instruments such as the Empyrean 3.0, Aeris, and Bruker D8 Advance diffractometers, all utilizing \ce{Cu} X-ray sources. Hundreds of pXRD patterns have been obtained through XRD refinement, enabling the determination of detailed lattice constants, atomic sizes, and other structural parameters. These patterns are labeled with CIF files that document the refined structures. The dataset is organized by elemental systems and includes original experimental files ranging from single-phase to five-phase mixtures, as well as mixtures studied for different tasks. \\
 
-Additionally, Xqueryer,\footnote{Xqueryer can be accessed at \url{http://xqueryer.caobin.asia/}.} a cutting-edge free online platform for intelligent structure identification has been launched. Users can upload experimental pXRD data to identify crystal structures and extract all relevant information available in the Materials Project database. Uploaded data are securely stored and integrated into the comprehensive opXRD database to progress toward a large-scale, long-term experimental resource. All usage complies with Xqueryer's terms of service.
+Additionally, Xqueryer,\footnote{Xqueryer can be accessed at \url{https://xqueryer.caobin.asia/}.} a cutting-edge free online platform for intelligent structure identification has been launched. Users can upload experimental pXRD data to identify crystal structures and extract all relevant information available in the Materials Project database\cite{jain2013commentary}. Uploaded data are securely stored and integrated into the comprehensive opXRD database to progress toward a large-scale, long-term experimental resource. All usage complies with Xqueryer's terms of service.
 
 
 % Paragraph by Adie Alwen and Andrea Hodge
