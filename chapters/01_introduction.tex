@@ -7,7 +7,22 @@ After fabricating a new material, a number of analysis techniques can be used to
 % Manual rietveld refinement and its problems
 Manually performing Rietveld refinement is time-consuming and often requires expert knowledge. It is not scalable to the degree required to keep up with advances in throughput and efficiency in other steps of the experimentation pipeline. In a Rietveld refinement process, the operator starts by setting parameters that characterize the background and peak shape of the powder diffraction pattern and determines a crystal structure model from which the optimization process can start. This model is usually obtained using search-match software, which identifies crystal structures with similar powder diffraction patterns from a database of crystal structures with accompanying powder diffraction patterns. Databases commonly used for this purpose include the Powder Diffraction File\cite{GatesRector2019}, the Inorganic Crystal Structure Database \cite{Belsky2002}, and the Crystallography Open Database \cite{Grazulis2009}. However, an initial structural model obtained from such a database via search-match software is not guaranteed to lead to an accurate structure solution through Rietveld refinement. Especially for novel structures, obtaining an initial structural model through matching to a database of known structures can be problematic. In such cases, more complex crystal structure solution approaches need to be applied to find suitable crystal structure guesses \cite{structure_solution_review}.\\
 
+% VISUAL ABSTRACT FIGURE
+\begin{figure}[!b]
+    \centering
+    \includegraphics[width=1.0\linewidth]{figures/figure1_v5.pdf}
+    \caption{Overview}
+    \label{fig:overview}
+\end{figure}
+
 Additionally, attempting to refine all crystal structure parameters at once, starting from this initial structure, is known to lead to unphysical results\cite{Ozaki2020}. Hence parameters are refined iteratively, with each iteration only refining a limited set of parameters. If, during the iterative determination of parameters, the structural model becomes unphysical the operator must intervene to backtrack to a previous successful step or start over entirely. Finding the correct order in which to refine structure parameters and finding the correct values for fixed parameters both present problems that add to the difficulty of the refinement process.\\
+
+%\begin{figure}[!htb]
+%    \centering
+%    \includegraphics[width=0.6\linewidth]{figures/rietveld_flowchart.png}
+%    \caption{Enter Caption}
+%    \label{fig:enter-label}
+%\end{figure}
 
 Machine learning has the potential to speed up the manual analysis of powder diffractograms and keep pace with an automated high-throughput experimentation environment\cite{Agrawal2019, Surdu2023}.
 Models can be trained to predict crystal structure information directly given a diffractogram, or models can be used to automate the conventional workflow of finding an initial guess \cite{Surdu2023} and running ML-automated Rietveld refinement \cite{Feng2019}.
@@ -18,7 +33,7 @@ Models trained on datasets with simulated diffractograms have already shown very
 However, the performance substantially drops off when these models are applied to data originating from experiments \cite{Schopmans2023,zhang2024crystallographic, Wang2020, Vecsei2018} The patterns observed in experiments exhibit imperfections that do not appear when simulating the X-ray diffraction pattern of a powder sample under ideal conditions. The physical effects underlying these imperfections need to be modeled accurately in order to be able to transfer models trained on simulated data to experimental patterns. Most approaches currently model these imperfections as a simple signal based on a heuristic functional form added to the simulated diffractograms. Experimental data can provide clues on how to model these imperfections in a more realistic fashion. \\
 
 At the moment, the number of openly available datasets for experimental powder data is very limited. The main sources for experimental patterns are XXX, YYY, and ZZZ. Further commercial datasets such as KKK and LLL exist, but license fees and restrictions in their use to train publishable models or even publish the training data limit their usability. Collecting a labeled dataset of raw experimental powder X-ray diffraction data of sufficient size to directly train a model that predicts crystal structure information is currently out of reach. The most advanced ML models currently are trained on approximately $10^5 - 10^6$ simulated diffractograms. \cite{Salgado2023, Schopmans2023}
-This is - to the best of our knowledge - two orders of magnitude larger than the largest currently curated experimental dataset (PDF-5+ with approximately 20,000 experimental patterns) and even x orders of magnitude larger than the number of unlabeled diffractograms in the opXRD dataset we present here. \\
+This is---to the best of our knowledge---two orders of magnitude larger than the largest currently curated experimental dataset (PDF-5+ with approximately 20,000 experimental patterns) and even x orders of magnitude larger than the number of unlabeled diffractograms in the opXRD dataset we present here. \\
 
 However, even small labeled and also unlabeled experimental diffractograms hold significant value in practice. First of all, labeled data can be used to test and benchmark existing and new automated analysis approaches, which yields a better comparison than when using the very limited currently available datasets, such as the commonly used RRUFF mineral dataset\cite{Armbruster2015}. \\
 
@@ -30,17 +45,17 @@ Additionally, some of the observed imperfections can be accounted for using tran
 
 In this publication, we provide a new open powder X-ray diffraction (opXRD) dataset that collects a broad range of patterns from experiments, exceeding the currently available amount of openly accessible experimental patterns by XX.
 Our opXRD dataset has been curated by collecting the accumulated powder data from multiple large research groups and institutions with high-throughput XRD facilities. It contains pXRD patterns from single and multiphase materials from a wide variety of material classes, including 
-high-entropy materials, perovskites, and commercial catalysts. Details about the experiments of contributing research groups are discussed in section $\eqref{sec:our_dataset}$, along with a detailed description of how to contribute further data and how to use the data. \\
+high-entropy materials, perovskites, and commercial catalysts. Details about the experiments of contributing research groups are discussed in Section~$\eqref{sec:our_dataset}$, along with a detailed description of how to contribute further data and how to use the data. \\
 
 \begin{figure*}[!htb]
     \centering
-    \includegraphics[width=\linewidth]{figures/overview.png}
+    \includegraphics[width=\linewidth]{figures/overview.pdf}
     \caption{Overview of the data collection pipeline. Datasets are submitted using an online submission form, optionally with the help of our submission helper software. After post-processing and data homogenization, we offer the creation of a Zenodo entry for each user submission and subsequently include the submission in the opXRD database.}
     \label{fig:overview}
 \end{figure*}
 
 % How to contribute? This aspect deserves a separate paragraph
-The opXRD database is intended as a growing, community-driven initiative. The dataset we present here is the first version, but we hope to further increase the dataset size through active engagement with the pXRD community. Our primary objective is to minimize the effort and thus the barrier to contributing experimental data to the opXRD database. Thus, we developed a program that helps to find and share data from pXRD lab computers. In detail, users can select their most common pXRD file types, the program lists all files of that type, and users can select or deselect certain folders or files for sharing. Selected contributions will be uploaded to opXRD, processed to a common file format, and - if wanted - published on Zenodo on behalf of the contributors, before becoming part of the opXRD database. If labels are available, they can be shared with opXRD as well. Further details can be found on the opXRD website.\footnote{The opXRD website is \url{https://xrd.aimat.science/}.} \\
+The opXRD database is intended as a growing, community-driven initiative. The dataset we present here is the first version, but we hope to further increase the dataset size through active engagement with the pXRD community. Our primary objective is to minimize the effort and thus the barrier to contributing experimental data to the opXRD database. Thus, we developed a program that helps to find and share data from pXRD lab computers. In detail, users can select their most common pXRD file types, the program lists all files of that type, and users can select or deselect certain folders or files for sharing. Selected contributions will be uploaded to opXRD, processed to a common file format, and---if wanted---published on Zenodo on behalf of the contributors, before becoming part of the opXRD database. If labels are available, they can be shared with opXRD as well. Further details can be found on the opXRD website.\footnote{The opXRD website is \url{https://xrd.aimat.science/}.} \\
 
 As argued by Aranda and Kroon-Batenburg \textit{et al}.\cite{Aranda2018, Kroon-Batenburg2024}, sharing raw powder diffraction data is not only in the interest of furthering machine learning research but is also in line with open science principles. It furthers the ability of other researchers to reproduce published work and in turn, adds to the credibility of the publisher of the data. Considering our streamlined submission and post-processing framework, a publication of powder diffraction data through the opXRD database is a simple way of realizing these principles. Compared to publishing data individually, it also has the added benefit that the data is contributed towards a large, homogenous dataset with a standardized interface. This makes the data more easily accessible to other researchers and provides more value to researchers seeking large quantities of data compared to an isolated submission on Zenodo. However, further data annotation with metadata is required to fulfill the FAIR data principles.\\
 

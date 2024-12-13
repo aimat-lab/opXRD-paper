@@ -1,6 +1,6 @@
-In collaboration with several other institutions we have collected a dataset of diffractograms stemming from experiments, some of them labeled with corresponding structural information. The following paragraphs detail the contribution of each research group. Most data was collected using \ce{Cu} radiaton sources which have a  $K_{\alpha1}$ wavelength of $\lambda=1.54056\text{\AA}$ and a $K_{\alpha2}$ wavelength of $\lambda=1.54439\text{\AA}$. We filtered the submitted datasets to exclude patterns with invalid features such as the pattern containing only one unique recorded angle or negative angles, the pattern containing less than 50 recorded angles total, or all intensities being zero. \\
+33In collaboration with several other institutions we have collected a dataset of diffractograms stemming from experiments, some of them labeled with corresponding structural information. The following paragraphs detail the contribution of each research group. Most data was collected using \ce{Cu} radiaton sources which have a  $K_{\alpha1}$ wavelength of $\lambda=1.54056\text{\AA}$ and a $K_{\alpha2}$ wavelength of $\lambda=1.54439\text{\AA}$. We filtered the submitted datasets to exclude patterns with invalid features such as the pattern containing only one unique recorded angle or negative angles, the pattern containing less than 50 recorded angles total, or all intensities being zero. \\
 
-The below table Tab.$\eqref{tab:merged}$ provides an overview of the opXRD database. The availability of the chemical composition, spacegroups, lattice parameters, and atomic coordinates of the underlying samples are indicated by the columns ``Comp.'', ``Spg.'', ``Lattice'' and ``Atom coords.'' respectively.
+The below table Table$\eqref{tab:merged}$ provides an overview of the opXRD database. The availability of the chemical composition, spacegroups, lattice parameters, and atomic coordinates of the underlying samples are indicated by the columns ``Comp.'', ``Spg.'', ``Lattice'' and ``Atom coords.'' respectively.
 
 \begin{table}[!htb]
 \centering
@@ -26,39 +26,13 @@ LBNL        &  n/a          & \xmark   & \xmark   & \xmark   & \xmark   & Time s
 
 %TODO: A paragraph on how data is correlated
 The degree of variation between the patterns is different for each contribution. For example, the CRNS and the INT contributions each are collections that encompass many research projects over a large period of time and hence exhibit a high degree of variability between individual patterns. In contrast, the contributions by the USC and the LBNL contain many very similar patterns. The patterns in the USC datasets are similar because the underlying samples are all variations of \ce{CuNi} and \ce{CuAl} alloys collected on the same machine. The patterns submitted by the LBNL are similar because they stem from in-situ recordings where several hundred or several thousand patterns were collected over time per sample while they were undergoing physical processes. 
-
-%The below histograms $\eqref{fig:histograms}$ show the distributions of spacegroups, 
-
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=\linewidth]{figures/quantities_hist.png}
-    \caption{Histograms detailing spacegroups of labeled data and number of entries, starting angle value and final angle value for all data}
+    \includegraphics[width=0.95\linewidth]{figures/quantities_hist.png}
+    \caption{Histograms detailing spacegroups of labeled data and number of entries, starting angle value, and final angle value for all data}
     \label{fig:histograms}
 \end{figure}
 
-
-
-%TODO:
-% The three datasets shown here are (1): USC CuNi, (2): USC CuAl, (3): HKUST
-% They certainly form clusters, but we have to think about how to interpret these results. It might still represent background/angle range more than anything else more interesting like material class.
-% Also if we add a larger dataset like the INT data the variance is so huge that all these three more narrow datasets effectively collapse onto a tiny region (see below)
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.5\linewidth]{figures/pca_scatter_smol.png}
-    \caption{Two component PCA scatter plot showing (1): USC CuNi, (2): USC CuAl, (3): HKUST data2}
-    \label{fig:enter-label}
-\end{figure}
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=0.5\linewidth]{figures/pca_scatter.png}
-    \caption{Two component PCA scatter plot including all opXRD data}
-    \label{fig:enter-label}
-\end{figure}
-
-The following paragraphs describe each contribution individually. \\
-
-\pagebreak
 %% Paragraph by FX Coudert and Arthur Hardiagon
 \subsubsection*{Chimie ParisTech, PSL University}
 
@@ -68,8 +42,6 @@ The pXRD data from the COD database are of high quality, with a median resolutio
 
 % Paragraph by Bin Cao and Tong-yi Zhang
 \subsubsection*{Guangzhou Municipal Key Laboratory of Materials Informatics, HKUST(GZ)}
-
-%In the past two years, we established a small-scale experimental PXRD database called the X-Ray Phase Identification Public Experimental Dataset. The data in XRed is generated in our lab using instruments such as the Empyrean 3.0, Aeris, and Bruker D8 Advance diffractometers under Cu targets. Hundreds of PXRD patterns have been refined, labeled with CIF files, and organized by elemental systems. The dataset includes original experimental files across single-phase to five-phase mixtures. This project is progressing toward integration with the comprehensive opXRD database to establish a large-scale, long-term experimental resource. 
 
 A small-scale experimental powder X-ray database called the X-Ray Phase Identification Public Experimental Dataset (XRed) was established over the past two years.\footnote{XRed can be accessed on GitHub at \url{https://github.com/WPEM/XRED}.} The primary objective of this database is to support the development of intelligent phase identification technology, serving as a foundation for data collection for future large-scale machine learning calculations. \\
 
@@ -81,7 +53,7 @@ Additionally, Xqueryer,\footnote{Xqueryer can be accessed at \url{https://xquery
 % Paragraph by Adie Alwen and Andrea Hodge
 \subsubsection*{Department of Chemical Engineering and Materials Science, USC}
 
-Combinatorial \ce{CuNi} and \ce{CuAl} samples were synthesized at the University of Southern California (USC) via magnetron co-sputtering from \ce{Cu} (99.999\%) and \ce{Ni} (99.995\%) or \ce{Al} (99.999\%) targets (Plasmaterials) onto stationary $10 \si{cm}$ \ce{Si} (100) substrates yielding 169 unique $5 \times 5 \ \si{mm}$ squares per wafer. These alloys were selected to study compositional effects on stacking fault and growth twin boundary formation in sputtered materials \cite{2024AcMat.27019839A,alwen2024combinatorial}. \\
+Combinatorial \ce{CuNi} and \ce{CuAl} samples were synthesized at the University of Southern California (USC) via magnetron co-sputtering from \ce{Cu} (99.999\%) and \ce{Ni} (99.995\%) or \ce{Al} (99.999\%) targets (Plasmaterials) onto stationary $10 \si{cm}$ \ce{Si} (100) substrates yielding 169 unique $5 \times 5 \ \si{mm}$ squares per wafer. These alloys were selected to study compositional effects on stacking fault and growth twin boundary formation in sputtered materials \cite{alwen2024_1,alwen2024_2}. \\
 
 XRD spectra were collected using a Malvern Panalytical Empyrean X-ray diffractometer at the Forschungszentrum Julich (FZJ) Institute for Energy and Climate Research, Structure and Function of Materials (IEK-2), which enabled automated XRD characterization due to its programmable XY stage and laser sensor for Z height correction. XRD analysis was used to link changes in defect formation in the sputtered films with varied phases and crystal structures. Each composition was characterized using \ce{Cu} $K_\alpha$ X-rays that were collimated to probe an area of $4 \times 4 \ \si{mm}$ using a step size of $0.026\degree$ and scan duration of $0.3$ seconds per step over a 2 range from $30\degree - 110\degree$. Measurement parameters were chosen to resolve at least six or more points above the full-width half maximum of each XRD peak.
 
@@ -94,8 +66,6 @@ All metal halide perovskite libraries were measured within a custom-made X-Ray t
 
 XRD data was measured using a Bruker D8 Discover equipped with a Cu radiation source in a Bragg-Brentano geometry. For the reported data sets the instrument was equipped with a Goebel mirror effectively removing the Cu~K$\beta$ radiation. The data set originates from the combinatorial exploration of the Zn–V–N compositional space, as well as data gathered from multiple research activities on more established metal halide perovskite semiconductors. All data was collected from thin films deposited on borosilicate glass. The Zn–V–N films showed some preferential out-of-plane orientation, while for the perovskites the preferential orientation was minimal, resulting in the presence of all reflections. \\
 
-
-
 %% Paragraph by Ben Breitung
 \subsubsection*{Institute of Nanotechnology, KIT}
 
@@ -106,26 +76,25 @@ The X-ray diffraction data were collected on a Bruker D8 Advance using a Cu radi
 % Paragraph by Moritz Wolf 
 \subsubsection*{Institute of Catalysis Research and Technology, KIT}
 
-A variety of samples were analyzed including commercial catalysts, bulk reference materials, porous metal oxide particles, and nanoparticles. The latter were synthesized via the surfactant-free benzyl alcohol route \cite{Wolf2019, Wolf2018}. The cobalt oxide (\ce{CoO} or \ce{Co3O4}) and cerium oxide (\ce{CeO2}) nanoparticles were in the size range of $4-16 \ \si{nm}$ according to the Scherrer equation. A series of porous \ce{Al2O3} materials, which were prepared by calcination of boehmite (\ce{AlOOH}) at various temperatures, represents crystalline samples with limited long-range structure and various contributions of \ce{Al2O3} polymorphs.\\
+A variety of samples were analyzed including commercial catalysts, bulk reference materials, porous metal oxide particles, and nanoparticles. The latter were synthesized via the surfactant-free benzyl alcohol route \cite{Wolf2019, Wolf2018}. The cobalt oxide (\ce{CoO} or \ce{Co3O4}) and cerium oxide (\ce{CeO2}) nanoparticles were in the size range of $4-16 \ \si{nm}$ according to the Scherrer equation. A series of porous \ce{Al2O3} materials, which were prepared by calcination of boehmite (\ce{AlOOH}) at various temperatures, represents crystalline samples with limited long-range structure and various contributions of \ce{Al2O3} polymorphs. \\
 
-X-ray diffraction (XRD) was conducted with an X’Pert Pro MPD (Panalytical) in Bragg-Brentano geometry using a \ce{Cu} X-ray source. The patterns were acquired in the $2\theta$ range of $5-80\degree$ with a step size of $0.016711\degree$ or $0.033420\degree$ and a total acquisition time of 40 to 120 min. \\
-
-
+X-ray diffraction (XRD) was conducted with an X’Pert Pro MPD (Panalytical) in Bragg-Brentano geometry using a \ce{Cu} X-ray source. The patterns were acquired in the $2\theta$ range of $5-80\degree$ with a step size of $0.016711\degree$ or $0.033420\degree$ and a total acquisition time of 40 to 120 min. This study has been carried out with the support of Angelina Barthelmeß, Elisabeth Herzinger, and Henning Hinrichs. \\
 
 % Paragraph by Tim Kodalle
 \subsubsection*{Molecular Foundry Division \& Advanced Light Source \& Chemical Sciences Division, LBNL}
 
-Data collection was performed in situ during thin-film deposition using a custom-made spin-coating and annealing stage. One dataset was collected from spin-coating triple cation metal-halide perovskite precursor solutions with the composition 
-\ce{Cs}$_{0.05}$(MA$_{0.23}$FA$_{0.77}$)\ce{Pb}$_{1.1}$(\ce{I}$_{0.77}$\ce{Br}$_{0.23}$)$_{3}$ (MA = Methylammonium, FA = Formamidinium) onto various substrates, including glass (amorphous), $\ce{GaAs}$ wafers (single crystalline) as well as stacks of glass/ITO, $\ce{GaAs}$/$\ce{Mo}$/$\ce{Cu}$($\ce{In}$,$\ce{Ga}$)$\ce{Se2}$/$\ce{CdS}$/$\ce{ZnO}$, and glass/$\ce{Mo}$/$\ce{Cu}$($\ce{In}$,$\ce{Ga}$)$\ce{Se2}$/$\ce{CdS}$/$\ce{ZnO}$ (glass/CIGS). Some of the substrates were additionally covered with a self-assembling monolayer of MeO-2PACz. The $\ce{GaAs}$ substrates were prepared by Dr. Jiro Nishinaga from the National Institute of Advanced Industrial Science and Technology (AIST) in Japan and the glass/CIGS substrates by Dr. Christian Kaufmann and his team at Helmholtz-Zentrum Berlin (HZB) in Germany. A second dataset was collected from spin-coating metal-halide perovskite precursor solutions with varying compositions of \ce{MAPb(I_{1-x}Br_x)3} (where MA = Methylammonium and x = 0, 0.33, 0.5, 0.67, 1) spin-coated onto glass substrates. The substrates were preheated to different temperatures ($30\degree $C, $50\degree $C, $70\degree $C, and $90\degree $C), and the spin-coating process was performed at a constant temperature on the preheated substrates. For both datasets, diffraction data were continuously measured during spin-coating, chemical induction of crystallization, and annealing of the samples (at $100\degree$C and $110\degree$C respectively) with a frequency of about $0.56 
+Data was collected from two separate studies. A first study collected data from spin-coating metal-halide perovskite precursor solutions. For this study, two datasets were collected. The first dataset was collected from spin-coating triple-cation metal-halide perovskite precursor solutions with the composition \ce{Cs}$_{0.05}$(MA$_{0.23}$FA$_{0.77}$)\ce{Pb}$_{1.1}$(\ce{I}$_{0.77}$\ce{Br}$_{0.23}$)$_{3}$ onto various substrates. Here, MA stands for Methylammonium and FA stands for Formamidinium. The substrates onto which these solutions were coated include glass, which is amorphous, and $\ce{GaAs}$ wafers, which are single crystalline. Other substrates were stacks of glass/indium tin oxide, stacks of \ce{GaAs}/CIGS, and stacks of glass/CIGS. Here, CIGS stands for a stack of \ce{Mo}, \ce{Cu}(\ce{In}, \ce{Ga})\ce{Se2},\ce{Cds} and \ce{ZnO}. Some of the substrates were additionally covered with a self-assembling monolayer of MeO-2PACz. The $\ce{GaAs}$ substrates were prepared by Dr. Jiro Nishinaga from the National Institute of Advanced Industrial Science and Technology (AIST) in Japan and the glass/CIGS substrates by Dr. Christian Kaufmann and his team at Helmholtz-Zentrum Berlin (HZB) in Germany. Data collection was performed in situ during thin-film deposition using a custom-made spin-coating and annealing stage. \\
+
+A second dataset was collected from spin-coating metal-halide perovskite precursor solutions with varying compositions of \ce{MAPb(I_{1-x}Br_x)3} spin-coated onto glass substrates. Here, MA = Methylammonium and x = 0, 0.33, 0.5, 0.67, 1. The substrates were preheated to different temperatures including $30\degree $C, $50\degree $C, $70\degree $C, and $90\degree $C, and the spin-coating process was performed at a constant temperature on the preheated substrates. For both datasets, diffraction data were continuously measured during spin-coating, chemical induction of crystallization, and annealing of the samples, at $100\degree$C and $110\degree$C respectively. The diffraction data was recorded with a frequency of about $0.56 
  \ 1/\si{s}$ and $0.54 \ 1/\si{s}$. Each in situ measurement consisted of about 500 to 1000 individual diffractograms. Depending on the substrate, each series of diffractograms shows an evolution from substrate only to a combination of polycrystalline perovskite, $\ce{PbI2}$ and substrate via several intermediate phases. \\
 
-Experimental XRD data were collected at beamline 12.3.2 of the Advanced Light Source, the synchrotron at Lawrence Berkeley National Laboratory. The data were collected using a photon energy of 10 $\si{keV}$ ($\lambda = 1.23984 \text{\AA}$), selected using a Si(111) monochromator. Measurements were taken in grazing incidence geometry, i.e. using a beam incidence angle of $1\degree$. Two-dimensional diffraction images were recorded using a Dectris Pilatus 1M area detector at an angle between $34\degree$ and $36\degree$ with a sample-to-detector distance of roughly $190 \ \si{mm}$. The two-dimensional data were calibrated using an Al$_{2}$O$_{3}$ calibration standard and integrated along the azimuthal angle. \\
+For this study, experimental XRD data were collected at beamline 12.3.2 of the Advanced Light Source, the synchrotron at Lawrence Berkeley National Laboratory. The data were collected using a photon energy of 10 $\si{keV}$ ($\lambda = 1.23984 \text{\AA}$), selected using a Si(111) monochromator. Measurements were taken in grazing incidence geometry, i.e. using a beam incidence angle of $1\degree$. Two-dimensional diffraction images were recorded using a Dectris Pilatus 1M area detector at an angle between $34\degree$ and $36\degree$ with a sample-to-detector distance of roughly $190 \ \si{mm}$. The two-dimensional data were calibrated using an Al$_{2}$O$_{3}$ calibration standard and integrated along the azimuthal angle. \\
 
 % Paragraph by Gregoire Heymans
 
-In a second study, the phase evolution of the Mn-Sb-O system varying with annealing temperature was measured using the \textit{in situ}  Rigaku-SmartLab3kW diffractometer. This tool operates with SmartLab Studio II software, which can measure the X-ray diffraction during the annealing process. This enables directly showing all the phase transitions when annealing in various atmospheres such as \ce{O2}, \ce{Ar}, and \ce{NH3}. Phase transitions are analyzed with the \textit{in situ} XRD tool up to 850$\degree$C in this work. Most of the \textit{in situ} experiments were performed under an air-like 20\% \ce{O2} and 80\% argon (Ar) environment is chosen (Ar flow: 50 \si{sccm}, O$_2$ flow: 10 \si{sccm}). When a 100\% Ar environment is fixed, an Ar flow of 60 \si{sccm} is input. The Bragg-Brentano (BB) mode is preferred in terms of geometry because it is more adapted in the analysis of scarce phases such as  \ce{MnSb2O6} rutile. The angular step is 0.01$\degree$ and the scanning rate is 10$\degree$/min. The step gives information about the resolution and the scanning rate (or speed duration time) results in the quality of the signal-to-noise ratio. \\
+In a second study, the phase evolution of the Mn-Sb-O system varying with annealing temperature was measured. The temperatures used to analyze the crystal structure of the Mn-Sb-O system were chosen depending on the number of phase transitions appearing for a certain temperature range. Few changes in the crystal structure appear between room temperature and 300$\degree$C and phase transitions appeared from 300$\degree$C until 850$\degree$C. No phase transition appeared when cooling down. Therefore, the crystal structure was measured every 100$\degree$C between room temperature and 300$\degree$C; every 50$\degree$C between 300$\degree$C and 850$\degree$C; and every 200$\degree$C when cooling down. The heating and cooling rates are fixed for all the experiments at 50$\degree$C/min and the holding time is fixed at 2 min. \\
 
-The temperatures used to analyze the crystal structure of the Mn-Sb-O system were chosen depending on the number of phase transitions appearing for a certain temperature range. Few changes in the crystal structure appear between RT and 300$\degree$C and phase transitions appeared from 300$\degree$C until 850$\degree$C. No phase transition appeared when cooling down. Therefore, the crystal structure was measured every 100$\degree$C between RT and 300$\degree$C; every 50$\degree$C between 300$\degree$C and 850$\degree$C; and every 200$\degree$C when cooling down. The heating and cooling rates are fixed for all the experiments at 50$\degree$C/min and the holding time is fixed at 2 min.
+The data was collected using the \textit{in situ}  Rigaku-SmartLab3kW diffractometer. This tool operates with SmartLab Studio II software, which can measure the X-ray diffraction during the annealing process. This enables directly showing all the phase transitions when annealing in various atmospheres such as \ce{O2}, \ce{Ar}, and \ce{NH3}. Phase transitions are analyzed with the \textit{in situ} XRD tool up to 850$\degree$C in this work. Most of the \textit{in situ} experiments were performed under an air-like 20\% \ce{O2} and 80\% \ce{Ar} environment is chosen (\ce{Ar} flow: 50 \si{sccm}, \ce{O2} flow: 10 \si{sccm}). When a 100\% Ar environment is fixed, an Ar flow of 60 \si{sccm} is input. The Bragg-Brentano (BB) mode is preferred in terms of geometry because it is more adapted in the analysis of scarce phases such as  \ce{MnSb2O6} rutile. The angular step used in the recording was 0.01$\degree$ and the scanning rate was 10$\degree$/min. 
 
 % end of Gregoire Heymans
 
