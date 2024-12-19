@@ -46,6 +46,9 @@
 \newcommand{\cmark}{\textcolor{green!80!black}{\ding{52}}}
 \newcommand{\xmark}{\textcolor{red}{\ding{53}}}
 \newcommand{\partialcheck}[1]{\textcolor{orange}{\ding{52}(#1\%)}}
+\captionsetup[table]{
+  font=footnotesize
+}
 
 \date{}
 \newcommand{\red}[1]{\textcolor{red}{#1}}
@@ -98,10 +101,10 @@
 \author[\KITICRT]{Moritz Wolf}
 \author[\CPT]{François-Xavier Coudert}
 \author[\LBLMF]{Carolin M. Sutter-Fella}
-\author[\ITI,\INT]{Pascal Friederich$^*$}
+\author[\ITI,\INT]{Pascal Friederich$^\ast$}
 
 
-\affil[\ITI]{Institute of Theoretical Informatics, Karlsruhe Institute of Technology, 76131 Karlsruhe, Germany}
+\affil[\ITI]{Institute of Theoretical Informatics, Karlsruhe Institute of Technology, 76131 Karlsruhe, Germany.  E-mail: pascal.friederich@kit.edu}
 \affil[\INT]{Institute of Nanotechnology, Karlsruhe Institute of Technology, 76131 Karlsruhe, Germany}
 \affil[\HKUSTGZ]{Guangzhou Municipal Key Laboratory of Materials Informatics, Hong Kong University of Science and Technology (Guangzhou), Guangzhou 511400, China}
 \affil[\USC]{Department of Chemical Engineering and Materials Science, University of Southern California, Los Angeles CA 90089, USA}
@@ -119,6 +122,8 @@
 \begin{document}
 
 \maketitle
+\textbf{Keywords}: powder x-ray diffraction, machine learning, open-access database, crystal structure determination, phase identification
+
 \begin{abstract}
 \input{chapters/00_abstract}
 \end{abstract}
@@ -140,7 +145,6 @@
 
 \section{Summary and Outlook}\label{sec:summary_and_outlook}
 \input{chapters/06_summary_and_outlook}
-
 
 \subsection*{Supporting Information}
 Supporting Information is available from the Wiley Online Library or the author.

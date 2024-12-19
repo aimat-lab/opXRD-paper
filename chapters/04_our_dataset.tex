@@ -1,24 +1,22 @@
-In collaboration with several other institutions we have collected a dataset of diffractograms stemming from experiments, some of them labeled with corresponding structural information. The following paragraphs detail the contribution of each research group. Most data was collected using \ce{Cu} radiaton sources which have a  $K_{\alpha1}$ wavelength of $\lambda=1.54056\text{\AA}$ and a $K_{\alpha2}$ wavelength of $\lambda=1.54439\text{\AA}$. We filtered the submitted datasets to exclude patterns with invalid features such as the pattern containing only one unique recorded angle or negative angles, the pattern containing less than 50 recorded angles total, or all intensities being zero. \\
-
-The below Table$\eqref{tab:merged}$ provides an overview of the opXRD database. The availability of the chemical composition, spacegroups, lattice parameters, and atomic coordinates of the underlying samples are indicated by the columns ``Comp.'', ``Spg.'', ``Lattice'' and ``Atom coords.'' respectively.
+In collaboration with several other institutions we have collected a dataset of diffractograms stemming from experiments, some of them labeled with corresponding structural information. The following paragraphs detail the contribution of each research group. Most data was collected using \ce{Cu} radiaton sources which have a  $K_{\alpha1}$ wavelength of $\lambda=1.54056\text{\AA}$ and a $K_{\alpha2}$ wavelength of $\lambda=1.54439\text{\AA}$. We filtered the submitted datasets to exclude patterns with invalid features such as the pattern containing only one unique recorded angle or negative angles, the pattern containing less than 50 recorded angles total, or all intensities being zero. The below Table$\eqref{tab:merged}$ provides an overview of the opXRD database. 
 
 \begin{table}[!htb]
 \centering
-\caption{The opXRD database}
+\caption{\footnotesize The opXRD database: The availability of the chemical composition, spacegroups, lattice parameters, and atomic coordinates of the underlying samples are indicated by the columns ``Comp.'', ``Spg.'', ``Lattice'' and ``Atom coords.'' respectively.}
 \label{tab:merged}
-\scalebox{0.81}{
+\scalebox{0.79}{
 \begin{adjustbox}{center}
 \begin{tabular}{@{}lllllll@{}}
 \toprule
 \textbf{Institution} & \textbf{No. patterns} & \textbf{Comp.} & \textbf{Spg.} & \textbf{Lattice} & \textbf{Atom coords.} & \textbf{Research Project} \\
 \midrule
-CNRS        &  1052          & \cmark   & \partialcheck{85}   & \cmark   &  \partialcheck{85}   & Extracted from the COD \\ 
-HKUST(GZ)   &  21           & \cmark   & \cmark   & \cmark   & \cmark   & Phase identification reference database \\ 
+CNRS        &  1052          & \cmark   & \partialcheck{85}   & \cmark   &  \partialcheck{85}   & Diffraction data extracted from COD \\ 
+HKUST(GZ)   &  21+499          & \cmark   & \cmark   & \cmark   & \cmark   & Phase/structure identification dataset  \\ 
 USC         &  338          & \cmark   & \cmark   & \partialcheck{90}   & \xmark   & Study of CuNi and CuAl alloys          \\ 
 EMPA        &  790          & \cmark   & \partialcheck{63}   & \xmark   & \xmark   & Tin halide perovskites, Zn-V-N library \\ 
 INT         &  19,780        & \xmark   & \xmark   & \xmark   & \xmark   & Compilation of various projects        \\ 
 IKFT        &  64           & \xmark   & \xmark   & \xmark   & \xmark   & Commercial catalysts, bulk materials   \\ 
-LBNL        &  n/a          & \xmark   & \xmark   & \xmark   & \xmark   & Time series recordings of Perovskites  \\ 
+LBNL        &  n/a          & \xmark   & \xmark   & \xmark   & \xmark   & Perovskites precursors, Mn-Sb-O system  \\ 
 \bottomrule
 \end{tabular}
 \end{adjustbox}}
@@ -43,9 +41,11 @@ The pXRD data from the COD database are of high quality, with a median resolutio
 % Paragraph by Bin Cao and Tong-yi Zhang
 \subsubsection*{Guangzhou Municipal Key Laboratory of Materials Informatics, HKUST(GZ)}
 
-A small-scale experimental powder X-ray database called the X-Ray Phase Identification Public Experimental Dataset (XRed) was established over the past two years.\footnote{XRed can be accessed on GitHub at \url{https://github.com/WPEM/XRED}.} The primary objective of this database is to support the development of intelligent phase identification technology, serving as a foundation for data collection for future large-scale machine learning calculations. \\
+A small-scale experimental powder X-ray database called the X-Ray Phase Identification Public Experimental Dataset (XRed) was established over the past two years.\footnote{XRed can be accessed on GitHub at \url{https://github.com/WPEM/XRED}.} The primary objective of this database is to support the development of intelligent phase identification technology, serving as a foundation for data collection for future large-scale machine learning calculations. The data in XRed were generated using instruments such as the Empyrean 3.0, Aeris, and Bruker D8 Advance diffractometers, all utilizing \ce{Cu} X-ray sources. Hundreds of pXRD patterns have been obtained through XRD refinement, enabling the determination of detailed lattice constants, atomic sizes, and other structural parameters. These patterns are labeled with CIF files that document the refined structures. The dataset is organized by elemental systems and includes original experimental files ranging from single-phase to five-phase mixtures, as well as mixtures studied for different tasks. \\
 
-The data in XRed were generated in our laboratory using instruments such as the Empyrean 3.0, Aeris, and Bruker D8 Advance diffractometers, all utilizing \ce{Cu} X-ray sources. Hundreds of pXRD patterns have been obtained through XRD refinement, enabling the determination of detailed lattice constants, atomic sizes, and other structural parameters. These patterns are labeled with CIF files that document the refined structures. The dataset is organized by elemental systems and includes original experimental files ranging from single-phase to five-phase mixtures, as well as mixtures studied for different tasks. \\
+
+Another experimental database integrated with opXRD is the "collected database", which comprises powder XRD data paired with corresponding crystal structures. The data were sourced from publicly available open-access publications and our collaborating institutions, with full authorization for research use. This database surpasses Xred in size, containing 499 entries. However, these entries have not undergone individual verification via pattern refinement. In most cases, the XRD patterns are labeled based on powder diffraction file cards rather than detailed pattern refinements.\\
+
 
 Additionally, Xqueryer,\footnote{Xqueryer can be accessed at \url{https://xqueryer.caobin.asia/}.} a cutting-edge free online platform for intelligent structure identification has been launched. Users can upload experimental pXRD data to identify crystal structures and extract all relevant information available in the Materials Project database\cite{jain2013commentary}. Uploaded data are securely stored and integrated into the comprehensive opXRD database to progress toward a large-scale, long-term experimental resource. All usage complies with Xqueryer's terms of service.
 
