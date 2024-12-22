@@ -1,4 +1,4 @@
-In collaboration with several other institutions we have collected a dataset of diffractograms stemming from experiments, some of them labeled with corresponding structural information. The following paragraphs detail the contribution of each research group. Most data was collected using \ce{Cu} radiaton sources which have a  $K_{\alpha1}$ wavelength of $\lambda=1.54056\text{\AA}$ and a $K_{\alpha2}$ wavelength of $\lambda=1.54439\text{\AA}$. We filtered the submitted datasets to exclude patterns with invalid features such as the pattern containing only one unique recorded angle or negative angles, the pattern containing less than 50 recorded angles total, or all intensities being zero. The below Table$\eqref{tab:merged}$ provides an overview of the opXRD database. 
+In collaboration with several other institutions we have collected a dataset of diffractograms stemming from experiments, some of them labeled with corresponding structural information. The following paragraphs detail the contribution of each research group. Most data was collected using \ce{Cu} radiaton sources which have a  $K_{\alpha1}$ wavelength of $\lambda=1.54056\text{\AA}$ and a $K_{\alpha2}$ wavelength of $\lambda=1.54439\text{\AA}$. We filtered the submitted datasets to exclude patterns with invalid features such as the pattern containing only one unique recorded angle or negative angles, the pattern containing less than 50 recorded angles total, or all intensities being zero. The below Table~$\eqref{tab:merged}$ provides an overview of the opXRD database. 
 
 \begin{table}[!htb]
 \centering
@@ -24,10 +24,15 @@ LBNL        &  n/a          & \xmark   & \xmark   & \xmark   & \xmark   & Perovs
 
 %TODO: A paragraph on how data is correlated
 The degree of variation between the patterns is different for each contribution. For example, the CRNS and the INT contributions each are collections that encompass many research projects over a large period of time and hence exhibit a high degree of variability between individual patterns. In contrast, the contributions by the USC and the LBNL contain many very similar patterns. The patterns in the USC datasets are similar because the underlying samples are all variations of \ce{CuNi} and \ce{CuAl} alloys collected on the same machine. The patterns submitted by the LBNL are similar because they stem from in-situ recordings where several hundred or several thousand patterns were collected over time per sample while they were undergoing physical processes. 
+
+\pagebreak
+
+Figure~$\eqref{fig:histograms}$ below provides an overview of the distributions of pattern and structure properties in the opXRD dataset. Nearly all patterns have an angular resolution smaller than $\Delta(2\theta) = 0.1 ^\circ$. Here the angular resolution is defined as the range of recorded angles divided by the number of recorded intensity values along that range. For most patterns, the lowest recorded angle is smaller than $30 ^\circ$ and the highest recorded angle is smaller than $120 ^\circ$.
+
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=0.8\linewidth]{figures/hist.png}
-    \caption{Histograms detailing the distribution of properties in the opXRD dataset: a) distribution of spacegroups present in labeled data; b) distribution of angular resolution in all data; c) distribution of smallest and largest recorded $2\theta$ values for all data.}
+    \caption{Histograms detailing the distribution of pattern and structure properties in the opXRD database: a) distribution of spacegroups present in labeled data; b) distribution of angular resolution in all data; c) distribution of smallest and largest recorded $2\theta$ values for all data.}
     \label{fig:histograms}
 \end{figure}
 
