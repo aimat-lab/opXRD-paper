@@ -4,19 +4,20 @@ In collaboration with several other institutions we have collected a dataset of 
 \centering
 \caption{\footnotesize The opXRD database: The availability of the chemical composition, spacegroups, lattice parameters, and atomic coordinates of the underlying samples are indicated by the columns ``Comp.'', ``Spg.'', ``Lattice'' and ``Atom coords.'' respectively.}
 \label{tab:merged}
-\scalebox{0.79}{
+\scalebox{0.75}{
 \begin{adjustbox}{center}
 \begin{tabular}{@{}lllllll@{}}
+%\begin{tabular}{@{}llccccl@{}}
 \toprule
 \textbf{Institution} & \textbf{No. patterns} & \textbf{Comp.} & \textbf{Spg.} & \textbf{Lattice} & \textbf{Atom coords.} & \textbf{Research Project} \\
 \midrule
 CNRS        &  1052          & \cmark   & \partialcheck{85}   & \cmark   &  \partialcheck{85}   & Diffraction data extracted from the COD \\ 
-HKUST(GZ)   &  21+499          & \cmark   & \cmark   & \cmark   & \cmark   & Phase/structure identification dataset  \\ 
-USC         &  338          & \cmark   & \cmark   & \partialcheck{90}   & \xmark   & Study of CuNi and CuAl alloys          \\ 
-EMPA        &  790          & \cmark   & \partialcheck{63}   & \xmark   & \xmark   & Tin halide perovskites, Zn-V-N libraries \\ 
-INT         &  19,780        & \xmark   & \xmark   & \xmark   & \xmark   & Compilation of various projects        \\ 
-IKFT        &  64           & \xmark   & \xmark   & \xmark   & \xmark   & Commercial catalysts, bulk materials   \\ 
-LBNL        &  n/a          & \xmark   & \xmark   & \xmark   & \xmark   & Perovskites precursors, Mn-Sb-O system  \\ 
+HKUST(GZ)   &  21+499          & \cmark   & \cmark   & \cmark   & \cmark[\quad]   & Phase/structure identification dataset  \\ 
+USC         &  338          & \cmark   & \cmark   & \partialcheck{90}   & \xmark[\quad]   & Study of CuNi and CuAl alloys          \\ 
+EMPA        &  790          & \cmark   & \partialcheck{63}   & \xmark   & \xmark[\quad]   & Tin halide perovskites, Zn-V-N libraries \\ 
+INT         &  19,780        & \xmark   & \xmark   & \xmark   & \xmark[\quad]   & Compilation of various projects        \\ 
+IKFT        &  64           & \xmark   & \xmark   & \xmark   & \xmark[\quad]   & Commercial catalysts, bulk materials   \\ 
+LBNL        &  n/a          & \xmark   & \xmark   & \xmark   & \xmark[\quad]   & Perovskites precursors, Mn-Sb-O system  \\ 
 \bottomrule
 \end{tabular}
 \end{adjustbox}}
@@ -24,6 +25,9 @@ LBNL        &  n/a          & \xmark   & \xmark   & \xmark   & \xmark   & Perovs
 
 %TODO: A paragraph on how data is correlated
 The degree of variation between the patterns is different for each contribution. For example, the CRNS and the INT contributions each are collections that encompass many research projects over a large period of time and hence exhibit a high degree of variability between individual patterns. In contrast, the contributions by the USC and the LBNL contain many very similar patterns. The patterns in the USC datasets are similar because the underlying samples are all variations of \ce{CuNi} and \ce{CuAl} alloys collected on the same machine. The patterns submitted by the LBNL are similar because they stem from in-situ recordings where several hundred or several thousand patterns were collected over time per sample while they were undergoing physical processes. 
+
+
+
 
 \pagebreak
 
