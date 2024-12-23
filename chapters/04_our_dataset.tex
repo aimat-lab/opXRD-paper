@@ -23,11 +23,18 @@ LBNL        &  n/a          &\ \xmark   & \xmark   & \xmark   & \ \ \quad \xmark
 \end{adjustbox}}
 \end{table}
 
+The below figure~$\eqref{fig:components}$ illustrates how varied the data of each contribution is using principle component analysis (PCA). PCA is a dimensional reduction technique that can be applied to datasets $X \subset \mathbb{R}^n$ to reduce the number of components needed to describe points $\p \in X$ up to some tolerance in lost accuracy. The cumulative explained variance ratio is a measure indicating how much of the variance in the dataset $X$ can be explained using a given number of components. For example, if PCA on a dataset $X \subset \mathbb{R}^10$ yields a cumulative variance ratio of 99\%, then each point in the dataset can be represented using only 5 degrees of freedom up to a minor loss in accuracy.
+
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{figures/component_fractions.png}
+    \caption{Explained variance ratio over the fraction of the maximum number of components for each dataset contributed to opXRD. Each dataset is named after the contributing institutions. Datasets contributed by the same institution are enumerated alphabetically in the order in which they are described below. }
+    \label{fig:components}
+\end{figure}
+
 %TODO: A paragraph on how data is correlated
-The degree of variation between the patterns is different for each contribution. For example, the CRNS and the INT contributions each are collections that encompass many research projects over a large period of time and hence exhibit a high degree of variability between individual patterns. In contrast, the contributions by the USC and the LBNL contain many very similar patterns. The patterns in the USC datasets are similar because the underlying samples are all variations of \ce{CuNi} and \ce{CuAl} alloys collected on the same machine. The patterns submitted by the LBNL are similar because they stem from in-situ recordings where several hundred or several thousand patterns were collected over time per sample while they were undergoing physical processes. 
-
-
-
+The degree of variation between the patterns is different for each contribution. For example, the CRNS and the INT contributions each are collections that encompass many research projects over a large period of time and hence exhibit a high degree of variability between individual patterns. In contrast, the contributions by the USC and the LBNL contain many very similar patterns. The patterns in the USC datasets are similar because the underlying samples are all variations of \ce{CuNi} and \ce{CuAl} alloys collected on the same machine. The patterns submitted by the LBNL are similar because they stem from in-situ recordings where several hundred or several thousand patterns were collected over time per sample while they were undergoing physical processes. \\
 
 \pagebreak
 
@@ -40,8 +47,7 @@ Figure~$\eqref{fig:histograms}$ below provides an overview of the distributions 
     \label{fig:histograms}
 \end{figure}
 
-
-\pagebreak
+The following texts describe the datasets contributed by each collaborating institution. Each text includes a description of the investigated materials and how X-ray diffraction data was collected.
 
 %% Paragraph by FX Coudert and Arthur Hardiagon
 \subsubsection*{Chimie ParisTech, PSL University}
@@ -55,7 +61,7 @@ The pXRD data from the COD database are of high quality, with a median resolutio
 
 A small-scale experimental powder X-ray database called the X-Ray Phase Identification Public Experimental Dataset (XRed) was established over the past two years.\footnote{XRed can be accessed on GitHub at \url{https://github.com/WPEM/XRED}.} The primary objective of this database is to support the development of intelligent phase identification technology, serving as a foundation for data collection for future large-scale machine learning calculations. The XRed dataset primarily focuses on metal and metal-oxide particles, with data generated using instruments such as the Empyrean 3.0, Aeris, and Bruker D8 Advance diffractometers, all utilizing \ce{Cu} X-ray sources. Hundreds of pXRD patterns have been obtained through XRD refinement, enabling the determination of detailed lattice constants, atomic sizes, and other structural parameters. These patterns are labeled with CIF files that document the refined structures. The dataset is organized by elemental systems and includes original experimental files ranging from single-phase to five-phase mixtures, as well as mixtures studied for different tasks. \\
 
-Another experimental dataset integrated with opXRD is a collection of powder diffraction data sourced from open-access publications and collaborating institutions. All collaborating institutions provided this data with full authorization for research purposes. This dataset provides broader coverage of chemical elements and includes ionic crystals, atomic crystals, and metallic crystals. This dataset surpasses Xred in size, containing 499 entries. However, contrary to Xred these data do not come paired with corresponding crystal structures.
+Another experimental dataset integrated with opXRD is a collection of powder diffraction data sourced from open-access publications and collaborating institutions. All collaborating institutions provided this data with full authorization for research purposes. This dataset provides broader coverage of chemical elements and includes ionic crystals, atomic crystals, and metallic crystals. This dataset surpasses Xred in size, containing 499 entries. However, contrary to Xred these data do not come paired with corresponding crystal structures. \\
 
 
 Xqueryer,\footnote{Xqueryer can be accessed at \url{https://xqueryer.caobin.asia/}.} a recently launched cutting-edge free online platform for intelligent structure identification, will also serve as a source of data for the opXRD database. Users can upload experimental pXRD data to identify crystal structures and extract all relevant information available in the Materials Project database\cite{jain2013commentary}. Uploaded data are securely stored and integrated into the comprehensive opXRD database to progress toward a large-scale, long-term experimental resource. All usage complies with Xqueryer's terms of service.
