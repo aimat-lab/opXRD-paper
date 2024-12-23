@@ -23,8 +23,17 @@ LBNL        &  n/a          &\ \xmark   & \xmark   & \xmark   & \ \ \quad \xmark
 \end{adjustbox}}
 \end{table}
 
-The below figure~$\eqref{fig:components}$ illustrates how varied the data of each contribution is using principle component analysis (PCA). PCA is a dimensional reduction technique that can be applied to datasets $X \subset \mathbb{R}^n$ to reduce the number of components needed to describe points $\p \in X$ up to some tolerance in lost accuracy. The cumulative explained variance ratio is a measure indicating how much of the variance in the dataset $X$ can be explained using a given number of components. For example, if PCA on a dataset $X \subset \mathbb{R}^10$ yields a cumulative variance ratio of 99\%, then each point in the dataset can be represented using only 5 degrees of freedom up to a minor loss in accuracy.
+The variance of the data was analyzed using a dimensional reduction technique called principal component analysis (PCA). PCA can be applied to datasets $X \subset \mathbb{R}^N$ to reduce the number of components needed to describe points $p \in X$ up to some tolerance in lost accuracy. In the context of PCA, the cumulative explained variance ratio is a measure of how much of the variance in the dataset $X$ can be explained using a given number of components. For example, if performing PCA on a dataset $X \subset \mathbb{R}^{10}$ yields a cumulative variance ratio of 99\%, then each point in the dataset can be represented using only 5 degrees of freedom up to a minor loss in accuracy. For a rigorous definition of PCA and the explained variance ratio, we refer to the literature \cite{Jolliffe2016}. \\
 
+Here, PCA was performed on datasets of X-ray diffraction patterns. These datasets $X$ are subsets of $\mathbb{R}^{N}$ with $N=N_{\text{values}} =512$ since each pattern $p \in X$ was standardized to have 512 intensity values spread out evenly from $0\degree$ to $180\degree$ using zero padding and interpolation with cubic splines. Hence the maximal components that could be needed to describe a dataset of diffraction data in this context is $N_{\text{values}}=512$. However, the maximal number of components is even lower for datasets that contain less than 512 patterns. In this case, the maximal number of components is equal to the number of patterns in the dataset since each pattern can add at most one degree of freedom to the dataset $X \in \mathbb{R}^N$. Hence the maximum number of components $N_{\text{max}}$ of a pattern dataset $X$ is given as follows:
+\begin{align}
+    N_{\text{max}} = \min(N_{\text{values}}, N_{\text{patterns}}).
+\end{align}
+Here $N_{\text{values}} = N =512$ is the number of recorded intensity values per pattern and $N_{\text{patterns}}$ is the number of patterns in the dataset $X$.
+
+\pagebreak
+
+The below figure~$\eqref{fig:components}$ shows the cumulative explained variance ratio over the fraction of maximal No. components $N_{\text{max}}$ as defined above. In this figure, a faster convergence of the cumulative variance ratio towards one indicates that the patterns in this data are relatively similar.
 
 \begin{figure}[!htb]
     \centering
