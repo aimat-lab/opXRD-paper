@@ -29,23 +29,22 @@ Here, PCA was performed on datasets of X-ray diffraction patterns. These dataset
 \begin{align}
     N_{\text{max}} = \min(N_{\text{values}}, N_{\text{patterns}}).
 \end{align}
-Here $N_{\text{values}} = N =512$ is the number of recorded intensity values per pattern and $N_{\text{patterns}}$ is the number of patterns in the dataset $X$.
+Here $N_{\text{values}} = N =512$ is the number of recorded intensity values per pattern and $N_{\text{patterns}}$ is the number of patterns in the dataset $X$. Figure~$\eqref{fig:components}$ below shows the cumulative explained variance ratio over the fraction of maximal No. components $N_{\text{max}}$ as defined above. In this figure, a faster convergence of the cumulative variance ratio towards one indicates that the patterns in this data are relatively similar. \\
 
+The degree of variation between the patterns is different for each contribution. For example, the CRNS and the HKUST contributions each are collections that encompass many research projects over a large period of time and hence exhibit a high degree of variability between individual patterns. In contrast, the contributions by the USC and the LBNL contain many very similar patterns. The patterns in the USC datasets are similar because the underlying samples are all variations of \ce{CuNi} and \ce{CuAl} alloys collected on the same machine. The patterns submitted by the LBNL are similar because they stem from in-situ recordings where several hundred or several thousand patterns were collected over time per sample while they were undergoing physical processes.  
 \pagebreak
 
-The below figure~$\eqref{fig:components}$ shows the cumulative explained variance ratio over the fraction of maximal No. components $N_{\text{max}}$ as defined above. In this figure, a faster convergence of the cumulative variance ratio towards one indicates that the patterns in this data are relatively similar.
+
+These effects can be observed in figure~$\eqref{fig:components}$: The cumulative explained variance ratios of the datasets contributed by the USC and LBNL converge towards one significantly faster than the datasets contributed by the CNRS and HKUST. \\
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=\linewidth]{figures/component_fractions.png}
-    \caption{Explained variance ratio over the fraction of the maximum number of components for each dataset contributed to opXRD. Each dataset is named after the contributing institutions. Datasets contributed by the same institution are enumerated alphabetically in the order in which they are described below. }
+    \includegraphics[width=0.85\linewidth]{figures/component_fractions.png}
+    \caption{Explained variance ratio over the fraction of the maximum number of components for each dataset contributed to opXRD. Each dataset is named after the contributing institutions. Datasets contributed by the same institution are labeled alphabetically in the order in which they are described in the texts towards the end of this section.}
     \label{fig:components}
 \end{figure}
 
-%TODO: A paragraph on how data is correlated
-The degree of variation between the patterns is different for each contribution. For example, the CRNS and the INT contributions each are collections that encompass many research projects over a large period of time and hence exhibit a high degree of variability between individual patterns. In contrast, the contributions by the USC and the LBNL contain many very similar patterns. The patterns in the USC datasets are similar because the underlying samples are all variations of \ce{CuNi} and \ce{CuAl} alloys collected on the same machine. The patterns submitted by the LBNL are similar because they stem from in-situ recordings where several hundred or several thousand patterns were collected over time per sample while they were undergoing physical processes. \\
 
-\pagebreak
 
 Figure~$\eqref{fig:histograms}$ below provides an overview of the distributions of pattern and structure properties in the opXRD dataset. Nearly all patterns have an angular resolution smaller than $\Delta(2\theta) = 0.1 ^\circ$. Here the angular resolution is defined as the range of recorded angles divided by the number of recorded intensity values along that range. For most patterns, the lowest recorded angle is smaller than $30 ^\circ$ and the highest recorded angle is smaller than $120 ^\circ$.
 
