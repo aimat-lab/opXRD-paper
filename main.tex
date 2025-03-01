@@ -34,7 +34,7 @@
 \usepackage{subfig}
 \usepackage[version=4]{mhchem}
 \usepackage{eurosym}
-\usepackage[locale = DE]{siunitx}
+\usepackage[locale = US]{siunitx}
 \usepackage{bm}
 \usepackage[normalem]{ulem} %%temporary, for organization purposes
 \usepackage{pythonhighlight}
@@ -52,6 +52,7 @@
 \newcommand{\red}[1]{\textcolor{red}{#1}}
 \renewcommand\Authfont{\small\raggedright\itshape}  
 \renewcommand\Affilfont{\normalfont\small}
+\newcommand{\numpatterns}{92,552 }
 
 \DeclareSIUnit{\myeuro}{\text{\euro}}
 \DeclareSIUnit\angstrom{\text {Å}}
@@ -90,7 +91,7 @@
 \author[\EMPA]{Siarhei Zhuk}
 \author[\CPT]{Arthur Hardiagon}
 \author[\KFUPMMSE,\KFUPMIRCIMR]{Maged Abdelsamie}
-\author[\HKUSTGZ]{Longhan Zhang}
+%\author[\HKUSTGZ]{Longhan Zhang}
 \author[\HKUSTGZ]{Tong-yi Zhang}
 \author[\USC]{Andrea M. Hodge}
 \author[\FZJIEMD]{Ruth Schwaiger}
@@ -101,10 +102,9 @@
 \author[\LBLMF]{Carolin M. Sutter-Fella}
 \author[\ITI,\INT]{Pascal Friederich$^\ast$}
 
-
 \affil[\ITI]{Institute of Theoretical Informatics, Karlsruhe Institute of Technology (KIT), 76131 Karlsruhe, Germany.  E-mail: pascal.friederich@kit.edu}
 \affil[\INT]{Institute of Nanotechnology, Karlsruhe Institute of Technology (KIT), 76131 Karlsruhe, Germany}
-\affil[\HKUSTGZ]{Guangzhou Municipal Key Laboratory of Materials Informatics, Hong Kong University of Science and Technology (Guangzhou) (HKUST), Guangzhou 511400, China}
+\affil[\HKUSTGZ]{Guangzhou Municipal Key Laboratory of Materials Informatics, Advanced Materials Thrust, Hong Kong University of Science and Technology (Guangzhou) (HKUST), Guangzhou 511400, China}
 \affil[\USC]{Department of Chemical Engineering and Materials Science, University of Southern California (USC), Los Angeles CA 90089, USA}
 \affil[\LBLMF]{Molecular Foundry Division, Lawrence Berkeley National Laboratory (LBNL), Berkeley 94720 CA, USA}
 \affil[\LBLALS]{Advanced Light Source, Lawrence Berkeley National Laboratory,  Berkeley 94720 CA, USA}
@@ -144,24 +144,12 @@
 \section{Summary and Outlook}\label{sec:summary_and_outlook}
 \input{chapters/06_summary_and_outlook}
 
-\pagebreak
-
 \subsection*{Supporting Information}
-%Supporting Information is available from the Wiley Online Library or the author.
-
-The below figure $\eqref{fig:combined}$ displays a randomly selected sample of the X-ray diffraction patterns found in each of the research projects contributed to the opXRD database.
-
-\begin{figure}[!htb]
-    \centering
-    \includegraphics[width=\linewidth]{figures/combined.png}
-    \caption{50 randomly chosen X-ray diffraction patterns from each contributed dataset. The figure shows data from the following datasets: a) EMPA, b) LBNL-A, c) LBNL-B, d) LBNL-C, e) USC, f) INT, g) HKUST-A, h) HKUST-B, i) CNRS, j) IKFT.}
-    \label{fig:combined}
-\end{figure}
-
-\pagebreak
+Supporting Information is available from the Wiley Online Library or the author.
 
 \subsection*{Data availability}
-The opXRD database is available on Zenodo at \url{https://zenodo.org/records/14254270}. It is published under the Creative Commons Attribution 4.0 International license.\footnote{Detailed terms of this license can be found at \url{https://creativecommons.org/licenses/by/4.0/deed.en}.} It can be downloaded by any user without any barriers or restrictions. For further details, please refer to Section~$\eqref{sec:how_to_use}$.
+The opXRD database is available on Zenodo at \url{https://zenodo.org/records/14254270}. It is published under the Creative Commons Attribution 4.0 International license.%\footnote{Detailed terms of this license can be found at \url{https://creativecommons.org/licenses/by/4.0/deed.en}.}
+It can be downloaded by any user without any barriers or restrictions. For further details, please refer to Section~$\eqref{sec:how_to_use}$.
 
 \subsection*{Conflicts of interest}
 There are no conflicts of interest to declare.
@@ -182,5 +170,38 @@ We acknowledge financial support by the German Research Foundation (DFG) through
 
 \bibliographystyle{bibstyle/bibstyle.bst}
 \bibliography{references}
+
+\setcounter{section}{0}
+\renewcommand{\thesection}{S\arabic{section}}
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{S\arabic{figure}}
+\setcounter{table}{0}
+\renewcommand{\thetable}{S\arabic{table}}
+
+\section*{Supporting Information}
+%Supporting Information is available from the Wiley Online Library or the author.
+
+\section{Description of opXRD files on Zenodo}
+The database comes in two zip archives, ``opxrd.zip'' and ``opxrd\_in\_situ.zip''. The latter contains the in-situ data with highly correlated patterns recorded through time series measurements. Within the .zip archives patterns are saved as .json files grouped in folders indicating the contributing institution. If an institution contributed data from several projects, the contributed data is further divided into folders indicating the research project. These research project folders are labeled alphabetically in the order they are introduced in section $\eqref{sec:our_dataset}$. 
+Each .json file contains a pattern recorded from an X-ray diffraction experiment. If available, the composition and structure of the investigated sample and experiment conditions are also included in this file. Patterns belonging to time series measurements are labeled with filenames that indicate the measurement series they belong to as well as their order in that series. 
+
+
+\section{opXRD Python library usage}
+
+The opXRD Python library allows the dataset to be accessed through one simple command: \pyth{OpXRD.load(root_dirpath)}. If the database is locally available under \pyth{root_dirpath} this command loads the library from this location. If the database is not available locally at this location, the database is automatically downloaded to \pyth{root_dirpath}. 
+
+
+\section{Fourier analysis}
+The Figure below $\eqref{fig:combined}$ shows 50 randomly selected samples of the X-ray diffraction patterns found in each of the research projects contributed to the opXRD database.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{figures/combined.png}
+    \caption{50 randomly chosen X-ray diffraction patterns from each contributed dataset. The figure shows data from the following datasets: a) EMPA, b) LBNL-A, c) LBNL-B, d) LBNL-C, e) USC, f) INT, g) HKUST-A, h) HKUST-B, i) CNRS, j) IKFT.}
+    \label{fig:combined}
+\end{figure}
+
+\pagebreak
+
 
 \end{document}
