@@ -148,21 +148,13 @@
 Supporting Information is available from the Wiley Online Library or the author.
 
 \subsection*{Data availability}
-The opXRD database is available on Zenodo at \url{https://zenodo.org/records/14254270}. It is published under the Creative Commons Attribution 4.0 International license.%\footnote{Detailed terms of this license can be found at \url{https://creativecommons.org/licenses/by/4.0/deed.en}.}
-It can be downloaded by any user without any barriers or restrictions. For further details, please refer to Section~$\eqref{sec:how_to_use}$.
+The opXRD database is available on Zenodo at \url{https://zenodo.org/records/14254270}. It is published under the Creative Commons Attribution 4.0 International license.It can be downloaded by any user without any barriers or restrictions. For further details, please refer to Section~$\eqref{sec:how_to_use}$.
 
 \subsection*{Conflicts of interest}
 There are no conflicts of interest to declare.
 
 \subsection*{Acknowledgements}
 We acknowledge financial support by the German Research Foundation (DFG) through the Research Training Group 2450 “Tailored Scale-Bridging Approaches to Computational Nanoscience”. We acknowledge support by the Federal Ministry of Education and Research (BMBF) under Grant No. 01DM21001B (German-Canadian Materials Acceleration Center). We acknowledge financial support from the Helmholtz Foundation Model Initiative within Project "SOL-AI". Part of this work was funded under the France 2030 framework by Agence Nationale de la Recherche (project ANR-22-PEXD-0009 of PEPR DIADEM). Work at the Molecular Foundry was supported by the Office of Science, Office of Basic Energy Sciences, of the U.S. Department of Energy under Contract No. DE-AC02-05CH11231. Work at the Advanced Light Source (ALS) was done at beamline 12.3.2. The ALS is a DOE Office of Science User Facility under contract no. DE-AC02-05CH11231. The development of the online phase identification platform is supported by the Guangzhou-HKUST(GZ) Joint Funding Program (No. 2023A03J0003). Work by the USC group was supported by the National Science Foundation (NSF) grant numbers DMR-2227178 and OISE-2106597. Funding by the Helmholtz Research Program “Materials and Technologies for the Energy Transition (MTET), Topic 3: Chemical Energy Carriers" is kindly acknowledged. Work by the Empa group was supported by the Strategic Focus Area–Advanced Manufacturing (SFA–AM) through the project Advancing manufacturability of hybrid organic–inorganic semiconductors for large area optoelectronics (AMYS) as well as the Empa internal research call 2020.
-
-%\subsection*{Table of contents}
-%\tableofcontents
-
-%A short text and graphic should be provided for the Table of Contents (ToC). The ToC text should describe the main results in 50 to 60 words. It should be written for a general audience and be written in the third person.
-
-%The ToC figure should convey the main message of the article. It does not have to be a figure from the article; it can be a combination of figures or a new, original figure composed to represent the topic. The author must be the copyright holder for this figure and any images used to create it. The size of the image should be either 55 mm × 50 mm (w × h) or 110 mm × 20 mm (w × h). 
 
 \printnomenclature
 
@@ -178,13 +170,29 @@ We acknowledge financial support by the German Research Foundation (DFG) through
 \setcounter{table}{0}
 \renewcommand{\thetable}{S\arabic{table}}
 
+\pagebreak
+
+\renewcommand{\thesubsection}{S\arabic{subsection}}
 \section*{Supporting Information}
-%Supporting Information is available from the Wiley Online Library or the author.
+
+\setcounter{page}{1}
+\renewcommand{\thesubsection}{S\arabic{subsection}}
+
+\subsection{Combined pattern plots}
+The Figure below $\eqref{fig:combined}$ shows 50 randomly selected samples of the X-ray diffraction patterns found in each of the research projects contributed to the opXRD database.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figures/combined.png}
+    \caption{50 randomly chosen X-ray diffraction patterns from each contributed dataset. The figure shows data from the following datasets: a) EMPA, b) LBNL-A, c) LBNL-B, d) LBNL-C, e) USC, f) INT, g) HKUST-A, h) HKUST-B, i) CNRS, j) IKFT.}
+    \label{fig:combined}
+\end{figure}
+
+\pagebreak
 
 \section*{Description of opXRD files on Zenodo}
 The database comes in two zip archives, ``opxrd.zip'' and ``opxrd\_in\_situ.zip''. The latter contains the in-situ data with highly correlated patterns recorded through time series measurements. Within the .zip archives patterns are saved as .json files grouped in folders indicating the contributing institution. If an institution contributed data from several projects, the contributed data is further divided into folders indicating the research project. These research project folders are labeled alphabetically in the order they are introduced in section $\eqref{sec:our_dataset}$. 
 Each .json file contains a pattern recorded from an X-ray diffraction experiment. If available, the composition and structure of the investigated sample and experiment conditions are also included in this file. Patterns belonging to time series measurements are labeled with filenames that indicate the measurement series they belong to as well as their order in that series. 
-
 
 \section*{opXRD Python library usage}
 
@@ -200,8 +208,6 @@ The Figure below $\eqref{fig:combined}$ shows 50 randomly selected samples of th
     \caption{50 randomly chosen X-ray diffraction patterns from each contributed dataset. The figure shows data from the following datasets: a) EMPA, b) LBNL-A, c) LBNL-B, d) LBNL-C, e) USC, f) INT, g) HKUST-A, h) HKUST-B, i) CNRS, j) IKFT.}
     \label{fig:combined}
 \end{figure}
-
-\pagebreak
 
 
 \end{document}
