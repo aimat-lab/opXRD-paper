@@ -1,0 +1,119 @@
+\documentclass[a4paper]{article}
+
+\pdfoutput=1
+\usepackage[utf8]{inputenc}
+\usepackage[super,sort&compress,comma, square]{natbib}
+%\renewcommand{\supercite}[1]{\cite{#1}}
+
+%% Language and font encodings
+\usepackage{tikz}
+\usepackage{tablefootnote}
+\usepackage{gensymb}
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{csquotes}
+\usepackage{doi}
+%% Sets page size and margins
+\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage{titling}
+
+
+% Useful packages
+\usepackage[version=4]{mhchem}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, allcolors=blue}
+\usepackage{authblk}
+\usepackage{multirow}
+\usepackage{nicematrix,enumitem,booktabs}
+\usepackage{nomencl}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{textcomp}
+\usepackage{amsfonts}
+\usepackage{outlines} %%same
+\usepackage{subfig}
+\usepackage[version=4]{mhchem}
+\usepackage{eurosym}
+\usepackage[locale = US]{siunitx}
+\usepackage{bm}
+\usepackage[normalem]{ulem} %%temporary, for organization purposes
+\usepackage{pythonhighlight}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{adjustbox}
+
+\usepackage{pifont}% http://ctan.org/pkg/pifont
+\newcommand{\cmark}[1][]{\textcolor{green!80!black}{#1\quad\ding{52}}}
+\newcommand{\xmark}[1][]{\textcolor{red}{#1\quad\ding{53}}}
+\newcommand{\partialcheck}[1]{\textcolor{orange}{\quad\ding{52}(#1\%)}}
+\captionsetup[table]{font=footnotesize}
+
+\date{}
+\newcommand{\red}[1]{\textcolor{red}{#1}}
+\renewcommand\Authfont{\small\raggedright\itshape}  
+\renewcommand\Affilfont{\normalfont\small}
+\newcommand{\numpatterns}{92,552 }
+\newcommand{\numlabeled}{2179 }
+
+\DeclareSIUnit{\myeuro}{\text{\euro}}
+\DeclareSIUnit\angstrom{\text {Å}}
+\usepackage[final]{changes}
+
+\interfootnotelinepenalty=10000
+\title{Supporting information for opXRD: Open Experimental Powder X-ray Diffraction Database}
+
+\affil[]{}
+\author[ ]{Daniel Hollarek}
+\author[ ]{Henrik Schopmans}
+\author[ ]{Jona Östreicher}
+\author[ ]{Jonas Teufel}
+\author[ ]{Bin Cao}
+\author[ ]{Adie Alwen}
+\author[ ]{Simon Schweidler}
+\author[ ]{Mriganka Singh}
+\author[ ]{Tim Kodalle}
+\author[ ]{Hanlin Hu}
+\author[ ]{Gregoire Heymans}
+\author[ ]{Maged Abdelsamie}
+\author[ ]{Alexander Wieczorek}
+\author[ ]{Siarhei Zhuk}
+\author[ ]{Arthur Hardiagon}
+\author[ ]{Ruth Schwaiger}
+\author[ ]{François-Xavier Coudert}
+\author[ ]{Moritz Wolf}
+\author[ ]{Sebastian Siol}
+\author[ ]{Carolin M. Sutter-Fella}
+\author[ ]{Ben Breitung}
+\author[ ]{Andrea M. Hodge}
+\author[ ]{Tong-yi Zhang}
+\author[ ]{Pascal Friederich}
+
+
+\begin{document}
+
+\maketitle
+\renewcommand{\thesection}{S\arabic{section}}
+
+\section{Description of opXRD files on Zenodo}
+The database comes in two zip archives, ``opxrd.zip'' and ``opxrd\_in\_situ.zip''. The latter contains the in-situ data with highly correlated patterns recorded through time series measurements. Within the .zip archives patterns are saved as .json files grouped in folders indicating the contributing institution. If an institution contributed data from several projects, the contributed data is further divided into folders indicating the research project. These research project folders are labeled alphabetically in the order they are introduced in section $3$. 
+Each .json file contains a pattern recorded from an X-ray diffraction experiment. If available, the composition and structure of the investigated sample and experiment conditions are also included in this file. Patterns belonging to time series measurements are labeled with filenames that indicate the measurement series they belong to as well as their order in that series. 
+
+\section{opXRD Python library usage}
+
+The opXRD Python library allows the dataset to be accessed through one simple command: \pyth{OpXRD.load(root_dirpath)}. If the database is locally available under \pyth{root_dirpath} this command loads the library from this location. If the database is not available locally at this location, the database is automatically downloaded to \pyth{root_dirpath}. 
+
+\pagebreak
+
+\section{Combined pattern plots}
+Figure~$\eqref{fig:combined}$ belowshows 50 randomly selected samples of the X-ray diffraction patterns found in each of the research projects contributed to the opXRD database.
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=0.95\linewidth]{figures/combined.png}
+    \caption{50 randomly chosen X-ray diffraction patterns from each contributed dataset. The figure shows data from the following datasets: a) EMPA, b) LBNL-A, c) LBNL-B, d) LBNL-C, e) USC, f) INT, g) HKUST-A, h) HKUST-B, i) CNRS, j) IKFT.}
+    \label{fig:combined}
+\end{figure}
+
+\end{document}
