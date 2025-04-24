@@ -64,7 +64,6 @@
 \interfootnotelinepenalty=10000
 \title{Supporting information for opXRD: Open Experimental Powder X-ray Diffraction Database}
 
-\affil[]{}
 \author[ ]{Daniel Hollarek}
 \author[ ]{Henrik Schopmans}
 \author[ ]{Jona Östreicher}
@@ -88,8 +87,9 @@
 \author[ ]{Ben Breitung}
 \author[ ]{Andrea M. Hodge}
 \author[ ]{Tong-yi Zhang}
-\author[ ]{Pascal Friederich}
+\author[*]{Pascal Friederich}
 
+\affil[*]{Corresponding author: pascal.friederich@kit.edu}
 
 \begin{document}
 
@@ -97,8 +97,8 @@
 \renewcommand{\thesection}{S\arabic{section}}
 
 \section{Description of opXRD files on Zenodo}
-The database comes in two zip archives, ``opxrd.zip'' and ``opxrd\_in\_situ.zip''. The latter contains the in-situ data with highly correlated patterns recorded through time series measurements. Within the .zip archives patterns are saved as .json files grouped in folders indicating the contributing institution. If an institution contributed data from several projects, the contributed data is further divided into folders indicating the research project. These research project folders are labeled alphabetically in the order they are introduced in section $3$. 
-Each .json file contains a pattern recorded from an X-ray diffraction experiment. If available, the composition and structure of the investigated sample and experiment conditions are also included in this file. Patterns belonging to time series measurements are labeled with filenames that indicate the measurement series they belong to as well as their order in that series. 
+The database comes in two zip archives, ``opxrd.zip'' and ``opxrd\_in\_situ.zip''. The latter contains the in-situ data with highly correlated patterns recorded through time series measurements. Within the .zip archives patterns are saved as .json files grouped in folders indicating the contributing institution. If an institution contributed data from several projects, the contributed data is further divided into folders indicating the research project. These research project folders are labeled alphabetically in the order they are introduced in Section~$3$. 
+Each .json file contains a pattern recorded from an X-ray diffraction experiment. If available, the composition and structure of the investigated sample and experiment conditions are also included in this file. Patterns belonging to time series measurements are labeled with filenames that indicate the measurement series they belong to and their order in that series. 
 
 \section{opXRD Python library usage}
 
@@ -107,7 +107,7 @@ The opXRD Python library allows the dataset to be accessed through one simple co
 \pagebreak
 
 \section{Combined pattern plots}
-Figure~$\eqref{fig:combined}$ belowshows 50 randomly selected samples of the X-ray diffraction patterns found in each of the research projects contributed to the opXRD database.
+Figure~$\eqref{fig:combined}$ shows 50 randomly selected samples of the X-ray diffraction patterns found in each of the research projects contributed to the opXRD database.
 
 \begin{figure}[!htb]
     \centering

@@ -103,7 +103,7 @@
 \author[\INT]{Ben Breitung}
 \author[\USC]{Andrea M. Hodge}
 \author[\HKUSTGZ]{Tong-yi Zhang}
-\author[\ITI,\INT]{Pascal Friederich$^\ast$}
+\author[\ITI,\INT,*]{Pascal Friederich}
 
 \affil[\ITI]{Institute of Theoretical Informatics, Karlsruhe Institute of Technology (KIT), 76131 Karlsruhe, Germany.  E-mail: pascal.friederich@kit.edu} % Informatik-Hauptgebäude, Am Fasanengarten 5, 76131 Karlsruhe
 \affil[\INT]{Institute of Nanotechnology, Karlsruhe Institute of Technology (KIT), 76131 Karlsruhe, Germany} % Hermann-von-Helmholtz-Platz 1
@@ -113,17 +113,18 @@
 \affil[\LBLALS]{Advanced Light Source, Lawrence Berkeley National Laboratory,  Berkeley 94720 CA, USA}  % 6 Cyclotron Rd, Berkeley, CA 94720, United States
 \affil[\Hoffmann]{Hoffmann Institute of Advanced Materials, Shenzhen Polytechnic, Shenzhen 518055, China} % Liuxian Street NO.7098, Shenzhen 518055, China
 \affil[\LBLCS]{Lawrence Berkeley National Laboratory (LBNL), Chemical Sciences Division, Berkeley 94720 CA, USA}  % 1 Cyclotron Rd, Berkeley, CA 94720, United States
-\affil[\EMPA]{Empa–Swiss Federal Laboratories for Materials Science and Technology (EMPA), 8600 Dübendorf, Switzerland}  % Ueberlandstrasse 129, 8600 Dübendorf, Switzerland
-\affil[\KITICRT]{Engler-Bunte-Institut \& Institute of Catalysis Research and Technology, Karlsruhe Institute of Technology (KIT), Karlsruhe, Germany}  %Hermann-von-Helmholtz-Platz 1
-\affil[\CPT]{Chimie ParisTech, PSL University, CNRS, Institut de Recherche de Chimie Paris, 75005 Paris, France} % 11 Rue Pierre et Marie Curie, 75005 Paris, France
 \affil[\KFUPMMSE]{Material Science and Engineering Department, King Fahd University of Petroleum and Minerals (KFUPM), Dhahran 31261, Saudi Arabia} % 846R+8C2, Academic Belt Rd, KFUPM, Dhahran 34463, Saudi Arabia
 \affil[\KFUPMIRCIMR]{Interdisciplinary Research Center for Intelligent Manufacturing and Robotics, King Fahd University of Petroleum and Minerals (KFUPM), Dhahran 31261, Saudi Arabia} %Academic Belt Road, Dhahran 31261, Saudi Arabia
+\affil[\CPT]{Chimie ParisTech, PSL University, CNRS, Institut de Recherche de Chimie Paris, 75005 Paris, France} % 11 Rue Pierre et Marie Curie, 75005 Paris, France
+\affil[\EMPA]{Empa–Swiss Federal Laboratories for Materials Science and Technology (EMPA), 8600 Dübendorf, Switzerland}  % Ueberlandstrasse 129, 8600 Dübendorf, Switzerland
 \affil[\FZJIEMD]{Institute of Energy Materials and Devices, Forschungszentrum Juelich GmbH, 52425 Juelich, Germany} %Wilhelm-Johnen-Straße, 52428 Jülich
+\affil[\KITICRT]{Engler-Bunte-Institut \& Institute of Catalysis Research and Technology, Karlsruhe Institute of Technology (KIT), Karlsruhe, Germany}  %Hermann-von-Helmholtz-Platz 1
+\affil[*]{Corresponding author: pascal.friederich@kit.edu}
 
 \begin{document}
-
 \maketitle
 
+\textbf{Keywords}: powder x-ray diffraction, machine learning, open-access data, crystal structure determination, phase identification
 \begin{abstract}
 \input{chapters/00_abstract}
 \end{abstract}
@@ -156,7 +157,18 @@ The opXRD database is available on Zenodo at \url{https://zenodo.org/records/142
 There are no conflicts of interest to declare.
 
 \subsection*{Acknowledgements}
-We acknowledge financial support by the German Research Foundation (DFG) through the Research Training Group 2450 “Tailored Scale-Bridging Approaches to Computational Nanoscience”. We acknowledge support by the Federal Ministry of Education and Research (BMBF) under Grant No. 01DM21001B (German-Canadian Materials Acceleration Center). We acknowledge financial support from the Helmholtz Foundation Model Initiative within Project "SOL-AI". Part of this work was funded under the France 2030 framework by Agence Nationale de la Recherche (project ANR-22-PEXD-0009 of PEPR DIADEM). Work at the Molecular Foundry was supported by the Office of Science, Office of Basic Energy Sciences, of the U.S. Department of Energy under Contract No. DE-AC02-05CH11231. Work at the Advanced Light Source (ALS) was done at beamline 12.3.2. The ALS is a DOE Office of Science User Facility under contract no. DE-AC02-05CH11231. The development of the online phase identification platform is supported by the Guangzhou-HKUST(GZ) Joint Funding Program (No. 2023A03J0003). Work by the USC group was supported by the National Science Foundation (NSF) grant numbers DMR-2227178 and OISE-2106597. Funding by the Helmholtz Research Program “Materials and Technologies for the Energy Transition (MTET), Topic 3: Chemical Energy Carriers" is kindly acknowledged. Work by the Empa group was supported by the Strategic Focus Area–Advanced Manufacturing (SFA–AM) through the project Advancing manufacturability of hybrid organic–inorganic semiconductors for large area optoelectronics (AMYS) as well as the Empa internal research call 2020.
+H.S. acknowledges financial support by the German Research Foundation (DFG) through the Research Training Group 2450 “Tailored Scale-Bridging Approaches to Computational Nanoscience”. P.F. and D.H. acknowledge support by the Federal Ministry of Education and Research (BMBF) under Grant No. 01DM21001B (German-Canadian Materials Acceleration Center). J.Oe. and P.F. acknowledge financial support from the Helmholtz Foundation Model Initiative within Project "SOL-AI". Part of this work was funded under the France 2030 framework by Agence Nationale de la Recherche (project ANR-22-PEXD-0009 of PEPR DIADEM). Work at the Molecular Foundry was supported by the Office of Science, Office of Basic Energy Sciences, of the U.S. Department of Energy under Contract No. DE-AC02-05CH11231. Work at the Advanced Light Source (ALS) was done at beamline 12.3.2. The ALS is a DOE Office of Science User Facility under contract no. DE-AC02-05CH11231. The development of the online phase identification platform is supported by the Guangzhou-HKUST(GZ) Joint Funding Program (No. 2023A03J0003). Work by the USC group was supported by the National Science Foundation (NSF) grant numbers DMR-2227178 and OISE-2106597. M.W. acknowledges funding by the Helmholtz Research Program “Materials and Technologies for the Energy Transition (MTET), Topic 3: Chemical Energy Carriers". Work by the Empa group was supported by the Strategic Focus Area–Advanced Manufacturing (SFA–AM) through the project Advancing manufacturability of hybrid organic–inorganic semiconductors for large area optoelectronics (AMYS) as well as the Empa internal research call 2020. We thank BWCloud, funded by the Ministry of Science, Research and Arts Baden-Württemberg, for providing cloud server infrastructure.
+
+\clearpage
+
+\begin{figure}
+\centering
+\textbf{Table of Contents}\\
+\medskip
+  \includegraphics{figures/TOC.png}
+  \medskip
+  \caption*{We introduce the Open Experimental Powder X-ray Diffraction Database (opXRD), the largest openly accessible collection of experimental powder diffractograms, comprising over 92,000 patterns collected across diverse material classes and experimental setups. Our ongoing effort aims to guide machine learning research toward fully automated analysis of pXRD data and to enable future self-driving materials labs.}
+\end{figure}
 
 \printnomenclature
 
