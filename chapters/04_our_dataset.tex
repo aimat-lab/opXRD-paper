@@ -2,22 +2,26 @@ In collaboration with several other research institutions, we have collected a d
 
 \begin{table}[!htb]
 \centering
-\caption{\footnotesize Overview of the contributions to the opXRD database: The availability of the chemical composition, spacegroups, lattice parameters, and atomic coordinates of the underlying samples are indicated by the columns ``Comp.'', ``Spg.'', ``Lattice'' and ``\replaced{Basis}{Atom coords}.'' respectively.}
+\caption{\footnotesize Overview of the contributions to the opXRD database: The availability of the chemical composition, spacegroups, lattice parameters, and atomic coordinates of the underlying samples are indicated by the columns ``Comp.'', ``Spg.'', ``Lattice'' and ``\replaced{Basis}{ Atom coords}.'' respectively.}
 \label{tab:merged}
 \scalebox{0.82}{
 \begin{adjustbox}{center}
 \begin{NiceTabular}{@{}llllllll@{}}[columns-width=1.2cm]
 %\begin{tabular}{@{}llccccl@{}}
 \toprule
-\textbf{Institution} & \textbf{No. patterns} & \textbf{Comp.} & \textbf{Spg.} & \textbf{Lattice} & \textbf{Basis} & \textbf{Research Project} \\
+\textbf{\ Institution} & \textbf{No. patterns} & \textbf{Comp.} & \textbf{Spg.} & \textbf{Lattice} & \textbf{Basis} & \textbf{Research Project} \\
 \midrule
-CNRS        &  1052         &  \cmark   & \pchk{85}  & \cmark    &   \pchk{85}   & Diffraction data extracted from the COD \\ 
-USC         &  338          &  \cmark   & \cmark     & \pchk{90} &   \xmark   & Study of CuNi and CuAl alloys          \\
-HKUST(GZ)   &  520          &  \pchk{4} & \pchk{4}   & \pchk{4}  &   \pchk{4}   & Phase identification dataset  \\ 
-EMPA        &  770          & \cmark    & \pchk{63}  & \xmark    &   \xmark   & Metal halide perovskites, Zn-V-N libraries \\ 
-INT         &  19,796       & \xmark    & \xmark     & \xmark    &   \xmark   & Compilation of various projects        \\ 
-IKFT        &  64           & \xmark    & \xmark     & \xmark    &   \xmark   & Commercial catalysts, metals, metal oxides   \\ 
-LBNL        &  70,012       & \xmark    & \xmark     & \xmark    &   \xmark   & Perovskites precursors, Mn-Sb-O system  \\ 
+\ CNRS        &  1052         &  \cmark   & \pchk{85}  & \cmark    &   \pchk{85}   & Diffraction data extracted from the COD \\ 
+\ USC         &  338          &  \cmark   & \cmark     & \pchk{90} &   \xmark   & Study of CuNi and CuAl alloys          \\
+\ HKUST(GZ)   &  520          &  \pchk{4} & \pchk{4}   & \pchk{4}  &   \pchk{4}   & Phase identification dataset  \\ 
+\ EMPA        &  770          & \cmark    & \pchk{63}  & \xmark    &   \xmark   & Metal halide perovskites, Zn-V-N libraries \\ 
+\ INT         &  19,796       & \xmark    & \xmark     & \xmark    &   \xmark   & Compilation of various projects        \\ 
+\ IKFT        &  64           & \xmark    & \xmark     & \xmark    &   \xmark   & Commercial catalysts, metals, metal oxides   \\ 
+\ LBNL        &  70,012       & \xmark    & \xmark     & \xmark    &   \xmark   & Perovskites precursors, Mn-Sb-O system  \\ 
+\midrule
+\midrule
+\added{\ $\sum$ Labeled}   & 2,179  & \pchk{79}  & \pchk{66}  & \pchk{63}  & \pchk{42} & Partially and fully labeled opXRD data \\
+\added{\ $\sum$ Unlabeled }& 90,373 & \xmark     & \xmark     & \xmark     & \xmark    & Unlabeled opXRD data\\
 \bottomrule
 \end{NiceTabular}
 \end{adjustbox}}
@@ -28,7 +32,7 @@ The variance of the data was analyzed using principal component analysis (PCA). 
     N_{\text{max}} = \min(N_{\text{values}}, N_{\text{patterns}}).
       \label{eq:nmax}
 \end{align}
-Here $N_{\text{values}} =512$ is the number of recorded intensity values per pattern and $N_{\text{patterns}}$ is the number of patterns in the dataset $X$. Fig~$\eqref{fig:components}$ below shows the cumulative explained variance ratio over the fraction of maximal No. components $N_{\text{max}}$ as defined above. In this figure, a faster convergence of the cumulative variance ratio towards one indicates that the patterns in this data are relatively similar. The degree of variation between the patterns is different for each contribution. For example, the CRNS and the HKUST contributions each are collections that encompass many research projects over a large period of time and thus exhibit a high degree of variability between individual patterns. In contrast, the contributions by USC and LBNL contain many very similar patterns. The patterns in the USC dataset are similar because the underlying samples are all variations of \ce{CuNi} and \ce{CuAl} alloys. The patterns submitted by LBNL are similar because they stem from in-situ recordings where several hundred or several thousand patterns were collected over time per sample while they were undergoing physical conversion processes.
+Here $N_{\text{values}} =512$ is the number of recorded intensity values per pattern and $N_{\text{patterns}}$ is the number of patterns in the dataset $X$. Fig~$\eqref{fig:components}$ below shows the cumulative explained variance ratio over the fraction of maximal No. components $N_{\text{max}}$ as defined above. In this figure, a faster convergence of the cumulative variance ratio towards one indicates that the patterns in this dataset are \replaced{largely}{relatively} similar. \deleted{The degree of variation between the patterns is different for each contribution.} \replaced{For example}{In contrast}, the contributions by USC and LBNL contain many very similar patterns. The patterns in the USC dataset are similar because the underlying samples are all variations of \ce{CuNi} and \ce{CuAl} alloys. The patterns submitted by LBNL are similar because they stem from in-situ recordings where several hundred or several thousand patterns were collected over time per sample. \deleted{ while they were undergoing physical conversion processes.} \replaced{In contrast}{For example}, the CRNS and the HKUST contributions each are collections that encompass many research projects over a large period of time and thus exhibit a high degree of variability between individual patterns. 
 
 \begin{figure}[!htb]
     \centering\includegraphics[width=0.85\linewidth]{figures/component_fractions.png}
@@ -36,14 +40,25 @@ Here $N_{\text{values}} =512$ is the number of recorded intensity values per pat
     \label{fig:components}
 \end{figure}
 
-Fig.~$\eqref{fig:histograms}$ provides an overview of the distributions of pattern and structure properties in the opXRD database. Nearly all patterns have an angular resolution smaller than $\Delta(2\theta) = 0.1 ^\circ$. Here the angular resolution is defined as the range of recorded angles divided by the number of recorded intensity values along that range. For most patterns, the lowest recorded angle is smaller than $30 ^\circ$ and the highest recorded angle is smaller than $120 ^\circ$. The start-to-end angle distribution reveals that all diffractograms start in a narrow window between $0\degree$ and approximately $50\degree$, while they end between $50\degree$ and $150\degree$, with the majority of patterns going from $0\degree$ to approximately $70\degree$. Unlike most ML approaches using synthetic data over the full angle range with fixed resolution, the opXRD dataset has a strongly varying angle range and resolution. Hence, working with this data requires additional pre-processing methods such as padding and interpolation, or more flexible ML models beyond standard CNNs.
+Fig.~$\eqref{fig:hist_XRD}$ \replaced{illustrates}{provides an overview of} the distributions of pattern \deleted{and structure} properties in the opXRD database. Nearly all patterns have an angular resolution smaller than $\Delta(2\theta) = 0.1 ^\circ$. Here the angular resolution is defined as the range of recorded angles divided by the number of recorded intensity values along that range. For most patterns, the lowest recorded angle is smaller than $30 ^\circ$ and the highest recorded angle is smaller than $120 ^\circ$. The start-to-end angle distribution reveals that all diffractograms start in a narrow window between $0\degree$ and approximately $50\degree$, while they end between $50\degree$ and $150\degree$, with the majority of patterns going from $0\degree$ to approximately $70\degree$. Unlike most ML approaches using synthetic data over the full angle range with fixed resolution, the opXRD dataset has a strongly varying angle range and resolution. Hence, working with this data requires additional pre-processing methods such as padding and interpolation, or more flexible ML models beyond standard CNNs.
+
+\added{Fig.~$\eqref{fig:hist_CRYSTAL}$ illustrates how structural properties are distributed among the structures underlying the labeled subset of the opXRD database. Most structures include either \ce{N}, \ce{C}, or \ce{O} atoms, and have unit cells that contain less than 100 atoms and are smaller than $10^3$\AA. The most common spacegroups include the orthorhombic $\text{Pnma}$, the monoclinic $\text{P}2_1/c$, and the cubic $\text{Fm}3\text{m}$.}
 
 \begin{figure}[!htb]
     \centering
-    \includegraphics[width=0.8\linewidth]{figures/hist.png}
-    \caption{Histograms detailing the distribution of pattern and structure properties in the opXRD database: a) distribution of spacegroups present in labeled data; b) distribution of angular resolution in all data; c) distribution of smallest and largest recorded $2\theta$ values for all data.}
-    \label{fig:histograms}
+    \includegraphics[width=\linewidth]{figures/hist_XRD.png}
+    \caption{Histograms detailing properties of all diffraction patterns in the opXRD database: a) distribution of angular resolutions; b) distribution of smallest and largest recorded $2\theta$ values.}
+    \label{fig:hist_XRD}
 \end{figure}
+
+\begin{figure}[!htb]
+    \centering
+    \includegraphics[width=\linewidth]{figures/hist_CRYSTAL.png}
+    \caption{Histograms detailing properties of the structures underlying labeled diffraction patterns in the opXRD database: a) distribution of structures containing specified elements;b) distribution of structures containing spacegroups; c) distribution of No. atoms $N_{\text{atom}}$ contained in unit cell; d) distribution of unit cell volume $V_{\text{uc}}$}
+    \label{fig:hist_CRYSTAL}
+\end{figure}
+
+\pagebreak
 
 In the following, we will describe the datasets contributed by each of the collaborating research groups and institutions. Each paragraph includes a description of the investigated materials and how X-ray diffraction data was collected. If applicable, the presence of thin-film samples or atypical diffraction geometries is indicated. Most data was collected using \ce{Cu} radiaton sources which has a $K_{\alpha1}$ wavelength of $\lambda=1.54056\text{\AA}$ and a $K_{\alpha2}$ wavelength of $\lambda=1.54439\text{\AA}$.
 
