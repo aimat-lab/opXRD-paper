@@ -1,13 +1,14 @@
-In collaboration with several other research institutions, we have collected a database of $\numpatterns$ experimental patterns of which 2179 are at least partially labeled with structural information of the underlying material. The following research institutions contributed data to the opXRD database: The French National Centre for Scientific Research (CNRS), Hong Kong University of Science and Technology (Guangzhou) (HKUST), University of Southern California (USC), Lawrence Berkeley National Laboratory (LBNL), Empa–Swiss Federal Laboratories for Materials Science and Technology (EMPA) and the Karlsruhe Institute of Technology (KIT). Tab.~$\eqref{tab:merged}$ provides an overview of the contributions of each institution. We filtered the submitted datasets to exclude patterns with invalid features such as only one unique recorded angle, negative angles, less than 50 recorded angles total, or all intensities being zero. \added{We standardized the associated structural information according to the standards described by Setyawan {\it et al.}\cite{Setyawan2010} using \textsc{pymatgen}. In particular, this standardization enforces a single crystal axis convention throughout all opXRD data. }
+In collaboration with several other research institutions, we have collected a database of $\numpatterns$ experimental \added{powder diffraction} patterns. \added{Of these patterns, $\numlabeled$} are at least partially labeled with structural information \added{and $\numfull$ are fully labeled through the lattice and basis of the underlying material}. The following research institutions contributed data to the opXRD database: The French National Centre for Scientific Research (CNRS), Hong Kong University of Science and Technology (Guangzhou) (HKUST), University of Southern California (USC), Lawrence Berkeley National Laboratory (LBNL), Empa–Swiss Federal Laboratories for Materials Science and Technology (EMPA) and the Karlsruhe Institute of Technology (KIT). \added{We have taken measures to ensure data validation through both manual and automated processes. Before parsing the data we established the file formats and data organization of each submission to ensure that the files were compatible with our custom parsing mechanism. As part of the automatic parsing process,} we filtered the submitted datasets to exclude patterns with invalid features such as only one unique recorded angle, negative angles, less than 50 recorded angles total, or all intensities being zero. \added{After the parsing, we also manually inspected a random selection of patterns from each submitted dataset for any anomalies that would warrant further investigation.}
+
+\added{We standardized the associated structural information according to the standards described by Setyawan {\it et al.}\cite{Setyawan2010} using \textsc{pymatgen}. In particular, this standardization enforces a single crystal axis convention throughout all opXRD data. } Tab.~$\eqref{tab:merged}$ provides an overview of the contributions of each institution. 
 
 \begin{table}[!htb]
 \centering
 \caption{\footnotesize Overview of the contributions to the opXRD database: The availability of the chemical composition, spacegroups, lattice parameters, and atomic coordinates of the underlying samples are indicated by the columns ``Comp.'', ``Spg.'', ``Lattice'' and ``\replaced{Basis}{ Atom coords}.'' respectively.}
 \label{tab:merged}
-\scalebox{0.82}{
+\scalebox{0.81}{
 \begin{adjustbox}{center}
 \begin{NiceTabular}{@{}llllllll@{}}[columns-width=1.2cm]
-%\begin{tabular}{@{}llccccl@{}}
 \toprule
 \textbf{\ Institution} & \textbf{No. patterns} & \textbf{Comp.} & \textbf{Spg.} & \textbf{Lattice} & \textbf{Basis} & \textbf{Research Project} \\
 \midrule
@@ -20,8 +21,8 @@ In collaboration with several other research institutions, we have collected a d
 \ LBNL        &  70,012       & \xmark    & \xmark     & \xmark    &   \xmark   & Perovskites precursors, Mn-Sb-O system  \\ 
 \midrule
 \midrule
-\added{\ $\sum$ Labeled}   & 2,179  & \pchk{79}  & \pchk{66}  & \pchk{63}  & \pchk{42} & Partially and fully labeled opXRD data \\
-\added{\ $\sum$ Unlabeled }& 90,373 & \xmark     & \xmark     & \xmark     & \xmark    & Unlabeled opXRD data\\
+\added{\ $\sum$ Labeled}   & \added{2,179}  & \pchk{79}  & \pchk{66}  & \pchk{63}  & \pchk{42} & \added{Partially and fully labeled opXRD data} \\
+\added{\ $\sum$ Unlabeled }& \added{90,373} & \xmark     & \xmark     & \xmark     & \xmark    & \added{Unlabeled opXRD data}\\
 \bottomrule
 \end{NiceTabular}
 \end{adjustbox}}
@@ -47,14 +48,14 @@ Fig.~$\eqref{fig:hist_XRD}$ \replaced{illustrates}{provides an overview of} the 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{figures/hist_XRD.png}
-    \caption{Histograms detailing properties of all diffraction patterns in the opXRD database: a) distribution of angular resolutions; b) distribution of smallest and largest recorded $2\theta$ values.}
+    \caption{\added{Histograms detailing properties of all diffraction patterns in the opXRD database: a) distribution of angular resolutions, b) distribution of smallest and largest recorded $2\theta$ values.}}
     \label{fig:hist_XRD}
 \end{figure}
 
 \begin{figure}[!htb]
     \centering
     \includegraphics[width=\linewidth]{figures/hist_CRYSTAL.png}
-    \caption{Histograms detailing properties of the structures underlying labeled diffraction patterns in the opXRD database: a) distribution of structures containing specified elements;b) distribution of structures containing spacegroups; c) distribution of No. atoms $N_{\text{atom}}$ contained in unit cell; d) distribution of unit cell volume $V_{\text{uc}}$}
+    \caption{\added{Histograms detailing properties of the structures underlying labeled diffraction patterns in the opXRD database: a) distribution of structures containing specified elements, b) distribution of structures containing spacegroups, c) distribution of No. atoms $N_{\text{atom}}$ contained in unit cell, d) distribution of unit cell volume $V_{\text{uc}}$.}}
     \label{fig:hist_CRYSTAL}
 \end{figure}
 
