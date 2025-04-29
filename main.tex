@@ -1,4 +1,4 @@
-\documentclass[a4paper]{article}
+\documentclass{WileyMSP-template}
 
 \pdfoutput=1
 \usepackage[utf8]{inputenc}
@@ -14,10 +14,9 @@
 \usepackage{csquotes}
 \usepackage{doi}
 %% Sets page size and margins
-\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+%\usepackage[a4paper,top=3cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
 \usepackage{titling}
 \usepackage{parskip}
-
 
 % Useful packages
 \usepackage[version=4]{mhchem}
@@ -123,9 +122,14 @@
 \affil[*]{Corresponding author: pascal.friederich@kit.edu}
 
 \begin{document}
+
+\pagestyle{fancy}
+\rhead{\includegraphics[width=2.5cm]{vch-logo.png}}
+
 \maketitle
 
-\textbf{Keywords}: powder x-ray diffraction, machine learning, open-access data, crystal structure determination, phase identification
+\keywords{powder x-ray diffraction, machine learning, open-access data, crystal structure determination, phase identification}
+
 \begin{abstract}
 \input{chapters/00_abstract}
 \end{abstract}
@@ -173,7 +177,7 @@ H.S. acknowledges financial support by the German Research Foundation (DFG) thro
 
 \printnomenclature
 
-\bibliographystyle{bibstyle/bibstyle.bst}
+\bibliographystyle{bibstyle/MSP}
 \bibliography{references}
 
 \setcounter{section}{0}
